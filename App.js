@@ -1,12 +1,26 @@
 import React from 'react';
+import { StackNavigator } from 'react-navigation';
+import SignUp from './Screens/Auth/SignUp';
 import { StyleSheet, Text, View } from 'react-native';
+import config from './firebase-config';
+import * as firebase from 'firebase';
+
+// API information in firebase-config.js
+firebase.initializeApp(config);
+
+const MainStack = StackNavigator({
+  SignUp: {
+    screen: SignUp
+  }
+}, {
+  navigationOptions: { header: null }
+});
 
 export default class App extends React.Component {
+  // SignUp component is a placeholder before we use react-navigation
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <MainStack />
     );
   }
 }
