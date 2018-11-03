@@ -65,3 +65,11 @@ typings/
 .next
 .idea/workspace.xml
 .expo/
+
+.gitignore
+node_modules
+.expo/
+package-lock.json
+.idea/misc.xml
+.idea/vcs.xml
+firebase-config.js
