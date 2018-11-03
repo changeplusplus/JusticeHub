@@ -3,7 +3,7 @@ import { View, Text, Button } from 'react-native';
 import * as firebase from 'firebase';
 import {InputBlock} from "../../Components/InputBlock";
 
-class EditClientProfile extends Component {
+class SetupClientProfile extends Component {
   state = {
     location: '',
     caseType: ''
@@ -46,4 +46,4 @@ class EditClientProfile extends Component {
   };
 }
 
-export default EditClientProfile;
+export default SetupClientProfile;

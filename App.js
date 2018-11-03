@@ -6,8 +6,8 @@ import * as firebase from 'firebase';
 import Login from "./Screens/Auth/Login";
 import ClientProfile from "./Screens/Profile/ClientProfile";
 import LawyerProfile from "./Screens/Profile/LawyerProfile";
-import EditLawyerProfile from "./Screens/Profile/EditLawyerProfile";
-import EditClientProfile from "./Screens/Profile/EditClientProfile";
+import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
+import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
 
 // API information in firebase-config.js
 firebase.initializeApp(config);
@@ -38,18 +38,18 @@ const LawyerTabNav = TabNavigator({
 });
 
 const MainStack = StackNavigator({
-  /*SignUp: {
+  SignUp: {
     screen: SignUp
   },
   Login: {
     screen: Login
   },
-  EditLawyerProfile: {
-    screen: EditLawyerProfile
+  SetupLawyerProfile: {
+    screen: SetupLawyerProfile
   },
-  EditClientProfile: {
-    screen: EditClientProfile
-  },*/
+  SetupClientProfile: {
+    screen: SetupClientProfile
+  },
   ClientTabNav: {
     screen: ClientTabNav
   },

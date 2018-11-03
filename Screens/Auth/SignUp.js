@@ -72,9 +72,9 @@ export default class SignUp extends Component {
         const { navigate } = this.props.navigation;
 
         if (isLawyer) {
-          navigate('EditLawyerProfile');
+          navigate('SetupLawyerProfile');
         } else {
-          navigate('EditClientProfile');
+          navigate('SetupClientProfile');
         }
       })
       .catch((error) => {

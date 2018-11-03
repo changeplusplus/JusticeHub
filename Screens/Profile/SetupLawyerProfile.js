@@ -3,7 +3,7 @@ import { View, Text, Button } from 'react-native';
 import * as firebase from 'firebase';
 import {InputBlock} from "../../Components/InputBlock";
 
-class EditLawyerProfile extends Component {
+class SetupLawyerProfile extends Component {
   state = {
     exp: '',
     degree: '',
@@ -51,4 +51,4 @@ class EditLawyerProfile extends Component {
   };
 }
 
-export default EditLawyerProfile;
+export default SetupLawyerProfile;
