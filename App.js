@@ -1,21 +1,41 @@
 import React from 'react';
+import { StackNavigator } from 'react-navigation';
+import SignUp from './Screens/Auth/SignUp';
 import { StyleSheet, Text, View } from 'react-native';
+import config from './firebase-config';
+import * as firebase from 'firebase';
+import Login from "./Screens/Auth/Login";
+import EditLawyerProfile from "./Screens/Profile/EditLawyerProfile";
+import EditClientProfile from "./Screens/Profile/EditClientProfile";
 
-export default class App extends React.Component {
+// API information in firebase-config.js
+firebase.initializeApp(config);
+
+const MainStack = StackNavigator({
+  /*SignUp: {
+    screen: SignUp
+  },
+  Login: {
+    screen: Login
+  },*/
+  /*EditLawyerProfile: {
+    screen: EditLawyerProfile
+  }*/
+  EditClientProfile: {
+    screen: EditClientProfile
+  }
+}, {
+  // Todo: potentially make this page specific
+  navigationOptions: { header: null }
+});
+
+class App extends React.Component {
+  // SignUp component is a placeholder before we use react-navigation
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <MainStack />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
