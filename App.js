@@ -4,13 +4,17 @@ import SignUp from './Screens/Auth/SignUp';
 import { StyleSheet, Text, View } from 'react-native';
 import config from './firebase-config';
 import * as firebase from 'firebase';
+import Login from "./Screens/Auth/Login";
 
 // API information in firebase-config.js
 firebase.initializeApp(config);
 
 const MainStack = StackNavigator({
-  SignUp: {
+  /*SignUp: {
     screen: SignUp
+  },*/
+  Login: {
+    screen: Login
   }
 }, {
   navigationOptions: { header: null }

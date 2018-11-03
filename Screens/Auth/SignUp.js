@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { View, KeyboardAvoidingView, Text, TextInput,
           Button, Picker } from 'react-native';
+import { InputBlock } from "../../Components/InputBlock";
 
-const InputBlock = (props) => (
+/*const InputBlock = (props) => (
   <View>
     <Text>{props.item}</Text>
     <TextInput
@@ -13,7 +14,7 @@ const InputBlock = (props) => (
       onChangeText={(text) => props.onChangeText(props.state, text)}
     />
   </View>
-);
+);*/
 
 export default class SignUp extends Component {
   state = {

@@ -1,3 +1,6 @@
+# CUSTOM IGNORE
+firebase-config.js
+
 # Logs
 logs
 *.log
