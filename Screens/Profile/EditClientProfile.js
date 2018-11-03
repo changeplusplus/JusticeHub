@@ -34,6 +34,9 @@ class EditClientProfile extends Component {
       location: location,
       caseType: caseType
     });
+
+    const { navigate } = this.props.navigation;
+    navigate('ClientTabNav');
   };
 
   _onChangeText = (state, update) => {

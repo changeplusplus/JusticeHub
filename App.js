@@ -1,28 +1,56 @@
 import React from 'react';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import SignUp from './Screens/Auth/SignUp';
-import { StyleSheet, Text, View } from 'react-native';
 import config from './firebase-config';
 import * as firebase from 'firebase';
 import Login from "./Screens/Auth/Login";
+import ClientProfile from "./Screens/Profile/ClientProfile";
+import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import EditLawyerProfile from "./Screens/Profile/EditLawyerProfile";
 import EditClientProfile from "./Screens/Profile/EditClientProfile";
 
 // API information in firebase-config.js
 firebase.initializeApp(config);
 
+const ClientTabNav = TabNavigator({
+  /*CreateCase: {
+
+  },*/
+  ViewProfile: {
+    screen: ClientProfile
+  }
+});
+
+const LawyerTabNav = TabNavigator({
+  /*CurrentCases: {
+
+  },
+  AllCases: {
+
+  },*/
+  ViewProfile: {
+    screen: LawyerProfile
+  }
+});
+
 const MainStack = StackNavigator({
-  /*SignUp: {
+  SignUp: {
     screen: SignUp
   },
   Login: {
     screen: Login
-  },*/
-  /*EditLawyerProfile: {
+  },
+  EditLawyerProfile: {
     screen: EditLawyerProfile
-  }*/
+  },
   EditClientProfile: {
     screen: EditClientProfile
+  },
+  ClientTabNav: {
+    screen: ClientTabNav
+  },
+  LawyerTabNav: {
+    screen: LawyerTabNav
   }
 }, {
   // Todo: potentially make this page specific
@@ -38,4 +66,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default MainStack;

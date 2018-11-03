@@ -39,6 +39,9 @@ class EditLawyerProfile extends Component {
       degree: degree,
       specialty: specialty
     });
+
+    const { navigate } = this.props.navigation;
+    navigate('LawyerTabNav');
   };
 
   _onChangeText = (state, update) => {
