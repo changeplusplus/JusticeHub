@@ -5,6 +5,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import config from './firebase-config';
 import * as firebase from 'firebase';
 import Login from "./Screens/Auth/Login";
+import EditLawyerProfile from "./Screens/Profile/EditLawyerProfile";
+import EditClientProfile from "./Screens/Profile/EditClientProfile";
 
 // API information in firebase-config.js
 firebase.initializeApp(config);
@@ -12,15 +14,22 @@ firebase.initializeApp(config);
 const MainStack = StackNavigator({
   /*SignUp: {
     screen: SignUp
-  },*/
+  },
   Login: {
     screen: Login
+  },*/
+  /*EditLawyerProfile: {
+    screen: EditLawyerProfile
+  }*/
+  EditClientProfile: {
+    screen: EditClientProfile
   }
 }, {
+  // Todo: potentially make this page specific
   navigationOptions: { header: null }
 });
 
-export default class App extends React.Component {
+class App extends React.Component {
   // SignUp component is a placeholder before we use react-navigation
   render() {
     return (
@@ -29,11 +38,4 @@ export default class App extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
