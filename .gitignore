@@ -1,5 +1,6 @@
 # CUSTOM IGNORE
 firebase-config.js
+.idea/
 
 # Logs
 logs

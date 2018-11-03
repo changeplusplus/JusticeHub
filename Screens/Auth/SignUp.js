@@ -87,7 +87,15 @@ export default class SignUp extends Component {
           isLawyer: isLawyer
         });
 
-        alert('Account successfully created!')
+        alert('Account successfully created!');
+
+        const { navigate } = this.props.navigation;
+
+        if (isLawyer) {
+          navigate('EditLawyerProfile');
+        } else {
+          navigate('EditClientProfile');
+        }
       })
       .catch((error) => {
         alert('Error: ' + error.message);
