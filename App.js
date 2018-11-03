@@ -19,6 +19,8 @@ const ClientTabNav = TabNavigator({
   ViewProfile: {
     screen: ClientProfile
   }
+}, {
+  tabBarPosition: 'bottom'
 });
 
 const LawyerTabNav = TabNavigator({
@@ -31,10 +33,12 @@ const LawyerTabNav = TabNavigator({
   ViewProfile: {
     screen: LawyerProfile
   }
+}, {
+  tabBarPosition: 'bottom'
 });
 
 const MainStack = StackNavigator({
-  SignUp: {
+  /*SignUp: {
     screen: SignUp
   },
   Login: {
@@ -45,7 +49,7 @@ const MainStack = StackNavigator({
   },
   EditClientProfile: {
     screen: EditClientProfile
-  },
+  },*/
   ClientTabNav: {
     screen: ClientTabNav
   },

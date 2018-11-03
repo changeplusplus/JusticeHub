@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e45d4cd-9b5e-46f5-9036-f0c63ea0417a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Screens/Profile/ClientProfile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screens/Profile/LawyerProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screens/Auth/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/Auth/SignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screens/Profile/EditClientProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/Profile/EditClientProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screens/Profile/EditLawyerProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/Profile/EditLawyerProfile.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -46,12 +38,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="51" />
-          <entry key="js" value="5056" />
+          <entry key="js" value="5113" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="5056" />
+          <entry key="JavaScript" value="5113" />
           <entry key="PLAIN_TEXT" value="51" />
         </counts>
       </usages-collector>
@@ -64,8 +56,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+            <state relative-caret-position="92">
+              <caret line="40" column="4" selection-start-line="40" selection-start-column="2" selection-end-line="51" selection-end-column="6" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -179,7 +174,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="1585" />
     <option name="width" value="1628" />
     <option name="height" value="1815" />
@@ -261,13 +256,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16484000" />
+    <option name="totallyTimeSpent" value="16628000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1293" height="733" extended-state="6" />
+    <frame x="634" y="0" width="651" height="726" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24880762" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.5081169" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -374,8 +369,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+        <state relative-caret-position="92">
+          <caret line="40" column="4" selection-start-line="40" selection-start-column="2" selection-end-line="51" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
