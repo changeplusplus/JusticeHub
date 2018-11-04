@@ -7,6 +7,14 @@ class DataStorage {
   static PHONE_NUM;
   static IS_LAWYER;
 
+  // Laywer specific information
+  static EXP;
+  static DEGREE;
+  static SPECIALTY;
+
+  // Client specific information
+  static LOCATION;
+
   static async saveLogin(email, password) {
     console.log('Trying to save login....');
     let savableEmail = email.substring(0, email.indexOf('@')) + '-at_' + email.substring(email.indexOf('@') + 1, email.length);
@@ -30,7 +38,7 @@ class DataStorage {
   }
 
   static loadBasicData() {
-    let uid = firebase.auth().currentUser.uid;
+    const uid = firebase.auth().currentUser.uid;
 
     firebase.database().ref('users/' + uid).once('value')
       .then((snap) => {
@@ -44,6 +52,36 @@ class DataStorage {
       .catch((error) => {
         alert('ERROR loading user data: ' + error.message);
       })
+  }
+
+  static loadProfileData() {
+    const uid = firebase.auth().currentUser.uid;
+
+    // Load lawyer data
+    if (this.IS_LAWYER) {
+      firebase.database().ref('Profiles/Lawyers/' + uid).once('value')
+        .then((snap) => {
+          this.EXP = snap.val().experience;
+          this.DEGREE = snap.val().degree;
+          this.SPECIALTY = snap.val().specialty;
+
+          console.log(this.EXP, this.DEGREE, this.SPECIALTY);
+        })
+        .catch((error) => {
+          alert('Cannot get lawyer data ' + error.message);
+        })
+    } else {
+      // Load client data
+      firebase.database().ref('Profiles/Clients/' + uid).once('value')
+        .then((snap) => {
+          this.LOCATION = snap.val().location;
+
+          console.log(this.LOCATION);
+        })
+        .catch((error) => {
+          alert('Cannot get lawyer data ' + error.message);
+        })
+    }
   }
 }
 

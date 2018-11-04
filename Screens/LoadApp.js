@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import * as firebase from 'firebase';
 import DataStorage from '../DataStorage';
 
@@ -25,6 +25,7 @@ class LoadApp extends Component {
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(() => {
           DataStorage.loadBasicData();
+          DataStorage.loadProfileData();
 
           if (DataStorage.IS_LAWYER) {
             navigate('LawyerTabNav');
@@ -42,7 +43,7 @@ class LoadApp extends Component {
   render() {
     return (
       <View>
-
+        <Text>Loading....</Text>
       </View>
     )
   }

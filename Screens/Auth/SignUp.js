@@ -70,7 +70,7 @@ export default class SignUp extends Component {
 
         alert('Account successfully created!');
 
-        // Todo: save password w/ expo
+        DataStorage.saveLogin(email, password);
 
         // Store basic data
         DataStorage.FULL_NAME = fullName;
