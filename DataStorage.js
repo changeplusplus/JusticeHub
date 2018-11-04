@@ -1,5 +1,5 @@
 import * as firebase from 'firebase';
-import Expo from 'expo';
+import { SecureStore } from 'expo';
 
 class DataStorage {
   static EMAIL;
@@ -19,11 +19,11 @@ class DataStorage {
     console.log('Trying to save login....');
     let savableEmail = email.substring(0, email.indexOf('@')) + '-at_' + email.substring(email.indexOf('@') + 1, email.length);
     // Save email for login
-    Expo.SecureStore.setItemAsync('lastUser', savableEmail)
+    SecureStore.setItemAsync('lastUser', savableEmail)
       .then(() => {
 
         // Save password
-        Expo.SecureStore.setItemAsync('password', password)
+        SecureStore.setItemAsync('password', password)
           .then(() => {
 
             console.log('Successfully saved email and pass');

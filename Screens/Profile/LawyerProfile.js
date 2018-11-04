@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
 import * as firebase from 'firebase';
-import Expo from 'expo';
+import { SecureStore } from 'expo';
 import DataStorage from "../../DataStorage";
 
 class LawyerProfile extends Component {
@@ -18,11 +18,11 @@ class LawyerProfile extends Component {
     firebase.auth().signOut();
 
     // Delete SecureStore user and pass and replace with - as placeholder
-    Expo.SecureStore.getItemAsync('lastUser')
+    SecureStore.getItemAsync('lastUser')
       .then((user) => {
-        Expo.SecureStore.setItemAsync('lastUser', '-')
+        SecureStore.setItemAsync('lastUser', '-')
           .then(() => {
-            Expo.SecureStore.setItemAsync('pass', '-')
+            SecureStore.setItemAsync('pass', '-')
               .then(() => {
                 DataStorage.clearData();
 

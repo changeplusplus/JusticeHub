@@ -21,16 +21,20 @@ export default class SignUp extends Component {
 
           <InputBlock item='Full Name'
                       state='fullName'
-                      onChangeText={this._onChangeText} />
+                      onChangeText={this._onChangeText}
+                      value={this.state.fullName} />
           <InputBlock item='Password'
                       state='password'
-                      onChangeText={this._onChangeText} />
+                      onChangeText={this._onChangeText}
+                      value={this.state.password}/>
           <InputBlock item='Phone Number'
                       state='phone'
-                      onChangeText={this._onChangeText} />
+                      onChangeText={this._onChangeText}
+                      value={this.state.phone}/>
           <InputBlock item='Email'
                       state='email'
-                      onChangeText={this._onChangeText} />
+                      onChangeText={this._onChangeText}
+                      value={this.state.email}/>
 
           <Picker
             selectedValue={this.state.isLawyer}

@@ -39,14 +39,14 @@ const LawyerTabNav = createBottomTabNavigator({
 });
 
 const MainStack = createStackNavigator({
-  /*SignUp: {
-    screen: SignUp
-  },*/
   LoadApp: {
     screen: LoadApp
   },
   Login: {
     screen: Login
+  },
+  SignUp: {
+    screen: SignUp
   },
   SetupLawyerProfile: {
     screen: SetupLawyerProfile
@@ -55,15 +55,17 @@ const MainStack = createStackNavigator({
     screen: SetupClientProfile
   },
   ClientTabNav: {
-    screen: ClientTabNav
+    screen: ClientTabNav,
+    navigationOptions: {
+      header: null
+    }
   },
   LawyerTabNav: {
-    screen: LawyerTabNav
+    screen: LawyerTabNav,
+    navigationOptions: {
+      header: null
+    }
   }
-}, {
-  // Todo: potentially make this page specific
-  navigationOptions: { header: null }
-
 });
 
 class App extends React.Component {
