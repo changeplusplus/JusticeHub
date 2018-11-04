@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "devToolsPort": 19002,
   "expoServerPort": null,
   "packagerPort": null,
@@ -7,13 +6,15 @@
   "expoServerNgrokUrl": "https://82-dsm.anonymous.justicehub.exp.direct",
   "packagerNgrokUrl": "https://packager.82-dsm.anonymous.justicehub.exp.direct",
   "ngrokPid": 11605
-=======
   "devToolsPort": 19003,
   "expoServerPort": 19000,
   "packagerPort": 19001,
+  "packagerPid": 75280,
+  "expoServerNgrokUrl": "https://e8-d2y.connorwaslo.justicehub.exp.direct",
+  "packagerNgrokUrl": "https://packager.e8-d2y.connorwaslo.justicehub.exp.direct",
+  "ngrokPid": 91016
   "packagerPid": 17280,
   "expoServerNgrokUrl": null,
   "packagerNgrokUrl": null,
   "ngrokPid": null
->>>>>>> 2515a7c4586165abc21068081eb24106fc3f6bca
 }
