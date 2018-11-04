@@ -83,6 +83,19 @@ class DataStorage {
         })
     }
   }
+
+  static clearData() {
+    this.EMAIL = '';
+    this.FULL_NAME = '';
+    this.PHONE_NUM = '';
+    this.IS_LAWYER = '';
+
+    this.EXP = '';
+    this.DEGREE = '';
+    this.SPECIALTY = '';
+
+    this.LOCATION = '';
+  }
 }
 
 export default DataStorage;
