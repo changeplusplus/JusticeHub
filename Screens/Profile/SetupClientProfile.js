@@ -30,7 +30,7 @@ class SetupClientProfile extends Component {
 
     let userId = firebase.auth().currentUser.uid;
 
-    firebase.database().ref('Profiles/Clients/' + userId).update({
+    firebase.database().ref('profiles/clients/' + userId).update({
       location: location,
       caseType: caseType
     });

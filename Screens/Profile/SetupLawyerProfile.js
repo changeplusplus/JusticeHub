@@ -34,7 +34,7 @@ class SetupLawyerProfile extends Component {
 
     let userId = firebase.auth().currentUser.uid;
 
-    firebase.database().ref('Profiles/Lawyers/' + userId).update({
+    firebase.database().ref('profiles/lawyers/' + userId).update({
       experience: exp,
       degree: degree,
       specialty: specialty

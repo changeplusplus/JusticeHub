@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { View, KeyboardAvoidingView, Text, TextInput,
           Button, Picker } from 'react-native';
 import { InputBlock } from "../../Components/InputBlock";
+import DataStorage from '../../DataStorage';
 
 export default class SignUp extends Component {
   state = {
@@ -68,6 +69,14 @@ export default class SignUp extends Component {
         });
 
         alert('Account successfully created!');
+
+        DataStorage.saveLogin(email, password);
+
+        // Store basic data
+        DataStorage.FULL_NAME = fullName;
+        DataStorage.EMAIL = email;
+        DataStorage.PHONE_NUM = phone;
+        DataStorage.IS_LAWYER = isLawyer;
 
         const { navigate } = this.props.navigation;
 

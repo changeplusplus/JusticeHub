@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import {View, TextInput, Button, KeyboardAvoidingView} from 'react-native';
 import { InputBlock } from "../../Components/InputBlock";
+import DataStorage from "../../DataStorage";
 
 class Login extends Component {
   state = {
@@ -19,7 +20,7 @@ class Login extends Component {
                     state='password'
                     onChangeText={this._onChangeText}/>
 
-        <Button onPress={this._login} title='Sign Up' color='blue' />
+        <Button onPress={this._login} title='Log In' color='blue' />
       </View>
     )
   }
@@ -32,7 +33,20 @@ class Login extends Component {
         // Get userId
         let userId = firebase.auth().currentUser.uid;
 
+        // Get basic data
+        console.log('Logged in');
+        DataStorage.saveLogin(email, password);
+        DataStorage.loadBasicData();
+
         alert('Logged in!\n' + userId);
+
+        const { navigate } = this.props.navigation;
+
+        if (DataStorage.IS_LAWYER) {
+          navigate('LawyerTabNav');
+        } else {
+          navigate('ClientTabNav');
+        }
       })
       .catch((error) => {
         alert('Error: ' + error.message);
