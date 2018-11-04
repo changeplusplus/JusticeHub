@@ -39,6 +39,14 @@ class Login extends Component {
         DataStorage.loadBasicData();
 
         alert('Logged in!\n' + userId);
+
+        const { navigate } = this.props.navigation;
+
+        if (DataStorage.IS_LAWYER) {
+          navigate('LawyerTabNav');
+        } else {
+          navigate('ClientTabNav');
+        }
       })
       .catch((error) => {
         alert('Error: ' + error.message);

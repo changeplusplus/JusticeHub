@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e45d4cd-9b5e-46f5-9036-f0c63ea0417a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/DataStorage.js" beforeDir="false" afterPath="$PROJECT_DIR$/DataStorage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/Auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/Auth/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Screens/Profile/ClientProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/Profile/ClientProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screens/Profile/LawyerProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/Profile/LawyerProfile.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -40,12 +40,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="51" />
-          <entry key="js" value="8730" />
+          <entry key="js" value="8891" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="8730" />
+          <entry key="JavaScript" value="8891" />
           <entry key="PLAIN_TEXT" value="51" />
         </counts>
       </usages-collector>
@@ -58,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-121">
-              <caret line="34" column="25" lean-forward="true" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+            <state relative-caret-position="224">
+              <caret line="27" column="19" lean-forward="true" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -70,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Screens/LoadApp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="27" column="40" lean-forward="true" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
+            <state relative-caret-position="207">
+              <caret line="12" column="64" lean-forward="true" selection-start-line="12" selection-start-column="64" selection-end-line="12" selection-end-column="64" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -79,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Screens/Auth/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="37" column="44" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
+            <state relative-caret-position="339">
+              <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -94,8 +94,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DataStorage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="96" column="23" lean-forward="true" selection-start-line="96" selection-start-column="23" selection-end-line="96" selection-end-column="23" />
+            <state relative-caret-position="220">
+              <caret line="21" column="59" lean-forward="true" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -124,11 +124,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Screens/Profile/ClientProfile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="31" column="16" lean-forward="true" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+            <state relative-caret-position="224">
+              <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -194,15 +194,15 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Screens/Profile/EditClientProfile.js" />
         <option value="$PROJECT_DIR$/Screens/Profile/EditLawyerProfile.js" />
-        <option value="$PROJECT_DIR$/Screens/Auth/Login.js" />
         <option value="$PROJECT_DIR$/App.js" />
         <option value="$PROJECT_DIR$/Screens/Auth/SignUp.js" />
         <option value="$PROJECT_DIR$/Screens/Profile/SetupLawyerProfile.js" />
         <option value="$PROJECT_DIR$/Screens/Profile/SetupClientProfile.js" />
-        <option value="$PROJECT_DIR$/Screens/LoadApp.js" />
         <option value="$PROJECT_DIR$/DataStorage.js" />
         <option value="$PROJECT_DIR$/Screens/Profile/LawyerProfile.js" />
         <option value="$PROJECT_DIR$/Screens/Profile/ClientProfile.js" />
+        <option value="$PROJECT_DIR$/Screens/LoadApp.js" />
+        <option value="$PROJECT_DIR$/Screens/Auth/Login.js" />
       </list>
     </option>
   </component>
@@ -305,7 +305,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26898000" />
+    <option name="totallyTimeSpent" value="27267000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="733" extended-state="6" />
@@ -406,46 +406,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Screens/LoadApp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="27" column="40" lean-forward="true" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Screens/Auth/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="37" column="44" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-121">
-          <caret line="34" column="25" lean-forward="true" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataStorage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="96" column="23" lean-forward="true" selection-start-line="96" selection-start-column="23" selection-end-line="96" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Screens/Profile/LawyerProfile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -456,10 +416,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="27" column="19" lean-forward="true" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataStorage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="21" column="59" lean-forward="true" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Screens/Profile/ClientProfile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="31" column="16" lean-forward="true" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+        <state relative-caret-position="224">
+          <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Screens/LoadApp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="12" column="64" lean-forward="true" selection-start-line="12" selection-start-column="64" selection-end-line="12" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Screens/Auth/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

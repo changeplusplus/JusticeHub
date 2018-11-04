@@ -18,18 +18,15 @@ class ClientProfile extends Component {
     firebase.auth().signOut();
 
     // Delete SecureStore user and pass and replace with - as placeholder
-    Expo.SecureStore.getItemAsync('lastUser')
-      .then((user) => {
-        Expo.SecureStore.setItemAsync('lastUser', '-')
+    Expo.SecureStore.setItemAsync('lastUser', '-')
+      .then(() => {
+        Expo.SecureStore.setItemAsync('password', '-')
           .then(() => {
-            Expo.SecureStore.setItemAsync('pass', '-')
-              .then(() => {
-                DataStorage.clearData();
+            DataStorage.clearData();
 
-                const { navigate } = this.props.navigation;
+            const {navigate} = this.props.navigation;
 
-                navigate('Login');
-              })
+            navigate('Login');
           })
       })
   }
