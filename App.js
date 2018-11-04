@@ -1,8 +1,9 @@
 import React from 'react';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import SignUp from './Screens/Auth/SignUp';
 import config from './firebase-config';
 import * as firebase from 'firebase';
+import LoadApp from './Screens/LoadApp';
 import Login from "./Screens/Auth/Login";
 import ClientProfile from "./Screens/Profile/ClientProfile";
 import LawyerProfile from "./Screens/Profile/LawyerProfile";
@@ -12,7 +13,7 @@ import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
 // API information in firebase-config.js
 firebase.initializeApp(config);
 
-const ClientTabNav = TabNavigator({
+const ClientTabNav = createBottomTabNavigator({
   /*CreateCase: {
 
   },*/
@@ -23,7 +24,7 @@ const ClientTabNav = TabNavigator({
   tabBarPosition: 'bottom'
 });
 
-const LawyerTabNav = TabNavigator({
+const LawyerTabNav = createBottomTabNavigator({
   /*CurrentCases: {
 
   },
@@ -37,10 +38,13 @@ const LawyerTabNav = TabNavigator({
   tabBarPosition: 'bottom'
 });
 
-const MainStack = StackNavigator({
+const MainStack = createStackNavigator({
   /*SignUp: {
     screen: SignUp
   },*/
+  LoadApp: {
+    screen: LoadApp
+  },
   Login: {
     screen: Login
   },
