@@ -15,10 +15,12 @@ class SetupClientProfile extends Component {
         <Text>Edit your information</Text>
         <InputBlock item='Location'
                     state='location'
-                    onChangeText={this._onChangeText}/>
+                    onChangeText={this._onChangeText}
+                    value={this.state.location}/>
         <InputBlock item='Type of case'
                     state='caseType'
-                    onChangeText={this._onChangeText}/>
+                    onChangeText={this._onChangeText}
+                    value={this.state.caseType}/>
 
         <Button onPress={this._submitChanges} title='Submit Changes' />
       </View>
@@ -30,7 +32,7 @@ class SetupClientProfile extends Component {
 
     let userId = firebase.auth().currentUser.uid;
 
-    firebase.database().ref('Profiles/Clients/' + userId).update({
+    firebase.database().ref('profiles/clients/' + userId).update({
       location: location,
       caseType: caseType
     });

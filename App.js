@@ -1,36 +1,24 @@
 import React from 'react';
-<<<<<<< HEAD
-import { StackNavigator } from 'react-navigation';
-//import SignUp from './Screens/Auth/SignUp';
-import { StyleSheet, Text, View } from 'react-native';
-import config from './firebase-config';       // Error with this line on iOS Simulation
-import * as firebase from 'firebase';
-import Chat from "./Components/Chat"
-//import Login from "./Screens/Auth/Login";
-//import EditLawyerProfile from "./Screens/Profile/EditLawyerProfile";
-//import EditClientProfile from "./Screens/Profile/EditClientProfile";
-=======
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import SignUp from './Screens/Auth/SignUp';
 import config from './firebase-config';
 import * as firebase from 'firebase';
+import LoadApp from './Screens/LoadApp';
 import Login from "./Screens/Auth/Login";
 import ClientProfile from "./Screens/Profile/ClientProfile";
 import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
 import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
->>>>>>> 2515a7c4586165abc21068081eb24106fc3f6bca
+import CaseList from "./Screens/Cases/CaseList";
 
 // API information in firebase-config.js
 firebase.initializeApp(config);
 
-/*
-
-const ClientTabNav = TabNavigator({
-  /*CreateCase: {
+const ClientTabNav = createBottomTabNavigator({
+    /*CreateCase: {
 
   },*/
-  /*ViewProfile: {
+  ViewProfile: {
     screen: ClientProfile
   }
 }, {
@@ -38,12 +26,13 @@ const ClientTabNav = TabNavigator({
 });
 
 const LawyerTabNav = TabNavigator({
-  /!*CurrentCases: {
+  /*CurrentCases: {
+
 
   },
   AllCases: {
 
-  },*!/
+  },*/
   ViewProfile: {
     screen: LawyerProfile
   }
@@ -51,14 +40,36 @@ const LawyerTabNav = TabNavigator({
   tabBarPosition: 'bottom'
 });
 
-const MainStack = StackNavigator({
-  SignUp: {
-    screen: SignUp
-  },
-  Login: {
-    screen: Login
-<<<<<<< HEAD
-  },*/
+const MainStack = createStackNavigator({
+    /*Signup: {
+      screen: SignUp
+    }*/
+
+    CaseList: {
+        screen: CaseList
+    },
+
+    LoadApp: {
+        screen: LoadApp
+    },
+    Login: {
+        screen: Login
+    },
+
+    SetupLawyerProfile: {
+        screen: SetupLawyerProfile
+    },
+    SetupClientProfile: {
+        screen: SetupClientProfile
+    },
+    ClientTabNav: {
+        screen: ClientTabNav
+    },
+    LawyerTabNav: {
+        screen: LawyerTabNav
+    }
+
+},{
 
   /*EditLawyerProfile: {
     screen: EditLawyerProfile
@@ -70,29 +81,10 @@ const MainStack = StackNavigator({
    // After login
    // Main: { screen: Main },
 
-    Chat: { screen: Chat }
+   // Chat: { screen: Chat },
 
-    // Conversations with others
-     //Conversations: { screen: Conversations },
+   // Conversations: { screen: Conversations },
 
-  }, {
-=======
-  },
-  SetupLawyerProfile: {
-    screen: SetupLawyerProfile
-  },
-  SetupClientProfile: {
-    screen: SetupClientProfile
-  },
-  ClientTabNav: {
-    screen: ClientTabNav
-  },
-  LawyerTabNav: {
-    screen: LawyerTabNav
-  }
-}, {
->>>>>>> 2515a7c4586165abc21068081eb24106fc3f6bca
-  // Todo: potentially make this page specific
   navigationOptions: { header: null }
 
 });

@@ -9,6 +9,7 @@ export const InputBlock = (props) => (
       autoCapitalize='none'
       underlineColorAndroid='rgb(0, 0, 0)'
       onChangeText={(text) => props.onChangeText(props.state, text)}
+      value={props.value}
     />
   </View>
 );

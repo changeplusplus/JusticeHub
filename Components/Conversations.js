@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, } from "react-native";
+import {View, Text, ScrollView,} from "react-native";
 
 
 // Button: compose new message
@@ -23,6 +23,7 @@ class Conversations extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
+            <ScrollView>
             <View style={styles.container}>
                 <Button
                 title='Conversations'
@@ -32,15 +33,20 @@ class Conversations extends React.Component {
                 />
 
                 <Button
-                    title='New Message'
-                    // color= ""
-                    onPress={() =>}
-
-
-
-
+                title='New Message'
+                // color= ""
+                onPress={() =>
+                    navigate('New Message')}
+                />
 
             </View>
+            </ScrollView>
+
+
+
+
+
+
         );
     };
 

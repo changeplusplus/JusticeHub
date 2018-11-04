@@ -4,6 +4,10 @@ import * as firebase from 'firebase';
 import {InputBlock} from "../../Components/InputBlock";
 
 class SetupLawyerProfile extends Component {
+  static navigationOptions = {
+    header: null
+  };
+
   state = {
     exp: '',
     degree: '',
@@ -16,13 +20,16 @@ class SetupLawyerProfile extends Component {
         <Text>Edit your information</Text>
         <InputBlock item='Experience'
                     state='exp'
-                    onChangeText={this._onChangeText}/>
+                    onChangeText={this._onChangeText}
+                    value={this.state.exp}/>
         <InputBlock item='Degree'
                     state='degree'
-                    onChangeText={this._onChangeText}/>
+                    onChangeText={this._onChangeText}
+                    value={this.state.degree}/>
         <InputBlock item='Specialty'
                     state='specialty'
-                    onChangeText={this._onChangeText}/>
+                    onChangeText={this._onChangeText}
+                    value={this.state.specialty}/>
 
         <Button onPress={this._submitChanges} title='Submit Changes' />
       </View>
@@ -34,7 +41,7 @@ class SetupLawyerProfile extends Component {
 
     let userId = firebase.auth().currentUser.uid;
 
-    firebase.database().ref('Profiles/Lawyers/' + userId).update({
+    firebase.database().ref('profiles/lawyers/' + userId).update({
       experience: exp,
       degree: degree,
       specialty: specialty
