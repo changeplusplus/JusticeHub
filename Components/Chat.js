@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import {View, Text,} from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat'; // 0.3.0
 import * as firebase from "firebase";
 
@@ -22,11 +23,16 @@ class Chat extends React.Component {
 
     render() {
         return (
-            <GiftedChat
-                messages={this.state.messages}
-                onSend={this.send}
-                user={this.user}
-            />
+            <View>
+                <Text>
+                    Send a message:
+                </Text>
+                    <GiftedChat
+                    messages={this.state.messages}
+                    onSend={this.send}
+                    user={this.user}
+                    />
+            </View>
         );
     }
 

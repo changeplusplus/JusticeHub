@@ -24,11 +24,13 @@ import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
 // API information in firebase-config.js
 firebase.initializeApp(config);
 
+/*
+
 const ClientTabNav = TabNavigator({
   /*CreateCase: {
 
   },*/
-  ViewProfile: {
+  /*ViewProfile: {
     screen: ClientProfile
   }
 }, {
@@ -36,12 +38,12 @@ const ClientTabNav = TabNavigator({
 });
 
 const LawyerTabNav = TabNavigator({
-  /*CurrentCases: {
+  /!*CurrentCases: {
 
   },
   AllCases: {
 
-  },*/
+  },*!/
   ViewProfile: {
     screen: LawyerProfile
   }
@@ -57,6 +59,7 @@ const MainStack = StackNavigator({
     screen: Login
 <<<<<<< HEAD
   },*/
+
   /*EditLawyerProfile: {
     screen: EditLawyerProfile
   }*/
@@ -70,7 +73,7 @@ const MainStack = StackNavigator({
     Chat: { screen: Chat }
 
     // Conversations with others
-    // Conversations: { screen: Conversations },
+     //Conversations: { screen: Conversations },
 
   }, {
 =======

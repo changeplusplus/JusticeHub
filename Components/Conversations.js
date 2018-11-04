@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { View, Text, Flatlist } from "react-native";
+import React from "react";
+import { View, Text, } from "react-native";
 
 
 // Button: compose new message
@@ -17,18 +17,30 @@ class Conversations extends React.Component {
 
     // FIXME
         static navigationOptions = ({ navigation }) => ({
-            title: (navigation.state.params || {}).name || 'Chat!',
+            title: (navigation.state.params || {}).name || 'Conversations',
         });
 
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <Button
-                // FIXME -
-                title='Name'
+            <View style={styles.container}>
+                <Button
+                title='Conversations'
+                //color= ""
                 onPress={() =>
-                    navigate('Name')}
-            />
+                    navigate('Conversations')}
+                />
+
+                <Button
+                    title='New Message'
+                    // color= ""
+                    onPress={() =>}
+
+
+
+
+
+            </View>
         );
     };
 
