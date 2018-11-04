@@ -9,6 +9,7 @@ import ClientProfile from "./Screens/Profile/ClientProfile";
 import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
 import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
+import CaseList from "./Screens/Cases/CaseList";
 
 // API information in firebase-config.js
 firebase.initializeApp(config);
@@ -39,6 +40,10 @@ const LawyerTabNav = createBottomTabNavigator({
 });
 
 const MainStack = createStackNavigator({
+    CaseList: {
+      screen:CaseList
+    },
+
   LoadApp: {
     screen: LoadApp
   },
