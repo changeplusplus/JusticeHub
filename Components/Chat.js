@@ -24,6 +24,7 @@ class Chat extends React.Component {
     render() {
         return (
             <View>
+                //FIXME choose client from list or by case?
                 <Text>
                     Send a message:
                 </Text>
@@ -96,7 +97,7 @@ class Chat extends React.Component {
 
     // send the message to the Backend
     send = messages => {
-        let newMsgs = []
+        let newMsgs = [];
         for (let i = 0; i < messages.length; i++) {
             const { text, user } = messages[i];
             const message = {

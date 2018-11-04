@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, ScrollView,} from "react-native";
+import {View, Text, ScrollView, Button, StyleSheet} from "react-native";
 
 
 // Button: compose new message
@@ -15,7 +15,7 @@ import {View, Text, ScrollView,} from "react-native";
 
 class Conversations extends React.Component {
 
-    // FIXME
+    // FIXME need to list all conversations and include a button to send new message
         static navigationOptions = ({ navigation }) => ({
             title: (navigation.state.params || {}).name || 'Conversations',
         });
@@ -30,34 +30,32 @@ class Conversations extends React.Component {
                 //color= ""
                 onPress={() =>
                     navigate('Conversations')}
+
                 />
 
                 <Button
                 title='New Message'
-                // color= ""
                 onPress={() =>
                     navigate('New Message')}
+                style={styles.buttonStyle}
                 />
 
             </View>
             </ScrollView>
+        )
+    }
 
-
-
-
-
-
-        );
-    };
-
-
-
-
-
-
-
+    const styles = this.Stylesheet.create({
+        buttonStyle: {
+            //color:
+            marginTop: 20,
+            padding: 20,
+            //background color:
+        }
+    });
 
 }
+
 
 
 
