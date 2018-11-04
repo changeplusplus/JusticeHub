@@ -3,25 +3,21 @@ import { View, Text, Button } from 'react-native';
 import * as firebase from 'firebase';
 import {InputBlock} from "../../Components/InputBlock";
 
-class EditLawyerProfile extends Component {
+class SetupClientProfile extends Component {
   state = {
-    exp: '',
-    degree: '',
-    specialty: ''
+    location: '',
+    caseType: ''
   };
 
   render() {
     return (
       <View>
         <Text>Edit your information</Text>
-        <InputBlock item='Experience'
-                    state='exp'
+        <InputBlock item='Location'
+                    state='location'
                     onChangeText={this._onChangeText}/>
-        <InputBlock item='Degree'
-                    state='degree'
-                    onChangeText={this._onChangeText}/>
-        <InputBlock item='Specialty'
-                    state='specialty'
+        <InputBlock item='Type of case'
+                    state='caseType'
                     onChangeText={this._onChangeText}/>
 
         <Button onPress={this._submitChanges} title='Submit Changes' />
@@ -30,15 +26,17 @@ class EditLawyerProfile extends Component {
   }
 
   _submitChanges = () => {
-    const { exp, degree, specialty } = this.state;
+    const { location, caseType } = this.state;
 
     let userId = firebase.auth().currentUser.uid;
 
-    firebase.database().ref('Profiles/Lawyers/' + userId).update({
-      experience: exp,
-      degree: degree,
-      specialty: specialty
+    firebase.database().ref('Profiles/Clients/' + userId).update({
+      location: location,
+      caseType: caseType
     });
+
+    const { navigate } = this.props.navigation;
+    navigate('ClientTabNav');
   };
 
   _onChangeText = (state, update) => {
@@ -48,4 +46,4 @@ class EditLawyerProfile extends Component {
   };
 }
 
-export default EditLawyerProfile;
+export default SetupClientProfile;
