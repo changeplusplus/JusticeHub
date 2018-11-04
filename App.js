@@ -63,6 +63,7 @@ const MainStack = createStackNavigator({
 }, {
   // Todo: potentially make this page specific
   navigationOptions: { header: null }
+
 });
 
 class App extends React.Component {
