@@ -35,6 +35,7 @@ class Login extends Component {
 
         // Get basic data
         console.log('Logged in');
+        DataStorage.saveLogin(email, password);
         DataStorage.loadBasicData();
 
         alert('Logged in!\n' + userId);
