@@ -38,9 +38,9 @@ const LawyerTabNav = TabNavigator({
 });
 
 const MainStack = StackNavigator({
-  SignUp: {
+  /*SignUp: {
     screen: SignUp
-  },
+  },*/
   Login: {
     screen: Login
   },
