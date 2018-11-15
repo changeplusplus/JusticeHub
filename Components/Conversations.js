@@ -15,6 +15,8 @@ import {View, Text, ScrollView, Button, StyleSheet} from "react-native";
 
 class Conversations extends React.Component {
 
+    // Firebase Admin SDK
+
     // FIXME need to list all conversations and include a button to send new message
         static navigationOptions = ({ navigation }) => ({
             title: (navigation.state.params || {}).name || 'Conversations',

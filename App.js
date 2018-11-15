@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, TabNavigator ,createBottomTabNavigator } from 'react-navigation';
 import SignUp from './Screens/Auth/SignUp';
 import config from './firebase-config';
 import * as firebase from 'firebase';
@@ -9,7 +9,7 @@ import ClientProfile from "./Screens/Profile/ClientProfile";
 import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
 import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
-import CaseList from "./Screens/Cases/CaseList";
+//import CaseList from "./Screens/Cases/CaseList";
 
 // API information in firebase-config.js
 firebase.initializeApp(config);
@@ -45,9 +45,9 @@ const MainStack = createStackNavigator({
       screen: SignUp
     }*/
 
-    CaseList: {
-        screen: CaseList
-    },
+   // CaseList: {
+   //     screen: CaseList
+   // },
 
     LoadApp: {
         screen: LoadApp

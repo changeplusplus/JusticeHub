@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 4704,
+  "expoServerNgrokUrl": "https://e8-d2y.anonymous.justicehub.exp.direct",
+  "packagerNgrokUrl": "https://packager.e8-d2y.anonymous.justicehub.exp.direct",
+  "ngrokPid": 4734
 }
-=======
-{}
->>>>>>> a58d4db3bc91f9c97593b78b30908a461894e6b9
