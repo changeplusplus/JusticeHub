@@ -16,7 +16,12 @@ class Login extends Component {
   
   render() {
     return (
-      <View>
+      <View style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'stretch',
+      }}>
         <InputBlock item='Email'
                     state='email'
                     onChangeText={this._onChangeText}
