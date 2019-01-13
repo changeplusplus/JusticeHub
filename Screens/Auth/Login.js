@@ -1,6 +1,23 @@
+/**
+ * Copyright 2018 Change++
+ * Description: The screen which allows the user to login 
+ * Last Edited: January 9, 2019
+ */
+
+
+
+
+
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import {View, TextInput, Button, KeyboardAvoidingView, Text} from 'react-native';
+import {
+    View,
+    TextInput,
+    Button,
+    KeyboardAvoidingView,
+    Text,
+    StyleSheet
+} from 'react-native';
 import { InputBlock } from "../../Components/InputBlock";
 import DataStorage from "../../DataStorage";
 
@@ -16,7 +33,7 @@ class Login extends Component {
   
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <InputBlock item='Email'
                     state='email'
                     onChangeText={this._onChangeText}
@@ -79,5 +96,16 @@ class Login extends Component {
     });
   };
 }
+
+/*** StyleSheet ****/
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'stretch'
+    }
+});
+
 
 export default Login;
