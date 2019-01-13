@@ -27,18 +27,23 @@ class Conversations extends React.Component {
         return (
             <ScrollView>
             <View style={styles.container}>
-                <Button
+                /*<Button
                 title='Conversations'
                 //color= ""
                 onPress={() =>
                     navigate('Conversations')}
 
-                />
+                />*/
+
+                //FIXME how to display all conversations in the server?
+                //FIXME how to specify sender in new message
+                //FIXME
+
 
                 <Button
                 title='New Message'
                 onPress={() =>
-                    navigate('New Message')}
+                    navigate('Chat')}
                 style={styles.buttonStyle}
                 />
 
