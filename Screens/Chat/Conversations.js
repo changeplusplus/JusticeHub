@@ -1,6 +1,5 @@
 import React from "react";
-import {View, Text, ScrollView, Button, StyleSheet} from "react-native";
-
+import {View, Text, ScrollView, Button, StyleSheet, Alert, AppRegistry} from "react-native";
 
 // Button: compose new message
 // Button: search bar --> to search conversations
@@ -17,7 +16,6 @@ class Conversations extends React.Component {
 
     // Firebase Admin SDK
 
-    // FIXME need to list all conversations and include a button to send new message
         static navigationOptions = ({ navigation }) => ({
             title: (navigation.state.params || {}).name || 'Conversations',
         });
@@ -25,30 +23,27 @@ class Conversations extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
+
+            <View>
+
+                <View>
+                    <Button
+                        title='New Message'
+                        onPress={() =>
+                            navigate('Chat')}
+                        style={styles.buttonStyle}
+                    />
+                </View>
+
             <ScrollView>
-            <View style={styles.container}>
-                /*<Button
-                title='Conversations'
-                //color= ""
-                onPress={() =>
-                    navigate('Conversations')}
 
-                />*/
+                // Conversation components go here, prop is name
 
-                //FIXME how to display all conversations in the server?
-                //FIXME how to specify sender in new message
-                //FIXME
+            </ScrollView>
 
-
-                <Button
-                title='New Message'
-                onPress={() =>
-                    navigate('Chat')}
-                style={styles.buttonStyle}
-                />
 
             </View>
-            </ScrollView>
+
         )
     }
 
@@ -58,6 +53,21 @@ class Conversations extends React.Component {
             marginTop: 20,
             padding: 20,
             //background color:
+        }
+
+        inputsContainer: {
+            flex: 1
+        },
+        fullWidthButton: {
+            backgroundColor: 'blue',
+            height:70,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        fullWidthButtonText: {
+            fontSize:24,
+            color: 'white'
         }
     });
 
