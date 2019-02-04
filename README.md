@@ -17,7 +17,7 @@ for individuals in developing nations needing legal representation. This project
 
 [Design](https://drive.google.com/drive/folders/1IEopNFn3UwrX5nbW_u-onOS5egJUVToq?usp=sharing)
 
-[Firebase Console] (https://console.firebase.google.com/u/0/project/justice-hub/overview)
+[Firebase Console](https://console.firebase.google.com/u/0/project/justice-hub/overview)
 
 ## How to build it
 
