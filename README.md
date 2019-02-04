@@ -19,6 +19,8 @@ for individuals in developing nations needing legal representation. This project
 
 [Firebase Console](https://console.firebase.google.com/u/0/project/justice-hub/overview)
 
+[Firebase Config File](https://drive.google.com/open?id=1kcfS1Y6KDH6j0r8wMxgIZCBrxV1UeZn5)
+
 ## How to build it
 
 1. Clone the application into a folder
