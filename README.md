@@ -13,6 +13,7 @@ for individuals in developing nations needing legal representation. This project
 
 [Demos](https://drive.google.com/drive/folders/1ff3bEEceG2k-NNhkcLUfK_VOm-xTJVFq?usp=sharing)
 
+[Design](https://drive.google.com/drive/folders/1IEopNFn3UwrX5nbW_u-onOS5egJUVToq?usp=sharing)
 ## How to build it 
 
 1. Clone the application into a folder
