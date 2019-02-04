@@ -3,7 +3,15 @@
 ## Summary
 
 This application is built in partnership with the International Bridges of Justice to provide support
-for individuals in developing nations needing legal representation
+for individuals in developing nations needing legal representation. This project is being built for CS 4279 taught by Jules White. 
+
+## Resources
+
+[Meeting Notes](https://drive.google.com/drive/folders/1rJVCRijpAJ4jqEw1JLW2U11afq9MQ8EJ?usp=sharing)
+
+[Trello Board](https://trello.com/b/8oe69tJe/change-justicehub)
+
+[Demos](https://drive.google.com/drive/folders/1ff3bEEceG2k-NNhkcLUfK_VOm-xTJVFq?usp=sharing)
 
 ## How to build it 
 
