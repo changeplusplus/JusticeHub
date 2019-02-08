@@ -21,7 +21,9 @@ for individuals in developing nations needing legal representation. This project
 
 [Firebase Config File](https://drive.google.com/open?id=1kcfS1Y6KDH6j0r8wMxgIZCBrxV1UeZn5)
 
-## How to build it
+[Privacy](privacy.md)
+
+## How to build
 
 1. Clone the application into a folder
 2. Add the config file to the project
