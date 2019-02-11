@@ -25,7 +25,7 @@ const ClientTabNav = createBottomTabNavigator({
   tabBarPosition: 'bottom'
 });
 
-const LawyerTabNav = TabNavigator({
+const LawyerTabNav = createBottomTabNavigator({
   /*CurrentCases: {
 
 
@@ -40,10 +40,10 @@ const LawyerTabNav = TabNavigator({
   tabBarPosition: 'bottom'
 });
 
-const MainStack = createStackNavigator({
-    /*Signup: {
+const MainStack = createBottomTabNavigator({
+    Signup: {
       screen: SignUp
-    }*/
+    },
 
    // CaseList: {
    //     screen: CaseList
