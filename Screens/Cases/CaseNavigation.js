@@ -5,6 +5,9 @@ import {
     FlatList,
     ActivityIndicator,
     SafeAreaView,
+    TouchableHighlight,
+    Button,
+    StyleSheet
 } from "react-native";
 import {  ListItem, SearchBar } from "react-native-elements";
 import { cases } from "./data/cases";
@@ -85,6 +88,13 @@ class CaseSearch extends Component {
         );
     };
 
+    _pressRow = () => {
+        this.props.navigation.navigate('Details', {
+            itemId: 1,
+            otherParam: 'Case Title',
+        });
+        console.log("Pressed");
+    };
 
 
     render() {
@@ -94,24 +104,24 @@ class CaseSearch extends Component {
                 <FlatList
                     data={this.state.data}
                     renderItem={({ item }) => (
-                        <ListItem
-                            title={item.name}
-                            subtitle={item.description}
-                            containerStyle={{ borderBottomWidth: 0 }}
-                            onPress={() => {
-                                /* 1. Navigate to the Details route with params */
-                                this.props.navigation.navigate('Details', {
-                                    itemId: 1,
-                                    otherParam: 'Case Title',
-                                });
-                            }}
-                        />
+
+                        <View>
+                            <ListItem
+                                title={item.name}
+                                subtitle={item.description}
+                                containerStyle={{ borderBottomWidth: 0 }}
+                                onPress={() => this._pressRow()}
+
+                            />
+                        </View>
+
                     )}
                     keyExtractor={item => item.email}
                     ItemSeparatorComponent={this.renderSeparator}
                     ListHeaderComponent={this.renderHeader}
                     ListFooterComponent={this.renderFooter}
                 />
+
             </SafeAreaView>
         );
     }
@@ -151,15 +161,8 @@ class DetailsScreen extends React.Component {
                 <Text>itemId: {JSON.stringify(itemId)}</Text>
                 <Text>otherParam: {JSON.stringify(otherParam)}</Text>
                 <Button
-                    title="Go to Details... again"
-                    onPress={() =>
-                        this.props.navigation.push('Details', {
-                            itemId: Math.floor(Math.random() * 100),
-                        })}
-                />
-                <Button
-                    title="Go to Home"
-                    onPress={() => this.props.navigation.navigate('Home')}
+                    title="Connect"
+                    // navigate to messenger with individual
                 />
 
             </View>
@@ -178,3 +181,18 @@ const RootStack = createStackNavigator(
 );
 const CaseNavigation = createAppContainer(RootStack);
 export default CaseNavigation;
+
+const styles = StyleSheet.create({
+    button: {
+        backgroundColor: 'blue',
+        borderColor: 'white',
+        borderWidth: 1,
+        borderRadius: 12,
+        color: 'white',
+        fontSize: 24,
+        fontWeight: 'bold',
+        overflow: 'hidden',
+        position: 'absolute',
+        right: 0
+    }
+});
