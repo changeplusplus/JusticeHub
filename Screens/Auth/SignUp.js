@@ -4,19 +4,25 @@ import { Alert, AppRegistry, View, KeyboardAvoidingView, Text, TextInput,
           Button, Picker } from 'react-native';
 import { InputBlock } from "../../Components/InputBlock";
 import DataStorage from '../../DataStorage';
+// import * as admin from 'firebase-admin';
+
+// var admin = require("firebase-admin");
+//
+// var serviceAccount = require("../../justice-hub-7f4ab08fec05.json");
+//
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://justice-hub.firebaseio.com"
+// });
 
 export default class SignUp extends Component {
-
-  _onPressButton() {
-    Alert.alert('You tapped the button!')
-  }
 
   constructor(props) {
     super(props);
     this.state = {
       fullName: "Full Name",
-      password: "Username",
-      phone: "Password",
+      username: "Username",
+      password: "Password",
       isLawyer: false
     };
   }
@@ -34,12 +40,12 @@ export default class SignUp extends Component {
           <TextInput
                       style = {{height: 40}}
                       placeholder="Username"
-                      onChangeText={(fullName) => this.setState({fullName})}
+                      onChangeText={(username) => this.setState({username})}
           />
           <TextInput
                       style = {{height: 40}}
                       placeholder="Password"
-                      onChangeText={(fullName) => this.setState({fullName})}
+                      onChangeText={(password) => this.setState({password})}
           />
           <Picker
                       selectedValue={this.state.isLawyer}
@@ -56,7 +62,7 @@ export default class SignUp extends Component {
         <View style = {{flex: 1}}>
           <Button
             onPress={this._onPressButton}
-            title="Press Me"
+            title="Sign Up"
             color="#841584"
           />
         </View>
@@ -66,4 +72,27 @@ export default class SignUp extends Component {
 
     )
   }
+//   _onPressButton = () => {
+//      const { fullName, username, password, isLawyer } = this.state;
+//
+//       if (fullName.trim() === '' || password.trim() === '' ||
+//           username.trim() === '') {
+//         alert('Must fill out required fields');
+//         return;
+//       }
+//
+//       admin.auth().createCustomToken(username)
+//         .then(function(customToken) {
+//           // Send token back to client
+//         })
+//         .catch(function(error) {
+//           console.log("Error creating custom token:", error);
+//         });
+//
+//       firebase.auth().signInWithCustomToken(token).catch(function(error) {
+//         // Handle Errors here.
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//       });
+//   }
 }
