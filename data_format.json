@@ -1,0 +1,48 @@
+{
+    "users": [
+      {
+        "userId": "0CLC7wwrdYxUDdNHG8o5",
+        "username": "jakeladerman",
+        "client": "yes",
+        "case": [
+          {
+            "Title":"Filing Bankruptcy",
+            "Description":"I was considering filing for Bankruptcy to escape debt and need help"
+          }
+        ]
+      },
+      {
+        "userId": "0CLC7wwrdYxUDdNHG8o5",
+        "username": "jarrettperkins",
+        "client": "yes",
+        "case": [
+          {
+            "Title":"Arrested for Trespassing",
+            "Description":"I was wrongly arrested for trespassing and need help"
+          }
+        ]
+      },
+      {
+        "userId": "0CLC7wwrdYxUDdNHG8o5",
+        "username": "michealsandborn",
+        "client": "yes",
+        "case": [
+          {
+            "Title":"Government confiscating property",
+            "Description":"The government is trying to steal my land!"
+          }
+        ]
+      },
+      {
+        "userId": "0CLC7wwrdYxUDdNHG8o5",
+        "username": "jamesraubenheimer",
+        "client": "yes",
+        "case": [
+          {
+            "Title":"Stolen Jewelery",
+            "Description":"I was arrested by the police and gave them my jewelery and did not get it back. I have tried speaking with them and non one will help me"
+          }
+        ]
+      }
+  ]
+}
