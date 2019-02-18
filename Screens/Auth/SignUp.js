@@ -1,103 +1,98 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { View, KeyboardAvoidingView, Text, TextInput,
+import { Alert, AppRegistry, View, KeyboardAvoidingView, Text, TextInput,
           Button, Picker } from 'react-native';
 import { InputBlock } from "../../Components/InputBlock";
 import DataStorage from '../../DataStorage';
+// import * as admin from 'firebase-admin';
+
+// var admin = require("firebase-admin");
+//
+// var serviceAccount = require("../../justice-hub-7f4ab08fec05.json");
+//
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://justice-hub.firebaseio.com"
+// });
 
 export default class SignUp extends Component {
-  state = {
-    fullName: '',
-    password: '',
-    phone: '',
-    email: '',
-    isLawyer: false
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      fullName: "Full Name",
+      username: "Username",
+      password: "Password",
+      isLawyer: false
+    };
+  }
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <KeyboardAvoidingView behavior='padding'>
+      <View style = {{flex: 1, alignItems: "center", justifyContent: "center"}}>
+        <KeyboardAvoidingView behavior='padding' style = {{flex: 1, padding: 10}}>
 
-          <InputBlock item='Full Name'
-                      state='fullName'
-                      onChangeText={this._onChangeText}
-                      value={this.state.fullName} />
-          <InputBlock item='Password'
-                      state='password'
-                      onChangeText={this._onChangeText}
-                      value={this.state.password}/>
-          <InputBlock item='Phone Number'
-                      state='phone'
-                      onChangeText={this._onChangeText}
-                      value={this.state.phone}/>
-          <InputBlock item='Email'
-                      state='email'
-                      onChangeText={this._onChangeText}
-                      value={this.state.email}/>
-
+          <TextInput
+                      style = {{height: 40}}
+                      placeholder="Full Name"
+                      onChangeText={(fullName) => this.setState({fullName})}
+          />
+          <TextInput
+                      style = {{height: 40}}
+                      placeholder="Username"
+                      onChangeText={(username) => this.setState({username})}
+          />
+          <TextInput
+                      style = {{height: 40}}
+                      placeholder="Password"
+                      onChangeText={(password) => this.setState({password})}
+          />
           <Picker
-            selectedValue={this.state.isLawyer}
-            onValueChange={(itemValue) => this.setState({isLawyer: itemValue})}>
-
-            <Picker.Item label='Lawyer' value={true} />
-            <Picker.Item label='Client' value={false} />
+                      selectedValue={this.state.isLawyer}
+                      style={{height: 1, width: 100}}
+                      onValueChange={(itemValue, itemIndex) =>
+                        this.setState({isLawyer: itemValue})
+                      }>
+                      <Picker.Item label="Lawyer" value={true} />
+                      <Picker.Item label="Client" value={false} />
           </Picker>
 
-          <Button onPress={this._signUp} title='Sign Up' color='blue' />
+
         </KeyboardAvoidingView>
+        <View style = {{flex: 1}}>
+          <Button
+            onPress={this._onPressButton}
+            title="Sign Up"
+            color="#841584"
+          />
+        </View>
+
       </View>
+
+
     )
   }
-
-  _signUp = () => {
-    const { fullName, password, phone, email, isLawyer } = this.state;
-
-    if (fullName.trim() === '' || password.trim() === '' ||
-        phone.trim() === '') {
-      alert('Must fill out required fields');
-      return;
-    }
-
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        // Get userId
-        let userId = firebase.auth().currentUser.uid;
-
-        // Set basic data in database
-        firebase.database().ref('users/' + userId).set({
-          fullName: fullName,
-          email: email,
-          phoneNumber: phone,
-          isLawyer: isLawyer
-        });
-
-        alert('Account successfully created!');
-
-        DataStorage.saveLogin(email, password);
-
-        // Store basic data
-        DataStorage.FULL_NAME = fullName;
-        DataStorage.EMAIL = email;
-        DataStorage.PHONE_NUM = phone;
-        DataStorage.IS_LAWYER = isLawyer;
-
-        const { navigate } = this.props.navigation;
-
-        if (isLawyer) {
-          navigate('SetupLawyerProfile');
-        } else {
-          navigate('SetupClientProfile');
-        }
-      })
-      .catch((error) => {
-        alert('Error: ' + error.message);
-      })
-  };
-
-  _onChangeText = (state, update) => {
-    this.setState({
-      [state]: update
-    });
-  };
+//   _onPressButton = () => {
+//      const { fullName, username, password, isLawyer } = this.state;
+//
+//       if (fullName.trim() === '' || password.trim() === '' ||
+//           username.trim() === '') {
+//         alert('Must fill out required fields');
+//         return;
+//       }
+//
+//       admin.auth().createCustomToken(username)
+//         .then(function(customToken) {
+//           // Send token back to client
+//         })
+//         .catch(function(error) {
+//           console.log("Error creating custom token:", error);
+//         });
+//
+//       firebase.auth().signInWithCustomToken(token).catch(function(error) {
+//         // Handle Errors here.
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//       });
+//   }
 }
