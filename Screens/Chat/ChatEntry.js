@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import * as firebase from 'firebase';
-import ChatMain from "./Screens/Chat/ChatMain";
+import ChatMain from "./ChatMain";
 
 class ChatEntry extends Component {
 
