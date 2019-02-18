@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity , View } from 'react-native';
 
 class ChatMain extends Component {
+    state = {
+        name: ''
+    };
 
     onPress = () => {
         this.props.navigation.navigate('Chat', { name: this.state.name });

@@ -10,11 +10,18 @@ import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
 import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
 import ChatEntry from "./Screens/Chat/ChatEntry";
+import ChatMain from './Screens/Chat/ChatMain';
+import ChatImpl from "./Screens/Chat/ChatImpl";
+import Fire from './Fire';
 
 //import CaseList from "./Screens/Cases/CaseList";
 
 // API information in firebase-config.js
-firebase.initializeApp(config);
+// firebase.initializeApp(config);
+let fire = new Fire();
+fire.init();
+
+console.disableYellowBox = true;
 
 const ClientTabNav = createBottomTabNavigator({
     /*CreateCase: {
@@ -43,9 +50,6 @@ const LawyerTabNav = TabNavigator({
 });
 
 const MainStack = createStackNavigator({
-    /*Signup: {
-      screen: SignUp
-    }*/
 
    // CaseList: {
    //     screen: CaseList
@@ -57,10 +61,18 @@ const MainStack = createStackNavigator({
     ChatEntry: {
         screen: ChatEntry
     },
+    ChatMain: {
+        screen: ChatMain
+    },
+    Chat: {
+        screen: ChatImpl
+    },
     Login: {
         screen: Login
     },
-
+    SignUp: {
+        screen: SignUp
+    },
     SetupLawyerProfile: {
         screen: SetupLawyerProfile
     },

@@ -1,10 +1,11 @@
 import firebase from 'firebase';
+import config from './firebase-config';
 
 class Fire {
     constructor() {
-        this.init();
+        // this.init();
 
-        this.observeAuth();
+        // this.observeAuth();
     }
 
     observeAuth = () =>
@@ -13,7 +14,9 @@ class Fire {
     onAuthStateChanged = user => {
         if (!user) {
             try {
+                console.log('Signing in anon');
                 firebase.auth().signInAnonymously();
+                console.log('UID:', firebase.auth().currentUser.uid);
             } catch ({message}) {
                 alert(message);
             }
@@ -73,14 +76,7 @@ class Fire {
     append = message => this.ref.push(message);
 
     init = () =>
-        firebase.initializeApp({
-            apiKey: "AIzaSyDTx1x0jO520B7oHxe6lahsXb7HM23z4U4",
-            authDomain: "chatfeature-9c371.firebaseapp.com",
-            databaseURL: "https://chatfeature-9c371.firebaseio.com",
-            projectId: "chatfeature-9c371",
-            storageBucket: "chatfeature-9c371.appspot.com",
-            messagingSenderId: "134783614333"
-        });
+        firebase.initializeApp(config);
 }
 
 

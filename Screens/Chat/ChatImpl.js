@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
+import Fire from '../../Fire';
 
 class ChatImpl extends Component {
+    constructor() {
+        super();
+
+        let fire = new Fire();
+        fire.observeAuth();
+    }
 
     static navigationOptions = ({ navigation }) => ({
         title: (navigation.state.params || {}).name || 'Chat!',
@@ -13,11 +20,15 @@ class ChatImpl extends Component {
     };
 
     render() {
-        return <GiftedChat
-            messages={this.state.messages}
-            onSend={Fire.shared.send}
-            user={this.user}
-        />;
+        return (
+            <KeyboardAvoidingView behavior='padding' style={{ flex: 1 }}>
+                <GiftedChat
+                    messages={this.state.messages}
+                    onSend={Fire.shared.send}
+                    user={this.user}
+                />
+            </KeyboardAvoidingView>
+        );
     }
 
     get user() {
