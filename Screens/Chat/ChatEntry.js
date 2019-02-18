@@ -1,40 +1,55 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
-import * as firebase from 'firebase';
-import ChatMain from "./ChatMain";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 
 class ChatEntry extends Component {
+    state = {
+        name: ''
+    };
+
+    onPress = () => {
+        this.props.navigation.navigate('Chat', { name: this.state.name });
+    };
+
+    onChangeText = name => this.setState({name});
 
     render() {
-        const {navigate} = this.props.navigation;
+
         return (
             <View>
-                <View style={styles.button}>
-                    <Text style={styles.buttonText}>Chat</Text>
-                </View>
-
-                <Button
-                    onPress={() => navigate('ChatMain')}
-                    title="to Chat"
-                    color="#841584"
+                <Text style={styles.title}>Enter your name:</Text>
+                <TextInput
+                    onChangeText={this.onChangeText}
+                    style={styles.nameInput}
+                    placeHolder="Your Name"
+                    value={this.state.name}
                 />
+
+                <TouchableOpacity onPress={this.onPress}>
+                    <Text style={styles.buttonText}>Next</Text>
+                </TouchableOpacity>
             </View>
         );
     }
 }
 
+const offset = 24;
 const styles = StyleSheet.create({
-
-    button: {
-        marginBottom: 30,
-        width: 260,
-        alignItems: 'center',
-        backgroundColor: '#b66040'
+    nameInput: {
+        height: offset * 2,
+        margin: offset,
+        paddingHorizontal: offset,
+        borderColor: '#111111',
+        borderWidth: 1,
+    },
+    title: {
+        marginTop: offset,
+        marginLeft: offset,
+        fontSize: offset,
     },
     buttonText: {
-        padding: 20,
-        color: 'white'
-    }
+        marginLeft: offset,
+        fontSize: offset,
+    },
 });
 
 export default ChatEntry;

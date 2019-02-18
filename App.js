@@ -10,7 +10,6 @@ import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
 import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
 import ChatEntry from "./Screens/Chat/ChatEntry";
-import ChatMain from './Screens/Chat/ChatMain';
 import ChatImpl from "./Screens/Chat/ChatImpl";
 import Fire from './Fire';
 
@@ -60,9 +59,6 @@ const MainStack = createStackNavigator({
     },
     ChatEntry: {
         screen: ChatEntry
-    },
-    ChatMain: {
-        screen: ChatMain
     },
     Chat: {
         screen: ChatImpl
