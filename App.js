@@ -9,6 +9,8 @@ import ClientProfile from "./Screens/Profile/ClientProfile";
 import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
 import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
+import ChatEntry from "./Screens/Chat/ChatEntry";
+
 //import CaseList from "./Screens/Cases/CaseList";
 
 // API information in firebase-config.js
@@ -52,6 +54,9 @@ const MainStack = createBottomTabNavigator({
     LoadApp: {
         screen: LoadApp
     },
+    ChatEntry: {
+        screen: ChatEntry
+    },
     Login: {
         screen: Login
     },
@@ -80,10 +85,6 @@ const MainStack = createBottomTabNavigator({
 
    // After login
    // Main: { screen: Main },
-
-   // Chat: { screen: Chat },
-
-   // Conversations: { screen: Conversations },
 
   navigationOptions: { header: null }
 
