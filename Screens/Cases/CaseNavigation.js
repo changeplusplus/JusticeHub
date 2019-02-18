@@ -88,10 +88,12 @@ class CaseSearch extends Component {
         );
     };
 
-    _pressRow = () => {
+    _pressRow = (name, info) => {
         this.props.navigation.navigate('Details', {
             itemId: 1,
             otherParam: 'Case Title',
+            itemName: name,
+            itemInfo: info
         });
         console.log("Pressed");
     };
@@ -110,7 +112,7 @@ class CaseSearch extends Component {
                                 title={item.name}
                                 subtitle={item.description}
                                 containerStyle={{ borderBottomWidth: 0 }}
-                                onPress={() => this._pressRow()}
+                                onPress={() => this._pressRow(item.name, item.description)}
 
                             />
                         </View>
@@ -152,14 +154,14 @@ class DetailsScreen extends React.Component {
     render() {
         /* 2. Get the param, provide a fallback value if not available */
         const { navigation } = this.props;
-        const itemId = navigation.getParam('itemId', 'NO-ID');
-        const otherParam = navigation.getParam('otherParam', 'some default value');
+        const itemName = navigation.getParam('itemName', 'No Name');
+        const itemInfo= navigation.getParam('itemInfo', 'No Description');
 
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Details Screen</Text>
-                <Text>itemId: {JSON.stringify(itemId)}</Text>
-                <Text>otherParam: {JSON.stringify(otherParam)}</Text>
+
+                <Text>Case: {itemName}</Text>
+                <Text>Description: {itemInfo}</Text>
                 <Button
                     title="Connect"
                     // navigate to messenger with individual
