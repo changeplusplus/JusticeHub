@@ -77,8 +77,13 @@ export default class SignUp extends Component {
               })
               .catch((error) => {
                   if (error ==  "Error: The email address is already in use by another account."){
-                      firebase.auth().signInWithEmailAndPassword(this.username+"@fakewebsite.com", this.password);
-                      alert("Logged in.");
+                      firebase.auth().signInWithEmailAndPassword(this.username+"@fakewebsite.com", this.password)
+                          .then(() => {
+                              alert("Logged in.");
+                          })
+                          .catch((error) => {
+                              alert(error);
+                          })
                   } else{
                       alert(error);
                   }
