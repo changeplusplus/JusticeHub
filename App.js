@@ -10,8 +10,7 @@ import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
 import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
 import ChatEntry from "./Screens/Chat/ChatEntry";
-
-//import CaseList from "./Screens/Cases/CaseList";
+import ClientCases from "./Screens/Cases/ClientCases";
 
 // API information in firebase-config.js
 firebase.initializeApp(config);
@@ -44,35 +43,35 @@ const LawyerTabNav = createBottomTabNavigator({
 
 const MainStack = createBottomTabNavigator({
     Signup: {
-      screen: SignUp
+        screen: SignUp
     },
 
-   // CaseList: {
-   //     screen: CaseList
-   // },
+   ClientCases: {
+        screen: ClientCases
+   }
 
-    LoadApp: {
-        screen: LoadApp
-    },
-    ChatEntry: {
-        screen: ChatEntry
-    },
-    Login: {
-        screen: Login
-    },
-
-    SetupLawyerProfile: {
-        screen: SetupLawyerProfile
-    },
-    SetupClientProfile: {
-        screen: SetupClientProfile
-    },
-    ClientTabNav: {
-        screen: ClientTabNav
-    },
-    LawyerTabNav: {
-        screen: LawyerTabNav
-    }
+    // LoadApp: {
+    //     screen: LoadApp
+    // },
+    // ChatEntry: {
+    //     screen: ChatEntry
+    // },
+    // Login: {
+    //     screen: Login
+    // },
+    //
+    // SetupLawyerProfile: {
+    //     screen: SetupLawyerProfile
+    // },
+    // SetupClientProfile: {
+    //     screen: SetupClientProfile
+    // },
+    // ClientTabNav: {
+    //     screen: ClientTabNav
+    // },
+    // LawyerTabNav: {
+    //     screen: LawyerTabNav
+    // }
 
 },{
 
