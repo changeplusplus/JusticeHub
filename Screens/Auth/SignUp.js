@@ -40,12 +40,12 @@ export default class SignUp extends Component {
           <TextInput
                       style = {{height: 40}}
                       placeholder="Username"
-                      onChangeText={(username) => this.setState({username})}
+                      onChangeText={(username) => this.username = username}
           />
           <TextInput
                       style = {{height: 40}}
                       placeholder="Password"
-                      onChangeText={(password) => this.setState({password})}
+                      onChangeText={(password) => this.password = password}
           />
           <Picker
                       selectedValue={this.state.isLawyer}
@@ -57,21 +57,38 @@ export default class SignUp extends Component {
                       <Picker.Item label="Client" value={false} />
           </Picker>
 
-
         </KeyboardAvoidingView>
         <View style = {{flex: 1}}>
           <Button
-            onPress={this._onPressButton}
+            onPress={() => this.signUp()}
             title="Sign Up"
             color="#841584"
           />
         </View>
 
       </View>
-
-
     )
   }
+    signUp = () =>{
+      try{
+          firebase.auth().createUserWithEmailAndPassword(this.username+"@fakewebsite.com", this.password)
+              .then(() => {
+                  alert("Signed up successfully!");
+              })
+              .catch((error) => {
+                  if (error ==  "Error: The email address is already in use by another account."){
+                      firebase.auth().signInWithEmailAndPassword(this.username+"@fakewebsite.com", this.password);
+                      alert("Logged in.");
+                  } else{
+                      alert(error);
+                  }
+              });
+      }
+      catch (e) {
+          alert(e);
+      }
+
+    }
 //   _onPressButton = () => {
 //      const { fullName, username, password, isLawyer } = this.state;
 //
