@@ -4,16 +4,10 @@ import { Alert, AppRegistry, View, KeyboardAvoidingView, Text, TextInput,
           Button, Picker } from 'react-native';
 import { InputBlock } from "../../Components/InputBlock";
 import DataStorage from '../../DataStorage';
-// import * as admin from 'firebase-admin';
 
-// var admin = require("firebase-admin");
-//
-// var serviceAccount = require("../../justice-hub-7f4ab08fec05.json");
-//
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   databaseURL: "https://justice-hub.firebaseio.com"
-// });
+var t = require('tcomb-form-native');
+
+var STORAGE_KEY = 'id_token';
 
 export default class SignUp extends Component {
 
@@ -61,7 +55,7 @@ export default class SignUp extends Component {
         </KeyboardAvoidingView>
         <View style = {{flex: 1}}>
           <Button
-            onPress={this._onPressButton}
+            onPress={this._userSignup}
             title="Sign Up"
             color="#841584"
           />
@@ -72,27 +66,53 @@ export default class SignUp extends Component {
 
     )
   }
-//   _onPressButton = () => {
-//      const { fullName, username, password, isLawyer } = this.state;
-//
-//       if (fullName.trim() === '' || password.trim() === '' ||
-//           username.trim() === '') {
-//         alert('Must fill out required fields');
-//         return;
-//       }
-//
-//       admin.auth().createCustomToken(username)
-//         .then(function(customToken) {
-//           // Send token back to client
-//         })
-//         .catch(function(error) {
-//           console.log("Error creating custom token:", error);
-//         });
-//
-//       firebase.auth().signInWithCustomToken(token).catch(function(error) {
-//         // Handle Errors here.
-//         var errorCode = error.code;
-//         var errorMessage = error.message;
-//       });
-//   }
+  // _onPressButton = () => {
+  //    const { fullName, username, password, isLawyer } = this.state;
+  //
+  //     if (fullName.trim() === '' || password.trim() === '' ||
+  //         username.trim() === '') {
+  //       alert('Must fill out required fields');
+  //       return;
+  //     }
+  //
+  //     var token;
+  //     admin.auth().createCustomToken(username)
+  //       .then(function(customToken) {
+  //         token = customToken;
+  //       })
+  //       .catch(function(error) {
+  //         console.log("Error creating custom token:", error);
+  //       });
+  //
+  //     firebase.auth().signInWithCustomToken(token).catch(function(error) {
+  //       // Handle Errors here.
+  //       var errorCode = error.code;
+  //       var errorMessage = error.message;
+  //     });
+  // }
+
+_userSignup() {
+    if (true) { // if validation fails, value will be null
+        fetch("http://localhost:19002/users", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: value.username,
+                password: value.password,
+            })
+        })
+        .then((response) => response.json())
+        .then((responseData) => {
+            this._onValueChange(STORAGE_KEY, responseData.id_token),
+            AlertIOS.alert(
+            "Signup Success!",
+            "Click the button to get a Chuck Norris quote!"
+            )
+        })
+        .done();
+    }
+}
 }
