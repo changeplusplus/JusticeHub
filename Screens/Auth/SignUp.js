@@ -91,6 +91,19 @@ export default class SignUp extends Component {
   //     });
   // }
 
+// https://dzone.com/articles/adding-authentication-to-your-react-native-app-usi-1
+// Playing around with above tutorial
+// Trying to modify to suit project needs
+// Currently understand how to perform a custom sign in according to below tutorial but struggling to generate JWT
+// https://firebase.google.com/docs/auth/web/custom-auth
+// Need to create custom token as shown below
+// https://firebase.google.com/docs/auth/admin/create-custom-tokens
+// Unfortunately, Firebase Admin SDK is not supported for React Native and I am struggling to find third party that use same algorithm
+// Might have to make own JWT as shown in following tutorial
+// https://medium.com/code-wave/how-to-make-your-own-jwt-c1a32b5c3898
+// Have invested a lot of hours researching/playing with tutorials, but haven't been able to get a funcitonal/meaningful commit
+// Thus I'm taking to the comments to explain my workflow and what I'm doing right now
+
 _userSignup() {
     if (true) { // if validation fails, value will be null
         fetch("http://localhost:19002/users", {
