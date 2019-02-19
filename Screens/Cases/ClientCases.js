@@ -4,10 +4,10 @@ import {ModalProps} from "react-native-modal";
 import * as firebase from 'firebase';
 import {InputBlock} from "../../Components/InputBlock";
 
-
+//TODO Implement Modal to make add case pop up from the case list
 export default class ClientCases extends Component {
     state = {
-        caseType: '',
+        caseName: '',
         caseDetails: ''
     };
 
@@ -15,28 +15,44 @@ export default class ClientCases extends Component {
         return (
             <View>
                 <Text>Submit Case</Text>
-                <InputBlock item='Type of case'
-                            state='caseType'
-                            onChangeText={(caseType) => this.state.caseType = caseType}/>
+                <InputBlock item='Name of Case'
+                            state='caseName'
+                            onChangeText={(caseName) => this.state.caseName = caseName}/>
                 <InputBlock item='Case Details'
                             state='caseDetails'
                             onChangeText={(caseDetails) => this.state.caseDetails = caseDetails}/>
 
-                <Button onPress={this._submitCase} title='Submit Case' />
+                <Button onPress={this.submitCase} title='Submit Case' />
+                <Button onPress={this.clearCases} title='Clear Cases' />
             </View>
         )
     }
 
-    _submitCase = () => {
-        const { caseType, caseDetails } = this.state;
-
+    submitCase = () => {
+        const { caseName, caseDetails } = this.state;
         let user = firebase.auth().currentUser;
-        alert(user.email);
-        firebase.auth().signOut();
-        // firebase.database().ref('Cases/' + userId).update({
-        //     caseType: caseType,
-        //     caseDetails: caseDetails
-        // });
+        let caseTest = firebase.database().ref("users/" + user.uid + "/cases/");
+        caseTest.push({
+            caseName : caseName,
+            caseDetails : caseDetails
+        })
+            .then(() =>{
+                alert("Case added successfully!");
+            })
+            .catch((error) =>{
+                alert(error);
+            })
+    };
 
+    clearCases = () => {
+        let user = firebase.auth().currentUser;
+        let caseTest = firebase.database().ref("users/" + user.uid + "/cases/");
+        caseTest.set({})
+            .then(() =>{
+                alert("Cases Cleared");
+            })
+            .catch((error) =>{
+                alert(error);
+            })
     };
 }
