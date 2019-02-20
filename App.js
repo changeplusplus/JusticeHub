@@ -12,6 +12,7 @@ import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
 import ChatEntry from "./Screens/Chat/ChatEntry";
 import ChatImpl from "./Screens/Chat/ChatImpl";
 import Fire from './Fire';
+import CaseNav from "./Screens/Cases/CaseNavigation";
 
 //import CaseList from "./Screens/Cases/CaseList";
 
@@ -80,6 +81,9 @@ const MainStack = createStackNavigator({
     },
     LawyerTabNav: {
         screen: LawyerTabNav
+    },
+    CaseTabNav: {
+        screen: CaseNav
     }
 
 },{
