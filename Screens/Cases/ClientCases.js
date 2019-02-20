@@ -13,8 +13,12 @@ export default class ClientCases extends Component {
 
     render() {
         return (
-            <View>
-                <Text>Submit Case</Text>
+            <View style={{
+                flex: 1,
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
                 <InputBlock item='Name of Case'
                             state='caseName'
                             onChangeText={(caseName) => this.state.caseName = caseName}/>
