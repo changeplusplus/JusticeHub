@@ -4,11 +4,10 @@ There are some unique privacy and security considerations for this project. Our 
 
 ## Security in Chat
 
-Each user will have a case title and description associated to their client profile. It is important that this information remains classified to anyone besides any lawyers working with the client on the case. Additionally, it is possible that users may be sending sensitive information including, but not limited to, name, location, case details, age, and profession. Securing this information is an important objective for the in-app messaging feature. For this chat functionality, we decided to use PubNub as the backend service for messaging. PubNub also provides a customizable ChatEngine template application which we will repurpose for our needs. From a security standpoint, PubNub guarantees end-to-end encryption using TLS and AES256, routes data in a way that prevents local attacks, and is also a HIPAA and SOC2 compliant service which is the robustness needed from a service handling a variety of sensitive legal data. 
-
+Each user will have a case title and description associated to their client profile. It is important that this information remains classified to anyone besides any lawyers working with the client on the case. Additionally, it is possible that users may be sending sensitive information including, but not limited to, name, location, case details, age, and profession. Securing this information is an important objective for the in-app messaging feature. For this chat functionality, we decided to use Twilio programmable chat as the messaging service. From a security standpoint, Twilio supports both TLS and provides Request Validation using SHA1 in conjunction with HMAC (Hash-based Message Authentication Code) signing and Twilio's own AuthTokens. Twilio's services are also SOC2 compliant to handle large amounts of sensitive legal data from the application users. 
 
 ### Resources
 
-[Security](https://www.pubnub.com/products/security-overview/) **|**
-[PubNub](https://www.pubnub.com/blog/pubnub-chatengine-vs-layer/) **|**
-[Authentication](https://firebase.google.com/docs/auth/)
+[Security](https://www.twilio.com/security) **|**
+[Authy](https://www.twilio.com/authy) **|**
+[Firebase](https://firebase.google.com/docs/auth/)
