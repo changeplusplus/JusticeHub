@@ -11,8 +11,6 @@ import { withNavigation } from 'react-navigation';
 
 
 export default class SignUp extends Component {
-  static router = MainStack.router;
-  // MainStack navigation={this.props.navigation};
 
 
   constructor(props) {
@@ -71,6 +69,7 @@ export default class SignUp extends Component {
   }
 
   _userSignup = () => {
+    const { navigate } = this.props.navigation;
     const { fullName, email, password, isLawyer } = this.state;
 
     if (fullName.trim() === '' || password.trim() === '' ||
@@ -89,7 +88,12 @@ export default class SignUp extends Component {
         isLawyer: isLawyer
       });
       alert('Sign up successful!');
-      this.props.navigation.navigate('Login');
+      if (isLawyer == true) {
+        navigate('SetupLawyerProfile');
+      }
+      else {
+        navigate('SetupClientProfile');
+      }
 
     })
     .catch(function(error) {
