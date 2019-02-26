@@ -28,6 +28,7 @@ class CaseSearch extends Component {
         };
     }
 
+
     readUserData() {
         firebase.database().ref('cases/').on('value', function (snapshot) {
             console.log(snapshot.val());
