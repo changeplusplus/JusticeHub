@@ -106,7 +106,7 @@ class App extends React.Component {
   // SignUp component is a placeholder before we use react-navigation
   render() {
     return (
-      <MainStack />
+      <CaseNav/>
     );
   }
 }

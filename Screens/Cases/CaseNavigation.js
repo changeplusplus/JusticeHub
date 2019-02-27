@@ -10,9 +10,9 @@ import {
     StyleSheet
 } from "react-native";
 import {  ListItem, SearchBar } from "react-native-elements";
-import { cases } from "./data/cases";
+import { cases } from "../../data/cases";
 import _ from "lodash";
-import config from "./config";
+import config from "../../firebase-config";
 import firebase from "firebase";
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
@@ -44,10 +44,10 @@ class CaseSearch extends Component {
         this.setState({ loading: true });
 
         getCases()
-            .then(users => {
+            .then(cases => {
                 this.setState({
                     loading: false,
-                    data: users
+                    data: cases
                 });
             })
             .catch(error => {
@@ -143,7 +143,7 @@ const getCases = (limit = 20, query = "") => {
         } else {
             const formattedQuery = query.toLowerCase();
             const results = _.filter(cases, cases => {
-                return contains(user, formattedQuery);
+                return contains(cases, formattedQuery);
             });
             resolve(_.take(results, limit));
         }
@@ -182,8 +182,7 @@ const RootStack = createStackNavigator(
         initialRouteName: 'Home',
     }
 );
-const CaseNavigation = createAppContainer(RootStack);
-export default CaseNavigation;
+export default RootStack;
 
 const styles = StyleSheet.create({
     button: {
