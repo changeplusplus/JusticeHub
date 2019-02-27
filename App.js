@@ -9,10 +9,19 @@ import ClientProfile from "./Screens/Profile/ClientProfile";
 import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
 import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
+import ChatEntry from "./Screens/Chat/ChatEntry";
+import ChatImpl from "./Screens/Chat/ChatImpl";
+import Fire from './Fire';
+import CaseNav from "./Screens/Cases/CaseNavigation";
+
 //import CaseList from "./Screens/Cases/CaseList";
 
 // API information in firebase-config.js
-firebase.initializeApp(config);
+// firebase.initializeApp(config);
+let fire = new Fire();
+fire.init();
+
+console.disableYellowBox = true;
 
 const ClientTabNav = createBottomTabNavigator({
     /*CreateCase: {
@@ -41,9 +50,6 @@ const LawyerTabNav = TabNavigator({
 });
 
 const MainStack = createStackNavigator({
-    /*Signup: {
-      screen: SignUp
-    }*/
 
    // CaseList: {
    //     screen: CaseList
@@ -52,10 +58,18 @@ const MainStack = createStackNavigator({
     LoadApp: {
         screen: LoadApp
     },
+    ChatEntry: {
+        screen: ChatEntry
+    },
+    Chat: {
+        screen: ChatImpl
+    },
     Login: {
         screen: Login
     },
-
+    SignUp: {
+        screen: SignUp
+    },
     SetupLawyerProfile: {
         screen: SetupLawyerProfile
     },
@@ -67,6 +81,9 @@ const MainStack = createStackNavigator({
     },
     LawyerTabNav: {
         screen: LawyerTabNav
+    },
+    CaseTabNav: {
+        screen: CaseNav
     }
 
 },{
@@ -81,10 +98,6 @@ const MainStack = createStackNavigator({
    // After login
    // Main: { screen: Main },
 
-   // Chat: { screen: Chat },
-
-   // Conversations: { screen: Conversations },
-
   navigationOptions: { header: null }
 
 });
@@ -93,9 +106,10 @@ class App extends React.Component {
   // SignUp component is a placeholder before we use react-navigation
   render() {
     return (
-      <MainStack />
+      <MainStack/>
     );
   }
 }
 
 export default MainStack;
+

@@ -23,7 +23,8 @@ for individuals in developing nations needing legal representation. This project
 
 [IBJ Call Notes](https://drive.google.com/open?id=17nc9E8TWOzQurAETf-EPkbWX5gDiZUZD)
 
-## How to build it
+[Privacy](privacy.md)
+
 
 1. Clone the application into a folder
 2. Add the config file to the project
