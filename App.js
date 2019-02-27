@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import {createStackNavigator, createBottomTabNavigator, createAppContainer} from 'react-navigation';
 import SignUp from './Screens/Auth/SignUp';
 import config from './firebase-config';
 import * as firebase from 'firebase';
@@ -17,7 +17,6 @@ import CaseNav from "./Screens/Cases/CaseNavigation";
 //import CaseList from "./Screens/Cases/CaseList";
 
 // API information in firebase-config.js
-// firebase.initializeApp(config);
 let fire = new Fire();
 fire.init();
 
@@ -27,33 +26,33 @@ const ClientTabNav = createBottomTabNavigator({
     /*CreateCase: {
 
   },*/
-  ViewProfile: {
-    screen: ClientProfile
-  }
+    ViewProfile: {
+        screen: ClientProfile
+    }
 }, {
-  tabBarPosition: 'bottom'
+    tabBarPosition: 'bottom'
 });
 
 const LawyerTabNav = createBottomTabNavigator({
-  /*CurrentCases: {
+    /*CurrentCases: {
 
 
-  },
-  AllCases: {
+    },
+    AllCases: {
 
-  },*/
-  ViewProfile: {
-    screen: LawyerProfile
-  }
+    },*/
+    ViewProfile: {
+        screen: LawyerProfile
+    }
 }, {
-  tabBarPosition: 'bottom'
+    tabBarPosition: 'bottom'
 });
 
 const MainStack = createStackNavigator({
 
-   // CaseList: {
-   //     screen: CaseList
-   // },
+    // CaseList: {
+    //     screen: CaseList
+    // },
 
     LoadApp: {
         screen: LoadApp
@@ -86,34 +85,10 @@ const MainStack = createStackNavigator({
         screen: CaseNav
     }
 
-},{
-
-  /*EditLawyerProfile: {
-    screen: EditLawyerProfile
-  }*/
-  /*EditClientProfile: {
-    screen: EditClientProfile
-  }*/
-
-   // After login
-   // Main: { screen: Main },
-
-  navigationOptions: { header: null }
-
+}, {
+    navigationOptions: {header: null}
 });
 
 const AppContainer = createAppContainer(MainStack);
 
 export default AppContainer;
-
-/*class App extends React.Component {
-  // SignUp component is a placeholder before we use react-navigation
-  render() {
-    return (
-      <MainStack/>
-    );
-  }
-}
-
-export default MainStack;*/
-
