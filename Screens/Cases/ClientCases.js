@@ -1,68 +1,68 @@
-import React, { Component } from 'react';
-import {View, Text, Button, TextInput} from 'react-native';
-import {ModalProps} from "react-native-modal";
-import * as firebase from 'firebase';
+استورد رد فعل ، { مكون } من 'رد فعل';
+استيراد من رد فعل أصلي;
+استيراد من";
+استيراد من firebase;
 
-//TODO Implement Modal to make add case pop up from the case list
-export default class ClientCases extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            caseName: '',
-            caseDetails: ''
-        };
+// todo تنفيذ modal to make add case popp up from the case list
+صدر افتراضي الفئة عناصر {
+    constructor (props){
+        super (props);
+        هذا.الدولة = {
+            اسم الملف:,
+        casedetails: "
+    };
     }
 
 
-    render() {
-        return (
-            <View style={{
-                flex: 1,
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <Text>Name of Case</Text>
-                <TextInput
-                    placeholder="title"
-                    onChangeText={(text) => this.state.caseName = text}
-                />
-                <Text>Case Details</Text>
-                <TextInput
-                    placeholder="description"
-                    onChangeText={(text) => this.state.caseDetails = text}
-                />
-                <Button onPress={this.submitCase} title='Submit Case' />
-                <Button onPress={this.clearCases} title='Clear Cases' />
-            </View>
-        )
-    }
+    اعرض() {
+        العودة (
+            أسلوب العرض{{
+            مرن: 1,
+                flexdirection: 'عمود',
+                justifycontent: 'center',
+                محاذاة: 'مركز'
+        }}>
+    < text>name of case< / text>
+        < textinput
+            حامل المكان= " العنوان"
+            onchangetext = {(text) = > this.الولايةاسم الملف = النص}
+        />
+        < text>case details< / text>
+            < textinput
+                حامل المكان = " الوصف"
+                onchangetext = {(text) = > this.الولايةcasedetails = نص}
+            />
+            < button onpress={this.submitcase} title= 'submit case' / >
+            < button onpress={this.clearaces} عنوان = 'clear cases' / >
+            < / عرض>
+            )
+            }
 
-    submitCase = () => {
-        const { caseName, caseDetails } = this.state;
-        let user = firebase.auth().currentUser;
-        let caseTest = firebase.database().ref("users/" + user.uid + "/cases/");
-        caseTest.push({
-            caseName : caseName,
-            caseDetails : caseDetails
+            submitcase = () => {
+            هذاالحالة;
+            let user = firebase.auth ().currentuser;
+            let casetest = firebase.database().المرجع ("users/" + user.uid + " / cases/");
+            كاستيستادفع({
+            اسم الملف: اسم الملف,
+            casedetails: casedetails
         })
-            .then(() =>{
-                alert("Case added successfully!");
-            })
-            .catch((error) =>{
-                alert(error);
-            })
-    };
+            .ثم () = >{
+            تنبيه ("حالة أضيفت بنجاح!");
+        })
+            .قبض ((خطأ) =>{
+            تنبيه خطأ);
+        })
+        };
 
-    clearCases = () => {
-        let user = firebase.auth().currentUser;
-        let caseTest = firebase.database().ref("users/" + user.uid + "/cases/");
-        caseTest.set({})
-            .then(() =>{
-                alert("Cases Cleared");
-            })
-            .catch((error) =>{
-                alert(error);
-            })
-    };
-}
+            clearcass = () = > {
+            let user = firebase.auth ().currentuser;
+            let casetest = firebase.database().المرجع ("users/" + user.uid + " / cases/");
+            كاستيستضبط({})
+            .ثم () = >{
+            تنبيه");
+        })
+            .قبض ((خطأ) =>{
+            تنبيه خطأ);
+        })
+        };
+            }
