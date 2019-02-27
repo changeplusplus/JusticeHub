@@ -21,6 +21,8 @@ for individuals in developing nations needing legal representation. This project
 
 [Firebase Config File](https://drive.google.com/open?id=1kcfS1Y6KDH6j0r8wMxgIZCBrxV1UeZn5)
 
+[IBJ Call Notes](https://drive.google.com/open?id=17nc9E8TWOzQurAETf-EPkbWX5gDiZUZD)
+
 ## How to build it
 
 1. Clone the application into a folder
