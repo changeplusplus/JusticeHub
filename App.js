@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, TabNavigator ,createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import SignUp from './Screens/Auth/SignUp';
 import config from './firebase-config';
 import * as firebase from 'firebase';
@@ -34,7 +34,7 @@ const ClientTabNav = createBottomTabNavigator({
   tabBarPosition: 'bottom'
 });
 
-const LawyerTabNav = TabNavigator({
+const LawyerTabNav = createBottomTabNavigator({
   /*CurrentCases: {
 
 
@@ -102,7 +102,11 @@ const MainStack = createStackNavigator({
 
 });
 
-class App extends React.Component {
+const AppContainer = createAppContainer(MainStack);
+
+export default AppContainer;
+
+/*class App extends React.Component {
   // SignUp component is a placeholder before we use react-navigation
   render() {
     return (
@@ -111,5 +115,5 @@ class App extends React.Component {
   }
 }
 
-export default MainStack;
+export default MainStack;*/
 

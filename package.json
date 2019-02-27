@@ -11,13 +11,13 @@
   "dependencies": {
     "chat-engine": "^0.9.19",
     "chat-engine-react-native": "0.0.9",
-    "expo": "^31.0.0",
+    "expo": "32.0.0",
     "firebase": "^5.5.7",
     "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-elements": "^1.0.0",
     "react-native-gifted-chat": "^0.4.3",
-    "react-navigation": "^2.18.3"
+    "react-navigation": "^3.0.9"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
