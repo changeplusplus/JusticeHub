@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, Button, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, Button, TextInput, TouchableOpacity, Image} from 'react-native';
 import Modal from "react-native-modal";
 import * as firebase from 'firebase';
 
@@ -29,28 +29,38 @@ export default class ClientCases extends Component {
                 alignItems: 'center'
             }}>
                 <TouchableOpacity onPress={this._toggleModal}>
-                    <Text>Show Modal</Text>
+                    <Image style={{width:50, height: 50}}
+                        source={require('./addCaseButton.png')}/>
                 </TouchableOpacity>
-                <Modal isVisible={this.state.isModalVisible} animationIn='fadeInRight'>
-                    <View style={{ flex: 1 }}>
-                        <Text>Hello!</Text>
+                <Modal isVisible={this.state.isModalVisible}
+                        animationIn='bounceInUp'
+                        animationInTiming={2000}
+                        hasBackdrop={false}
+                        backdropColor='blue'>
+                    <View style={{
+                        flex: .75,
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: 'white'
+                    }}>
+                        <Text>Name of Case</Text>
+                        <TextInput
+                            placeholder="title"
+                            onChangeText={(text) => this.setState({caseName: text})}
+                        />
+                        <Text>Case Details</Text>
+                        <TextInput
+                            placeholder="description"
+                            onChangeText={(text) => this.setState({caseDetails: text})}
+                        />
+                        <Button onPress={this.submitCase} title='Submit Case' />
+                        <Button onPress={this.clearCases} title='Clear Cases' />
                         <TouchableOpacity onPress={this._toggleModal}>
                             <Text>Hide me!</Text>
                         </TouchableOpacity>
                     </View>
                 </Modal>
-                <Text>Name of Case</Text>
-                <TextInput
-                    placeholder="title"
-                    onChangeText={(text) => this.setState({caseName: text})}
-                />
-                <Text>Case Details</Text>
-                <TextInput
-                    placeholder="description"
-                    onChangeText={(text) => this.setState({caseDetails: text})}
-                />
-                <Button onPress={this.submitCase} title='Submit Case' />
-                <Button onPress={this.clearCases} title='Clear Cases' />
             </View>
         )
     }
@@ -67,12 +77,12 @@ export default class ClientCases extends Component {
             caseName : caseName,
             caseDetails : caseDetails
         })
-        //     .then(() =>{
-        //         alert("Case added successfully!");
-        //     })
-        //     .catch((error) =>{
-        //         alert(error);
-        //     })
+            .then(() =>{
+                alert("Case added successfully!");
+            })
+            .catch((error) =>{
+                alert(error);
+            })
     };
 
     clearCases = () => {
