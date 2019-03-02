@@ -33,8 +33,8 @@ export default class ClientCases extends Component {
                         source={require('./addCaseButton.png')}/>
                 </TouchableOpacity>
                 <Modal isVisible={this.state.isModalVisible}
-                        animationIn='bounceInUp'
-                        animationInTiming={2000}
+                        animationIn='bounceIn'
+                        animationInTiming={700}
                         hasBackdrop={false}
                         backdropColor='blue'>
                     <View style={{
