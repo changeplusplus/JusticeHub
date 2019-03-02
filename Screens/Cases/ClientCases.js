@@ -74,16 +74,4 @@ export default class ClientCases extends Component {
         //         alert(error);
         //     })
     };
-
-    clearCases = () => {
-        let user = firebase.auth().currentUser;
-        let caseTest = firebase.database().ref("users/" + user.uid + "/cases/");
-        caseTest.set({})
-            .then(() =>{
-                alert("Cases Cleared");
-            })
-            .catch((error) =>{
-                alert(error);
-            })
-    };
 }
