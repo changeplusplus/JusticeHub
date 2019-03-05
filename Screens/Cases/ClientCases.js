@@ -57,7 +57,6 @@ export default class ClientCases extends Component {
                         flexDirection: 'column',
                         justifyContent: 'center',
                         marginVertical: 50,
-                        marginHorizontal: 20,
                         alignItems: 'center'
 
                     }}>
@@ -104,48 +103,35 @@ export default class ClientCases extends Component {
                 </View>
             );
         else
-            return null;
-        }
+            return (
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center'
 
-    mainScreen = () => {
-        if (this.state.cases.length === 0){
-            return (
-                <View>
-                    <Text style={{
-                        fontSize:32,
-                        fontWeight:'bold',
-                        textAlign: 'center'
-                    }}>
-                        Click + sign to add a case
-                    </Text>
-                    <Button onPress={this.clearCases} title='Clear Cases' />
+                }}>
+                    {this.loadingScreen()}
                 </View>
-        );
-        } else{
-            return (
-                <View
-                style={{flex:1, justifyContent: 'space-evenly'}}>
-                    <FlatList
-                        data={this.state.cases}
-                        keyExtractor={(item) => item.caseName}
-                        renderItem={({item}) => this.renderListItem(item)}
-                    />
-                    <Text>It Worked!</Text>
-                    <Button onPress={this.clearCases} title='Clear Cases' />
-                </View>
-            )
+            );
         }
-    };
 
     renderListItem(item){
         return (
             <TouchableOpacity
-                style={{backgroundColor:'blue'}}
+                style={{
+                    backgroundColor: 'white',
+                    borderRadius: 3,
+                    borderWidth: 1,
+                    borderColor: '#CED0CE',
+                    width: width,
+                    height: 50
+                }}
                 onPress={() => {
                     this._toggleModal();
                     this.setState({caseName: item.caseName, caseDetails: item.caseDetails, caseId: item.caseId});
                 }}>
-                <Text style={{color:'white'}}>{item.caseName}</Text>
+                <Text style={{color:'black', textAlign:'center', textAlignVertical:'center'}}>{item.caseName}</Text>
             </TouchableOpacity>
         );
     }
@@ -191,7 +177,7 @@ export default class ClientCases extends Component {
                 .then(() =>{
                     Alert.alert(
                         'Alert',
-                        'Case changed successfully!',
+                        'Case edited successfully!',
                         [{text: 'OK', onPress: () => {stateVar._toggleModal()}}]
                     );
                 })
@@ -217,5 +203,54 @@ export default class ClientCases extends Component {
             .catch((error) =>{
                 alert(error);
             });
+    };
+
+    mainScreen = () => {
+        if (this.state.cases.length === 0){
+            return (
+                <View>
+                    <Text style={{
+                        fontSize:32,
+                        fontWeight:'bold',
+                        textAlign: 'center'
+                    }}>
+                        Click + sign to add a case
+                    </Text>
+                    <Button onPress={this.clearCases} title='Clear Cases' />
+                </View>
+            );
+        } else{
+            return (
+                <View
+                    style={{flex:1, justifyContent: 'space-evenly'}}>
+                    <FlatList
+                        // style={{alignItems:'stretch'}}
+                        data={this.state.cases}
+                        keyExtractor={(item) => item.caseName}
+                        renderItem={({item}) => this.renderListItem(item)}
+                        ItemSeparatorComponent={() => {return (<View style={{height:5}}/>)}}
+                    />
+                    <Button onPress={this.clearCases} title='Clear Cases' />
+                </View>
+            )
+        }
+    };
+
+    loadingScreen = () => {
+        return(
+            <View style={{flexDirection:'row'}}>
+                <Text style={{
+                    fontSize:32,
+                    fontWeight:'bold',
+                    textAlign: 'center'
+                }}>Fetching Cases  </Text>
+                <Image
+                    source={require('./loadingGif.gif')}
+                    style={{
+                        width:50,
+                        height: 50,
+                    }}/>
+            </View>
+        )
     };
 }
