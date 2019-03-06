@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, Text, TextInput, TouchableOpacity, Button, Linking} from 'react-native';
 
 class ChatEntry extends Component {
     state = {
@@ -23,6 +23,9 @@ class ChatEntry extends Component {
                     placeHolder="Your Name"
                     value={this.state.name}
                 />
+
+                <Button onPress={() => {Linking.openURL('https://web.telegram.org/')}}
+                        title='Telegram' color='red'/>
 
                 <TouchableOpacity onPress={this.onPress}>
                     <Text style={styles.buttonText}>Next</Text>
