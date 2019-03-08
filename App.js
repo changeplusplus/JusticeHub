@@ -13,8 +13,8 @@ import ChatEntry from "./Screens/Chat/ChatEntry";
 import ChatImpl from "./Screens/Chat/ChatImpl";
 import Fire from './Fire';
 import CaseNav from "./Screens/Cases/CaseNavigation";
-
 //import CaseList from "./Screens/Cases/CaseList";
+import ClientCases from "./Screens/Cases/ClientCases";
 
 // API information in firebase-config.js
 // firebase.initializeApp(config);
@@ -28,13 +28,16 @@ const ClientTabNav = createBottomTabNavigator({
 
   },*/
   ViewProfile: {
-    screen: ClientProfile
+      screen: ClientProfile
+  },
+  Cases: {
+      screen: ClientCases
   }
 }, {
   tabBarPosition: 'bottom'
 });
 
-const LawyerTabNav = TabNavigator({
+const LawyerTabNav = createBottomTabNavigator({
   /*CurrentCases: {
 
 
@@ -84,8 +87,10 @@ const MainStack = createStackNavigator({
     },
     CaseTabNav: {
         screen: CaseNav
-    }
-
+    },
+   ClientCases: {
+        screen: ClientCases
+   }
 },{
 
   /*EditLawyerProfile: {
@@ -112,4 +117,3 @@ class App extends React.Component {
 }
 
 export default MainStack;
-
