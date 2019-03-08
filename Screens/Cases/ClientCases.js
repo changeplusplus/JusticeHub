@@ -3,7 +3,6 @@ import {View, Text, Button, TextInput, TouchableOpacity, Image, Dimensions, Aler
 import Modal from "react-native-modal";
 import * as firebase from 'firebase';
 
-//TODO Implement Modal to make add case pop up from the case list
 const { width, height } = Dimensions.get('window');
 export default class ClientCases extends Component {
 
@@ -21,8 +20,6 @@ export default class ClientCases extends Component {
     }
 
     _toggleModal = () => {
-        this.setState({});
-
         this.setState({ isModalVisible: !this.state.isModalVisible, caseName:'', caseDetails:'', caseId:''});
     };
 
