@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, TabNavigator ,createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import SignUp from './Screens/Auth/SignUp';
 import config from './firebase-config';
 import * as firebase from 'firebase';
