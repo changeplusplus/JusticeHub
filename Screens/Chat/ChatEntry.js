@@ -24,8 +24,7 @@ class ChatEntry extends Component {
                     value={this.state.name}
                 />
 
-                <Button onPress={() => {Linking.openURL('https://web.telegram.org/')}}
-                        title='Telegram' color='red'/>
+                <Button onPress={() => {Linking.openURL('https://web.telegram.org/')}} title='Messages'/>
 
                 <TouchableOpacity onPress={this.onPress}>
                     <Text style={styles.buttonText}>Next</Text>

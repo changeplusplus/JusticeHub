@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, Button} from 'react-native';
+import { View, Text, Button, Linking} from 'react-native';
 import * as firebase from "firebase";
 import { SecureStore } from "expo";
 import DataStorage from "../../DataStorage";
@@ -9,7 +9,11 @@ class ClientProfile extends Component {
     return (
       <View>
         <Text>Client Profile</Text>
-        <Button onPress={this._logout} title='Log Out' />
+
+      <Button onPress={this._logout} title='Log Out' />
+      <Button onPress={this.props.navigation.navigate('ClientCases')} title='My Cases'/>
+      <Button onPress={() => {Linking.openURL('https://web.telegram.org/')}} title='Messages'/>
+
       </View>
     )
   }
