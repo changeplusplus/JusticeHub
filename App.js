@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, TabNavigator ,createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import SignUp from './Screens/Auth/SignUp';
 import config from './firebase-config';
 import * as firebase from 'firebase';
@@ -12,7 +12,7 @@ import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
 import ChatEntry from "./Screens/Chat/ChatEntry";
 import ChatImpl from "./Screens/Chat/ChatImpl";
 import Fire from './Fire';
-import CaseNav from "./Screens/Cases/CaseNavigation";
+import CaseSearch from "./Screens/Cases/CaseSearch";
 //import CaseList from "./Screens/Cases/CaseList";
 import ClientCases from "./Screens/Cases/ClientCases";
 
@@ -85,12 +85,15 @@ const MainStack = createStackNavigator({
     LawyerTabNav: {
         screen: LawyerTabNav
     },
-    CaseTabNav: {
-        screen: CaseNav
-    },
    ClientCases: {
         screen: ClientCases
-   }
+   },
+   ClientProfile: {
+        screen: ClientProfile
+   },
+    CaseSearch: {
+        screen: CaseSearch
+    }
 },{
 
   /*EditLawyerProfile: {
