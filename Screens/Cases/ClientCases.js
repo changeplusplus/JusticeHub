@@ -226,7 +226,7 @@ export default class ClientCases extends Component {
                         Click + sign to add a case
                     </Text>
                     <Button onPress={this.clearCases} title='Clear Cases'/>
-                    <Button onPress={this.navigateScreens} title='Profile'/>
+                    <Button onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
                 </View>
             );
         } else {
@@ -242,14 +242,10 @@ export default class ClientCases extends Component {
                         }}
                     />
                     <Button onPress={this.clearCases} title='Clear Cases'/>
-                    <Button onPress={this.navigateScreens} title='Profile'/>
+                    <Button onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
                 </View>
             )
         }
-    };
-
-    navigateScreens = () => {
-        this.props.navigation.navigate('ClientProfile');
     };
 
     loadingScreen = () => {

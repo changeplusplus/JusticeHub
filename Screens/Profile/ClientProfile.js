@@ -7,20 +7,16 @@ import DataStorage from "../../DataStorage";
 class ClientProfile extends Component {
   render() {
     return (
-      <View>
+      <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
         <Text>Client Profile</Text>
 
       <Button onPress={this._logout} title='Log Out' />
-      <Button onPress={this.navigateScreens} title='My Cases'/>
+      <Button onPress={() => {this.props.navigation.navigate('ClientCases')}} title='My Cases'/>
       <Button onPress={() => {Linking.openURL('https://web.telegram.org/')}} title='Messages'/>
 
       </View>
     )
   }
-
-    navigateScreens = () => {
-        this.props.navigation.navigate('ClientCases');
-    };
 
   _logout = () => {
     firebase.auth().signOut();
