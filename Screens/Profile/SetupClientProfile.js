@@ -1,51 +1,61 @@
-import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, Button, Picker} from 'react-native';
 import * as firebase from 'firebase';
 import {InputBlock} from "../../Components/InputBlock";
 
 class SetupClientProfile extends Component {
-  state = {
-    location: '',
-    caseType: ''
-  };
+    state = {
+        location: '',
+        caseType: '',
+        prefEmail: false
+    };
 
-  render() {
-    return (
-      <View>
-        <Text>Edit your information</Text>
-        <InputBlock item='Location'
-                    state='location'
-                    onChangeText={this._onChangeText}
-                    value={this.state.location}/>
-        <InputBlock item='Type of case'
-                    state='caseType'
-                    onChangeText={this._onChangeText}
-                    value={this.state.caseType}/>
+    render() {
+        return (
+            <View>
+                <Text>Edit your information</Text>
+                <InputBlock item='Location'
+                            state='location'
+                            onChangeText={this._onChangeText}
+                            value={this.state.location}/>
+                <InputBlock item='Type of case'
+                            state='caseType'
+                            onChangeText={this._onChangeText}
+                            value={this.state.caseType}/>
+                <Text>How should lawyers contact you?</Text>
+                <Picker
+                    selectedValue={this.state.prefEmail}
+                    onValueChange={(itemValue) => this.setState({prefEmail: itemValue})}>
 
-        <Button onPress={this._submitChanges} title='Submit Changes' />
-      </View>
-    )
-  }
+                    <Picker.Item label='Email' value={true} />
+                    <Picker.Item label='Phone' value={false} />
+                </Picker>
 
-  _submitChanges = () => {
-    const { location, caseType } = this.state;
+                <Button onPress={this._submitChanges} title='Submit Changes'/>
+            </View>
+        )
+    }
 
-    let userId = firebase.auth().currentUser.uid;
+    _submitChanges = () => {
+        const {location, caseType, prefEmail} = this.state;
 
-    firebase.database().ref('profiles/clients/' + userId).update({
-      location: location,
-      caseType: caseType
-    });
+        let userId = firebase.auth().currentUser.uid;
 
-    const { navigate } = this.props.navigation;
-    navigate('ClientTabNav');
-  };
+        firebase.database().ref('profiles/clients/' + userId).update({
+            location: location,
+            caseType: caseType,
+            prefEmail: prefEmail
+        });
 
-  _onChangeText = (state, update) => {
-    this.setState({
-      [state]: update
-    });
-  };
+        const {navigate} = this.props.navigation;
+        navigate('ClientTabNav');
+    };
+
+    _onChangeText = (state, update) => {
+        this.setState({
+            [state]: update
+        });
+    };
 }
 
 export default SetupClientProfile;
