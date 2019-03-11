@@ -12,7 +12,7 @@ class ClientProfile extends Component {
 
       <Button onPress={this._logout} title='Log Out' />
       <Button onPress={this.props.navigation.navigate('ClientCases')} title='My Cases'/>
-      <Button onPress={() => {Linking.openURL('https://web.telegram.org/')}} title='Messages'/>
+      <Button onPress={() => {Linking.openURL('telegram://app')}} title='Messages'/>
 
       </View>
     )
