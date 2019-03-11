@@ -11,12 +11,16 @@ class ClientProfile extends Component {
         <Text>Client Profile</Text>
 
       <Button onPress={this._logout} title='Log Out' />
-      <Button onPress={this.props.navigation.navigate('ClientCases')} title='My Cases'/>
+      <Button onPress={this.navigateScreens} title='My Cases'/>
       <Button onPress={() => {Linking.openURL('https://web.telegram.org/')}} title='Messages'/>
 
       </View>
     )
   }
+
+    navigateScreens = () => {
+        this.props.navigation.navigate('ClientCases');
+    };
 
   _logout = () => {
     firebase.auth().signOut();

@@ -15,13 +15,13 @@ export default class ClientCases extends Component {
             caseDetails: '',
             caseId: '',
             casesLoaded: false,
-            cases:[]
+            cases: []
         };
         this.fetchCases();
     }
 
     _toggleModal = () => {
-        this.setState({ isModalVisible: !this.state.isModalVisible, caseName:'', caseDetails:'', caseId:''});
+        this.setState({isModalVisible: !this.state.isModalVisible, caseName: '', caseDetails: '', caseId: ''});
     };
 
     render() {
@@ -40,13 +40,13 @@ export default class ClientCases extends Component {
                                           style={{
                                               marginRight: 20,
                                               marginBottom: 10,
-                                              flex:1,
+                                              flex: 1,
                                               alignSelf: 'flex-end',
                                               justifyContent: 'flex-end'
                                           }}>
                             <Image
                                 source={require('./addCaseButton.png')}
-                                style={{width:40, height:40}}
+                                style={{width: 40, height: 40}}
                             />
                         </TouchableOpacity>
                     </View>
@@ -83,7 +83,7 @@ export default class ClientCases extends Component {
                                     defaultValue={this.state.caseName}
                                     onChangeText={(text) => this.setState({caseName: text})}
                                 />
-                                <Text style={{borderTopWidth:7, borderBottomWidth: 3}}>Case Details</Text>
+                                <Text style={{borderTopWidth: 7, borderBottomWidth: 3}}>Case Details</Text>
                                 <TextInput
                                     style={{flex: .5}}
                                     multiline={true}
@@ -95,7 +95,7 @@ export default class ClientCases extends Component {
                                     textAlign={'center'}
                                     onChangeText={(text) => this.setState({caseDetails: text})}
                                 />
-                                <Button onPress={this.submitCase} title='Submit Case' />
+                                {this.submitButtonText()}
                             </View>
                         </TouchableWithoutFeedback>
                     </Modal>
@@ -113,9 +113,9 @@ export default class ClientCases extends Component {
                     {this.loadingScreen()}
                 </View>
             );
-        }
+    }
 
-    renderListItem(item){
+    renderListItem(item) {
         return (
             <TouchableOpacity
                 style={{
@@ -130,7 +130,7 @@ export default class ClientCases extends Component {
                     this._toggleModal();
                     this.setState({caseName: item.caseName, caseDetails: item.caseDetails, caseId: item.caseId});
                 }}>
-                <Text style={{color:'black', textAlign:'center', textAlignVertical:'center'}}>{item.caseName}</Text>
+                <Text style={{color: 'black', textAlign: 'center', textAlignVertical: 'center'}}>{item.caseName}</Text>
             </TouchableOpacity>
         );
     }
@@ -139,48 +139,58 @@ export default class ClientCases extends Component {
         let user = firebase.auth().currentUser;
         let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
         let stateVar = this;
-        caseList.once('value', function(snapshot){
+        caseList.once('value', function (snapshot) {
             let caseArr = [];
             let obj = snapshot.val();
-            for (let caseId in obj){
+            for (let caseId in obj) {
                 caseArr.push(obj[caseId]);
-                caseArr[caseArr.length-1].caseId = caseId;
+                caseArr[caseArr.length - 1].caseId = caseId;
             }
             stateVar.setState({cases: caseArr});
         })
-            .then(() => {this.setState({casesLoaded:true})})
+            .then(() => {
+                this.setState({casesLoaded: true})
+            })
             .catch((error) => {
                 Alert.alert("Case Fetch Failed", error);
             });
     };
 
     submitCase = () => {
-        const { caseName, caseDetails, caseId} = this.state;
+        const {caseName, caseDetails, caseId} = this.state;
         let user = firebase.auth().currentUser;
         let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
         let stateVar = this;
-        if  (caseId === ''){
-            caseList.push({caseName : caseName, caseDetails : caseDetails})
-                .then(() =>{
+        if (caseId === '') {
+            caseList.push({caseName: caseName, caseDetails: caseDetails})
+                .then(() => {
                     Alert.alert(
                         'Alert',
                         'Case added successfully!',
-                        [{text: 'OK', onPress: () => {stateVar._toggleModal()}}]
+                        [{
+                            text: 'OK', onPress: () => {
+                                stateVar._toggleModal()
+                            }
+                        }]
                     );
                 })
-                .catch((error) =>{
+                .catch((error) => {
                     Alert.alert('Error', error, [{text: 'OK', onPress: () => stateVar._toggleModal()}]);
                 });
-        } else{
-            caseList.child(caseId).set({caseName : caseName, caseDetails : caseDetails})
-                .then(() =>{
+        } else {
+            caseList.child(caseId).set({caseName: caseName, caseDetails: caseDetails})
+                .then(() => {
                     Alert.alert(
                         'Alert',
                         'Case edited successfully!',
-                        [{text: 'OK', onPress: () => {stateVar._toggleModal()}}]
+                        [{
+                            text: 'OK', onPress: () => {
+                                stateVar._toggleModal()
+                            }
+                        }]
                     );
                 })
-                .catch((error) =>{
+                .catch((error) => {
                     Alert.alert('Error', error, [{text: 'OK', onPress: () => stateVar._toggleModal()}]);
                 });
         }
@@ -192,63 +202,77 @@ export default class ClientCases extends Component {
         let user = firebase.auth().currentUser;
         let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
         caseList.set({})
-            .then(() =>{
+            .then(() => {
                 Alert.alert(
                     'Alert',
                     'Cases Cleared',
                     [{text: 'OK', onPress: this.fetchCases}]
                 );
             })
-            .catch((error) =>{
+            .catch((error) => {
                 alert(error);
             });
     };
 
     mainScreen = () => {
-        if (this.state.cases.length === 0){
+        if (this.state.cases.length === 0) {
             return (
                 <View>
                     <Text style={{
-                        fontSize:32,
-                        fontWeight:'bold',
+                        fontSize: 32,
+                        fontWeight: 'bold',
                         textAlign: 'center'
                     }}>
                         Click + sign to add a case
                     </Text>
-                    <Button onPress={this.clearCases} title='Clear Cases' />
+                    <Button onPress={this.clearCases} title='Clear Cases'/>
+                    <Button onPress={this.navigateScreens} title='Profile'/>
                 </View>
             );
-        } else{
+        } else {
             return (
                 <View
-                    style={{flex:1, justifyContent: 'space-evenly'}}>
+                    style={{flex: 1, justifyContent: 'space-evenly'}}>
                     <FlatList
                         data={this.state.cases}
                         keyExtractor={(item) => item.caseName}
                         renderItem={({item}) => this.renderListItem(item)}
-                        ItemSeparatorComponent={() => {return (<View style={{height:5}}/>)}}
+                        ItemSeparatorComponent={() => {
+                            return (<View style={{height: 5}}/>)
+                        }}
                     />
-                    <Button onPress={this.clearCases} title='Clear Cases' />
+                    <Button onPress={this.clearCases} title='Clear Cases'/>
+                    <Button onPress={this.navigateScreens} title='Profile'/>
                 </View>
             )
         }
     };
 
+    navigateScreens = () => {
+        this.props.navigation.navigate('ClientProfile');
+    };
+
     loadingScreen = () => {
-        return(
-            <View style={{flexDirection:'row'}}>
+        return (
+            <View style={{flexDirection: 'row'}}>
                 <Text style={{
-                    fontSize:32,
-                    fontWeight:'bold',
+                    fontSize: 32,
+                    fontWeight: 'bold',
                     textAlign: 'center'
-                }}>Fetching Cases  </Text>
+                }}>Fetching Cases </Text>
                 <Image
                     source={require('./loadingGif.gif')}
                     style={{
-                        width:50,
+                        width: 50,
                         height: 50,
                     }}/>
             </View>
         )
+    };
+    submitButtonText = () => {
+        if (this.state.caseId === '') {
+            return (<Button onPress={this.submitCase} title='Submit Case'/>)
+        } else
+            return (<Button onPress={this.submitCase} title='Edit Case'/>)
     };
 }

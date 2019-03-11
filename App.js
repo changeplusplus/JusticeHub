@@ -90,6 +90,9 @@ const MainStack = createStackNavigator({
     },
    ClientCases: {
         screen: ClientCases
+   },
+   ClientProfile: {
+        screen: ClientProfile
    }
 },{
 
