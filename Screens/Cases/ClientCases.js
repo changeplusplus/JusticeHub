@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {View, Text, Button, TextInput, TouchableOpacity, Image, Dimensions, Alert, FlatList} from 'react-native';
+import {View, Text, Button, TextInput, TouchableOpacity,
+    Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback} from 'react-native';
 import Modal from "react-native-modal";
 import * as firebase from 'firebase';
 
@@ -32,21 +33,21 @@ export default class ClientCases extends Component {
                     alignItems: 'stretch',
                 }}>
                     <View style={{
-                        flex: .2,
+                        flex: .15,
                         backgroundColor: 'blue'
                     }}>
                         <TouchableOpacity onPress={this._toggleModal}
                                           style={{
-                                              marginTop: 50,
-                                              marginRight: 25,
-                                              marginBottom: 15,
-                                              alignSelf: 'flex-end'
+                                              marginRight: 20,
+                                              marginBottom: 10,
+                                              flex:1,
+                                              alignSelf: 'flex-end',
+                                              justifyContent: 'flex-end'
                                           }}>
                             <Image
                                 source={require('./addCaseButton.png')}
-                                style={{
-                                    width:40,
-                                    height: 40}}/>
+                                style={{width:40, height:40}}
+                            />
                         </TouchableOpacity>
                     </View>
                     <View style={{
@@ -66,36 +67,37 @@ export default class ClientCases extends Component {
                            backdropColor='blue'
                            backdropOpacity={.4}
                            onBackdropPress={this._toggleModal}>
-
-                        <View style={{
-                            flex: .75,
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: 'white',
-                            borderRadius: 70,
-                            borderWidth: 0,
-                        }}>
-                            <Text>Name of Case</Text>
-                            <TextInput
-                                placeholder="title"
-                                defaultValue={this.state.caseName}
-                                onChangeText={(text) => this.setState({caseName: text})}
-                            />
-                            <Text style={{borderTopWidth:7, borderBottomWidth: 3}}>Case Details</Text>
-                            <TextInput
-                                style={{flex: .5}}
-                                multiline={true}
-                                placeholder="description"
-                                defaultValue={this.state.caseDetails}
-                                width={250}
-                                maxLength={400}
-                                borderWidth={1}
-                                textAlign={'center'}
-                                onChangeText={(text) => this.setState({caseDetails: text})}
-                            />
-                            <Button onPress={this.submitCase} title='Submit Case' />
-                        </View>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                            <View style={{
+                                flex: .75,
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: 'white',
+                                borderRadius: 70,
+                                borderWidth: 0,
+                            }}>
+                                <Text>Case Name</Text>
+                                <TextInput
+                                    placeholder="title"
+                                    defaultValue={this.state.caseName}
+                                    onChangeText={(text) => this.setState({caseName: text})}
+                                />
+                                <Text style={{borderTopWidth:7, borderBottomWidth: 3}}>Case Details</Text>
+                                <TextInput
+                                    style={{flex: .5}}
+                                    multiline={true}
+                                    placeholder="description"
+                                    defaultValue={this.state.caseDetails}
+                                    width={250}
+                                    maxLength={400}
+                                    borderWidth={1}
+                                    textAlign={'center'}
+                                    onChangeText={(text) => this.setState({caseDetails: text})}
+                                />
+                                <Button onPress={this.submitCase} title='Submit Case' />
+                            </View>
+                        </TouchableWithoutFeedback>
                     </Modal>
                 </View>
             );
@@ -221,7 +223,6 @@ export default class ClientCases extends Component {
                 <View
                     style={{flex:1, justifyContent: 'space-evenly'}}>
                     <FlatList
-                        // style={{alignItems:'stretch'}}
                         data={this.state.cases}
                         keyExtractor={(item) => item.caseName}
                         renderItem={({item}) => this.renderListItem(item)}
