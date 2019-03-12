@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
 import {
-    View, KeyboardAvoidingView, Text, TextInput,
-    Button, Picker
+    View, KeyboardAvoidingView, TextInput, Picker
 } from 'react-native';
 import {InputBlock} from "../../Components/InputBlock";
 import DataStorage from '../../DataStorage';
+import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
 export default class SignUp extends Component {
     state = {
@@ -21,24 +21,29 @@ export default class SignUp extends Component {
             <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
                 <KeyboardAvoidingView behavior='padding'>
 
-                    <InputBlock item='Full Name'
-                                state='fullName'
-                                onChangeText={this._onChangeText}
-                                value={this.state.fullName}/>
-                    <InputBlock item='Password'
-                                state='password'
-                                onChangeText={this._onChangeText}
-                                value={this.state.password}/>
-                    <InputBlock item='Phone Number'
-                                state='phone'
-                                onChangeText={this._onChangeText}
-                                value={this.state.phone}/>
-                    <InputBlock item='Email'
-                                state='email'
-                                onChangeText={this._onChangeText}
-                                value={this.state.email}/>
+                    <TextInput style={Jtheme.InputText}
+                               placeholder="Full Name"
+                               state='fullName'
+                               onChangeText={(text) => this.setState({text})}/>
 
-                    <Picker
+                    <TextInput style={Jtheme.InputText}
+                               placeholder="Password"
+                               state='password'
+                               onChangeText={(text) => this.setState({text})}/>
+
+                    <TextInput style={Jtheme.InputText}
+                               placeholder="Phone Number"
+                               state='phone'
+                               onChangeText={(text) => this.setState({text})}/>
+
+                    <TextInput style={Jtheme.InputText}
+                               placeholder="Email"
+                               state='email'
+                               onChangeText={(text) => this.setState({text})}/>
+
+                    <Text h5 style={Jtheme.Text}> I am a:</Text>
+
+                    <Picker style={Jtheme.Text}
                         selectedValue={this.state.isLawyer}
                         onValueChange={(itemValue) => this.setState({isLawyer: itemValue})}>
 
@@ -46,7 +51,7 @@ export default class SignUp extends Component {
                         <Picker.Item label='Client' value={false}/>
                     </Picker>
 
-                    <Button onPress={this._signUp} title='Sign Up' color='blue'/>
+                    <Button style={Jtheme.Button} onPress={this._signUp} title='Sign Up'/>
                 </KeyboardAvoidingView>
             </View>
         )
@@ -103,3 +108,61 @@ export default class SignUp extends Component {
         });
     };
 }
+
+const Jtheme = {
+
+    backgroundColor: '#112853',
+
+    Button: {
+        color: '#cc7832',
+        paddingLeft: 70,
+        paddingRight: 70,
+        paddingTop: 10,
+        paddingBottom: 10,
+    },
+
+    Container: {
+        flex: 1,
+        color: '#cc7832',
+        backgroundColor: '#112853',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        borderColor: '#111111',
+        borderWidth: 1,
+    },
+
+    Input: {
+        flex: 1,
+        backgroundColor: '#111111',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        borderColor: '#111111',
+        borderWidth: 3,
+        paddingLeft: 50,
+    },
+
+    Text: {
+        alignment: true,
+        fontWeight: 'bold',
+        flexDirection: 'column',
+        color: '#112853',
+        justifyContent: 'center',
+        fontSize: 20,
+        paddingTop: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+    },
+
+    InputText: {
+        alignment: true,
+        fontWeight: 'bold',
+        flexDirection: 'column',
+        color: '#112853',
+        justifyContent: 'center',
+        fontSize: 15,
+        paddingBottom: 30,
+        paddingLeft: 10,
+        paddingRight: 50,
+    },
+
+};

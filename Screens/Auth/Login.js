@@ -32,15 +32,13 @@ class Login extends Component {
                 <TextInput style={Jtheme.InputText}
                     placeholder="Email"
                     state='email'
-                    onChangeText={(text) => this.setState({text})}
-                />
+                    onChangeText={(text) => this.setState({text})}/>
 
                 <TextInput style={Jtheme.InputText}
                     placeholder="Password"
                     state='password'
                     onChangeText={(text) => this.setState({text})}
-                    secureTextEntry={true}
-                />
+                    secureTextEntry={true}/>
 
                 <Button style={Jtheme.Button} onPress={this._login} title='Log In'/>
                 <Button style={Jtheme.Button} onPress={this._navToSignup} title='Sign Up'/>
