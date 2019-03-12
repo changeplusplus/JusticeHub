@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import {View, Text, Button, Linking} from 'react-native';
 import * as firebase from 'firebase';
 import { SecureStore } from 'expo';
 import DataStorage from "../../DataStorage";
@@ -10,7 +10,9 @@ class LawyerProfile extends Component {
       <View>
         <Text>Lawyer Profile</Text>
           <Button onPress={() => {this.props.navigation.navigate('CaseSearch')}} title="Find Cases"/>
-        <Button onPress={this._logout} title='Log Out' />
+          <Button onPress={this._logout} title='Log Out' />
+          <Button onPress={() => {Linking.openURL('telegram://app')}} title='Telegram'/>
+
       </View>
     )
   }
