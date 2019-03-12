@@ -24,22 +24,23 @@ export default class SignUp extends Component {
                     <TextInput style={Jtheme.InputText}
                                placeholder="Full Name"
                                state='fullName'
-                               onChangeText={(text) => this.setState({text})}/>
+                               onChangeText={(fullName) => this.setState({fullName})}/>
 
                     <TextInput style={Jtheme.InputText}
                                placeholder="Password"
                                state='password'
-                               onChangeText={(text) => this.setState({text})}/>
+                               onChangeText={(password) => this.setState({password})}/>
 
                     <TextInput style={Jtheme.InputText}
                                placeholder="Phone Number"
                                state='phone'
-                               onChangeText={(text) => this.setState({text})}/>
+                               keyboardType='number-pad'
+                               onChangeText={(phone) => this.setState({phone})}/>
 
                     <TextInput style={Jtheme.InputText}
                                placeholder="Email"
                                state='email'
-                               onChangeText={(text) => this.setState({text})}/>
+                               onChangeText={(email) => this.setState({email})}/>
 
                     <Text h5 style={Jtheme.Text}> I am a:</Text>
 
@@ -112,6 +113,16 @@ export default class SignUp extends Component {
 const Jtheme = {
 
     backgroundColor: '#112853',
+
+    BackButton: {
+        color: '#cc7832',
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        paddingBottom: 100,
+        marginTop: -5,
+        position: 'absolute', // add if dont work with above
+    },
 
     Button: {
         color: '#cc7832',
