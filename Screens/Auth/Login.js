@@ -146,7 +146,7 @@ const Jtheme = {
         flexDirection: 'column',
         color: '#112853',
         justifyContent: 'center',
-        fontSize: 15,
+        fontSize: 20,
         paddingTop: 30,
         paddingBottom: 30,
         paddingLeft: 50,

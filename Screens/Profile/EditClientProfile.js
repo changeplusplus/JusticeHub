@@ -14,7 +14,7 @@ class EditClientProfile extends Component {
   render() {
     return (
       <View>
-        <Text h3 style={Jtheme.Text}>Edit your information</Text>
+        <Text h3 style={Jtheme.Text}>Update your information</Text>
         <TextInput style={Jtheme.InputText}
                     item='Location'
                     state='location'

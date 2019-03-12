@@ -19,6 +19,7 @@ export default class SignUp extends Component {
     render() {
         return (
             <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
+                <Text h3 style={Jtheme.Text}>Create an Account:</Text>
                 <KeyboardAvoidingView behavior='padding'>
 
                     <TextInput style={Jtheme.InputText}
@@ -128,8 +129,8 @@ const Jtheme = {
         color: '#cc7832',
         paddingLeft: 70,
         paddingRight: 70,
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingTop: 0,
+        paddingBottom: 5,
     },
 
     Container: {
@@ -160,6 +161,7 @@ const Jtheme = {
         justifyContent: 'center',
         fontSize: 20,
         paddingTop: 5,
+        paddingBottom: 20,
         paddingLeft: 10,
         paddingRight: 10,
     },
@@ -170,7 +172,7 @@ const Jtheme = {
         flexDirection: 'column',
         color: '#112853',
         justifyContent: 'center',
-        fontSize: 15,
+        fontSize: 20,
         paddingBottom: 30,
         paddingLeft: 10,
         paddingRight: 50,
