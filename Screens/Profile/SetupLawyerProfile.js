@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Checkbox, View} from 'react-native';
+import {Checkbox, TextInput, View} from 'react-native';
 import * as firebase from 'firebase';
-import {Button, CheckBox, Text, TextInput, ThemeConsumer, ThemeProvider} from "react-native-elements";
+import {Button, CheckBox, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 import {InputBlock} from "../../Components/InputBlock";
 
 

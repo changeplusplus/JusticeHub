@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import SignUp from './Screens/Auth/SignUp';
 import config from './firebase-config';
 import * as firebase from 'firebase';
@@ -29,35 +29,35 @@ const ClientTabNav = createBottomTabNavigator({
     /*CreateCase: {
 
   },*/
-  ViewProfile: {
-      screen: ClientProfile
-  },
-  Cases: {
-      screen: ClientCases
-  }
+    ViewProfile: {
+        screen: ClientProfile
+    },
+    Cases: {
+        screen: ClientCases
+    }
 }, {
-  tabBarPosition: 'bottom'
+    tabBarPosition: 'bottom'
 });
 
 const LawyerTabNav = createBottomTabNavigator({
-  /*CurrentCases: {
+    /*CurrentCases: {
 
-  },
-  AllCases: {
+    },
+    AllCases: {
 
-  },*/
-  ViewProfile: {
-    screen: LawyerProfile
-  }
+    },*/
+    ViewProfile: {
+        screen: LawyerProfile
+    }
 }, {
-  tabBarPosition: 'bottom'
+    tabBarPosition: 'bottom'
 });
 
 const MainStack = createStackNavigator({
 
-   // CaseList: {
-   //     screen: CaseList
-   // },
+    // CaseList: {
+    //     screen: CaseList
+    // },
 
     LoadApp: {
         screen: LoadApp
@@ -92,31 +92,31 @@ const MainStack = createStackNavigator({
     LawyerTabNav: {
         screen: LawyerTabNav
     },
-   ClientCases: {
+    ClientCases: {
         screen: ClientCases
-   },
-   ClientProfile: {
+    },
+    ClientProfile: {
         screen: ClientProfile
-   },
+    },
     CaseSearch: {
         screen: CaseSearch
     }
-},{
+}, {
 
-   // After login
-   // Main: { screen: Main },
+    // After login
+    // Main: { screen: Main },
 
-  navigationOptions: { header: null }
+    navigationOptions: {header: null}
 
 });
 
 class App extends React.Component {
-  // SignUp component is a placeholder before we use react-navigation
-  render() {
-    return (
-      <MainStack/>
-    );
-  }
+    // SignUp component is a placeholder before we use react-navigation
+    render() {
+        return (
+            <MainStack/>
+        );
+    }
 }
 
 export default App;
