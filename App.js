@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import SignUp from './Screens/Auth/SignUp';
 import config from './firebase-config';
 import * as firebase from 'firebase';
@@ -12,9 +12,11 @@ import SetupClientProfile from "./Screens/Profile/SetupClientProfile";
 import ChatEntry from "./Screens/Chat/ChatEntry";
 import ChatImpl from "./Screens/Chat/ChatImpl";
 import Fire from './Fire';
-import CaseNav from "./Screens/Cases/CaseNavigation";
+import CaseSearch from "./Screens/Cases/CaseSearch";
 //import CaseList from "./Screens/Cases/CaseList";
 import ClientCases from "./Screens/Cases/ClientCases";
+import EditClientProfile from "./Screens/Profile/EditClientProfile";
+import EditLawyerProfile from "./Screens/Profile/EditLawyerProfile";
 
 // API information in firebase-config.js
 // firebase.initializeApp(config);
@@ -27,36 +29,35 @@ const ClientTabNav = createBottomTabNavigator({
     /*CreateCase: {
 
   },*/
-  ViewProfile: {
-      screen: ClientProfile
-  },
-  Cases: {
-      screen: ClientCases
-  }
+    ViewProfile: {
+        screen: ClientProfile
+    },
+    Cases: {
+        screen: ClientCases
+    }
 }, {
-  tabBarPosition: 'bottom'
+    tabBarPosition: 'bottom'
 });
 
 const LawyerTabNav = createBottomTabNavigator({
-  /*CurrentCases: {
+    /*CurrentCases: {
 
+    },
+    AllCases: {
 
-  },
-  AllCases: {
-
-  },*/
-  ViewProfile: {
-    screen: LawyerProfile
-  }
+    },*/
+    ViewProfile: {
+        screen: LawyerProfile
+    }
 }, {
-  tabBarPosition: 'bottom'
+    tabBarPosition: 'bottom'
 });
 
 const MainStack = createStackNavigator({
 
-   // CaseList: {
-   //     screen: CaseList
-   // },
+    // CaseList: {
+    //     screen: CaseList
+    // },
 
     LoadApp: {
         screen: LoadApp
@@ -79,44 +80,43 @@ const MainStack = createStackNavigator({
     SetupClientProfile: {
         screen: SetupClientProfile
     },
+    EditLawyerProfile: {
+        screen: EditLawyerProfile
+    },
+    EditClientProfile: {
+        screen: EditClientProfile
+    },
     ClientTabNav: {
         screen: ClientTabNav
     },
     LawyerTabNav: {
         screen: LawyerTabNav
     },
-    CaseTabNav: {
-        screen: CaseNav
-    },
-   ClientCases: {
+    ClientCases: {
         screen: ClientCases
-   },
-   ClientProfile: {
+    },
+    ClientProfile: {
         screen: ClientProfile
-   }
-},{
+    },
+    CaseSearch: {
+        screen: CaseSearch
+    }
+}, {
 
-  /*EditLawyerProfile: {
-    screen: EditLawyerProfile
-  }*/
-  /*EditClientProfile: {
-    screen: EditClientProfile
-  }*/
+    // After login
+    // Main: { screen: Main },
 
-   // After login
-   // Main: { screen: Main },
-
-  navigationOptions: { header: null }
+    navigationOptions: {header: null}
 
 });
 
 class App extends React.Component {
-  // SignUp component is a placeholder before we use react-navigation
-  render() {
-    return (
-      <MainStack/>
-    );
-  }
+    // SignUp component is a placeholder before we use react-navigation
+    render() {
+        return (
+            <MainStack/>
+        );
+    }
 }
 
-export default MainStack;
+export default App;
