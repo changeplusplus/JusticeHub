@@ -13,19 +13,19 @@ export default class SetupLawyerProfile extends Component {
   };
 
     state = {
-    exp: '',
-    bar: '',
-    firm: '',
-    location: '',
-    radius: '',
-    avail: '',
-    expertise: {
-      theft: false,
-      drug: false,
-      violent: false,
-      other: ''
-    }
-  };
+        exp: '',
+        bar: '',
+        firm: '',
+        location: '',
+        radius: '',
+        avail: '',
+        expertise: {
+            theft: false,
+            drug: false,
+            violent: false,
+            other: ''
+        }
+    };
 
   render() {
     return (
@@ -61,48 +61,48 @@ export default class SetupLawyerProfile extends Component {
                   checked={this.state.expertise.theft}
                   onIconPress={(checked) => this.setState({theft: checked})}
 
-        />
-        <CheckBox
-                  title='Drug Offenses'
-                  checked={this.state.expertise.drug}
-                  onIconPress={(checked) => this.setState({drug: checked})}
+                />
+                <CheckBox
+                    title='Drug Offenses'
+                    checked={this.state.expertise.drug}
+                    onIconPress={(checked) => this.setState({drug: checked})}
 
-        />
-        <CheckBox
-                  title='Violent Crime'
-                  checked={this.state.expertise.violent}
-                  onIconPress={(checked) => this.setState({violent: checked})}
+                />
+                <CheckBox
+                    title='Violent Crime'
+                    checked={this.state.expertise.violent}
+                    onIconPress={(checked) => this.setState({violent: checked})}
 
-        />
-        <InputBlock item='Other (please specify)'
-                  state='expertise'
-                  onChangeText={this._onChangeText}
-                  value={this.state.expertise.other}/>
+                />
+                <InputBlock item='Other (please specify)'
+                            state='expertise'
+                            onChangeText={this._onChangeText}
+                            value={this.state.expertise.other}/>
 
 
-        <Button onPress={this._submitChanges} title='Submit Changes' />
-      </View>
-    )
-  }
+                <Button onPress={this._submitChanges} title='Submit Changes'/>
+            </View>
+        )
+    }
 
-  _submitChanges = () => {
-    const { exp, degree, specialty } = this.state;
+    _submitChanges = () => {
+        const {exp, degree, specialty} = this.state;
 
-    let userId = firebase.auth().currentUser.uid;
+        let userId = firebase.auth().currentUser.uid;
 
-    firebase.database().ref('profiles/lawyers/' + userId).update({
-      experience: exp,
-      degree: degree,
-      specialty: specialty
-    });
+        firebase.database().ref('profiles/lawyers/' + userId).update({
+            experience: exp,
+            degree: degree,
+            specialty: specialty
+        });
 
-    const { navigate } = this.props.navigation;
-    navigate('LawyerTabNav');
-  };
+        const {navigate} = this.props.navigation;
+        navigate('LawyerTabNav');
+    };
 
-  _onChangeText = (state, update) => {
-    this.setState({
-      [state]: update
-    });
-  };
+    _onChangeText = (state, update) => {
+        this.setState({
+            [state]: update
+        });
+    };
 }
