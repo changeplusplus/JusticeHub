@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {View, TextInput} from 'react-native';
+import {View} from 'react-native';
 import * as firebase from 'firebase';
-import {InputBlock} from "../../Components/InputBlock";
-import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
+import {Button, Text, TextInput, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
 class SetupLawyerProfile extends Component {
   static navigationOptions = {
@@ -28,6 +27,7 @@ class SetupLawyerProfile extends Component {
                    item='Degree'
                    state='degree'
                    onChangeText={this._onChangeText}/>
+
         <TextInput style={Jtheme.InputText}
                    item='Specialty'
                    state='specialty'

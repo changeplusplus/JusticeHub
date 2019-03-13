@@ -15,6 +15,8 @@ import Fire from './Fire';
 import CaseSearch from "./Screens/Cases/CaseSearch";
 //import CaseList from "./Screens/Cases/CaseList";
 import ClientCases from "./Screens/Cases/ClientCases";
+import EditClientProfile from "./Screens/Profile/EditClientProfile";
+import EditLawyerProfile from "./Screens/Profile/EditLawyerProfile";
 
 // API information in firebase-config.js
 // firebase.initializeApp(config);
@@ -39,7 +41,6 @@ const ClientTabNav = createBottomTabNavigator({
 
 const LawyerTabNav = createBottomTabNavigator({
   /*CurrentCases: {
-
 
   },
   AllCases: {
@@ -79,6 +80,12 @@ const MainStack = createStackNavigator({
     SetupClientProfile: {
         screen: SetupClientProfile
     },
+    EditLawyerProfile: {
+        screen: EditLawyerProfile
+    },
+    EditClientProfile: {
+        screen: EditClientProfile
+    },
     ClientTabNav: {
         screen: ClientTabNav
     },
@@ -96,13 +103,6 @@ const MainStack = createStackNavigator({
     }
 },{
 
-  /*EditLawyerProfile: {
-    screen: EditLawyerProfile
-  }*/
-  /*EditClientProfile: {
-    screen: EditClientProfile
-  }*/
-
    // After login
    // Main: { screen: Main },
 
@@ -119,4 +119,4 @@ class App extends React.Component {
   }
 }
 
-export default MainStack;
+export default App;
