@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
     View,
     Text,
-    Button
+    Button, Linking
 } from "react-native";
 
 
@@ -23,11 +23,8 @@ export default class CaseScreen extends Component {
             <View>
                 <Text>{this.state.title}</Text>
                 <Text>{this.state.description}</Text>
-                <Button title="Connect" onPress={}/>
+                <Button title="Connect" onPress={() => {Linking.openURL('https://web.telegram.org/')}}/>
             </View>
         );
     }
 }
-
-
-ls

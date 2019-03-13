@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, Text, TextInput, TouchableOpacity, Button, Linking} from 'react-native';
 
 class ChatEntry extends Component {
     state = {
@@ -16,17 +16,9 @@ class ChatEntry extends Component {
 
         return (
             <View>
-                <Text style={styles.title}>Enter your name:</Text>
-                <TextInput
-                    onChangeText={this.onChangeText}
-                    style={styles.nameInput}
-                    placeHolder="Your Name"
-                    value={this.state.name}
-                />
 
-                <TouchableOpacity onPress={this.onPress}>
-                    <Text style={styles.buttonText}>Next</Text>
-                </TouchableOpacity>
+                <Button onPress={() => {Linking.openURL('https://web.telegram.org/#/login')}} title='Go to Telegram'/>
+
             </View>
         );
     }
@@ -38,6 +30,7 @@ const styles = StyleSheet.create({
         height: offset * 2,
         margin: offset,
         paddingHorizontal: offset,
+        paddingTop: 50,
         borderColor: '#111111',
         borderWidth: 1,
     },

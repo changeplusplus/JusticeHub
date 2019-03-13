@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Checkbox, View, Text, Button } from 'react-native';
 import * as firebase from 'firebase';
-import {InputBlock} from "../../Components/InputBlock";
+import {Button, Text, TextInput, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
 
 class SetupLawyerProfile extends Component {

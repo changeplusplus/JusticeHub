@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import {View, Text, Button, TextInput, TouchableOpacity,
+import {View, TextInput, TouchableOpacity,
     Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback} from 'react-native';
 import Modal from "react-native-modal";
 import * as firebase from 'firebase';
+import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
 const { width, height } = Dimensions.get('window');
-export default class CaseSearch extends Component {
+export default class ClientCases extends Component {
 
     constructor(props) {
         super(props);
@@ -34,7 +35,7 @@ export default class CaseSearch extends Component {
                 }}>
                     <View style={{
                         flex: .15,
-                        backgroundColor: 'blue'
+                        backgroundColor: '#112853'
                     }}>
                         <TouchableOpacity onPress={this._toggleModal}
                                           style={{
@@ -46,7 +47,7 @@ export default class CaseSearch extends Component {
                                           }}>
                             <Image
                                 source={require('./addCaseButton.png')}
-                                style={{width: 40, height: 40}}
+                                style={{width: 30, height: 30}}
                             />
                         </TouchableOpacity>
                     </View>
@@ -77,15 +78,14 @@ export default class CaseSearch extends Component {
                                 borderRadius: 70,
                                 borderWidth: 0,
                             }}>
-                                <Text>Case Name</Text>
-                                <TextInput
+                                <Text h6 style={Jtheme.Text}>Case Name</Text>
+                                <TextInput style={Jtheme.InputText}
                                     placeholder="title"
                                     defaultValue={this.state.caseName}
                                     onChangeText={(text) => this.setState({caseName: text})}
                                 />
-                                <Text style={{borderTopWidth: 7, borderBottomWidth: 3}}>Case Details</Text>
-                                <TextInput
-                                    style={{flex: .5}}
+                                <Text style={Jtheme.Text}>Case Details</Text>
+                                <TextInput style={Jtheme.InputText}
                                     multiline={true}
                                     placeholder="description"
                                     defaultValue={this.state.caseDetails}
@@ -225,8 +225,8 @@ export default class CaseSearch extends Component {
                     }}>
                         Click + sign to add a case
                     </Text>
-                    <Button onPress={this.clearCases} title='Clear Cases'/>
-                    <Button onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
+                    <Button style={Jtheme.Button} onPress={this.clearCases} title='Clear Cases'/>
+                    <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
                 </View>
             );
         } else {
@@ -241,8 +241,8 @@ export default class CaseSearch extends Component {
                             return (<View style={{height: 5}}/>)
                         }}
                     />
-                    <Button onPress={this.clearCases} title='Clear Cases'/>
-                    <Button onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
+                    <Button style={Jtheme.Button} onPress={this.clearCases} title='Clear Cases'/>
+                    <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
                 </View>
             )
         }
@@ -267,8 +267,79 @@ export default class CaseSearch extends Component {
     };
     submitButtonText = () => {
         if (this.state.caseId === '') {
-            return (<Button onPress={this.submitCase} title='Submit Case'/>)
+            return (<Button style={Jtheme.Button} onPress={this.submitCase} title='Submit Case'/>)
         } else
-            return (<Button onPress={this.submitCase} title='Edit Case'/>)
+            return (<Button style={Jtheme.Button} onPress={this.submitCase} title='Edit Case'/>)
     };
 }
+
+const Jtheme = {
+
+    backgroundColor: '#112853',
+
+    BackButton: {
+        color: '#cc7832',
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        paddingBottom: 100,
+        marginTop: -5,
+        position: 'absolute', // add if dont work with above
+    },
+
+    Button: {
+        color: '#cc7832',
+        paddingLeft: 70,
+        paddingRight: 70,
+        paddingTop: 10,
+        paddingBottom: 10,
+    },
+
+    Container: {
+        flex: 1,
+        color: '#cc7832',
+        backgroundColor: '#112853',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        borderColor: '#111111',
+        borderWidth: 1,
+    },
+
+    Input: {
+        flex: 1,
+        backgroundColor: '#111111',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        borderColor: '#111111',
+        borderWidth: 3,
+        paddingLeft: 50,
+    },
+
+    Text: {
+        alignment: true,
+        fontWeight: 'bold',
+        flexDirection: 'column',
+        color: '#112853',
+        justifyContent: 'center',
+        fontSize: 20,
+        paddingTop: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderTopWidth: 7,
+        borderBottomWidth: 3
+    },
+
+    InputText: {
+        alignment: true,
+        fontWeight: 'bold',
+        flexDirection: 'column',
+        flex: .5,
+        color: '#112853',
+        justifyContent: 'center',
+        fontSize: 15,
+        paddingBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 50,
+    },
+
+};
