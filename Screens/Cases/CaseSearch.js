@@ -134,19 +134,48 @@ export default class CaseSearch extends Component {
             </TouchableOpacity>
         );
     }
-
+    // userIds.once('value', function (snapshot) {
+    //     let obj = snapshot.val();
+    //     for (let userId in obj) {
+    //         console.log(userId);
+    //
+    //         //loops through the cases for each user
+    //         let caseList = firebase.database().ref("users/" + userId+ "/cases/");
+    //         caseList.once('value', function (snapshot) {
+    //
+    //
+    //
+    //         }
+    //
+    //     }
+    //
+    // caseArr.push(obj[caseId]);
+    // caseArr[caseArr.length - 1].caseId = caseId;
+    //   stateVar.setState({cases: caseArr});
     fetchCases = () => {
         let user = firebase.auth().currentUser;
         let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
+        let userIds = firebase.database().ref("users/");
         let stateVar = this;
-        caseList.once('value', function (snapshot) {
-            let caseArr = [];
+        let caseArr =[];
+        userIds.once('value', function (snapshot) {
             let obj = snapshot.val();
-            for (let caseId in obj) {
-                caseArr.push(obj[caseId]);
-                caseArr[caseArr.length - 1].caseId = caseId;
+            for (let userId in obj) {
+                console.log(userId);
+                let caseList = firebase.database().ref("users/" + userId+ "/cases/");
+                caseList.once('value', function (snapshot) {
+                    let casesList = snapshot.val();
+                    for(let caseId in casesList){
+                        caseArr.push(obj[caseId]);
+                        caseArr[caseArr.length - 1].caseId = caseId;
+                    }
+                }).then(()=>{
+                    // indicate a single case loaded
+                }).catch((error) => {
+                    Alert.alert("Case Fetch Failed", error);
+                });
             }
-            stateVar.setState({cases: caseArr});
+
         })
             .then(() => {
                 this.setState({casesLoaded: true})
@@ -154,6 +183,8 @@ export default class CaseSearch extends Component {
             .catch((error) => {
                 Alert.alert("Case Fetch Failed", error);
             });
+
+        stateVar.setState({cases: caseArr});
     };
 
     submitCase = () => {
