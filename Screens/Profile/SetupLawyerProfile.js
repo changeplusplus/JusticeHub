@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { Checkbox, View, Text, Button } from 'react-native';
 import * as firebase from 'firebase';
-import {Button, Text, TextInput, ThemeConsumer, ThemeProvider} from "react-native-elements";
+import {
+    CheckBox, View,  TextInput
+} from 'react-native';
+import {InputBlock} from "../../Components/InputBlock";
+import {Button, Text} from "react-native-elements";
 
 
-class SetupLawyerProfile extends Component {
+export default class SetupLawyerProfile extends Component {
   static navigationOptions = {
     header: null
   };
@@ -28,7 +31,7 @@ class SetupLawyerProfile extends Component {
     return (
       <View>
         <Text>Edit your information</Text>
-        <InputBlock item='Years of Practice'
+      <InputBlock item='Years of Practice'
                     state='exp'
                     onChangeText={this._onChangeText}
                     value={this.state.exp}/>
@@ -103,5 +106,3 @@ class SetupLawyerProfile extends Component {
     });
   };
 }
-
-// export default SetupLawyerProfile;
