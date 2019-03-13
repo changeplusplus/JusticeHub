@@ -1,35 +1,81 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { Checkbox, View, Text, Button } from 'react-native';
 import * as firebase from 'firebase';
 import {InputBlock} from "../../Components/InputBlock";
+
 
 class SetupLawyerProfile extends Component {
   static navigationOptions = {
     header: null
   };
 
-  state = {
+    state = {
     exp: '',
-    degree: '',
-    specialty: ''
+    bar: '',
+    firm: '',
+    location: '',
+    radius: '',
+    avail: '',
+    expertise: {
+      theft: false,
+      drug: false,
+      violent: false,
+      other: ''
+    }
   };
 
   render() {
     return (
       <View>
         <Text>Edit your information</Text>
-        <InputBlock item='Experience'
+        <InputBlock item='Years of Practice'
                     state='exp'
                     onChangeText={this._onChangeText}
                     value={this.state.exp}/>
-        <InputBlock item='Degree'
-                    state='degree'
+      <InputBlock item='Bar Association Membership'
+                  state='bar'
+                  onChangeText={this._onChangeText}
+                  value={this.state.bar}/>
+        <InputBlock item='Firm'
+                    state='firm'
                     onChangeText={this._onChangeText}
-                    value={this.state.degree}/>
-        <InputBlock item='Specialty'
-                    state='specialty'
+                    value={this.state.firm}/>
+        <InputBlock item='Location'
+                    state='location'
                     onChangeText={this._onChangeText}
-                    value={this.state.specialty}/>
+                    value={this.state.location}/>
+        <InputBlock item='Radius of Practice'
+                    state='radius'
+                    onChangeText={this._onChangeText}
+                    value={this.state.radius}/>
+        <InputBlock item='Availability'
+                  state='avail'
+                  onChangeText={this._onChangeText}
+                  value={this.state.avail}/>
+        <Text> Expertise </Text>
+        <CheckBox
+                  title='Theft'
+                  checked={this.state.expertise.theft}
+                  onIconPress={(checked) => this.setState({theft: checked})}
+
+        />
+        <CheckBox
+                  title='Drug Offenses'
+                  checked={this.state.expertise.drug}
+                  onIconPress={(checked) => this.setState({drug: checked})}
+
+        />
+        <CheckBox
+                  title='Violent Crime'
+                  checked={this.state.expertise.violent}
+                  onIconPress={(checked) => this.setState({violent: checked})}
+
+        />
+        <InputBlock item='Other (please specify)'
+                  state='expertise'
+                  onChangeText={this._onChangeText}
+                  value={this.state.expertise.other}/>
+
 
         <Button onPress={this._submitChanges} title='Submit Changes' />
       </View>
@@ -58,4 +104,4 @@ class SetupLawyerProfile extends Component {
   };
 }
 
-export default SetupLawyerProfile;
+// export default SetupLawyerProfile;
