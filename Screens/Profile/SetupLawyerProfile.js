@@ -55,45 +55,23 @@ export default class SetupLawyerProfile extends Component {
                   state='avail'
                   onChangeText={this._onChangeText}
                   value={this.state.avail}/>
-        <Text> Expertise </Text>
-        <CheckBox
-                  title='Theft'
-                  checked={this.state.expertise.theft}
-                  onIconPress={(checked) => this.setState({theft: checked})}
-
-                />
-                <CheckBox
-                    title='Drug Offenses'
-                    checked={this.state.expertise.drug}
-                    onIconPress={(checked) => this.setState({drug: checked})}
-
-                />
-                <CheckBox
-                    title='Violent Crime'
-                    checked={this.state.expertise.violent}
-                    onIconPress={(checked) => this.setState({violent: checked})}
-
-                />
-                <InputBlock item='Other (please specify)'
-                            state='expertise'
-                            onChangeText={this._onChangeText}
-                            value={this.state.expertise.other}/>
-
-
-                <Button onPress={this._submitChanges} title='Submit Changes'/>
+            <Button onPress={this._submitChanges} title='Submit Changes'/>
             </View>
         )
     }
 
     _submitChanges = () => {
-        const {exp, degree, specialty} = this.state;
+        const {exp, bar, firm, location, radius, avail} = this.state;
 
         let userId = firebase.auth().currentUser.uid;
 
-        firebase.database().ref('profiles/lawyers/' + userId).update({
+        firebase.database().ref('users/' + userId).update({
             experience: exp,
-            degree: degree,
-            specialty: specialty
+            bar: bar,
+            firm: firm,
+            location: location,
+            radius: radius,
+            avail: avail
         });
 
         const {navigate} = this.props.navigation;
