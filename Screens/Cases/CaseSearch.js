@@ -3,6 +3,7 @@ import {View, Text, Button, TextInput, TouchableOpacity,
     Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback} from 'react-native';
 import Modal from "react-native-modal";
 import * as firebase from 'firebase';
+import { SearchBar } from 'react-native-elements';
 
 const { width, height } = Dimensions.get('window');
 export default class CaseSearch extends Component {
@@ -15,7 +16,8 @@ export default class CaseSearch extends Component {
             caseDetails: '',
             caseId: '',
             casesLoaded: false,
-            cases: []
+            cases: [],
+            search: ''
         };
         this.fetchCases();
     }
@@ -24,7 +26,14 @@ export default class CaseSearch extends Component {
         this.setState({isModalVisible: !this.state.isModalVisible, caseName: '', caseDetails: '', caseId: ''});
     };
 
+
+    updateSearch = search => {
+        this.setState({ search });
+    };
+
+
     render() {
+        const { search } = this.state;
         if (this.state.casesLoaded)
             return (
                 <View style={{
@@ -32,10 +41,12 @@ export default class CaseSearch extends Component {
                     flexDirection: 'column',
                     alignItems: 'stretch',
                 }}>
-                    <View style={{
-                        flex: .15,
-                        backgroundColor: 'blue'
-                    }}>
+                    <SearchBar
+                        placeholder="Type Here..."
+                        onChangeText={this.updateSearch}
+                        value={search}
+                    />
+                    <View >
                         <TouchableOpacity onPress={this._toggleModal}
                                           style={{
                                               marginRight: 20,
@@ -44,10 +55,7 @@ export default class CaseSearch extends Component {
                                               alignSelf: 'flex-end',
                                               justifyContent: 'flex-end'
                                           }}>
-                            <Image
-                                source={require('./addCaseButton.png')}
-                                style={{width: 40, height: 40}}
-                            />
+
                         </TouchableOpacity>
                     </View>
                     <View style={{
@@ -77,25 +85,11 @@ export default class CaseSearch extends Component {
                                 borderRadius: 70,
                                 borderWidth: 0,
                             }}>
-                                <Text>Case Name</Text>
-                                <TextInput
-                                    placeholder="title"
-                                    defaultValue={this.state.caseName}
-                                    onChangeText={(text) => this.setState({caseName: text})}
-                                />
-                                <Text style={{borderTopWidth: 7, borderBottomWidth: 3}}>Case Details</Text>
-                                <TextInput
-                                    style={{flex: .5}}
-                                    multiline={true}
-                                    placeholder="description"
-                                    defaultValue={this.state.caseDetails}
-                                    width={250}
-                                    maxLength={400}
-                                    borderWidth={1}
-                                    textAlign={'center'}
-                                    onChangeText={(text) => this.setState({caseDetails: text})}
-                                />
-                                {this.submitButtonText()}
+                                <Text h6 style={Jtheme.Text}>Case Name</Text>
+                                <Text style={Jtheme.InputText}>{this.state.caseName}</Text>
+                                <Text h6 style={Jtheme.Text}>Case Details</Text>
+                                <Text style={Jtheme.InputText}>{this.state.caseDetails}</Text>
+                                <Button style={Jtheme.Button} title='Connect'/>
                             </View>
                         </TouchableWithoutFeedback>
                     </Modal>
@@ -134,41 +128,28 @@ export default class CaseSearch extends Component {
             </TouchableOpacity>
         );
     }
-    // userIds.once('value', function (snapshot) {
-    //     let obj = snapshot.val();
-    //     for (let userId in obj) {
-    //         console.log(userId);
-    //
-    //         //loops through the cases for each user
-    //         let caseList = firebase.database().ref("users/" + userId+ "/cases/");
-    //         caseList.once('value', function (snapshot) {
-    //
-    //
-    //
-    //         }
-    //
-    //     }
-    //
-    // caseArr.push(obj[caseId]);
-    // caseArr[caseArr.length - 1].caseId = caseId;
-    //   stateVar.setState({cases: caseArr});
+
     fetchCases = () => {
         let user = firebase.auth().currentUser;
         let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
         let userIds = firebase.database().ref("users/");
         let stateVar = this;
-        let caseArr =[];
+        let caseArr = [];
         userIds.once('value', function (snapshot) {
             let obj = snapshot.val();
             for (let userId in obj) {
                 console.log(userId);
                 let caseList = firebase.database().ref("users/" + userId+ "/cases/");
                 caseList.once('value', function (snapshot) {
-                    let casesList = snapshot.val();
-                    for(let caseId in casesList){
-                        caseArr.push(obj[caseId]);
+                    let cases = snapshot.val();
+                    for(let caseId in cases){
+                        caseArr.push(cases[caseId]);
                         caseArr[caseArr.length - 1].caseId = caseId;
+                        console.log(caseId);
+                        console.log()
+                        console.log(caseArr.length+"\n");
                     }
+                    stateVar.setState({cases: caseArr});
                 }).then(()=>{
                     // indicate a single case loaded
                 }).catch((error) => {
@@ -184,99 +165,30 @@ export default class CaseSearch extends Component {
                 Alert.alert("Case Fetch Failed", error);
             });
 
-        stateVar.setState({cases: caseArr});
+
     };
 
-    submitCase = () => {
-        const {caseName, caseDetails, caseId} = this.state;
-        let user = firebase.auth().currentUser;
-        let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
-        let stateVar = this;
-        if (caseId === '') {
-            caseList.push({caseName: caseName, caseDetails: caseDetails})
-                .then(() => {
-                    Alert.alert(
-                        'Alert',
-                        'Case added successfully!',
-                        [{
-                            text: 'OK', onPress: () => {
-                                stateVar._toggleModal()
-                            }
-                        }]
-                    );
-                })
-                .catch((error) => {
-                    Alert.alert('Error', error, [{text: 'OK', onPress: () => stateVar._toggleModal()}]);
-                });
-        } else {
-            caseList.child(caseId).set({caseName: caseName, caseDetails: caseDetails})
-                .then(() => {
-                    Alert.alert(
-                        'Alert',
-                        'Case edited successfully!',
-                        [{
-                            text: 'OK', onPress: () => {
-                                stateVar._toggleModal()
-                            }
-                        }]
-                    );
-                })
-                .catch((error) => {
-                    Alert.alert('Error', error, [{text: 'OK', onPress: () => stateVar._toggleModal()}]);
-                });
-        }
 
-        this.fetchCases();
-    };
-
-    clearCases = () => {
-        let user = firebase.auth().currentUser;
-        let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
-        caseList.set({})
-            .then(() => {
-                Alert.alert(
-                    'Alert',
-                    'Cases Cleared',
-                    [{text: 'OK', onPress: this.fetchCases}]
-                );
-            })
-            .catch((error) => {
-                alert(error);
-            });
-    };
 
     mainScreen = () => {
-        if (this.state.cases.length === 0) {
-            return (
-                <View>
-                    <Text style={{
-                        fontSize: 32,
-                        fontWeight: 'bold',
-                        textAlign: 'center'
-                    }}>
-                        Click + sign to add a case
-                    </Text>
-                    <Button onPress={this.clearCases} title='Clear Cases'/>
-                    <Button onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
-                </View>
-            );
-        } else {
-            return (
-                <View
-                    style={{flex: 1, justifyContent: 'space-evenly'}}>
-                    <FlatList
-                        data={this.state.cases}
-                        keyExtractor={(item) => item.caseName}
-                        renderItem={({item}) => this.renderListItem(item)}
-                        ItemSeparatorComponent={() => {
-                            return (<View style={{height: 5}}/>)
-                        }}
-                    />
-                    <Button onPress={this.clearCases} title='Clear Cases'/>
-                    <Button onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
-                </View>
-            )
-        }
+
+        return (
+
+            <View
+                style={{flex: 1, justifyContent: 'space-evenly'}}>
+
+                <FlatList
+                    data={this.state.cases}
+                    keyExtractor={(item) => item.caseName}
+                    renderItem={({item}) => this.renderListItem(item)}
+                    ItemSeparatorComponent={() => {
+                        return (<View style={{height: 5}}/>)
+                    }}
+                />
+                <Button onPress={() => {this.props.navigation.navigate('LawyerProfile')}} title='Profile'/>
+            </View>
+        )
+
     };
 
     loadingScreen = () => {
@@ -296,10 +208,76 @@ export default class CaseSearch extends Component {
             </View>
         )
     };
-    submitButtonText = () => {
-        if (this.state.caseId === '') {
-            return (<Button onPress={this.submitCase} title='Submit Case'/>)
-        } else
-            return (<Button onPress={this.submitCase} title='Edit Case'/>)
-    };
+
 }
+
+const Jtheme = {
+
+    backgroundColor: '#112853',
+
+    BackButton: {
+        color: '#cc7832',
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        paddingBottom: 100,
+        marginTop: -5,
+        position: 'absolute', // add if dont work with above
+    },
+
+    Button: {
+        color: '#cc7832',
+        paddingLeft: 70,
+        paddingRight: 70,
+        paddingTop: 10,
+        paddingBottom: 10,
+    },
+
+    Container: {
+        flex: 1,
+        color: '#cc7832',
+        backgroundColor: '#112853',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        borderColor: '#111111',
+        borderWidth: 1,
+    },
+
+    Input: {
+        flex: 1,
+        backgroundColor: '#111111',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        borderColor: '#111111',
+        borderWidth: 3,
+        paddingLeft: 50,
+    },
+
+    Text: {
+        alignment: true,
+        fontWeight: 'bold',
+        flexDirection: 'column',
+        color: '#112853',
+        justifyContent: 'center',
+        fontSize: 20,
+        paddingTop: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderTopWidth: 7,
+        borderBottomWidth: 3
+    },
+
+    InputText: {
+        alignment: true,
+        fontWeight: 'bold',
+        flexDirection: 'column',
+        flex: .5,
+        color: '#112853',
+        justifyContent: 'center',
+        fontSize: 15,
+        paddingBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 50,
+    },
+
+};
