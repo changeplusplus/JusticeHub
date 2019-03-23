@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {View, Text, Button, TextInput, TouchableOpacity,
-    Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback} from 'react-native';
+import {
+    View, Text, Button, TextInput, TouchableOpacity,
+    Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback, Linking
+} from 'react-native';
 import Modal from "react-native-modal";
 import * as firebase from 'firebase';
 import { SearchBar } from 'react-native-elements';
@@ -31,9 +33,23 @@ export default class CaseSearch extends Component {
         this.setState({ search });
     };
 
+    _communicate = () => {
+        if (this.state.commPref === 'Email') {
+
+            // FIXME set view of client email address here
+        }
+        if (!Linking.canOpenURL('whatsapp://app')) {
+            alert('Please install WhatsApp to continue')
+        } else {
+            Linking.openURL('whatsapp://app')
+            // FIXME set receiving number to client phone number and send
+            // FIXME "Hello, my name is <name>. I saw your case and would like to help."
+        }
+    };
+
 
     render() {
-        const { search } = this.state;
+        const {search} = this.state;
         if (this.state.casesLoaded)
             return (
                 <View style={{
@@ -46,7 +62,7 @@ export default class CaseSearch extends Component {
                         onChangeText={this.updateSearch}
                         value={search}
                     />
-                    <View >
+                    <View>
                         <TouchableOpacity onPress={this._toggleModal}
                                           style={{
                                               marginRight: 20,
@@ -89,12 +105,11 @@ export default class CaseSearch extends Component {
                                 <Text style={Jtheme.InputText}>{this.state.caseName}</Text>
                                 <Text h6 style={Jtheme.Text}>Case Details</Text>
                                 <Text style={Jtheme.InputText}>{this.state.caseDetails}</Text>
-                                <Button style={Jtheme.Button} title='Connect'/>
+                                <Button style={Jtheme.Button} title='Connect' onPress={this._communicate}/>
                             </View>
                         </TouchableWithoutFeedback>
                     </Modal>
-                </View>
-            );
+                </View>);
         else
             return (
                 <View style={{

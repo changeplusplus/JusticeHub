@@ -6,12 +6,16 @@ import DataStorage from "../../DataStorage";
 import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
 class ClientProfile extends Component {
-  render() {
+
+        render() {
     return (
       <View>
           <Text h1 style={Jtheme.Text}>My Profile</Text>
             <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('ClientCases')}} title='My Cases'/>
-            <Button style={Jtheme.Button} onPress={() => {Linking.openURL('telegram://app/')}} title='My Messages'/>
+            <Button style={Jtheme.Button} onPress={() =>
+                {if (Linking.canOpenURL('whatsapp://app')){
+                    Linking.openURL('whatsapp://app')}
+                    alert('Please install WhatsApp to continue');}} title='Messages'/>
             <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('EditClientProfile')}} title='Edit Profile'/>
             <Button style={Jtheme.Button} onPress={this._logout} title='Log Out' />
       </View>
