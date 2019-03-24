@@ -28,7 +28,7 @@ class SetupLawyerProfile extends Component {
     render() {
         return (
             <ScrollView>
-                <Text>Edit your information</Text>
+            <Text>Edit your information</Text>
                 <TextInput style={Jtheme.InputText}
                             item='Years of Practice'
                             state='exp'
@@ -54,12 +54,12 @@ class SetupLawyerProfile extends Component {
                             state='radius'
                             onChangeText={this._onChangeText}
                             value={this.state.radius}/>
-                <InputText style={Jtheme.InputText}
+                <TextInput style={Jtheme.InputText}
                             item='Availability'
                             state='avail'
                             onChangeText={this._onChangeText}
                             value={this.state.avail}/>
-                <Text> style={Jtheme.Text} Expertise </Text>
+                <Text style={Jtheme.Text}>Expertise</Text>
                 <CheckBox
                     title='Theft'
                     checked={this.state.expertise.theft}
