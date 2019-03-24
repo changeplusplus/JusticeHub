@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {View, TextInput, TouchableOpacity,
+import {View, Text, Button, TextInput, TouchableOpacity,
     Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback} from 'react-native';
 import Modal from "react-native-modal";
+import DatePicker from 'react-native-datepicker'
 import * as firebase from 'firebase';
-import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
 const { width, height } = Dimensions.get('window');
 export default class ClientCases extends Component {
@@ -13,16 +13,20 @@ export default class ClientCases extends Component {
         this.state = {
             isModalVisible: false,
             caseName: '',
+            caseDate: '',
+            caseLocation: '',
             caseDetails: '',
             caseId: '',
             casesLoaded: false,
+            newCase: true,
             cases: []
         };
         this.fetchCases();
     }
 
     _toggleModal = () => {
-        this.setState({isModalVisible: !this.state.isModalVisible, caseName: '', caseDetails: '', caseId: ''});
+        this.setState({isModalVisible: !this.state.isModalVisible, caseName: '', caseDetails: '',
+            caseLocation: '', caseDate: '', caseId: '', newCase: true});
     };
 
     render() {
@@ -35,7 +39,7 @@ export default class ClientCases extends Component {
                 }}>
                     <View style={{
                         flex: .15,
-                        backgroundColor: '#112853'
+                        backgroundColor: 'blue'
                     }}>
                         <TouchableOpacity onPress={this._toggleModal}
                                           style={{
@@ -47,7 +51,7 @@ export default class ClientCases extends Component {
                                           }}>
                             <Image
                                 source={require('./addCaseButton.png')}
-                                style={{width: 30, height: 30}}
+                                style={{width: 40, height: 40}}
                             />
                         </TouchableOpacity>
                     </View>
@@ -57,7 +61,6 @@ export default class ClientCases extends Component {
                         justifyContent: 'center',
                         marginVertical: 50,
                         alignItems: 'center'
-
                     }}>
                         {this.mainScreen()}
                     </View>
@@ -78,14 +81,33 @@ export default class ClientCases extends Component {
                                 borderRadius: 70,
                                 borderWidth: 0,
                             }}>
-                                <Text h6 style={Jtheme.Text}>Case Name</Text>
-                                <TextInput style={Jtheme.InputText}
-                                    placeholder="title"
+                                <Text style={{marginTop: -20, fontWeight:'bold'}}>Accusation</Text>
+                                <TextInput
+                                    placeholder="accusation"
                                     defaultValue={this.state.caseName}
                                     onChangeText={(text) => this.setState({caseName: text})}
                                 />
-                                <Text style={Jtheme.Text}>Case Details</Text>
-                                <TextInput style={Jtheme.InputText}
+                                <Text style={{marginTop: 8, fontWeight:'bold'}}>Date of Arrest</Text>
+                                <DatePicker
+                                    style={{width: 200}}
+                                    date={this.state.caseDate}
+                                    mode="date"
+                                    showIcon={false}
+                                    placeholder="select date"
+                                    format="MM-DD-YYYY"
+                                    confirmBtnText="Confirm"
+                                    cancelBtnText="Cancel"
+                                    onDateChange={(date) => {this.setState({caseDate: date})}}
+                                />
+                                <Text style={{marginTop: 8, fontWeight:'bold'}}>Location of arrest</Text>
+                                <TextInput
+                                    placeholder="location"
+                                    defaultValue={this.state.caseLocation}
+                                    onChangeText={(text) => this.setState({caseLocation: text})}
+                                />
+                                <Text style={{borderTopWidth: 8, borderBottomWidth: 3, fontWeight:'bold'}}>Accusation Description</Text>
+                                <TextInput
+                                    style={{flex: .5}}
                                     multiline={true}
                                     placeholder="description"
                                     defaultValue={this.state.caseDetails}
@@ -115,6 +137,19 @@ export default class ClientCases extends Component {
             );
     }
 
+    submitButtonText = () => {
+        if (this.state.newCase) {
+            return (<Button onPress={this.submitCase} title='Submit Case'/>)
+        } else {
+            return (
+                <View>
+                    <Button onPress={this.submitCase} title='Edit Case'/>
+                    <Button onPress={this.deleteCase} title='Delete Case' color='red'/>
+                </View>
+            )
+        }
+    };
+
     renderListItem(item) {
         return (
             <TouchableOpacity
@@ -128,7 +163,8 @@ export default class ClientCases extends Component {
                 }}
                 onPress={() => {
                     this._toggleModal();
-                    this.setState({caseName: item.caseName, caseDetails: item.caseDetails, caseId: item.caseId});
+                    this.setState({caseName: item.caseName, caseDetails: item.caseDetails,
+                        caseDate: item.caseDate, caseLocation: item.caseLocation,  caseId: item.caseId, newCase: false});
                 }}>
                 <Text style={{color: 'black', textAlign: 'center', textAlignVertical: 'center'}}>{item.caseName}</Text>
             </TouchableOpacity>
@@ -157,12 +193,13 @@ export default class ClientCases extends Component {
     };
 
     submitCase = () => {
-        const {caseName, caseDetails, caseId} = this.state;
+        const {caseName, caseDetails, caseDate, caseLocation, caseId} = this.state;
         let user = firebase.auth().currentUser;
         let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
         let stateVar = this;
         if (caseId === '') {
-            caseList.push({caseName: caseName, caseDetails: caseDetails})
+            caseList.push({caseName: caseName, caseDetails: caseDetails,
+                caseLocation: caseLocation, caseDate: caseDate})
                 .then(() => {
                     Alert.alert(
                         'Alert',
@@ -178,7 +215,8 @@ export default class ClientCases extends Component {
                     Alert.alert('Error', error, [{text: 'OK', onPress: () => stateVar._toggleModal()}]);
                 });
         } else {
-            caseList.child(caseId).set({caseName: caseName, caseDetails: caseDetails})
+            caseList.child(caseId).set({caseName: caseName, caseDetails: caseDetails,
+                caseLocation: caseLocation, caseDate: caseDate})
                 .then(() => {
                     Alert.alert(
                         'Alert',
@@ -196,6 +234,30 @@ export default class ClientCases extends Component {
         }
 
         this.fetchCases();
+    };
+
+    deleteCase = () => {
+        let user = firebase.auth().currentUser;
+        let stateVar = this;
+        if (this.state.caseId !== ''){
+            let caseVar = firebase.database().ref("users/" + user.uid + "/cases/" + this.state.caseId);
+            caseVar.set({})
+                .then(() => {
+                    Alert.alert(
+                        'Alert',
+                        'Case deleted',
+                        [{
+                            text: 'OK',
+                            onPress: () => {
+                                stateVar.fetchCases();
+                                stateVar._toggleModal();
+                            }}]
+                    );
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        }
     };
 
     clearCases = () => {
@@ -225,8 +287,8 @@ export default class ClientCases extends Component {
                     }}>
                         Click + sign to add a case
                     </Text>
-                    <Button style={Jtheme.Button} onPress={this.clearCases} title='Clear Cases'/>
-                    <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
+                    <Button onPress={this.clearCases} title='Clear Cases'/>
+                    <Button onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
                 </View>
             );
         } else {
@@ -241,8 +303,8 @@ export default class ClientCases extends Component {
                             return (<View style={{height: 5}}/>)
                         }}
                     />
-                    <Button style={Jtheme.Button} onPress={this.clearCases} title='Clear Cases'/>
-                    <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
+                    <Button onPress={this.clearCases} title='Clear Cases'/>
+                    <Button onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
                 </View>
             )
         }
@@ -265,81 +327,4 @@ export default class ClientCases extends Component {
             </View>
         )
     };
-    submitButtonText = () => {
-        if (this.state.caseId === '') {
-            return (<Button style={Jtheme.Button} onPress={this.submitCase} title='Submit Case'/>)
-        } else
-            return (<Button style={Jtheme.Button} onPress={this.submitCase} title='Edit Case'/>)
-    };
 }
-
-const Jtheme = {
-
-    backgroundColor: '#112853',
-
-    BackButton: {
-        color: '#cc7832',
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 100,
-        marginTop: -5,
-        position: 'absolute', // add if dont work with above
-    },
-
-    Button: {
-        color: '#cc7832',
-        paddingLeft: 70,
-        paddingRight: 70,
-        paddingTop: 10,
-        paddingBottom: 10,
-    },
-
-    Container: {
-        flex: 1,
-        color: '#cc7832',
-        backgroundColor: '#112853',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        borderColor: '#111111',
-        borderWidth: 1,
-    },
-
-    Input: {
-        flex: 1,
-        backgroundColor: '#111111',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        borderColor: '#111111',
-        borderWidth: 3,
-        paddingLeft: 50,
-    },
-
-    Text: {
-        alignment: true,
-        fontWeight: 'bold',
-        flexDirection: 'column',
-        color: '#112853',
-        justifyContent: 'center',
-        fontSize: 20,
-        paddingTop: 5,
-        paddingLeft: 10,
-        paddingRight: 10,
-        borderTopWidth: 7,
-        borderBottomWidth: 3
-    },
-
-    InputText: {
-        alignment: true,
-        fontWeight: 'bold',
-        flexDirection: 'column',
-        flex: .5,
-        color: '#112853',
-        justifyContent: 'center',
-        fontSize: 15,
-        paddingBottom: 5,
-        paddingLeft: 10,
-        paddingRight: 50,
-    },
-
-};

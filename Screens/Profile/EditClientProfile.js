@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Picker, View} from 'react-native';
+import {Picker, TextInput, View} from 'react-native';
 import * as firebase from 'firebase';
 import {InputBlock} from "../../Components/InputBlock";
-import {Button, Text, TextInput, ThemeConsumer, ThemeProvider} from "react-native-elements";
+import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
 export default class EditClientProfile extends Component {
   state = {
@@ -14,34 +14,35 @@ export default class EditClientProfile extends Component {
   render() {
     return (
       <View>
-        <Text h3 style={Jtheme.Text}>Update your information:</Text>
+          <Text h3 style={Jtheme.Text}>Update your information:</Text>
 
-        <TextInput style={Jtheme.InputText}
-                    item='Location'
-                    state='location'
-                    onChangeText={this._onChangeText}/>
+          <TextInput style={Jtheme.InputText}
+                     item='Location'
+                     state='location'
+                     onChangeText={this._onChangeText}/>
 
-        <TextInput style={Jtheme.InputText}
-                    item='Type of case'
-                    state='caseType'
-                    onChangeText={this._onChangeText}/>
+          <TextInput style={Jtheme.InputText}
+                     item='Type of case'
+                     state='caseType'
+                     onChangeText={this._onChangeText}/>
 
-        <Text h5 style={Jtheme.Text}>How should lawyers contact you?</Text>
-        <Picker
-            selectedValue={this.state.commPref}
-            onValueChange={(itemValue) => this.setState({commPref: itemValue})}>
+          <Text h5 style={Jtheme.Text}>How should lawyers contact you?</Text>
+          <Picker
+              selectedValue={this.state.commPref}
+              onValueChange={(itemValue) => this.setState({commPref: itemValue})}>
 
-          <Picker.Item label='Email' value={true} />
-          <Picker.Item label='Phone' value={false} />
-        </Picker>
+              <Picker.Item label='Email' value={true} />
+              <Picker.Item label='Phone' value={false} />
+          </Picker>
 
-        <Button style={Jtheme.Button} onPress={this._submitChanges} title='Submit Changes'/>
+          <Button style={Jtheme.Button} onPress={this._submitChanges} title='Submit Changes'/>
       </View>
     );
   }
 
   _submitChanges = () => {
     const { location, caseType, commPref } = this.state;
+    const { navigate } = this.props.navigation;
 
     let userId = firebase.auth().currentUser.uid;
 
@@ -50,6 +51,8 @@ export default class EditClientProfile extends Component {
       caseType: caseType,
       commPref: commPref
     });
+
+    navigate('ClientTabNav');
   };
 
   _onChangeText = (state, update) => {

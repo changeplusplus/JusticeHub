@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {View, Picker} from 'react-native';
+import {View, TextInput, Picker} from 'react-native';
 import * as firebase from 'firebase';
-import {Button, Text, TextInput, ThemeConsumer, ThemeProvider} from "react-native-elements";
+import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
 class SetupClientProfile extends Component {
     state = {
@@ -12,7 +12,7 @@ class SetupClientProfile extends Component {
 
     render() {
         return (
-            <View>
+            <ThemeProvider style={Jtheme.backgroundColor}>
                 <Text h3 style={Jtheme.Text}>Update your information:</Text>
                 <TextInput style={Jtheme.InputText}
                             item='Location'
@@ -37,7 +37,7 @@ class SetupClientProfile extends Component {
                 </Picker>
 
                 <Button style={Jtheme.Button} onPress={this._submitChanges} title='Submit Changes'/>
-            </View>
+            </ThemeProvider>
         )
     }
 
