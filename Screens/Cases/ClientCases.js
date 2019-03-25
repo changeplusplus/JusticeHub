@@ -39,7 +39,7 @@ export default class ClientCases extends Component {
                 }}>
                     <View style={{
                         flex: .15,
-                        backgroundColor: 'blue'
+                        backgroundColor: '#47ddff'
                     }}>
                         <TouchableOpacity onPress={this._toggleModal}
                                           style={{
