@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Checkbox, TextInput, View} from 'react-native';
+import {Checkbox, ScrollView, TextInput, View} from 'react-native';
 import * as firebase from 'firebase';
 import {Button, CheckBox, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 import {InputBlock} from "../../Components/InputBlock";
@@ -27,33 +27,39 @@ class SetupLawyerProfile extends Component {
 
     render() {
         return (
-            <View>
-                <Text>Edit your information</Text>
-                <InputBlock item='Years of Practice'
+            <ScrollView>
+            <Text>Edit your information</Text>
+                <TextInput style={Jtheme.InputText}
+                            item='Years of Practice'
                             state='exp'
                             onChangeText={this._onChangeText}
                             value={this.state.exp}/>
-                <InputBlock item='Bar Association Membership'
+                <TextInput style={Jtheme.InputText}
+                            item='Bar Association Membership'
                             state='bar'
                             onChangeText={this._onChangeText}
                             value={this.state.bar}/>
-                <InputBlock item='Firm'
+                <TextInput style={Jtheme.InputText}
+                            item='Firm'
                             state='firm'
                             onChangeText={this._onChangeText}
                             value={this.state.firm}/>
-                <InputBlock item='Location'
+                <TextInput style={Jtheme.InputText}
+                            item='Location'
                             state='location'
                             onChangeText={this._onChangeText}
                             value={this.state.location}/>
-                <InputBlock item='Radius of Practice'
+                <TextInput style={Jtheme.InputText}
+                            item='Radius of Practice'
                             state='radius'
                             onChangeText={this._onChangeText}
                             value={this.state.radius}/>
-                <InputBlock item='Availability'
+                <TextInput style={Jtheme.InputText}
+                            item='Availability'
                             state='avail'
                             onChangeText={this._onChangeText}
                             value={this.state.avail}/>
-                <Text> Expertise </Text>
+                <Text style={Jtheme.Text}>Expertise</Text>
                 <CheckBox
                     title='Theft'
                     checked={this.state.expertise.theft}
@@ -72,14 +78,15 @@ class SetupLawyerProfile extends Component {
                     onIconPress={(checked) => this.setState({violent: checked})}
 
                 />
-                <InputBlock item='Other (please specify)'
+                <TextInput style={Jtheme.InputText}
+                            item='Other (please specify)'
                             state='expertise'
                             onChangeText={this._onChangeText}
                             value={this.state.expertise.other}/>
 
 
-                <Button onPress={this._submitChanges} title='Submit Changes'/>
-            </View>
+                <Button style={Jtheme.Button} onPress={this._submitChanges} title='Submit Changes'/>
+            </ScrollView>
         )
     }
 
@@ -106,3 +113,70 @@ class SetupLawyerProfile extends Component {
 }
 
 export default SetupLawyerProfile;
+
+const Jtheme = {
+
+    backgroundColor: '#112853',
+
+    BackButton: {
+        color: '#cc7832',
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        paddingBottom: 100,
+        marginTop: -5,
+        position: 'absolute', // add if dont work with above
+    },
+
+    Button: {
+        color: '#cc7832',
+        paddingLeft: 70,
+        paddingRight: 70,
+        paddingTop: 30,
+        paddingBottom: 30,
+    },
+
+    Container: {
+        flex: 1,
+        color: '#cc7832',
+        backgroundColor: '#112853',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        borderColor: '#111111',
+        borderWidth: 1,
+    },
+
+    Input: {
+        flex: 1,
+        backgroundColor: '#111111',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        borderColor: '#111111',
+        borderWidth: 3,
+        paddingLeft: 50,
+    },
+
+    Text: {
+        alignment: true,
+        fontWeight: 'bold',
+        flexDirection: 'column',
+        color: '#112853',
+        justifyContent: 'center',
+        fontSize: 40,
+        paddingTop: 50,
+        paddingLeft: 50,
+        paddingRight: 50,
+    },
+
+    InputText: {
+        alignment: true,
+        fontWeight: 'bold',
+        flexDirection: 'column',
+        color: '#112853',
+        justifyContent: 'center',
+        fontSize: 15,
+        paddingBottom: 30,
+        paddingLeft: 10,
+        paddingRight: 50,
+    }
+};

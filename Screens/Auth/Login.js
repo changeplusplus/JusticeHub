@@ -53,9 +53,12 @@ class Login extends Component {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(() => {
                 // Get userId
-                let userId = firebase.auth().currentUser.uid;
-
-                // Get basic data
+              let userId = firebase.auth().currentUser.uid;
+              var isLawyerRef = firebase.database().ref('users/' + userId + '/isLawyer');
+              let isLawyer;
+              isLawyerRef.on('value', function(snapshot) {
+                isLawyer = snapshot.val();
+              });
                 console.log('Logged in');
                 DataStorage.saveLogin(email, password);
                 DataStorage.loadBasicData();
@@ -66,18 +69,17 @@ class Login extends Component {
                     password: ''
                 });
 
-                alert('Logged in!\n' + userId);
+                alert('Logged in!\n');
 
                 const {navigate} = this.props.navigation;
-
-                if (DataStorage.IS_LAWYER) {
+                if (isLawyer) {
                     navigate('LawyerTabNav');
                 } else {
                     navigate('ClientTabNav');
                 }
             })
             .catch((error) => {
-                alert('That email/password combo doesn\'t exist');
+                alert(error);
             })
     };
 
@@ -129,7 +131,7 @@ const Jtheme = {
     },
 
     Text: {
-        alignment: true,
+        // alignment: true,
         fontWeight: 'bold',
         flexDirection: 'column',
         color: '#112853',
@@ -141,7 +143,7 @@ const Jtheme = {
     },
 
     InputText: {
-        alignment: true,
+        // alignment: true,
         fontWeight: 'bold',
         flexDirection: 'column',
         color: '#112853',
