@@ -27,78 +27,86 @@ class SetupLawyerProfile extends Component {
 
     render() {
         return (
-            <ScrollView>
-            <Text>Edit your information</Text>
-                <TextInput style={Jtheme.InputText}
-                            item='Years of Practice'
-                            state='exp'
-                            onChangeText={this._onChangeText}
-                            value={this.state.exp}/>
-                <TextInput style={Jtheme.InputText}
-                            item='Bar Association Membership'
-                            state='bar'
-                            onChangeText={this._onChangeText}
-                            value={this.state.bar}/>
-                <TextInput style={Jtheme.InputText}
-                            item='Firm'
-                            state='firm'
-                            onChangeText={this._onChangeText}
-                            value={this.state.firm}/>
-                <TextInput style={Jtheme.InputText}
-                            item='Location'
-                            state='location'
-                            onChangeText={this._onChangeText}
-                            value={this.state.location}/>
-                <TextInput style={Jtheme.InputText}
-                            item='Radius of Practice'
-                            state='radius'
-                            onChangeText={this._onChangeText}
-                            value={this.state.radius}/>
-                <TextInput style={Jtheme.InputText}
-                            item='Availability'
-                            state='avail'
-                            onChangeText={this._onChangeText}
-                            value={this.state.avail}/>
+            <ScrollView contentContainerStyle={{justifyContent:'center', marginTop: 55}}>
+                <Text style={Jtheme.InputText}>Years of Practice</Text>
+                <TextInput style={Jtheme.Input}
+                           onChangeText={(text) => this.setState({exp: text})}
+                           placeholder={"years"}
+                           width={100}/>
+
+                <Text style={Jtheme.InputText}>Bar Association Membership</Text>
+                <TextInput style={Jtheme.Input}
+                           onChangeText={(text) => this.setState({bar: text})}
+                           placeholder={"bar"}
+                           width={100}/>
+
+                <Text style={Jtheme.InputText}>Law Firm</Text>
+                <TextInput style={Jtheme.Input}
+                           onChangeText={(text) => this.setState({firm: text})}
+                           placeholder={"firm"}
+                           width={100}/>
+
+                <Text style={Jtheme.InputText}>Location</Text>
+                <TextInput style={Jtheme.Input}
+                           onChangeText={(text) => this.setState({location: text})}
+                           placeholder={"location"}
+                           width={100}/>
+
+                <Text style={Jtheme.InputText}>Radius of Practice</Text>
+                <TextInput style={Jtheme.Input}
+                           onChangeText={(text) => this.setState({radius: text})}
+                           placeholder={"radius (miles)"}
+                           width={100}/>
+
+                <Text style={Jtheme.InputText}>Availability</Text>
+                <TextInput style={Jtheme.Input}
+                           onChangeText={(text) => this.setState({avail: text})}
+                           placeholder={"availability"}
+                           width={100}/>
                 <Text style={Jtheme.Text}>Expertise</Text>
                 <CheckBox
                     title='Theft'
                     checked={this.state.expertise.theft}
-                    onIconPress={(checked) => this.setState({theft: checked})}
-
+                    onIconPress={() => this.setState({expertise: {
+                            ...this.state.expertise, theft: !this.state.expertise.theft}})}
                 />
                 <CheckBox
                     title='Drug Offenses'
                     checked={this.state.expertise.drug}
-                    onIconPress={(checked) => this.setState({drug: checked})}
-
+                    onIconPress={() => this.setState({expertise: {
+                        ...this.state.expertise, drug: !this.state.expertise.drug}})}
                 />
                 <CheckBox
                     title='Violent Crime'
                     checked={this.state.expertise.violent}
-                    onIconPress={(checked) => this.setState({violent: checked})}
-
+                    onIconPress={() => this.setState({expertise: {
+                            ...this.state.expertise, violent: !this.state.expertise.violent}})}
                 />
-                <TextInput style={Jtheme.InputText}
-                            item='Other (please specify)'
-                            state='expertise'
-                            onChangeText={this._onChangeText}
-                            value={this.state.expertise.other}/>
-
-
-                <Button style={Jtheme.Button} onPress={this._submitChanges} title='Submit Changes'/>
+                <Text style={Jtheme.InputText}>Other (please specify)</Text>
+                <TextInput style={Jtheme.Input}
+                    onChangeText={(text) =>
+                        this.setState({expertise: {...this.state.expertise, other: text}})}
+                    placeholder={"other"}
+                    width={100}/>
+                <Button style={Jtheme.Button} onPress={this._submitChanges}
+                        title='Submit Changes'/>
             </ScrollView>
         )
     }
 
     _submitChanges = () => {
-        const {exp, degree, specialty} = this.state;
+        const {exp, bar, firm, location, radius, avail, expertise} = this.state;
 
         let userId = firebase.auth().currentUser.uid;
 
         firebase.database().ref('profiles/lawyers/' + userId).update({
             experience: exp,
-            degree: degree,
-            specialty: specialty
+            bar: bar,
+            firm: firm,
+            location: location,
+            radius: radius,
+            avail: avail,
+            expertise: expertise
         });
 
         const {navigate} = this.props.navigation;
@@ -119,6 +127,7 @@ const Jtheme = {
     backgroundColor: '#112853',
 
     BackButton: {
+        flex:1,
         color: '#cc7832',
         paddingLeft: 0,
         paddingRight: 0,
@@ -129,6 +138,7 @@ const Jtheme = {
     },
 
     Button: {
+        flex:1,
         color: '#cc7832',
         paddingLeft: 70,
         paddingRight: 70,
@@ -147,16 +157,16 @@ const Jtheme = {
     },
 
     Input: {
-        flex: 1,
-        backgroundColor: '#111111',
-        flexDirection: 'column',
+        flex: .5,
         justifyContent: 'center',
-        borderColor: '#111111',
-        borderWidth: 3,
-        paddingLeft: 50,
+        alignItems: 'center',
+        borderColor: '#CED0CE',
+        borderWidth: 1,
+        paddingLeft: 35,
     },
 
     Text: {
+        flex:1,
         alignment: true,
         fontWeight: 'bold',
         flexDirection: 'column',
@@ -169,13 +179,14 @@ const Jtheme = {
     },
 
     InputText: {
-        alignment: true,
+        flex:1,
+        alignItems: 'center',
         fontWeight: 'bold',
         flexDirection: 'column',
         color: '#112853',
         justifyContent: 'center',
         fontSize: 15,
-        paddingBottom: 30,
+        paddingBottom: 10,
         paddingLeft: 10,
         paddingRight: 50,
     }
