@@ -125,23 +125,31 @@ export default class CaseSearch extends Component {
     }
 
     renderListItem(item) {
-        return (
-            <TouchableOpacity
-                style={{
-                    backgroundColor: 'white',
-                    borderRadius: 3,
-                    borderWidth: 1,
-                    borderColor: '#CED0CE',
-                    width: width,
-                    height: 50
-                }}
-                onPress={() => {
-                    this._toggleModal();
-                    this.setState({caseName: item.caseName, caseDetails: item.caseDetails, caseId: item.caseId});
-                }}>
-                <Text style={{color: 'black', textAlign: 'center', textAlignVertical: 'center'}}>{item.caseName}</Text>
-            </TouchableOpacity>
-        );
+        //if it contains the search term
+
+        if(item.caseName.includes(this.state.search)) {
+            return (
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: 'white',
+                        borderRadius: 3,
+                        borderWidth: 1,
+                        borderColor: '#CED0CE',
+                        width: width,
+                        height: 50
+                    }}
+                    onPress={() => {
+                        this._toggleModal();
+                        this.setState({caseName: item.caseName, caseDetails: item.caseDetails, caseId: item.caseId});
+                    }}>
+                    <Text style={{
+                        color: 'black',
+                        textAlign: 'center',
+                        textAlignVertical: 'center'
+                    }}>{item.caseName}</Text>
+                </TouchableOpacity>
+            );
+        }
     }
 
     fetchCases = () => {
