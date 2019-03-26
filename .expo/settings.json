@@ -1,7 +1,7 @@
 {
-  "hostType": "localhost",
+  "hostType": "lan",
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "pg-922"
+  "urlRandomness": "u4-8fk"
 }

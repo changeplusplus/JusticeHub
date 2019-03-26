@@ -54,10 +54,16 @@ class Login extends Component {
             .then(() => {
                 // Get userId
               let userId = firebase.auth().currentUser.uid;
-              var isLawyerRef = firebase.database().ref('users/' + userId + '/isLawyer');
-              let isLawyer;
+              var isLawyerRef = firebase.database().ref('users/' + userId);
+              let thisObj = this;
               isLawyerRef.on('value', function(snapshot) {
-                isLawyer = snapshot.val();
+                let isLawyer = snapshot.val().isLawyer;
+                const {navigate} = thisObj.props.navigation;
+                if (isLawyer) {
+                    navigate('LawyerTabNav');
+                } else {
+                    navigate('ClientTabNav');
+                }
               });
                 console.log('Logged in');
                 DataStorage.saveLogin(email, password);
@@ -71,12 +77,6 @@ class Login extends Component {
 
                 alert('Logged in!\n');
 
-                const {navigate} = this.props.navigation;
-                if (isLawyer) {
-                    navigate('LawyerTabNav');
-                } else {
-                    navigate('ClientTabNav');
-                }
             })
             .catch((error) => {
                 alert(error);
@@ -87,12 +87,6 @@ class Login extends Component {
         const {navigate} = this.props.navigation;
 
         navigate('SignUp');
-    };
-
-    _onChangeText = (state, update) => {
-        this.setState({
-            [state]: update
-        });
     };
 }
 

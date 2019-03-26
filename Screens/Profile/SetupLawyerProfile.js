@@ -10,56 +10,69 @@ class SetupLawyerProfile extends Component {
         header: null
     };
 
-    state = {
-        exp: '',
-        bar: '',
-        firm: '',
-        location: '',
-        radius: '',
-        avail: '',
-        expertise: {
-            theft: false,
-            drug: false,
-            violent: false,
-            other: ''
-        }
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            exp: '',
+            bar: '',
+            firm: '',
+            location: '',
+            radius: '',
+            avail: '',
+            expertise: {
+                theft: false,
+                drug: false,
+                violent: false,
+                other: ''
+            },
+            dataLoaded: false
+        };
+        this._loadData();
+    }
 
     render() {
+        if (!this.state.dataLoaded)
+            return null;
         return (
             <ScrollView contentContainerStyle={{justifyContent:'center', marginTop: 55}}>
                 <Text style={Jtheme.InputText}>Years of Practice</Text>
                 <TextInput style={Jtheme.Input}
+                           value={this.state.exp}
                            onChangeText={(text) => this.setState({exp: text})}
                            placeholder={"years"}
                            width={100}/>
 
                 <Text style={Jtheme.InputText}>Bar Association Membership</Text>
                 <TextInput style={Jtheme.Input}
+                           value={this.state.bar}
                            onChangeText={(text) => this.setState({bar: text})}
                            placeholder={"bar"}
                            width={100}/>
 
                 <Text style={Jtheme.InputText}>Law Firm</Text>
                 <TextInput style={Jtheme.Input}
+                           value={this.state.firm}
                            onChangeText={(text) => this.setState({firm: text})}
                            placeholder={"firm"}
                            width={100}/>
 
                 <Text style={Jtheme.InputText}>Location</Text>
                 <TextInput style={Jtheme.Input}
+                           value={this.state.location}
                            onChangeText={(text) => this.setState({location: text})}
                            placeholder={"location"}
                            width={100}/>
 
                 <Text style={Jtheme.InputText}>Radius of Practice</Text>
                 <TextInput style={Jtheme.Input}
+                           value={this.state.radius}
                            onChangeText={(text) => this.setState({radius: text})}
                            placeholder={"radius (miles)"}
                            width={100}/>
 
                 <Text style={Jtheme.InputText}>Availability</Text>
                 <TextInput style={Jtheme.Input}
+                           value={this.state.avail}
                            onChangeText={(text) => this.setState({avail: text})}
                            placeholder={"availability"}
                            width={100}/>
@@ -86,6 +99,7 @@ class SetupLawyerProfile extends Component {
                 <TextInput style={Jtheme.Input}
                     onChangeText={(text) =>
                         this.setState({expertise: {...this.state.expertise, other: text}})}
+                        value={this.state.expertise.other}
                     placeholder={"other"}
                     width={100}/>
                 <Button style={Jtheme.Button} onPress={this._submitChanges}
@@ -108,14 +122,26 @@ class SetupLawyerProfile extends Component {
             avail: avail,
             expertise: expertise
         });
-
+        this.setState({dataLoaded:false});
         const {navigate} = this.props.navigation;
         navigate('LawyerTabNav');
     };
 
-    _onChangeText = (state, update) => {
-        this.setState({
-            [state]: update
+    _loadData = () => {
+        let userId = firebase.auth().currentUser.uid
+        let thisObj = this;
+        firebase.database().ref('profiles/lawyers/' + userId).once('value',(snapshot) => {
+            let data = snapshot.val();
+            thisObj.setState({
+                exp: data.experience,
+                bar: data.bar,
+                firm: data.firm,
+                location: data.location,
+                radius: data.radius,
+                avail: data.avail,
+                expertise: data.expertise,
+                dataLoaded: true
+            })
         });
     };
 }
