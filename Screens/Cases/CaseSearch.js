@@ -19,10 +19,28 @@ export default class CaseSearch extends Component {
             caseId: '',
             casesLoaded: false,
             cases: [],
+            // FIXME - new states
             search: ''
         };
         this.fetchCases();
     }
+
+    _communicate = (name, phone, email, pref) => {
+
+        //let clientName = get client userName
+        let lawyerName = firebase.auth().currentUser.displayName;
+        let clientName = "Client :)";
+        let greeting = "Hello " + clientName + ", my name is " + lawyerName + ". I saw your case and would like to help.";
+        let phoneNumber = +16026514181;
+
+        // FIXME Modal popup - "this client prefers to be contacted by email and can be reached at
+
+        if (!Linking.canOpenURL('whatsapp://app')) {
+            alert('Please install WhatsApp to continue')
+        } else {
+            Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + phoneNumber)
+        }
+    };
 
     _toggleModal = () => {
         this.setState({isModalVisible: !this.state.isModalVisible, caseName: '', caseDetails: '', caseId: ''});
@@ -34,16 +52,23 @@ export default class CaseSearch extends Component {
     };
 
     _communicate = () => {
+
+        let name = firebase.auth().currentUser.displayName;
+        let greeting = 'Hello, my name is ' + name + '. I saw your case and would like to help.';
+        let phoneNumber = +18132407013;
+
         if (this.state.commPref === 'Email') {
 
-            // FIXME set view of client email address here
+            // FIXME Modal popup - "this client prefers to be contacted by email and can be reached at
         }
-        if (!Linking.canOpenURL('whatsapp://app')) {
-            alert('Please install WhatsApp to continue')
-        } else {
-            Linking.openURL('whatsapp://app')
-            // FIXME set receiving number to client phone number and send
-            // FIXME "Hello, my name is <name>. I saw your case and would like to help."
+
+        if (0 === 1) {
+            if (!Linking.canOpenURL('whatsapp://app')) {
+                alert('Please install WhatsApp to continue')
+            } else {
+                Linking.openURL(Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + phoneNumber))
+                // FIXME "Hello, my name is <name>. I saw your case and would like to help."
+            }
         }
     };
 

@@ -7,17 +7,42 @@ import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements"
 
 class ClientProfile extends Component {
 
+    _openWhatsApp = () => {
+        if (Linking.canOpenURL('whatsapp://app')) {
+            Linking.openURL('whatsapp://app')
+        } else {
+            alert('Please install WhatsApp to continue')
+        }
+    };
+
+    _communicate = () => {
+
+      //let clientName = get client userName
+        let name = firebase.auth().currentUser.displayName;
+        let clientName = "Client :)";
+        let greeting = "Hello " + clientName + ", my name is " + name + ". I saw your case and would like to help.";
+        let phoneNumber = +16026514181;
+
+            // FIXME Modal popup - "this client prefers to be contacted by email and can be reached at
+
+        if (!Linking.canOpenURL('whatsapp://app')) {
+            alert('Please install WhatsApp to continue')
+        } else {
+            Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + phoneNumber)
+            // FIXME "Hello , my name is <name>. I saw your case and would like to help."
+        }
+    };
+
         render() {
     return (
       <View>
           <Text h1 style={Jtheme.Text}>My Profile</Text>
             <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('ClientCases')}} title='My Cases'/>
-            <Button style={Jtheme.Button} onPress={() =>
-                {if (Linking.canOpenURL('whatsapp://app')){
-                    Linking.openURL('whatsapp://app')}
-                    alert('Please install WhatsApp to continue');}} title='Messages'/>
             <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('EditClientProfile')}} title='Edit Profile'/>
             <Button style={Jtheme.Button} onPress={this._logout} title='Log Out' />
+            <Button style={Jtheme.Button} onPress={this._openWhatsApp} title='Messages' />
+            <Button style={Jtheme.Button} onPress={this._communicate} title='Demo Message' />
+
       </View>
     )
   }
