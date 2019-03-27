@@ -152,7 +152,7 @@ export default class CaseSearch extends Component {
     renderListItem(item) {
         //if it contains the search term
 
-        if(item.caseName.includes(this.state.search)) {
+        if(item.caseName.includes(this.state.search)||item.caseDetails.includes(this.state.search)) {
             return (
                 <TouchableOpacity
                     style={{
