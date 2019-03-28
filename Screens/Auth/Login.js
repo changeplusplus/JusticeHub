@@ -54,18 +54,18 @@ class Login extends Component {
             .then(() => {
                 // Get userId
               let userId = firebase.auth().currentUser.uid;
-              var isLawyerRef = firebase.database().ref('users/' + userId);
+              var isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
               let thisObj = this;
               isLawyerRef.on('value', function(snapshot) {
-                let isLawyer = snapshot.val().isLawyer;
-                const {navigate} = thisObj.props.navigation;
-                if (isLawyer) {
-                    navigate('LawyerTabNav');
-                } else {
-                    navigate('ClientTabNav');
-                }
+                  let isLawyer = (snapshot.val() !== null);
+                  const {navigate} = thisObj.props.navigation;
+                  if (isLawyer) {
+                      navigate('LawyerTabNav');
+                  } else {
+                      navigate('ClientTabNav');
+                  }
               });
-                console.log('Logged in');
+                // console.log('Logged in');
                 DataStorage.saveLogin(email, password);
                 DataStorage.loadBasicData();
 
@@ -125,7 +125,6 @@ const Jtheme = {
     },
 
     Text: {
-        // alignment: true,
         fontWeight: 'bold',
         flexDirection: 'column',
         color: '#112853',
@@ -137,7 +136,6 @@ const Jtheme = {
     },
 
     InputText: {
-        // alignment: true,
         fontWeight: 'bold',
         flexDirection: 'column',
         color: '#112853',

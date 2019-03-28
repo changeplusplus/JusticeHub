@@ -302,7 +302,6 @@ const Jtheme = {
     },
 
     Text: {
-        alignment: true,
         fontWeight: 'bold',
         flexDirection: 'column',
         color: '#112853',
@@ -316,7 +315,6 @@ const Jtheme = {
     },
 
     InputText: {
-        alignment: true,
         fontWeight: 'bold',
         flexDirection: 'column',
         flex: .5,

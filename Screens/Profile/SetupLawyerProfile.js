@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
-import {Checkbox, ScrollView, TextInput, View} from 'react-native';
+import {Alert, Checkbox, ScrollView, TextInput, View} from 'react-native';
 import * as firebase from 'firebase';
 import {Button, CheckBox, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 import {InputBlock} from "../../Components/InputBlock";
 
 
 class SetupLawyerProfile extends Component {
-    static navigationOptions = {
-        header: null
-    };
 
     constructor(props) {
         super(props);
@@ -27,12 +24,13 @@ class SetupLawyerProfile extends Component {
             },
             dataLoaded: false
         };
-        this._loadData();
     }
 
     render() {
-        if (!this.state.dataLoaded)
+        if (!this.state.dataLoaded){
+            this._loadData();
             return null;
+        }
         return (
             <ScrollView contentContainerStyle={{justifyContent:'center', marginTop: 55}}>
                 <Text style={Jtheme.InputText}>Years of Practice</Text>
@@ -113,7 +111,7 @@ class SetupLawyerProfile extends Component {
 
         let userId = firebase.auth().currentUser.uid;
 
-        firebase.database().ref('profiles/lawyers/' + userId).update({
+        firebase.database().ref('lawyerProfiles/' + userId).update({
             experience: exp,
             bar: bar,
             firm: firm,
@@ -128,21 +126,25 @@ class SetupLawyerProfile extends Component {
     };
 
     _loadData = () => {
-        let userId = firebase.auth().currentUser.uid
-        let thisObj = this;
-        firebase.database().ref('profiles/lawyers/' + userId).once('value',(snapshot) => {
+        let {exp, bar, firm, location, radius, avail, expertise, dataLoaded} = '';
+        let userId = firebase.auth().currentUser.uid;
+        firebase.database().ref('lawyerProfiles/' + userId).once('value',(snapshot) => {
             let data = snapshot.val();
-            thisObj.setState({
-                exp: data.experience,
-                bar: data.bar,
-                firm: data.firm,
-                location: data.location,
-                radius: data.radius,
-                avail: data.avail,
-                expertise: data.expertise,
-                dataLoaded: true
-            })
-        });
+            exp = data.experience;
+            bar = data.bar;
+            firm = data.firm;
+            location = data.location;
+            radius = data.radius;
+            avail = data.avail;
+            expertise = data.expertise;
+            dataLoaded = true;
+        })
+            .then(() => {
+            this.setState({exp, bar, firm, location, radius, avail, expertise, dataLoaded});
+        })
+            .catch((error) => {
+                Alert.alert("Data load Failed", error);
+            });
     };
 }
 
@@ -193,7 +195,6 @@ const Jtheme = {
 
     Text: {
         flex:1,
-        alignment: true,
         fontWeight: 'bold',
         flexDirection: 'column',
         color: '#112853',

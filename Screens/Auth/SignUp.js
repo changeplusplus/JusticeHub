@@ -72,24 +72,45 @@ export default class SignUp extends Component {
             .then(() => {
                 // Get userId
                 let userId = firebase.auth().currentUser.uid;
-
-                // Set basic data in database
-                firebase.database().ref('users/' + userId).set({
-                    fullName: fullName,
-                    email: email,
-                    phoneNumber: phone,
-                    isLawyer: isLawyer
-                });
+                if (isLawyer){
+                    // Set lawyer data gets put in a lawyer user section in database
+                    firebase.database().ref('lawyerProfiles/' + userId).set({
+                        fullName: fullName,
+                        email: email,
+                        phoneNumber: phone,
+                        isLawyer: isLawyer,
+                        experience: '',
+                        bar: 'test',
+                        firm: '',
+                        location: '',
+                        radius: '',
+                        avail: '',
+                        expertise: {
+                            theft: false,
+                            drug: false,
+                            violent: false,
+                            other: ''
+                        }
+                    });
+                } else{
+                    //for clients it begins their case profile
+                    firebase.database().ref('cases/' + userId).set({
+                        fullName: fullName,
+                        email: email,
+                        phoneNumber: phone,
+                        isLawyer: isLawyer
+                    });
+                }
 
                 alert('Account successfully created!');
 
-                DataStorage.saveLogin(email, password);
-
-                // Store basic data
-                DataStorage.FULL_NAME = fullName;
-                DataStorage.EMAIL = email;
-                DataStorage.PHONE_NUM = phone;
-                DataStorage.IS_LAWYER = isLawyer;
+                // DataStorage.saveLogin(email, password);
+                //
+                // // Store basic data
+                // DataStorage.FULL_NAME = fullName;
+                // DataStorage.EMAIL = email;
+                // DataStorage.PHONE_NUM = phone;
+                // DataStorage.IS_LAWYER = isLawyer;
 
                 const {navigate} = this.props.navigation;
 
@@ -102,12 +123,6 @@ export default class SignUp extends Component {
             .catch((error) => {
                 alert('Error: ' + error.message);
             })
-    };
-
-    _onChangeText = (state, update) => {
-        this.setState({
-            [state]: update
-        });
     };
 }
 
@@ -154,7 +169,6 @@ const Jtheme = {
     },
 
     Text: {
-        alignment: true,
         fontWeight: 'bold',
         flexDirection: 'column',
         color: '#112853',
@@ -167,7 +181,6 @@ const Jtheme = {
     },
 
     InputText: {
-        alignment: true,
         fontWeight: 'bold',
         flexDirection: 'column',
         color: '#112853',
