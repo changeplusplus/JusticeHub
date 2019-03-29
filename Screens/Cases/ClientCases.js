@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {View, Text, Button, TextInput, TouchableOpacity,
-    Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback} from 'react-native';
-import Modal from "react-native-modal";
-import DatePicker from 'react-native-datepicker'
+import {
+    View, Text, Button, TextInput, TouchableOpacity,
+    Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback, ScrollView
+} from 'react-native';
 import * as firebase from 'firebase';
+import {CheckBox} from "react-native-elements";
 
 const { width, height } = Dimensions.get('window');
 export default class ClientCases extends Component {
@@ -11,320 +12,219 @@ export default class ClientCases extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isModalVisible: false,
-            caseName: '',
-            caseDate: '',
-            caseLocation: '',
-            caseDetails: '',
-            caseId: '',
-            casesLoaded: false,
-            newCase: true,
-            cases: []
+            reportingOther: false,
+            name: '',
+            occupation: '',
+            address: '',
+            DOB: '',
+            gender: '',
+            arrName: '',
+            arrPhone: '',
+            arrEmail: '',
+            offense: '',
+            details: '',
+            date: '',
+            contacts: '',
+            resolved: false,
+            detentionCenter: '',
+            locationArrest: '',
+            arrestingOfficer: '',
+            torture: '',
+            specialNotes: '',
+            lawyer: ''
         };
-        this.fetchCases();
     }
-
-    _toggleModal = () => {
-        this.setState({isModalVisible: !this.state.isModalVisible, caseName: '', caseDetails: '',
-            caseLocation: '', caseDate: '', caseId: '', newCase: true});
-    };
 
     render() {
-        if (this.state.casesLoaded)
             return (
-                <View style={{
-                    flex: 1,
-                    flexDirection: 'column',
-                    alignItems: 'stretch',
+                <ScrollView style={{
+                    marginTop: 75,
                 }}>
-                    <View style={{
-                        flex: .15,
-                        backgroundColor: '#47ddff'
-                    }}>
-                        <TouchableOpacity onPress={this._toggleModal}
-                                          style={{
-                                              marginRight: 20,
-                                              marginBottom: 10,
-                                              flex: 1,
-                                              alignSelf: 'flex-end',
-                                              justifyContent: 'flex-end'
-                                          }}>
-                            <Image
-                                source={require('./addCaseButton.png')}
-                                style={{width: 40, height: 40}}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{
-                        flex: 1,
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        marginVertical: 50,
-                        alignItems: 'center'
-                    }}>
-                        {this.mainScreen()}
-                    </View>
-                    <Modal isVisible={this.state.isModalVisible}
-                           animationIn='bounceIn'
-                           animationInTiming={700}
-                           hasBackdrop={false}
-                           backdropColor='blue'
-                           backdropOpacity={.4}
-                           onBackdropPress={this._toggleModal}>
-                        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                            <View style={{
-                                flex: .75,
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: 'white',
-                                borderRadius: 70,
-                                borderWidth: 0,
-                            }}>
-                                <Text style={{marginTop: -20, fontWeight:'bold'}}>Accusation</Text>
-                                <TextInput
-                                    placeholder="accusation"
-                                    defaultValue={this.state.caseName}
-                                    onChangeText={(text) => this.setState({caseName: text})}
-                                />
-                                <Text style={{marginTop: 8, fontWeight:'bold'}}>Date of Arrest</Text>
-                                <DatePicker
-                                    style={{width: 200}}
-                                    date={this.state.caseDate}
-                                    mode="date"
-                                    showIcon={false}
-                                    placeholder="select date"
-                                    format="MM-DD-YYYY"
-                                    confirmBtnText="Confirm"
-                                    cancelBtnText="Cancel"
-                                    onDateChange={(date) => {this.setState({caseDate: date})}}
-                                />
-                                <Text style={{marginTop: 8, fontWeight:'bold'}}>Location of arrest</Text>
-                                <TextInput
-                                    placeholder="location"
-                                    defaultValue={this.state.caseLocation}
-                                    onChangeText={(text) => this.setState({caseLocation: text})}
-                                />
-                                <Text style={{borderTopWidth: 8, borderBottomWidth: 3, fontWeight:'bold'}}>Accusation Description</Text>
-                                <TextInput
-                                    style={{flex: .5}}
-                                    multiline={true}
-                                    placeholder="description"
-                                    defaultValue={this.state.caseDetails}
-                                    width={250}
-                                    maxLength={400}
-                                    borderWidth={1}
-                                    textAlign={'center'}
-                                    onChangeText={(text) => this.setState({caseDetails: text})}
-                                />
-                                {this.submitButtonText()}
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </Modal>
-                </View>
-            );
-        else
-            return (
-                <View style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-
-                }}>
-                    {this.loadingScreen()}
-                </View>
+                    <CheckBox
+                        style={{marginTop: 100}}
+                        title='Reporting someone else'
+                        checked={this.state.reportingOther}
+                        onIconPress={() => this.setState({reportingOther: !this.state.reportingOther})}
+                    />
+                    <Text style={Jtheme.InputText}>Name</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.name}
+                               onChangeText={(text) => this.setState({name: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Arrested persons name</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.arrName}
+                               onChangeText={(text) => this.setState({arrName: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Occupation</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.occupation}
+                               onChangeText={(text) => this.setState({occupation: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Address</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.address}
+                               onChangeText={(text) => this.setState({address: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Date of Birth</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.DOB}
+                               onChangeText={(text) => this.setState({DOB: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Gender</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.gender}
+                               onChangeText={(text) => this.setState({gender: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Arrested person phone number</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.arrPhone}
+                               onChangeText={(text) => this.setState({arrPhone: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Arrested person email</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.arrEmail}
+                               onChangeText={(text) => this.setState({arrEmail: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Offense</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.offense}
+                               onChangeText={(text) => this.setState({offense: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Details</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.details}
+                               onChangeText={(text) => this.setState({details: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Date of Arrest</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.date}
+                               onChangeText={(text) => this.setState({date: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Contacts</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.contacts}
+                               onChangeText={(text) => this.setState({contacts: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <CheckBox
+                        title='Resolved'
+                        checked={this.state.resolved}
+                        onIconPress={() => this.setState({resolved: !this.state.resolved})}
+                    />
+                    <Text style={Jtheme.InputText}>Detention Center</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.detentionCenter}
+                               onChangeText={(text) => this.setState({detentionCenter: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Location of arrest</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.locationArrest}
+                               onChangeText={(text) => this.setState({locationArrest: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Torture used?</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.torture}
+                               onChangeText={(text) => this.setState({torture: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Special Notes</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.specialNotes}
+                               onChangeText={(text) => this.setState({specialNotes: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Text style={Jtheme.InputText}>Lawyer</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.lawyer}
+                               onChangeText={(text) => this.setState({lawyer: text})}
+                               placeholder={"name"}
+                               width={100}/>
+                    <Button style={Jtheme.Button} onPress={this.submitCase}
+                            title='Submit Case'/>
+                </ScrollView>
             );
     }
-
-    submitButtonText = () => {
-        if (this.state.newCase) {
-            return (<Button onPress={this.submitCase} title='Submit Case'/>)
-        } else {
-            return (
-                <View>
-                    <Button onPress={this.submitCase} title='Edit Case'/>
-                    <Button onPress={this.deleteCase} title='Delete Case' color='red'/>
-                </View>
-            )
-        }
-    };
-
-    renderListItem(item) {
-        return (
-            <TouchableOpacity
-                style={{
-                    backgroundColor: 'white',
-                    borderRadius: 3,
-                    borderWidth: 1,
-                    borderColor: '#CED0CE',
-                    width: width,
-                    height: 50
-                }}
-                onPress={() => {
-                    this._toggleModal();
-                    this.setState({caseName: item.caseName, caseDetails: item.caseDetails,
-                        caseDate: item.caseDate, caseLocation: item.caseLocation,  caseId: item.caseId, newCase: false});
-                }}>
-                <Text style={{color: 'black', textAlign: 'center', textAlignVertical: 'center'}}>{item.caseName}</Text>
-            </TouchableOpacity>
-        );
-    }
-
-    fetchCases = () => {
-        let user = firebase.auth().currentUser;
-        let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
-        let stateVar = this;
-        caseList.once('value', function (snapshot) {
-            let caseArr = [];
-            let obj = snapshot.val();
-            for (let caseId in obj) {
-                caseArr.push(obj[caseId]);
-                caseArr[caseArr.length - 1].caseId = caseId;
-            }
-            stateVar.setState({cases: caseArr});
-        })
-            .then(() => {
-                this.setState({casesLoaded: true})
-            })
-            .catch((error) => {
-                Alert.alert("Case Fetch Failed", error);
-            });
-    };
 
     submitCase = () => {
-        const {caseName, caseDetails, caseDate, caseLocation, caseId} = this.state;
+        const {reportingOther, name, occupation, address, DOB, gender,
+            arrName, arrPhone, arrEmail, offense, details, date,
+            contacts, resolved, detentionCenter, locationArrest,
+            arrestingOfficer, torture, specialNotes, lawyer} = this.state;
         let user = firebase.auth().currentUser;
-        let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
-        let stateVar = this;
-        if (caseId === '') {
-            caseList.push({caseName: caseName, caseDetails: caseDetails,
-                caseLocation: caseLocation, caseDate: caseDate})
-                .then(() => {
-                    Alert.alert(
-                        'Alert',
-                        'Case added successfully!',
-                        [{
-                            text: 'OK', onPress: () => {
-                                stateVar._toggleModal()
-                            }
-                        }]
-                    );
-                })
-                .catch((error) => {
-                    Alert.alert('Error', error, [{text: 'OK', onPress: () => stateVar._toggleModal()}]);
-                });
-        } else {
-            caseList.child(caseId).set({caseName: caseName, caseDetails: caseDetails,
-                caseLocation: caseLocation, caseDate: caseDate})
-                .then(() => {
-                    Alert.alert(
-                        'Alert',
-                        'Case edited successfully!',
-                        [{
-                            text: 'OK', onPress: () => {
-                                stateVar._toggleModal()
-                            }
-                        }]
-                    );
-                })
-                .catch((error) => {
-                    Alert.alert('Error', error, [{text: 'OK', onPress: () => stateVar._toggleModal()}]);
-                });
-        }
-
-        this.fetchCases();
-    };
-
-    deleteCase = () => {
-        let user = firebase.auth().currentUser;
-        let stateVar = this;
-        if (this.state.caseId !== ''){
-            let caseVar = firebase.database().ref("users/" + user.uid + "/cases/" + this.state.caseId);
-            caseVar.set({})
-                .then(() => {
-                    Alert.alert(
-                        'Alert',
-                        'Case deleted',
-                        [{
-                            text: 'OK',
-                            onPress: () => {
-                                stateVar.fetchCases();
-                                stateVar._toggleModal();
-                            }}]
-                    );
-                })
-                .catch((error) => {
-                    alert(error);
-                });
-        }
-    };
-
-    clearCases = () => {
-        let user = firebase.auth().currentUser;
-        let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
-        caseList.set({})
+        let userCase = firebase.database().ref("cases/" + user.uid);
+        userCase.update({
+            reportingOther: reportingOther,
+            name: name,
+            occupation: occupation,
+            address: address,
+            DOB: DOB,
+            gender: gender,
+            arrName: arrName,
+            arrPhone: arrPhone,
+            arrEmail: arrEmail,
+            offense: offense,
+            details: details,
+            date: date,
+            contacts: contacts,
+            resolved: resolved,
+            detentionCenter: detentionCenter,
+            locationArrest: locationArrest,
+            arrestingOfficer: arrestingOfficer,
+            torture: torture,
+            specialNotes: specialNotes,
+            lawyer: lawyer})
             .then(() => {
-                Alert.alert(
-                    'Alert',
-                    'Cases Cleared',
-                    [{text: 'OK', onPress: this.fetchCases}]
-                );
+                alert("Case submitted succesfully");
             })
             .catch((error) => {
                 alert(error);
             });
     };
+}
 
-    mainScreen = () => {
-        if (this.state.cases.length === 0) {
-            return (
-                <View>
-                    <Text style={{
-                        fontSize: 32,
-                        fontWeight: 'bold',
-                        textAlign: 'center'
-                    }}>
-                        Click + sign to add a case
-                    </Text>
-                    <Button onPress={this.clearCases} title='Clear Cases'/>
-                    <Button onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
-                </View>
-            );
-        } else {
-            return (
-                <View
-                    style={{flex: 1, justifyContent: 'space-evenly'}}>
-                    <FlatList
-                        data={this.state.cases}
-                        keyExtractor={(item) => item.caseName}
-                        renderItem={({item}) => this.renderListItem(item)}
-                        ItemSeparatorComponent={() => {
-                            return (<View style={{height: 5}}/>)
-                        }}
-                    />
-                    <Button onPress={this.clearCases} title='Clear Cases'/>
-                    <Button onPress={() => {this.props.navigation.navigate('ClientProfile')}} title='Profile'/>
-                </View>
-            )
-        }
-    };
+const Jtheme = {
+    Button: {
+        flex: 1,
+        color: '#cc7832',
+        paddingLeft: 70,
+        paddingRight: 70,
+        paddingTop: 30,
+        paddingBottom: 30,
+    },
 
-    loadingScreen = () => {
-        return (
-            <View style={{flexDirection: 'row'}}>
-                <Text style={{
-                    fontSize: 32,
-                    fontWeight: 'bold',
-                    textAlign: 'center'
-                }}>Fetching Cases </Text>
-                <Image
-                    source={require('./loadingGif.gif')}
-                    style={{
-                        width: 50,
-                        height: 50,
-                    }}/>
-            </View>
-        )
-    };
+    Input: {
+        flex: .5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#CED0CE',
+        borderWidth: 1,
+        paddingLeft: 35,
+    },
+
+    InputText: {
+        flex: 1,
+        alignItems: 'center',
+        fontWeight: 'bold',
+        flexDirection: 'column',
+        color: '#112853',
+        justifyContent: 'center',
+        fontSize: 15,
+        paddingBottom: 10,
+        paddingLeft: 10,
+        paddingRight: 50,
+    }
 }

@@ -6,30 +6,16 @@ import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements"
 
 export default class EditClientProfile extends Component {
   state = {
-    location: '',
-    caseType: '',
-    commPref: '',
+    prefersEmail: true
   };
 
   render() {
     return (
-      <View>
-          <Text h3 style={Jtheme.Text}>Update your information:</Text>
-
-          <TextInput style={Jtheme.InputText}
-                     item='Location'
-                     state='location'
-                     onChangeText={this._onChangeText}/>
-
-          <TextInput style={Jtheme.InputText}
-                     item='Type of case'
-                     state='caseType'
-                     onChangeText={this._onChangeText}/>
-
+      <View style={{justifyContent:'center'}}>
           <Text h5 style={Jtheme.Text}>How should lawyers contact you?</Text>
           <Picker
-              selectedValue={this.state.commPref}
-              onValueChange={(itemValue) => this.setState({commPref: itemValue})}>
+              selectedValue={this.state.prefersEmail}
+              onValueChange={(itemValue) => this.setState({prefersEmail: itemValue})}>
 
               <Picker.Item label='Email' value={true} />
               <Picker.Item label='Phone' value={false} />
@@ -41,24 +27,15 @@ export default class EditClientProfile extends Component {
   }
 
   _submitChanges = () => {
-    const { location, caseType, commPref } = this.state;
+    const { prefersEmail } = this.state;
     const { navigate } = this.props.navigation;
 
     let userId = firebase.auth().currentUser.uid;
 
-    firebase.database().ref('Profiles/Clients/' + userId).update({
-      location: location,
-      caseType: caseType,
-      commPref: commPref
+    firebase.database().ref('cases/' + userId).update({
+      prefersEmail: prefersEmail
     });
-
     navigate('ClientTabNav');
-  };
-
-  _onChangeText = (state, update) => {
-    this.setState({
-      [state]: update
-    });
   };
 }
 
@@ -110,7 +87,7 @@ const Jtheme = {
     color: '#112853',
     justifyContent: 'center',
     fontSize: 40,
-    paddingTop: 50,
+    paddingTop: 125,
     paddingLeft: 50,
     paddingRight: 50,
   },

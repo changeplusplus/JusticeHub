@@ -35,14 +35,12 @@ class ClientProfile extends Component {
 
         render() {
     return (
-      <View>
-          <Text h1 style={Jtheme.Text}>My Profile</Text>
-            <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('ClientCases')}} title='My Cases'/>
-            <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('EditClientProfile')}} title='Edit Profile'/>
-            <Button style={Jtheme.Button} onPress={this._logout} title='Log Out' />
-            <Button style={Jtheme.Button} onPress={this._openWhatsApp} title='Messages' />
-            <Button style={Jtheme.Button} onPress={this._communicate} title='Demo Message' />
-
+      <View styles={{flex:1, justifyContent:'center'}}>
+          <Text h1 style={Jtheme.Text}>Account</Text>
+          <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('EditClientProfile')}} title='Edit Profile'/>
+          <Button style={Jtheme.Button} onPress={this._openWhatsApp} title='Messages' />
+          <Button style={Jtheme.Button} onPress={this._communicate} title='Demo Message' />
+          <Button style={Jtheme.Button} onPress={this._logout} title='Log Out' />
       </View>
     )
   }
@@ -116,8 +114,7 @@ const Jtheme = {
         justifyContent: 'center',
         fontSize: 40,
         paddingTop: 50,
-        paddingLeft: 50,
-        paddingRight: 50,
+        paddingLeft: 115,
     },
 
     InputText: {

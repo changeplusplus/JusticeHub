@@ -98,7 +98,6 @@ export default class SignUp extends Component {
                         fullName: fullName,
                         email: email,
                         phoneNumber: phone,
-                        isLawyer: isLawyer
                     });
                 }
 
