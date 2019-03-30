@@ -42,7 +42,7 @@ class Login extends Component {
 
                 <Button style={Jtheme.Button} onPress={this._login} title='Log In'/>
                 <Button style={Jtheme.Button} onPress={this._navToSignup} title='Sign Up'/>
-                <Button style={Jtheme.Button} onPress={() => this.props.navigation.navigate('ChatEntry')} title='Demo Chat'/>
+                <Button style={Jtheme.Button} onPress={} title='Forgot Password'/>
             </ThemeProvider>
         )
     }

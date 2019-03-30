@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     View, Text, Button, TextInput, TouchableOpacity,
-    Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback, ScrollView
+    Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback, ScrollView, Picker
 } from 'react-native';
 import * as firebase from 'firebase';
 import {CheckBox} from "react-native-elements";
@@ -21,6 +21,7 @@ export default class ClientCases extends Component {
             arrName: '',
             arrPhone: '',
             arrEmail: '',
+            prefersEmail: false,
             offense: '',
             details: '',
             date: '',
@@ -153,6 +154,13 @@ export default class ClientCases extends Component {
                                onChangeText={(text) => this.setState({lawyer: text})}
                                placeholder={"name"}
                                width={100}/>
+                    <Picker
+                        selectedValue={this.state.prefersEmail}
+                        onValueChange={(itemValue) => this.setState({prefersEmail: itemValue})}>
+                        <Picker.Item label='Email' value={true} />
+                        <Picker.Item label='Phone' value={false} />
+                    </Picker>
+
                     <Button style={Jtheme.Button} onPress={this.submitCase}
                             title='Submit Case'/>
                 </ScrollView>
@@ -161,7 +169,7 @@ export default class ClientCases extends Component {
 
     submitCase = () => {
         const {reportingOther, name, occupation, address, DOB, gender,
-            arrName, arrPhone, arrEmail, offense, details, date,
+            arrName, arrPhone, arrEmail, prefersEmail, offense, details, date,
             contacts, resolved, detentionCenter, locationArrest,
             arrestingOfficer, torture, specialNotes, lawyer} = this.state;
         let user = firebase.auth().currentUser;
@@ -176,6 +184,7 @@ export default class ClientCases extends Component {
             arrName: arrName,
             arrPhone: arrPhone,
             arrEmail: arrEmail,
+            prefersEmail: prefersEmail,
             offense: offense,
             details: details,
             date: date,
@@ -188,7 +197,7 @@ export default class ClientCases extends Component {
             specialNotes: specialNotes,
             lawyer: lawyer})
             .then(() => {
-                alert("Case submitted succesfully");
+                alert("Case submitted successfully");
             })
             .catch((error) => {
                 alert(error);

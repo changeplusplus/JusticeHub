@@ -19,26 +19,34 @@ export default class CaseSearch extends Component {
             caseId: '',
             casesLoaded: false,
             cases: [],
-            // FIXME - new states
+            clientName: '',
+            clientPhone: '',
+            clientEmail: '',
+            prefersEmail: false,
             search: ''
         };
         this.fetchCases();
     }
 
-    _communicate = (name, phone, email, pref) => {
+        // FIXME - Connor - need these parameters from the client case
+    _communicate = (clientName, clientPhone, clientEmail, prefersEmail) => {
 
-        //let clientName = get client userName
         let lawyerName = firebase.auth().currentUser.displayName;
-        let clientName = "Client :)";
         let greeting = "Hello " + clientName + ", my name is " + lawyerName + ". I saw your case and would like to help.";
-        let phoneNumber = +16026514181;
 
-        // FIXME Modal popup - "this client prefers to be contacted by email and can be reached at
+        if (prefersEmail){
+            return(
+                <Text> Contact {clientName} by email at: {clientEmail} </Text>
+            )
 
-        if (!Linking.canOpenURL('whatsapp://app')) {
-            alert('Please install WhatsApp to continue')
-        } else {
-            Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + phoneNumber)
+        } else { // prefers phone contact -- to WhatsApp with default message
+            if (!Linking.canOpenURL('whatsapp://app')) {
+                alert('Please install WhatsApp to continue')
+            } else {
+                if (clientPhone !== null) {
+                    Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + clientPhone)
+                }
+            }
         }
     };
 
@@ -46,32 +54,9 @@ export default class CaseSearch extends Component {
         this.setState({isModalVisible: !this.state.isModalVisible, caseName: '', caseDetails: '', caseId: ''});
     };
 
-
     updateSearch = search => {
         this.setState({ search });
     };
-
-    _communicate = () => {
-
-        let name = firebase.auth().currentUser.displayName;
-        let greeting = 'Hello, my name is ' + name + '. I saw your case and would like to help.';
-        let phoneNumber = +18132407013;
-
-        if (this.state.commPref === 'Email') {
-
-            // FIXME Modal popup - "this client prefers to be contacted by email and can be reached at
-        }
-
-        if (0 === 1) {
-            if (!Linking.canOpenURL('whatsapp://app')) {
-                alert('Please install WhatsApp to continue')
-            } else {
-                Linking.openURL(Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + phoneNumber))
-                // FIXME "Hello, my name is <name>. I saw your case and would like to help."
-            }
-        }
-    };
-
 
     render() {
         const {search} = this.state;
@@ -130,7 +115,9 @@ export default class CaseSearch extends Component {
                                 <Text style={Jtheme.InputText}>{this.state.caseName}</Text>
                                 <Text h6 style={Jtheme.Text}>Case Details</Text>
                                 <Text style={Jtheme.InputText}>{this.state.caseDetails}</Text>
-                                <Button style={Jtheme.Button} title='Connect' onPress={this._communicate}/>
+                                    // FIXME - get parameters
+                                <Button style={Jtheme.Button} title='Connect'
+                                        onPress={this._communicate(clientName, clientPhone, clientEmail, prefersEmail)}/>
                             </View>
                         </TouchableWithoutFeedback>
                     </Modal>
