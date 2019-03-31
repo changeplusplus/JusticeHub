@@ -6,9 +6,13 @@
 
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
-import {TextInput, StyleSheet} from 'react-native';
+import {TextInput, StyleSheet, TouchableOpacity, TouchableHighlight} from 'react-native';
 import {InputBlock} from "../../Components/InputBlock";
 import DataStorage from "../../DataStorage";
+//import Il8n from "il8n-js";
+//import arabic from "../../Utils/locales/arabic";
+
+
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
@@ -26,11 +30,11 @@ class Login extends Component {
         return (
             <ThemeProvider style={Jtheme.backgroundColor}>
 
-                <Text h1 style={Jtheme.Text}>Justice Hub</Text>
+                <Text h1 style={Jtheme.Text}>JusticeHub</Text>
                 <Text h4 style={Jtheme.Text}>A digital platform for accessing and enabling justice</Text>
 
                 <TextInput style={Jtheme.InputText}
-                    placeholder="Email"
+                    placeholder='Email'
                     state='email'
                     onChangeText={(email) => this.setState({email})}/>
 
@@ -42,7 +46,7 @@ class Login extends Component {
 
                 <Button style={Jtheme.Button} onPress={this._login} title='Log In'/>
                 <Button style={Jtheme.Button} onPress={this._navToSignup} title='Sign Up'/>
-                <Button style={Jtheme.Button} onPress={} title='Forgot Password'/>
+                <Button style={Jtheme.Button} title='Forgot Password'/>
             </ThemeProvider>
         )
     }
