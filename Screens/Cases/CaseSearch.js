@@ -48,15 +48,11 @@ export default class CaseSearch extends Component {
                 contactInfo: contact
             });
 
-            console.log('Contact: ' + contact);
-            console.log('this.state.contactInfo: ' + this.state.contactInfo);
-
             /*return(
                 <Text> Contact {clientName} by email at: {clientEmail} </Text>
             )*/
 
         } else { // prefers phone contact -- to WhatsApp with default message
-            console.log('Opening whats app')
             if (!Linking.canOpenURL('whatsapp://app')) {
                 alert('Please install WhatsApp to continue')
             } else {
@@ -160,11 +156,10 @@ export default class CaseSearch extends Component {
     }
 
     renderListItem(item) {
-        //if it contains the search term
-        console.log('Item offense:' + item.offense + ' ' + item.phoneNumber + ' ' + item.email);
         // Check to see if there's even a case to render
         // This is an issue because with new database setup accounts and case data are stored in same area
         if (item.offense) {
+            // If it contains the search term in the title or description
             if (item.offense.includes(this.state.search) || item.details.includes(this.state.search)) {
                 return (
                     <TouchableOpacity
@@ -186,7 +181,6 @@ export default class CaseSearch extends Component {
                                 clientEmail: item.email,
                                 prefersEmail: item.prefersEmail
                             });
-                            console.log('After setState...' + this.state.clientPhone + ' ' + this.state.clientEmail + ' ' + this.state.prefersEmail);
                             this._toggleModal();
                         }}>
                         <Text style={{
