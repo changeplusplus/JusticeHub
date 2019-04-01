@@ -80,19 +80,19 @@ class SetupLawyerProfile extends Component {
                 <CheckBox
                     title='Theft'
                     checked={this.state.expertise.theft}
-                    onIconPress={() => this.setState({expertise: {
+                    onPress={() => this.setState({expertise: {
                             ...this.state.expertise, theft: !this.state.expertise.theft}})}
                 />
                 <CheckBox
                     title='Drug Offenses'
                     checked={this.state.expertise.drug}
-                    onIconPress={() => this.setState({expertise: {
+                    onPress={() => this.setState({expertise: {
                         ...this.state.expertise, drug: !this.state.expertise.drug}})}
                 />
                 <CheckBox
                     title='Violent Crime'
                     checked={this.state.expertise.violent}
-                    onIconPress={() => this.setState({expertise: {
+                    onPress={() => this.setState({expertise: {
                             ...this.state.expertise, violent: !this.state.expertise.violent}})}
                 />
                 <Text style={Jtheme.InputText}>Other (please specify)</Text>
