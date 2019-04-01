@@ -32,27 +32,28 @@ export default class CaseSearch extends Component {
         this.fetchCases();
     }
 
-    //     // FIXME - Connor - need these parameters from the client case
-    // _communicate = (this.state.clientName, this.state.clientPhone, this.state.clientEmail, this.state.prefersEmail) => {
-    //
-    //     let lawyerName = firebase.auth().currentUser.displayName;
-    //     let greeting = "Hello " + this.state.clientName + ", my name is " + this.state.lawyerName + ". I saw your case and would like to help.";
-    //
-    //     if (this.state.prefersEmail){
-    //         return(
-    //             <Text> Contact {this.state.clientName} by email at: {this.state.clientEmail} </Text>
-    //         )
-    //
-    //     } else { // prefers phone contact -- to WhatsApp with default message
-    //         if (!Linking.canOpenURL('whatsapp://app')) {
-    //             alert('Please install WhatsApp to continue')
-    //         } else {
-    //             if (clientPhone !== null) {
-    //                 Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + clientPhone)
-    //             }
-    //         }
-    //     }
-    // };
+        // FIXME - Connor - need these parameters from the client case
+    _communicate = () => {
+        const {clientName, lawyerName, clientEmail, prefersEmail, clientPhone} = this.state;
+
+        // let lawyerName = firebase.auth().currentUser.displayName;
+        let greeting = "Hello " + clientName + ", my name is " + lawyerName + ". I saw your case and would like to help.";
+
+        if (prefersEmail) {
+            return(
+                <Text> Contact {clientName} by email at: {clientEmail} </Text>
+            )
+
+        } else { // prefers phone contact -- to WhatsApp with default message
+            if (!Linking.canOpenURL('whatsapp://app')) {
+                alert('Please install WhatsApp to continue')
+            } else {
+                if (clientPhone !== null) {
+                    Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + clientPhone)
+                }
+            }
+        }
+    };
 
     _toggleModal = () => {
         this.setState({isModalVisible: !this.state.isModalVisible, caseName: '', caseDetails: '', caseId: ''});
@@ -119,7 +120,8 @@ export default class CaseSearch extends Component {
                                 <Text style={Jtheme.InputText}>{this.state.offense}</Text>
                                 <Text h2 style={Jtheme.Text}>Case Details</Text>
                                 <Text style={Jtheme.InputText}>{this.state.details}</Text>
-                                <Button style={Jtheme.Button} title='Connect'
+                                <Button style={Jtheme.Button}
+                                        title='Connect'
                                         onPress=''/*{this._communicate(clientName, clientPhone, clientEmail, prefersEmail)}*/ />
                             </View>
                         </TouchableWithoutFeedback>
@@ -141,29 +143,33 @@ export default class CaseSearch extends Component {
 
     renderListItem(item) {
         //if it contains the search term
-
-        if( item.offense.includes(this.state.search) || item.details.includes(this.state.search)) {
-            return (
-                <TouchableOpacity
-                    style={{
-                        backgroundColor: 'white',
-                        borderRadius: 3,
-                        borderWidth: 1,
-                        borderColor: '#CED0CE',
-                        width: width,
-                        height: 50
-                    }}
-                    onPress={() => {
-                        this._toggleModal();
-                        this.setState({offense: item.offense, details: item.details, caseId: item.caseId});
-                    }}>
-                    <Text style={{
-                        color: 'black',
-                        textAlign: 'center',
-                        textAlignVertical: 'center'
-                    }}>{item.offense}</Text>
-                </TouchableOpacity>
-            );
+        console.log('Item offense:' + item.offense);
+        // Check to see if there's even a case to render
+        // This is an issue because with new database setup accounts and case data are stored in same area
+        if (item.offense) {
+            if (item.offense.includes(this.state.search) || item.details.includes(this.state.search)) {
+                return (
+                    <TouchableOpacity
+                        style={{
+                            backgroundColor: 'white',
+                            borderRadius: 3,
+                            borderWidth: 1,
+                            borderColor: '#CED0CE',
+                            width: width,
+                            height: 50
+                        }}
+                        onPress={() => {
+                            this._toggleModal();
+                            this.setState({offense: item.offense, details: item.details, caseId: item.caseId});
+                        }}>
+                        <Text style={{
+                            color: 'black',
+                            textAlign: 'center',
+                            textAlignVertical: 'center'
+                        }}>{item.offense}</Text>
+                    </TouchableOpacity>
+                );
+            }
         }
    }
 
@@ -176,7 +182,6 @@ export default class CaseSearch extends Component {
             for (let caseId in obj) {
                         caseArr.push(obj[caseId]);
                         caseArr[caseArr.length - 1].caseId = caseId;
-                        console.log(caseId+"\n");
                     }
 
                     stateVar.setState({cases: caseArr});
@@ -189,6 +194,7 @@ export default class CaseSearch extends Component {
     };
 
     mainScreen = () => {
+        console.log('Cases:', this.state.cases);
         return (
             <View
                 style={{flex: 1, justifyContent: 'space-evenly'}}>
