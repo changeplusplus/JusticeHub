@@ -64,11 +64,10 @@ typings/
 # next.js build output
 .next
 .idea/workspace.xml
-.expo/
 
 .gitignore
 node_modules
-.expo/
+.expo
 package-lock.json
 .idea/misc.xml
 .idea/vcs.xml

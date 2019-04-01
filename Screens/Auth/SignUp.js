@@ -80,7 +80,7 @@ export default class SignUp extends Component {
                         phoneNumber: phone,
                         isLawyer: isLawyer,
                         experience: '',
-                        bar: 'test',
+                        bar: '',
                         firm: '',
                         location: '',
                         radius: '',
