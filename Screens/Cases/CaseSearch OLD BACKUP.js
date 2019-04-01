@@ -23,36 +23,32 @@ export default class CaseSearch extends Component {
             clientPhone: '',
             clientEmail: '',
             prefersEmail: false,
-            search: '',
-            offense:"",
-            details:"",
-            date:"",
-            lawyerName:""
+            search: ''
         };
         this.fetchCases();
     }
 
-    //     // FIXME - Connor - need these parameters from the client case
-    // _communicate = (this.state.clientName, this.state.clientPhone, this.state.clientEmail, this.state.prefersEmail) => {
-    //
-    //     let lawyerName = firebase.auth().currentUser.displayName;
-    //     let greeting = "Hello " + this.state.clientName + ", my name is " + this.state.lawyerName + ". I saw your case and would like to help.";
-    //
-    //     if (this.state.prefersEmail){
-    //         return(
-    //             <Text> Contact {this.state.clientName} by email at: {this.state.clientEmail} </Text>
-    //         )
-    //
-    //     } else { // prefers phone contact -- to WhatsApp with default message
-    //         if (!Linking.canOpenURL('whatsapp://app')) {
-    //             alert('Please install WhatsApp to continue')
-    //         } else {
-    //             if (clientPhone !== null) {
-    //                 Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + clientPhone)
-    //             }
-    //         }
-    //     }
-    // };
+    // FIXME - Connor - need these parameters from the client case
+    _communicate = (clientName, clientPhone, clientEmail, prefersEmail) => {
+
+        let lawyerName = firebase.auth().currentUser.displayName;
+        let greeting = "Hello " + clientName + ", my name is " + lawyerName + ". I saw your case and would like to help.";
+
+        if (prefersEmail){
+            return(
+                <Text> Contact {clientName} by email at: {clientEmail} </Text>
+            )
+
+        } else { // prefers phone contact -- to WhatsApp with default message
+            if (!Linking.canOpenURL('whatsapp://app')) {
+                alert('Please install WhatsApp to continue')
+            } else {
+                if (clientPhone !== null) {
+                    Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + clientPhone)
+                }
+            }
+        }
+    };
 
     _toggleModal = () => {
         this.setState({isModalVisible: !this.state.isModalVisible, caseName: '', caseDetails: '', caseId: ''});
@@ -115,12 +111,13 @@ export default class CaseSearch extends Component {
                                 borderRadius: 70,
                                 borderWidth: 0,
                             }}>
-                                <Text h62style={Jtheme.Text}>Case Name</Text>
-                                <Text style={Jtheme.InputText}>{this.state.offense}</Text>
-                                <Text h2 style={Jtheme.Text}>Case Details</Text>
-                                <Text style={Jtheme.InputText}>{this.state.details}</Text>
+                                <Text h6 style={Jtheme.Text}>Case Name</Text>
+                                <Text style={Jtheme.InputText}>{this.state.caseName}</Text>
+                                <Text h6 style={Jtheme.Text}>Case Details</Text>
+                                <Text style={Jtheme.InputText}>{this.state.caseDetails}</Text>
+                                // FIXME - get parameters
                                 <Button style={Jtheme.Button} title='Connect'
-                                        onPress=''/*{this._communicate(clientName, clientPhone, clientEmail, prefersEmail)}*/ />
+                                        onPress={this._communicate(clientName, clientPhone, clientEmail, prefersEmail)}/>
                             </View>
                         </TouchableWithoutFeedback>
                     </Modal>
@@ -141,8 +138,7 @@ export default class CaseSearch extends Component {
 
     renderListItem(item) {
         //if it contains the search term
-
-        if( item.offense.includes(this.state.search) || item.details.includes(this.state.search)) {
+        if(item.caseName.includes(this.state.search)||item.caseDetails.includes(this.state.search)) {
             return (
                 <TouchableOpacity
                     style={{
@@ -155,46 +151,68 @@ export default class CaseSearch extends Component {
                     }}
                     onPress={() => {
                         this._toggleModal();
-                        this.setState({offense: item.offense, details: item.details, caseId: item.caseId});
+                        this.setState({caseName: item.caseName, caseDetails: item.caseDetails, caseId: item.caseId});
                     }}>
                     <Text style={{
                         color: 'black',
                         textAlign: 'center',
                         textAlignVertical: 'center'
-                    }}>{item.offense}</Text>
+                    }}>{item.caseName}</Text>
                 </TouchableOpacity>
             );
         }
-   }
+    }
 
     fetchCases = () => {
-        let caseIds = firebase.database().ref("cases/");
+        let user = firebase.auth().currentUser;
+        let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
+        let userIds = firebase.database().ref("users/");
         let stateVar = this;
         let caseArr = [];
-        caseIds.once('value', function (snapshot) {
+        userIds.once('value', function (snapshot) {
             let obj = snapshot.val();
-            for (let caseId in obj) {
-                        caseArr.push(obj[caseId]);
+            for (let userId in obj) {
+                console.log(userId);
+                let caseList = firebase.database().ref("users/" + userId+ "/cases/");
+                caseList.once('value', function (snapshot) {
+                    let cases = snapshot.val();
+                    for(let caseId in cases){
+                        caseArr.push(cases[caseId]);
                         caseArr[caseArr.length - 1].caseId = caseId;
-                        console.log(caseId+"\n");
+                        console.log(caseId);
+                        console.log()
+                        console.log(caseArr.length+"\n");
                     }
-
                     stateVar.setState({cases: caseArr});
                 }).then(()=>{
                     // indicate a single case loaded
-                    this.setState({casesLoaded: true})
                 }).catch((error) => {
                     Alert.alert("Case Fetch Failed", error);
                 });
+            }
+
+        })
+            .then(() => {
+                this.setState({casesLoaded: true})
+            })
+            .catch((error) => {
+                Alert.alert("Case Fetch Failed", error);
+            });
+
     };
 
+
+
     mainScreen = () => {
+
         return (
+
             <View
                 style={{flex: 1, justifyContent: 'space-evenly'}}>
+
                 <FlatList
                     data={this.state.cases}
-                    keyExtractor={(item) => item.offense}
+                    keyExtractor={(item) => item.caseName}
                     renderItem={({item}) => this.renderListItem(item)}
                     ItemSeparatorComponent={() => {
                         return (<View style={{height: 5}}/>)
@@ -293,4 +311,4 @@ const Jtheme = {
         paddingRight: 50,
     },
 
-};
+} ;

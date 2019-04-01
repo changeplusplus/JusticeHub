@@ -38,14 +38,11 @@ const ClientTabNav = createBottomTabNavigator({
 });
 
 const LawyerTabNav = createBottomTabNavigator({
-    /*CurrentCases: {
-
-    },
-    AllCases: {
-
-    },*/
     ViewProfile: {
         screen: LawyerProfile
+    },
+    CaseSearch: {
+        screen: CaseSearch
     }
 }, {
     tabBarPosition: 'bottom'
