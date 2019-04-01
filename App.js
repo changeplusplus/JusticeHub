@@ -72,6 +72,9 @@ const MainStack = createStackNavigator({
     SignUp: {
         screen: SignUp
     },
+    AdminTabNav: {
+        screen: AdminProfile
+    },
     SetupLawyerProfile: {
         screen: SetupLawyerProfile
     },
