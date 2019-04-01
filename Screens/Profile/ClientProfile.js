@@ -16,20 +16,17 @@ class ClientProfile extends Component {
     };
 
     _communicate = () => {
-
+    // FIXME hard coded data- for testing- delete
       //let clientName = get client userName
-        let name = firebase.auth().currentUser.displayName;
-        let clientName = "Client :)";
-        let greeting = "Hello " + clientName + ", my name is " + name + ". I saw your case and would like to help.";
+        let name = "Connor";
+        let clientName = "Michael";
+        let greeting = "Hello " + clientName + ", my name is " + name + " and I am a lawyer. I saw your case and would like to help.";
         let phoneNumber = +16026514181;
-
-            // FIXME Modal popup - "this client prefers to be contacted by email and can be reached at
 
         if (!Linking.canOpenURL('whatsapp://app')) {
             alert('Please install WhatsApp to continue')
         } else {
             Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + phoneNumber)
-            // FIXME "Hello , my name is <name>. I saw your case and would like to help."
         }
     };
 
