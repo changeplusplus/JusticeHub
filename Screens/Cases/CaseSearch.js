@@ -27,24 +27,36 @@ export default class CaseSearch extends Component {
             offense:"",
             details:"",
             date:"",
-            lawyerName:""
+            lawyerName:"",
+            contactInfo: ''
         };
         this.fetchCases();
     }
 
         // FIXME - Connor - need these parameters from the client case
     _communicate = () => {
-        const {clientName, lawyerName, clientEmail, prefersEmail, clientPhone} = this.state;
+        const {clientName, lawyerName, clientPhone, clientEmail, prefersEmail} = this.state;
+
+        console.log('CONNECT');
 
         // let lawyerName = firebase.auth().currentUser.displayName;
         let greeting = "Hello " + clientName + ", my name is " + lawyerName + ". I saw your case and would like to help.";
 
         if (prefersEmail) {
-            return(
+            let contact = 'Contact ' + clientName + ' by email at: ' + clientEmail;
+            this.setState({
+                contactInfo: contact
+            });
+
+            console.log('Contact: ' + contact);
+            console.log('this.state.contactInfo: ' + this.state.contactInfo);
+
+            /*return(
                 <Text> Contact {clientName} by email at: {clientEmail} </Text>
-            )
+            )*/
 
         } else { // prefers phone contact -- to WhatsApp with default message
+            console.log('Opening whats app')
             if (!Linking.canOpenURL('whatsapp://app')) {
                 alert('Please install WhatsApp to continue')
             } else {
@@ -120,9 +132,10 @@ export default class CaseSearch extends Component {
                                 <Text style={Jtheme.InputText}>{this.state.offense}</Text>
                                 <Text h2 style={Jtheme.Text}>Case Details</Text>
                                 <Text style={Jtheme.InputText}>{this.state.details}</Text>
+                                <Text style={Jtheme.Text}>{this.state.contactInfo}</Text>
                                 <Button style={Jtheme.Button}
                                         title='Connect'
-                                        onPress=''/*{this._communicate(clientName, clientPhone, clientEmail, prefersEmail)}*/ />
+                                        onPress={this._communicate} />
                             </View>
                         </TouchableWithoutFeedback>
                     </Modal>
@@ -139,11 +152,13 @@ export default class CaseSearch extends Component {
                     {this.loadingScreen()}
                 </View>
             );
+
+        /*{this._communicate(clientName, clientPhone, clientEmail, prefersEmail)}*/
     }
 
     renderListItem(item) {
         //if it contains the search term
-        console.log('Item offense:' + item.offense);
+        console.log('Item offense:' + item.offense + ' ' + item.phoneNumber + ' ' + item.email);
         // Check to see if there's even a case to render
         // This is an issue because with new database setup accounts and case data are stored in same area
         if (item.offense) {
@@ -159,8 +174,17 @@ export default class CaseSearch extends Component {
                             height: 50
                         }}
                         onPress={() => {
+                            console.log('Pressed case w/ following info: ' + item.email + ' ' + item.phoneNumber + ' ' + item.prefersEmail);
+                            this.setState({
+                                offense: item.offense,
+                                details: item.details,
+                                caseId: item.caseId,
+                                clientPhone: item.phoneNumber,
+                                clientEmail: item.email,
+                                prefersEmail: item.prefersEmail
+                            });
+                            console.log('After setState...' + this.state.clientPhone + ' ' + this.state.clientEmail + ' ' + this.state.prefersEmail);
                             this._toggleModal();
-                            this.setState({offense: item.offense, details: item.details, caseId: item.caseId});
                         }}>
                         <Text style={{
                             color: 'black',
@@ -194,7 +218,7 @@ export default class CaseSearch extends Component {
     };
 
     mainScreen = () => {
-        console.log('Cases:', this.state.cases);
+        // console.log('Cases:', this.state.cases);
         return (
             <View
                 style={{flex: 1, justifyContent: 'space-evenly'}}>
