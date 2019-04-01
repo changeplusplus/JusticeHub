@@ -59,6 +59,7 @@ class Login extends Component {
                 // Get userId
               let userId = firebase.auth().currentUser.uid;
               var isAdminRef = firebase.database().ref('admins/' + userId);
+              let thisObj = this;
               isAdminRef.on('value', function(snapshot) {
                   let isAdmin = (snapshot.val() !== null);
                   const {navigate} = thisObj.props.navigation;
@@ -66,7 +67,6 @@ class Login extends Component {
                       navigate('AdminTabNav');
                   } else {
                     var isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
-                    let thisObj = this;
                     isLawyerRef.on('value', function(snapshot) {
                         let isLawyer = (snapshot.val() !== null);
                         const {navigate} = thisObj.props.navigation;
