@@ -30,17 +30,18 @@ export default class CaseSearch extends Component {
             lawyerName:"",
             contactInfo: ''
         };
+
+        this.lawyerName = '';
+
         this.fetchCases();
     }
 
         // FIXME - Connor - need these parameters from the client case
     _communicate = () => {
-        const {clientName, lawyerName, clientPhone, clientEmail, prefersEmail} = this.state;
+        const {clientName, clientPhone, clientEmail, prefersEmail} = this.state;
 
-        console.log('CONNECT');
-
-        // let lawyerName = firebase.auth().currentUser.displayName;
-        let greeting = "Hello " + clientName + ", my name is " + lawyerName + ". I saw your case and would like to help.";
+        let greeting = "Hello " + clientName + ", my name is " + this.lawyerName + ". I saw your case and would like to help.";
+        console.log(greeting);
 
         if (prefersEmail) {
             let contact = 'Contact ' + clientName + ' by email at: ' + clientEmail;
@@ -179,7 +180,8 @@ export default class CaseSearch extends Component {
                                 caseId: item.caseId,
                                 clientPhone: item.phoneNumber,
                                 clientEmail: item.email,
-                                prefersEmail: item.prefersEmail
+                                prefersEmail: item.prefersEmail,
+                                clientName: item.name
                             });
                             this._toggleModal();
                         }}>
@@ -227,6 +229,14 @@ export default class CaseSearch extends Component {
                 }).catch((error) => {
                     Alert.alert("Case Fetch Failed", error);
                 });
+
+        // Also grab lawyer name for use later
+        const uid = firebase.auth().currentUser.uid;
+        firebase.database().ref('lawyerProfiles/' + uid).once('value', (snapshot) => {
+            this.lawyerName = snapshot.val().fullName;
+
+            console.log('Lawyer name ' + this.lawyerName);
+        })
     };
 
     mainScreen = () => {
