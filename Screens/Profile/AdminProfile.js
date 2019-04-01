@@ -12,6 +12,7 @@ class AdminProfile extends Component {
       <View>
           <Text h1 style={Jtheme.Text}>My Admin</Text>
             <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('CaseSearch')}} title='View Cases'/>
+            <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('LawyerAuth')}} title='Authorize Lawyers'/>
             <Button style={Jtheme.Button} onPress={this._logout} title='Log Out' />
 
       </View>

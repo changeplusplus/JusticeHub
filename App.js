@@ -13,6 +13,7 @@ import ChatEntry from "./Screens/Chat/ChatEntry";
 import ChatImpl from "./Screens/Chat/ChatImpl";
 import Fire from './Fire';
 import CaseSearch from "./Screens/Cases/CaseSearch";
+import LawyerAuth from "./Screens/Admin/LawyerAuth";
 //import CaseList from "./Screens/Cases/CaseList";
 import ClientCases from "./Screens/Cases/ClientCases";
 import EditClientProfile from "./Screens/Profile/EditClientProfile";
@@ -75,6 +76,9 @@ const MainStack = createStackNavigator({
     },
     AdminTabNav: {
         screen: AdminProfile
+    },
+    LawyerAuth: {
+        screen: LawyerAuth
     },
     SetupLawyerProfile: {
         screen: SetupLawyerProfile
