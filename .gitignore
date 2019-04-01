@@ -67,7 +67,7 @@ typings/
 
 .gitignore
 node_modules
-.expo
+./.expo/
 package-lock.json
 .idea/misc.xml
 .idea/vcs.xml
