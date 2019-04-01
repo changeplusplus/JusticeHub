@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     View, Text, Button, TextInput, TouchableOpacity,
-    Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback, Linking
+    Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback, Linking, Clipboard
 } from 'react-native';
 import Modal from "react-native-modal";
 import * as firebase from 'firebase';
@@ -77,6 +77,7 @@ export default class CaseSearch extends Component {
 
     render() {
         const {search} = this.state;
+
         if (this.state.casesLoaded)
             return (
                 <View style={{
@@ -132,7 +133,9 @@ export default class CaseSearch extends Component {
                                 <Text style={Jtheme.InputText}>{this.state.offense}</Text>
                                 <Text h2 style={Jtheme.Text}>Case Details</Text>
                                 <Text style={Jtheme.InputText}>{this.state.details}</Text>
-                                <Text style={Jtheme.Text}>{this.state.contactInfo}</Text>
+
+                                {this._renderContactInfo()}
+
                                 <Button style={Jtheme.Button}
                                         title='Connect'
                                         onPress={this._communicate} />
@@ -196,6 +199,21 @@ export default class CaseSearch extends Component {
             }
         }
    }
+
+    _renderContactInfo = () => {
+        if (this.state.contactInfo !== '') {
+            return (
+                <View>
+                    <Text style={Jtheme.Text}>{this.state.contactInfo}</Text>
+                    <Button style={[Jtheme.Button, { marginBottom: 10 }]}
+                            title='Copy to Clipboard'
+                            onPress={() => Clipboard.setString(this.state.clientEmail)}/>
+                </View>
+            )
+        }
+
+        return null;
+    }
 
     fetchCases = () => {
         let caseIds = firebase.database().ref("cases/");
