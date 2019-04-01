@@ -32,48 +32,50 @@ class SetupLawyerProfile extends Component {
             return null;
         }
         return (
-            <ScrollView contentContainerStyle={{justifyContent:'center', marginTop: 55}}>
-                <Text style={Jtheme.InputText}>Years of Practice</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.exp}
-                           onChangeText={(text) => this.setState({exp: text})}
-                           placeholder={"years"}
-                           width={100}/>
+            <ScrollView contentContainerStyle={{justifyContent:'center', marginTop: 55, paddingBottom: 55}}>
+                <View style={Jtheme.InputsContainer}>
+                    <Text style={Jtheme.InputText}>Years of Practice</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.exp}
+                               onChangeText={(text) => this.setState({exp: text})}
+                               placeholder={"years"}
+                               width={100}/>
 
-                <Text style={Jtheme.InputText}>Bar Association Membership</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.bar}
-                           onChangeText={(text) => this.setState({bar: text})}
-                           placeholder={"bar"}
-                           width={100}/>
+                    <Text style={Jtheme.InputText}>Bar Association Membership</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.bar}
+                               onChangeText={(text) => this.setState({bar: text})}
+                               placeholder={"bar"}
+                               width={100}/>
 
-                <Text style={Jtheme.InputText}>Law Firm</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.firm}
-                           onChangeText={(text) => this.setState({firm: text})}
-                           placeholder={"firm"}
-                           width={100}/>
+                    <Text style={Jtheme.InputText}>Law Firm</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.firm}
+                               onChangeText={(text) => this.setState({firm: text})}
+                               placeholder={"firm"}
+                               width={100}/>
 
-                <Text style={Jtheme.InputText}>Location</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.location}
-                           onChangeText={(text) => this.setState({location: text})}
-                           placeholder={"location"}
-                           width={100}/>
+                    <Text style={Jtheme.InputText}>Location</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.location}
+                               onChangeText={(text) => this.setState({location: text})}
+                               placeholder={"location"}
+                               width={100}/>
 
-                <Text style={Jtheme.InputText}>Radius of Practice</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.radius}
-                           onChangeText={(text) => this.setState({radius: text})}
-                           placeholder={"radius (miles)"}
-                           width={100}/>
+                    <Text style={Jtheme.InputText}>Radius of Practice</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.radius}
+                               onChangeText={(text) => this.setState({radius: text})}
+                               placeholder={"radius (miles)"}
+                               width={100}/>
 
-                <Text style={Jtheme.InputText}>Availability</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.avail}
-                           onChangeText={(text) => this.setState({avail: text})}
-                           placeholder={"availability"}
-                           width={100}/>
+                    <Text style={Jtheme.InputText}>Availability</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.avail}
+                               onChangeText={(text) => this.setState({avail: text})}
+                               placeholder={"availability"}
+                               width={100}/>
+                </View>
                 <Text style={Jtheme.Text}>Expertise</Text>
                 <CheckBox
                     title='Theft'
@@ -100,8 +102,10 @@ class SetupLawyerProfile extends Component {
                         value={this.state.expertise.other}
                     placeholder={"other"}
                     width={100}/>
-                <Button style={Jtheme.Button} onPress={this._submitChanges}
-                        title='Submit Changes'/>
+                <View style={{marginTop: 10}}>
+                    <Button style={Jtheme.Button} onPress={this._submitChanges}
+                            title='Submit Changes'/>
+                </View>
             </ScrollView>
         )
     }
@@ -154,6 +158,11 @@ const Jtheme = {
 
     backgroundColor: '#112853',
 
+    InputsContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
     BackButton: {
         flex:1,
         color: '#cc7832',
@@ -185,12 +194,12 @@ const Jtheme = {
     },
 
     Input: {
-        flex: .5,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         borderColor: '#CED0CE',
         borderWidth: 1,
-        paddingLeft: 35,
+        paddingHorizontal: 5,
     },
 
     Text: {
@@ -201,20 +210,19 @@ const Jtheme = {
         justifyContent: 'center',
         fontSize: 40,
         paddingTop: 50,
-        paddingLeft: 50,
-        paddingRight: 50,
+        paddingHorizontal: 50
     },
 
     InputText: {
         flex:1,
         alignItems: 'center',
+        textAlign: 'center',
         fontWeight: 'bold',
         flexDirection: 'column',
         color: '#112853',
         justifyContent: 'center',
         fontSize: 15,
-        paddingBottom: 10,
-        paddingLeft: 10,
-        paddingRight: 50,
+        marginTop: 20,
+        paddingBottom: 10
     }
 };

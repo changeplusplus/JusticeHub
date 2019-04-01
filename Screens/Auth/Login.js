@@ -78,9 +78,6 @@ class Login extends Component {
                     email: '',
                     password: ''
                 });
-
-                alert('Logged in!\n');
-
             })
             .catch((error) => {
                 alert(error);

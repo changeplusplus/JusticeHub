@@ -197,10 +197,10 @@ export default class CaseSearch extends Component {
     _renderContactInfo = () => {
         if (this.state.contactInfo !== '') {
             return (
-                <View>
+                <View style={Jtheme.ContactContainer}>
                     <Text style={Jtheme.Text}>{this.state.contactInfo}</Text>
                     <Button style={[Jtheme.Button, { marginBottom: 10 }]}
-                            title='Copy to Clipboard'
+                            title='Copy'
                             onPress={() => Clipboard.setString(this.state.clientEmail)}/>
                 </View>
             )
@@ -274,8 +274,7 @@ const Jtheme = {
 
     BackButton: {
         color: '#cc7832',
-        paddingLeft: 0,
-        paddingRight: 0,
+        paddingHorizontal: 0,
         paddingTop: 0,
         paddingBottom: 100,
         marginTop: -5,
@@ -284,10 +283,13 @@ const Jtheme = {
 
     Button: {
         color: '#cc7832',
-        paddingLeft: 70,
-        paddingRight: 70,
+        paddingHorizontal: 70,
         paddingTop: 10,
         paddingBottom: 10,
+    },
+
+    ContactContainer: {
+        marginVertical: 10
     },
 
     Container: {
@@ -317,8 +319,7 @@ const Jtheme = {
         justifyContent: 'center',
         fontSize: 20,
         paddingTop: 5,
-        paddingLeft: 10,
-        paddingRight: 10,
+        paddingHorizontal: 10,
         borderTopWidth: 7,
         borderBottomWidth: 3
     },
