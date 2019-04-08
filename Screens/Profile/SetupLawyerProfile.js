@@ -10,7 +10,7 @@ class SetupLawyerProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            authorized: 'false',
+            authorized: false,
             exp: '',
             bar: '',
             firm: '',
