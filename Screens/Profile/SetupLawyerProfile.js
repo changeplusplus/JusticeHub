@@ -10,6 +10,7 @@ class SetupLawyerProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            authorized: 'false',
             exp: '',
             bar: '',
             firm: '',
@@ -107,11 +108,12 @@ class SetupLawyerProfile extends Component {
     }
 
     _submitChanges = () => {
-        const {exp, bar, firm, location, radius, avail, expertise} = this.state;
+        const {exp, authorized, bar, firm, location, radius, avail, expertise} = this.state;
 
         let userId = firebase.auth().currentUser.uid;
 
         firebase.database().ref('lawyerProfiles/' + userId).update({
+            authorized: authorized,
             experience: exp,
             bar: bar,
             firm: firm,
@@ -126,10 +128,11 @@ class SetupLawyerProfile extends Component {
     };
 
     _loadData = () => {
-        let {exp, bar, firm, location, radius, avail, expertise, dataLoaded} = '';
+        let {authorized, exp, bar, firm, location, radius, avail, expertise, dataLoaded} = '';
         let userId = firebase.auth().currentUser.uid;
         firebase.database().ref('lawyerProfiles/' + userId).once('value',(snapshot) => {
             let data = snapshot.val();
+            authorized = data.authorized;
             exp = data.experience;
             bar = data.bar;
             firm = data.firm;

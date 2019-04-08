@@ -11,7 +11,7 @@ class LawyerProfile extends Component {
     return (
       <View>
           <Text h1 style={Jtheme.Text}>My Profile</Text>
-            <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('CaseSearch')}} title='Find Cases'/>
+            <Button style={Jtheme.Button} onPress={this._caseSearch} title='Find Cases'/>
             <Button style={Jtheme.Button} onPress={this._openWhatsApp} title='WhatsApp'/>
             <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('SetupLawyerProfile')}} title='Edit Profile'/>
             <Button style={Jtheme.Button} onPress={this._logout} title='Log Out' />
@@ -19,6 +19,21 @@ class LawyerProfile extends Component {
       </View>
     )
   }
+
+    _caseSearch = () => {
+      // check if authorized
+      const uid = firebase.auth().currentUser.uid;
+      let authorized = false;
+      firebase.database().ref('lawyerProfiles/' + uid).once('value', (snapshot) => {
+          auuthorized = snapshot.val().authorized;
+          if (!authorized) {
+            alert('Awaiting authorization')
+          }
+          else {
+            this.props.navigation.navigate('CaseSearch')
+          }
+      })
+    }
 
     _openWhatsApp = () => {
         if (Linking.canOpenURL('whatsapp://app')) {
