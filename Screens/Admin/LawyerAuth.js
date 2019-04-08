@@ -24,7 +24,7 @@ export default class LawyerAuth extends Component {
 
 
     _toggleModal = () => {
-        this.setState({isModalVisible: !this.state.isModalVisible, lawyerName: '', , lawyerId: ''});
+        this.setState({isModalVisible: !this.state.isModalVisible, lawyerName: '', lawyerId: ''});
     };
 
 
@@ -85,21 +85,51 @@ export default class LawyerAuth extends Component {
             );
     }
 
+    renderListItem(item) {
+        // Check to see if there's even a lawyer to render
+        if (item.lawyerName) {
+              return (
+                  <TouchableOpacity
+                      style={{
+                          backgroundColor: 'white',
+                          borderRadius: 3,
+                          borderWidth: 1,
+                          borderColor: '#CED0CE',
+                          width: width,
+                          height: 50
+                      }}
+                      onPress={() => {
+                          console.log('Pressed laywer w/ following info: ' + item.lawyerName + ' ' + item.lawyerId);
+                          this.setState({
+                              lawyerName: item.lawyerName,
+                              lawyerId: item.lawyerId
+                          });
+                          this._toggleModal();
+                      }}>
+                      <Text style={{
+                          color: 'black',
+                          textAlign: 'center',
+                          textAlignVertical: 'center'
+                      }}>{item.lawyerName}</Text>
+                  </TouchableOpacity>
+              );
+        }
+   }
+
     fetchLawyers = () => {
         let user = firebase.auth().currentUser;
-        let lawyers = firebase.database().ref("lawyers/");
+        let lawyers = firebase.database().ref("lawyerProfiles/");
         let stateVar = this;
         let lawyerArr = [];
         lawyers.once('value', function (snapshot) {
             let obj = snapshot.val();
             for (let lawyer in obj) {
-                lawyerArr.push(lawyers[lawyer]);
-                lawyerArr[lawyerArr.length - 1].lawyerId = lawyer;
-                console.log(lawyer);
-                console.log()
-                console.log(lawyerArr.length+"\n");
-                stateVar.setState({lawyers: lawyerArr});
+                if (obj[lawyer].authorized == false) {
+                  lawyerArr.push(obj[lawyer]);
+                  lawyerArr[lawyerArr.length - 1].lawyer = lawyer;
+                }
           }
+          stateVar.setState({lawyers: lawyerArr});
         })
         .then(() => {
             this.setState({lawyersLoaded: true})
@@ -123,7 +153,7 @@ export default class LawyerAuth extends Component {
                 <FlatList
                     data={this.state.lawyers}
                     keyExtractor={(item) => item.lawyerName}
-                    renderItem={({item}) => item.lawyerName}
+                    renderItem={({item}) => this.renderListItem(item)}
                     ItemSeparatorComponent={() => {
                         return (<View style={{height: 5}}/>)
                     }}
