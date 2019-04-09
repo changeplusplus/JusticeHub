@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import * as firebase from 'firebase';
 import {CheckBox} from "react-native-elements";
-
+//  FIXME - JAKE - ADD FUNCTIONALITY TO SHARE MICROWAVE
 const { width, height } = Dimensions.get('window');
 export default class ClientCases extends Component {
 

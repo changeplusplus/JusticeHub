@@ -18,17 +18,34 @@ export default class CaseSearch extends Component {
             caseDetails: '',
             caseId: '',
             casesLoaded: false,
+            search: '',
             cases: [],
             clientName: '',
             clientPhone: '',
             clientEmail: '',
-            prefersEmail: false,
-            search: '',
-            offense:"",
-            details:"",
-            date:"",
             lawyerName:"",
-            contactInfo: ''
+            contactInfo: '',
+            reportingOther: false,
+            name: '',
+            occupation: '',
+            address: '',
+            DOB: '',
+            gender: '',
+            arrName: '',
+            arrPhone: '',
+            arrEmail: '',
+            prefersEmail: false,
+            offense: '',
+            details: '',
+            date: '',
+            contacts: '',
+            resolved: false,
+            detentionCenter: '',
+            locationArrest: '',
+            arrestingOfficer: '',
+            torture: '',
+            specialNotes: '',
+            lawyer: ''
         };
 
         this.lawyerName = '';
@@ -73,7 +90,9 @@ export default class CaseSearch extends Component {
     };
 
     render() {
-        const {search} = this.state;
+        const {search, clientName, clientPhone, clientEmail,  reportingOther, name,
+        occupation, address, DOB, gender, arrName, arrPhone, arrEmail, prefersEmail, offense, details,date, contacts,
+        resolved, detentionCenter, locationArrest, arrestingOfficer, torture, specialNotes, lawyer} = this.state;
 
         if (this.state.casesLoaded)
             return (
@@ -126,10 +145,50 @@ export default class CaseSearch extends Component {
                                 borderRadius: 70,
                                 borderWidth: 0,
                             }}>
-                                <Text h62style={Jtheme.Text}>Case Name</Text>
-                                <Text style={Jtheme.InputText}>{this.state.offense}</Text>
-                                <Text h2 style={Jtheme.Text}>Case Details</Text>
-                                <Text style={Jtheme.InputText}>{this.state.details}</Text>
+
+                                <Text style={Jtheme.Text}>Client Name:
+                                    <Text h6 style={Jtheme.InputText}>{clientName}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>Occupation:
+                                    <Text h6 style={Jtheme.InputText}>{occupation}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>Date of Birth:
+                                    <Text h6 style={Jtheme.InputText}>{DOB}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>Address
+                                    <Text h6 style={Jtheme.InputText}>{address}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>Gender:
+                                    <Text h6 style={Jtheme.InputText}>{gender}</Text>
+                                </Text>
+
+
+                               <Text style={Jtheme.Text}>Case Name:
+                                    <Text h6 style={Jtheme.InputText}>{offense}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>Case Details:
+                                    <Text h6 style={Jtheme.InputText}>{details}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>Date:
+                                    <Text h6 style={Jtheme.InputText}>{date}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>Location of Arrest:
+                                    <Text h6 style={Jtheme.InputText}>{locationArrest}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>Arresting Officer:
+                                    <Text h6 style={Jtheme.InputText}>{arrestingOfficer}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>Detention Center:
+                                    <Text h6 style={Jtheme.InputText}>{detentionCenter}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>Torture:
+                                    <Text h6 style={Jtheme.InputText}>{torture}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>Special Notes:
+                                    <Text h6 style={Jtheme.InputText}>{specialNotes}</Text>
+                                </Text>
+
+
 
                                 {this._renderContactInfo()}
 
@@ -175,13 +234,33 @@ export default class CaseSearch extends Component {
                         onPress={() => {
                             console.log('Pressed case w/ following info: ' + item.email + ' ' + item.phoneNumber + ' ' + item.prefersEmail);
                             this.setState({
-                                offense: item.offense,
-                                details: item.details,
+
                                 caseId: item.caseId,
                                 clientPhone: item.phoneNumber,
                                 clientEmail: item.email,
+                                clientName: item.name,
+                                reportingOther: false,
+                                name: item.name,
+                                occupation: item.occupation,
+                                address: item.address,
+                                DOB: item.DOB,
+                                gender: item.gender,
+                                arrName: item.arrName,
+                                arrPhone: item.arrPhone,
+                                arrEmail: item.arrEmail,
                                 prefersEmail: item.prefersEmail,
-                                clientName: item.name
+                                offense: item.offense,
+                                details: item.details,
+                                date: item.date,
+                                contacts: item.contacts,
+                                resolved: item.resolved,
+                                detentionCenter: item.detentionCenter,
+                                locationArrest: item.locationArrest,
+                                arrestingOfficer: item.arrestingOfficer,
+                                torture: item.torture,
+                                specialNotes: item.specialNotes,
+                                lawyer: item.lawyer
+
                             });
                             this._toggleModal();
                         }}>
@@ -327,7 +406,7 @@ const Jtheme = {
         flexDirection: 'column',
         color: '#112853',
         justifyContent: 'center',
-        fontSize: 20,
+        fontSize: 15,
         paddingTop: 5,
         paddingHorizontal: 10,
         borderTopWidth: 7,
@@ -335,12 +414,12 @@ const Jtheme = {
     },
 
     InputText: {
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         flexDirection: 'column',
         flex: .5,
         color: '#112853',
         justifyContent: 'center',
-        fontSize: 15,
+        fontSize: 10,
         paddingBottom: 5,
         paddingLeft: 10,
         paddingRight: 50,
