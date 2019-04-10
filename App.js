@@ -8,8 +8,6 @@ import Login from "./Screens/Auth/Login";
 import ClientProfile from "./Screens/Profile/ClientProfile";
 import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
-import ChatEntry from "./Screens/Chat/ChatEntry";
-import ChatImpl from "./Screens/Chat/ChatImpl";
 import Fire from './Fire';
 import CaseSearch from "./Screens/Cases/CaseSearch";
 //import CaseList from "./Screens/Cases/CaseList";
@@ -56,12 +54,6 @@ const MainStack = createStackNavigator({
 
     LoadApp: {
         screen: LoadApp
-    },
-    ChatEntry: {
-        screen: ChatEntry
-    },
-    Chat: {
-        screen: ChatImpl
     },
     Login: {
         screen: Login
