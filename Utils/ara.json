@@ -1,0 +1,25 @@
+{
+  "login_page": {
+    "login":"تَسْجيل دُخول",
+    "signUp": "اشْتَرَ",
+    "email": "عنوان البريد",
+    "password": "كلمة",
+    "selectLang": "انتق اللغة",
+    "apply": "تطبيق",
+    "welcome": "JusticeHub"
+  },
+
+  "signup_page": {
+    "lawyer": "مُحامٍ",
+    "client": "عَميل",
+    "phone": "هاتف",
+    "phoneNumber": "رَقْم هاتِفٍ",
+    "occupation": "مِهْنة",
+    "gender": "نَوْع",
+    "DOB": "تاريخ الوِلادةِ",
+    "details": "مَعْلومات",
+    "contacts": "مَعْرِفة",
+    "notes": "نوتة",
+    "location": "مَوْقِع"
+  }
+}

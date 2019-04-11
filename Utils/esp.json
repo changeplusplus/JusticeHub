@@ -1,0 +1,26 @@
+{
+
+  "login_page": {
+    "login": "Entrar",
+    "signup": "Apuntar",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "selectLang": "Seleccionar idioma:",
+    "apply": "Aplicar",
+    "welcome": "Bienvenidos a JusticeHub"
+  },
+
+  "signup_page": {
+    "lawyer": "Abogado",
+    "client": "Cliente",
+    "phone": "Teléfono",
+    "phoneNumber": "El número de teléfono",
+    "occupation": "Ocupación",
+    "gender": "Género",
+    "DOB": "Fecha de nacimiento",
+    "details": "Detalles",
+    "contacts": "Contactos",
+    "notes": "Notas",
+    "location": "Ubicación"
+  }
+}

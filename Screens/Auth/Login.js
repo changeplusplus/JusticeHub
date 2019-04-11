@@ -6,50 +6,76 @@
 
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
-import {TextInput, StyleSheet, TouchableOpacity, TouchableHighlight} from 'react-native';
+import {TextInput, StyleSheet, TouchableOpacity, TouchableHighlight, Picker} from 'react-native';
 import {InputBlock} from "../../Components/InputBlock";
 import DataStorage from "../../DataStorage";
-//import Il8n from "il8n-js";
-//import arabic from "../../Utils/locales/arabic";
-
-
+import i18n from 'i18next';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
+import { strings } from '../../Utils/i18n';
+
 class Login extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     static navigationOptions = {
         header: null
     };
 
     state = {
         email: '',
-        password: ''
+        password: '',
+        currentLanguage: 'English',
     };
 
     render() {
         return (
             <ThemeProvider style={Jtheme.backgroundColor}>
 
-                <Text h1 style={Jtheme.Text}>JusticeHub</Text>
+                <Text h1 style={Jtheme.Text}>{strings('login_page.welcome')}</Text>
                 <Text h4 style={Jtheme.Text}>A digital platform for accessing and enabling justice</Text>
 
                 <TextInput style={Jtheme.InputText}
-                    placeholder='Email'
-                    state='email'
-                    onChangeText={(email) => this.setState({email})}/>
+                           placeholder={strings('login_page.email')}
+                           state='email'
+                           onChangeText={(email) => this.setState({email})}/>
 
                 <TextInput style={Jtheme.InputText}
-                    placeholder="Password"
-                    state='password'
-                    onChangeText={(password) => this.setState({password})}
-                    secureTextEntry={true}/>
+                           placeholder={strings('login_page.password')}
+                           state='password'
+                           onChangeText={(password) => this.setState({password})}
+                           secureTextEntry={true}/>
 
-                <Button style={Jtheme.Button} onPress={this._login} title='Log In'/>
-                <Button style={Jtheme.Button} onPress={this._navToSignup} title='Sign Up'/>
-                <Button style={Jtheme.Button} title='Forgot Password'/>
+                <Button style={Jtheme.Button} onPress={this._login} title={strings('login_page.login')}/>
+                <Button style={Jtheme.Button} onPress={this._navToSignup} title={strings('login_page.signup')}/>
+                <Button style={Jtheme.Button} title={strings('login_page.forgotPass')}/>
+
+                {/*<Text h5 style={Jtheme.Text}> {strings('login_page.selectLang')} </Text>*/}
+                {/*<Picker style={Jtheme.Text}*/}
+                {/*selectedValue={this.state.currentLanguage}*/}
+                {/*onValueChange={(language) => this.setState({currentLanguage:language})}>*/}
+                {/*<Picker.Item label='Arabic' value={'Arabic'}/>*/}
+                {/*<Picker.Item label='English' value={'English'}/>*/}
+                {/*<Picker.Item label='Spanish' value={'Spanish'}/>*/}
+                {/*</Picker>*/}
+                {/*<Button style={Jtheme.Button} onPress={this._changeLanguage} title='Apply'/>*/}
             </ThemeProvider>
-        )
+        );
     }
+
+    // _changeLanguage = () => {
+    //     if (this.state.currentLanguage === 'English') {
+    //         languages.setLanguage('eng');
+    //     } else if (this.state.currentLanguage === 'Arabic'){
+    //             languages.setLanguage('ara');
+    //     } else if (this.state.currentLanguage === 'Spanish') {
+    //         languages.setLanguage('esp');
+    //     }
+    // };
+
 
     _login = () => {
         const {email, password} = this.state;
@@ -57,18 +83,18 @@ class Login extends Component {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(() => {
                 // Get userId
-              let userId = firebase.auth().currentUser.uid;
-              var isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
-              let thisObj = this;
-              isLawyerRef.on('value', function(snapshot) {
-                  let isLawyer = (snapshot.val() !== null);
-                  const {navigate} = thisObj.props.navigation;
-                  if (isLawyer) {
-                      navigate('LawyerTabNav');
-                  } else {
-                      navigate('ClientTabNav');
-                  }
-              });
+                let userId = firebase.auth().currentUser.uid;
+                var isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
+                let thisObj = this;
+                isLawyerRef.on('value', function(snapshot) {
+                    let isLawyer = (snapshot.val() !== null);
+                    const {navigate} = thisObj.props.navigation;
+                    if (isLawyer) {
+                        navigate('LawyerTabNav');
+                    } else {
+                        navigate('ClientTabNav');
+                    }
+                });
                 // console.log('Logged in');
                 DataStorage.saveLogin(email, password);
                 DataStorage.loadBasicData();
@@ -167,3 +193,4 @@ const styles = StyleSheet.create({
 
 
 export default Login;
+

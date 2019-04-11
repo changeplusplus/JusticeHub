@@ -1,0 +1,26 @@
+{
+  "login_page": {
+    "login": "Login",
+    "signup": "Signup",
+    "email": "Email",
+    "password": "Password",
+    "selectLang": "Select Language:",
+    "apply": "Apply",
+    "forgotPass": "Forgot Password",
+    "welcome": "Welcome to JusticeHub"
+  },
+
+  "signup_page": {
+    "lawyer": "Lawyer",
+    "client": "Client",
+    "phone": "Phone",
+    "phoneNumber": "Phone number",
+    "occupation": "Occupation",
+    "gender": "Gender",
+    "DOB": "Date of Birth",
+    "details": "Details",
+    "contacts": "Contacts",
+    "notes": "Notes",
+    "location": "Location"
+  }
+}
