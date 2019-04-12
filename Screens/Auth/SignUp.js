@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import {
     View, KeyboardAvoidingView, TextInput, Picker
 } from 'react-native';
+import I18n from '../../Utils/i18n';
 import {InputBlock} from "../../Components/InputBlock";
 import DataStorage from '../../DataStorage';
 import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
@@ -72,7 +73,7 @@ export default class SignUp extends Component {
             .then(() => {
                 // Get userId
                 let userId = firebase.auth().currentUser.uid;
-                if (isLawyer){
+                if (isLawyer) {
                     // Set lawyer data gets put in a lawyer user section in database
                     firebase.database().ref('lawyerProfiles/' + userId).set({
                         fullName: fullName,
@@ -90,14 +91,17 @@ export default class SignUp extends Component {
                             drug: false,
                             violent: false,
                             other: ''
-                        }
+                        },
+                        language: I18n.getLangKey()
                     });
-                } else{
+                }
+                else {
                     //for clients it begins their case profile
                     firebase.database().ref('cases/' + userId).set({
                         fullName: fullName,
                         email: email,
                         phoneNumber: phone,
+                        language: I18n.getLangKey()
                     });
                 }
 

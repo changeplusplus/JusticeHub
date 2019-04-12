@@ -91,13 +91,23 @@ class Login extends Component {
                 let userId = firebase.auth().currentUser.uid;
                 var isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
                 let thisObj = this;
-                isLawyerRef.on('value', function(snapshot) {
+                isLawyerRef.on('value', (snapshot) => {
                     let isLawyer = (snapshot.val() !== null);
                     const {navigate} = thisObj.props.navigation;
+
+                    // Load language for lawyers
+                    I18n.curLang = snapshot.val().language;
+
                     if (isLawyer) {
                         navigate('LawyerTabNav');
                     } else {
-                        navigate('ClientTabNav');
+                        // Load client data just to grab language
+                        // Todo: This loads a lot of data every time, probably excessive
+                        firebase.database().ref('cases/' + userId).on('value', (snap) => {
+                            I18n.curLang = snap.val().language;
+
+                            navigate('ClientTabNav');
+                        });
                     }
                 });
                 // console.log('Logged in');
