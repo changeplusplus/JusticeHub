@@ -6,7 +6,7 @@
 
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
-import {TextInput, StyleSheet, ScrollView, TouchableHighlight, Picker} from 'react-native';
+import {TextInput, StyleSheet, ScrollView, Platform, NativeModules, Picker} from 'react-native';
 import {InputBlock} from "../../Components/InputBlock";
 import DataStorage from "../../DataStorage";
 import I18n from '../../Utils/i18n';
@@ -17,6 +17,27 @@ class Login extends Component {
 
     constructor(props) {
         super(props);
+
+        let locale = '';
+
+        // On construction of the login page, check device language and set that
+        if (Platform.OS === 'android') {
+            // Get language
+            locale = NativeModules.I18nManager.localeIdentifier;
+        }
+        else if (Platform.OS === 'ios') {
+            locale = NativeModules.SettingsManager.settings.AppleLocale;
+        }
+
+        console.log('Locale: ' + locale);
+        // Check for each langauge and adjust accordingly
+        if (locale.includes('en_') || locale === 'en') {
+            I18n.changeLang('Eng');
+        } else if (locale.includes('ar_') || locale === 'ar') {
+            I18n.changeLang('Ara');
+        } else if (locale.includes('es_') || locale === 'es') {
+            I18n.changeLang('Esp');
+        }
     }
 
     static navigationOptions = {
