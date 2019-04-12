@@ -2,15 +2,21 @@
 
   "login_page": {
     "login": "Entrar",
-    "signup": "Apuntar",
+    "signUp": "Apuntar",
     "email": "Correo electrónico",
     "password": "Contraseña",
     "selectLang": "Seleccionar idioma:",
     "apply": "Aplicar",
-    "welcome": "Bienvenidos a JusticeHub"
+    "forgotPass": "Se te olvidó tu contraseña",
+    "welcome": "Bienvenidos a JusticeHub",
+    "desc": "Una plataforma digital para acceder y habilitar la justicia",
+    "arabic": "عربى",
+    "english": "English",
+    "spanish": "Español"
   },
 
   "signup_page": {
+    "title": "Crea una Cuenta",
     "lawyer": "Abogado",
     "client": "Cliente",
     "phone": "Teléfono",
@@ -21,6 +27,13 @@
     "details": "Detalles",
     "contacts": "Contactos",
     "notes": "Notas",
-    "location": "Ubicación"
+    "location": "Ubicación",
+    "name_ph": "Nombre completo",
+    "pass_ph": "Contraseña",
+    "phone_ph": "Número de teléfono",
+    "email_ph": "Email",
+    "user_type": "Soy un:",
+    "fail_alert": "Debe completar los campos requeridos",
+    "signup": "Regístrate"
   }
 }

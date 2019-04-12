@@ -1,16 +1,21 @@
 {
   "login_page": {
     "login": "Login",
-    "signup": "Signup",
+    "signUp": "Signup",
     "email": "Email",
     "password": "Password",
     "selectLang": "Select Language:",
     "apply": "Apply",
     "forgotPass": "Forgot Password",
-    "welcome": "Welcome to JusticeHub"
+    "welcome": "Welcome to JusticeHub",
+    "desc": "A digital platform for accessing and enabling justice",
+    "arabic": "عربى",
+    "english": "English",
+    "spanish": "Español"
   },
 
   "signup_page": {
+    "title": "Create an Account",
     "lawyer": "Lawyer",
     "client": "Client",
     "phone": "Phone",
@@ -21,6 +26,13 @@
     "details": "Details",
     "contacts": "Contacts",
     "notes": "Notes",
-    "location": "Location"
+    "location": "Location",
+    "name_ph": "Full Name",
+    "pass_ph": "Password",
+    "phone_ph": "Phone Number",
+    "email_ph": "Email",
+    "user_type": "I am a:",
+    "fail_alert": "Must fill out required fields",
+    "signup": "Sign Up"
   }
 }

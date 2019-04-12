@@ -6,10 +6,16 @@
     "password": "كلمة",
     "selectLang": "انتق اللغة",
     "apply": "تطبيق",
-    "welcome": "JusticeHub"
+    "forgotPass": "هل نسيت كلمة المرور",
+    "welcome": "JusticeHub",
+    "desc": "منصة رقمية للوصول إلى العدالة وتمكينها",
+    "arabic": "عربى",
+    "english": "English",
+    "spanish": "Español"
   },
 
   "signup_page": {
+    "title": "انشئ حساب",
     "lawyer": "مُحامٍ",
     "client": "عَميل",
     "phone": "هاتف",
@@ -20,6 +26,13 @@
     "details": "مَعْلومات",
     "contacts": "مَعْرِفة",
     "notes": "نوتة",
-    "location": "مَوْقِع"
+    "location": "مَوْقِع",
+    "name_ph": "الاسم الكامل",
+    "pass_ph": "كلمه السر",
+    "phone_ph": "رقم الهاتف",
+    "email_ph": "البريد الإلكتروني",
+    "user_type": "أنا:",
+    "fail_alert": "يجب ملء الحقول المطلوبة",
+    "signup": "سجل"
   }
 }

@@ -35,7 +35,7 @@ class Login extends Component {
                 <ScrollView>
 
                 <Text h1 style={Jtheme.Text}>{I18n.curLang.login_page.welcome}</Text>
-                <Text h4 style={Jtheme.Text}>A digital platform for accessing and enabling justice</Text>
+                <Text h4 style={Jtheme.Text}>{I18n.curLang.login_page.desc}</Text>
 
                 <TextInput style={Jtheme.InputText}
                            placeholder={I18n.curLang.login_page.email}
@@ -49,7 +49,7 @@ class Login extends Component {
                            secureTextEntry={true}/>
 
                 <Button style={Jtheme.Button} onPress={this._login} title={I18n.curLang.login_page.login}/>
-                <Button style={Jtheme.Button} onPress={this._navToSignup} title={I18n.curLang.login_page.signup}/>
+                <Button style={Jtheme.Button} onPress={this._navToSignup} title={I18n.curLang.login_page.signUp}/>
                 <Button style={Jtheme.Button} title={I18n.curLang.login_page.forgotPass}/>
 
                 <Text h5 style={Jtheme.Text}> {I18n.curLang.login_page.selectLang} </Text>
@@ -57,11 +57,11 @@ class Login extends Component {
                     selectedValue={this.state.currentLanguage}
                     onValueChange={(language) => this.setState({currentLanguage:language})}>
 
-                    <Picker.Item label='Arabic' value={'Arabic'}/>
-                    <Picker.Item label='English' value={'English'}/>
-                    <Picker.Item label='Spanish' value={'Spanish'}/>
+                    <Picker.Item label={I18n.curLang.login_page.arabic} value='Arabic'/>
+                    <Picker.Item label={I18n.curLang.login_page.english} value='English'/>
+                    <Picker.Item label={I18n.curLang.login_page.spanish} value='Spanish'/>
                 </Picker>
-                <Button style={Jtheme.Button} onPress={this._changeLanguage} title='Apply'/>
+                <Button style={Jtheme.Button} onPress={this._changeLanguage} title={I18n.curLang.login_page.apply}/>
                 </ScrollView>
             </ThemeProvider>
         );

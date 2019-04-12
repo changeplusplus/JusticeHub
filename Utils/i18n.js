@@ -19,7 +19,7 @@ class I18n {
             I18n.curLang = I18n.languages.Eng;
         else if (lang === 'Esp')
             I18n.curLang = I18n.languages.Esp;
-    }
+    };
 
     static getLangKey = () => {
         if (I18n.curLang === I18n.languages.Ara)
@@ -28,7 +28,7 @@ class I18n {
             return 'Eng';
         else if (I18n.curLang === I18n.languages.Esp)
             return 'Esp';
-    }
+    };
 }
 
 export default I18n;
