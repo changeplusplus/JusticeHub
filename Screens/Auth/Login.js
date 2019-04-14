@@ -30,7 +30,7 @@ class Login extends Component {
         }
 
         console.log('Locale: ' + locale);
-        // Check for each langauge and adjust accordingly
+        // Check for each language and adjust accordingly
         if (locale.includes('en_') || locale === 'en') {
             I18n.changeLang('Eng');
         } else if (locale.includes('ar_') || locale === 'ar') {

@@ -63,61 +63,61 @@ export default class ClientCases extends Component {
                     <TextInput style={Jtheme.Input}
                                value={this.state.occupation}
                                onChangeText={(text) => this.setState({occupation: text})}
-                               placeholder={"name"}
+                               placeholder={"occupation"}
                                width={100}/>
                     <Text style={Jtheme.InputText}>Address</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.address}
                                onChangeText={(text) => this.setState({address: text})}
-                               placeholder={"name"}
+                               placeholder={"address"}
                                width={100}/>
                     <Text style={Jtheme.InputText}>Date of Birth</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.DOB}
                                onChangeText={(text) => this.setState({DOB: text})}
-                               placeholder={"name"}
+                               placeholder={"birth"}
                                width={100}/>
                     <Text style={Jtheme.InputText}>Gender</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.gender}
                                onChangeText={(text) => this.setState({gender: text})}
-                               placeholder={"name"}
+                               placeholder={"gender"}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Arrested person phone number</Text>
+                    <Text style={Jtheme.InputText}>Phone number of Arrested Person</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.arrPhone}
                                onChangeText={(text) => this.setState({arrPhone: text})}
-                               placeholder={"name"}
+                               placeholder={"phone"}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Arrested person email</Text>
+                    <Text style={Jtheme.InputText}>Email of Arrested Person</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.arrEmail}
                                onChangeText={(text) => this.setState({arrEmail: text})}
-                               placeholder={"name"}
+                               placeholder={"email"}
                                width={100}/>
                     <Text style={Jtheme.InputText}>Offense</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.offense}
                                onChangeText={(text) => this.setState({offense: text})}
-                               placeholder={"name"}
+                               placeholder={"offense"}
                                width={100}/>
                     <Text style={Jtheme.InputText}>Details</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.details}
                                onChangeText={(text) => this.setState({details: text})}
-                               placeholder={"name"}
+                               placeholder={"details"}
                                width={100}/>
                     <Text style={Jtheme.InputText}>Date of Arrest</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.date}
                                onChangeText={(text) => this.setState({date: text})}
-                               placeholder={"name"}
+                               placeholder={"date"}
                                width={100}/>
                     <Text style={Jtheme.InputText}>Contacts</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.contacts}
                                onChangeText={(text) => this.setState({contacts: text})}
-                               placeholder={"name"}
+                               placeholder={"contacts"}
                                width={100}/>
                     <CheckBox
                         title='Resolved'
@@ -128,25 +128,25 @@ export default class ClientCases extends Component {
                     <TextInput style={Jtheme.Input}
                                value={this.state.detentionCenter}
                                onChangeText={(text) => this.setState({detentionCenter: text})}
-                               placeholder={"name"}
+                               placeholder={"detention center"}
                                width={100}/>
                     <Text style={Jtheme.InputText}>Location of arrest</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.locationArrest}
                                onChangeText={(text) => this.setState({locationArrest: text})}
-                               placeholder={"name"}
+                               placeholder={"location"}
                                width={100}/>
                     <Text style={Jtheme.InputText}>Torture used?</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.torture}
                                onChangeText={(text) => this.setState({torture: text})}
-                               placeholder={"name"}
+                               placeholder={"yes/no"}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Special Notes</Text>
+                    <Text style={Jtheme.InputText}>Additional Notes</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.specialNotes}
                                onChangeText={(text) => this.setState({specialNotes: text})}
-                               placeholder={"name"}
+                               placeholder={"notes"}
                                width={100}/>
                     <Text style={Jtheme.InputText}>Lawyer</Text>
                     <TextInput style={Jtheme.Input}

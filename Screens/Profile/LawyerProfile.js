@@ -12,7 +12,7 @@ class LawyerProfile extends Component {
       <View>
           <Text h1 style={Jtheme.Text}>My Profile</Text>
             <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('CaseSearch')}} title='Find Cases'/>
-            <Button style={Jtheme.Button} onPress={this._openWhatsApp} title='WhatsApp'/>
+            <Button style={Jtheme.Button} onPress={this._openWhatsApp} title='Messages'/>
             <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('SetupLawyerProfile')}} title='Edit Profile'/>
             <Button style={Jtheme.Button} onPress={this._logout} title='Log Out' />
 

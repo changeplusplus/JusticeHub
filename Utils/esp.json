@@ -28,12 +28,95 @@
     "contacts": "Contactos",
     "notes": "Notas",
     "location": "Ubicación",
-    "name_ph": "Nombre completo",
-    "pass_ph": "Contraseña",
-    "phone_ph": "Número de teléfono",
-    "email_ph": "Email",
+    "name_place": "Nombre completo",
+    "pass_place": "Contraseña",
+    "phone_place": "Número de teléfono",
+    "email_place": "Email",
     "user_type": "Soy un:",
     "fail_alert": "Debe completar los campos requeridos",
-    "signup": "Regístrate"
+    "signup": "Registrar"
+  },
+
+  "client_profile": {
+    "whatsApp_alert": "Por favor, instale WhatsApp para continuar",
+    "edit_profile": "Editar Perfil",
+    "messages": "Mensajes",
+    "logout": "Cerrar sesión"
+  },
+
+  "lawyer_profile": {
+    "whatsApp_alert": "Por favor, instale WhatsApp para continuar",
+    "find_cases": "Encontrar casos",
+    "messages": "Mensajes",
+    "edit_profile": "Editar Perfil",
+    "logout": "Cerrar sesión"
+  },
+
+  "edit_client_profile": {
+    "contact_question": "¿Cómo deben contactarse los abogados?",
+    "picker_email": "Correo Electrónico",
+    "picker_phone": "Teléfono",
+    "submit": "Enviar cambios"
+  },
+
+  "setup_lawyer_profile": {
+    "practice_yrs": "Años de práctica",
+    "practice_yrs_place": "años",
+    "bar_membership": "La afiliación de la asociación Bar",
+    "bar_membership_place": "afiliación",
+    "law_firm":"Su bufete de abogados",
+    "location": "Ubicación",
+    "radius": "El radio de la práctica",
+    "radius_place": "kilometros",
+    "availability": "La disponibilidad",
+    "availability_place": "días y horas",
+    "expertise": "La pericia",
+    "expertise_theft": "El robo",
+    "expertise_drug": "Las infracciones de drogas",
+    "expertise_violent": "El crimen violento",
+    "expertise_other": "Otro (por favor especificar)",
+    "expertise_other_place": "otro",
+    "submit": "Enviar cambios"
+  },
+
+  "client_cases": {
+    "name": "El nombre y apellidos",
+    "name_arrested": "Nombre de la persona arrestada",
+    "name_place": "nombre",
+    "occupation": "Ocupación",
+    "occupation_place": "ocupación",
+    "address": "Dirección",
+    "address_place": "dirección",
+    "DOB": "Fecha de nacimiento",
+    "DOB_place": "mes día, año",
+    "gender": "Género",
+    "gender_place": "género",
+    "phone_arrested": "El número de teléfono de la persona arrestada",
+    "phone_place": "+1111111111",
+    "email": "El correo electrónico de una persona arrestada",
+    "email_place": "correo electrónico",
+    "offense": "La infracción",
+    "offense_place": "infraccion",
+    "details": "Detalles",
+    "details_place": "detalles",
+    "date_arrest": "Fecha de detención",
+    "date_arrest_place": "mes día, año",
+    "contacts": "Contactos",
+    "contacts_place": "contactos",
+    "detention_center": "El centro de detencion",
+    "detention_center_place": "centro de detención",
+    "arrest_location": "La ubicación de detención",
+    "arrest_location_place": "ubicación",
+    "torture": "Se usó la tortura?",
+    "torture_place": "sí o no",
+    "additional": "Notas adicionales",
+    "additional_place": "notas",
+    "lawyer": "Abogado",
+    "lawyer_place": "nombre",
+    "picker_email": "correo electrónico",
+    "picker_phone": "teléfono",
+    "submit": "Enviar caso"
   }
+
+
 }

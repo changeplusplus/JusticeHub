@@ -5,6 +5,9 @@ import { SecureStore } from "expo";
 import DataStorage from "../../DataStorage";
 import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
+import I18n from '../../Utils/i18n';
+
+
 class ClientProfile extends Component {
 
     _openWhatsApp = () => {
@@ -15,28 +18,12 @@ class ClientProfile extends Component {
         }
     };
 
-    _communicate = () => {
-    // FIXME hard coded data- for testing- delete
-      //let clientName = get client userName
-        let name = "Connor";
-        let clientName = "Michael";
-        let greeting = "Hello " + clientName + ", my name is " + name + " and I am a lawyer. I saw your case and would like to help.";
-        let phoneNumber = +16026514181;
-
-        if (!Linking.canOpenURL('whatsapp://app')) {
-            alert('Please install WhatsApp to continue')
-        } else {
-            Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + phoneNumber)
-        }
-    };
-
         render() {
     return (
       <View styles={{flex:1, justifyContent:'center'}}>
           <Text h1 style={Jtheme.Text}>Account</Text>
           <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('EditClientProfile')}} title='Edit Profile'/>
           <Button style={Jtheme.Button} onPress={this._openWhatsApp} title='Messages' />
-          <Button style={Jtheme.Button} onPress={this._communicate} title='Demo Message' />
           <Button style={Jtheme.Button} onPress={this._logout} title='Log Out' />
       </View>
     )

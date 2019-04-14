@@ -27,12 +27,93 @@
     "contacts": "Contacts",
     "notes": "Notes",
     "location": "Location",
-    "name_ph": "Full Name",
-    "pass_ph": "Password",
-    "phone_ph": "Phone Number",
-    "email_ph": "Email",
+    "name_place": "Full Name",
+    "pass_place": "Password",
+    "phone_place": "Phone Number",
+    "email_place": "Email",
     "user_type": "I am a:",
     "fail_alert": "Must fill out required fields",
     "signup": "Sign Up"
+  },
+
+  "client_profile": {
+    "whatsApp_alert": "Please install WhatsApp to continue",
+    "edit_profile": "Edit Profile",
+    "messages": "Messages",
+    "logout": "Log out"
+  },
+
+  "lawyer_profile": {
+    "whatsApp_alert": "Please install WhatsApp to continue",
+    "find_cases": "Find Cases",
+    "messages": "Messages",
+    "edit_profile": "Edit Profile",
+    "logout": "Log out"
+  },
+
+  "edit_client_profile": {
+    "contact_question": "How should lawyers contact you?",
+    "picker_email": "Email",
+    "picker_phone": "Phone",
+    "submit": "Submit Changes"
+  },
+
+  "setup_lawyer_profile": {
+    "practice_yrs": "Years of Practice",
+    "practice_yrs_place": "years",
+    "bar_membership": "Bar Association Membership",
+    "bar_membership_place": "membership",
+    "law_firm":"Law Firm",
+    "location": "Location",
+    "radius": "Radius of Practice",
+    "radius_place": "kilometers",
+    "availability": "Availability",
+    "availability_place": "days and times",
+    "expertise": "Expertise",
+    "expertise_theft": "Theft",
+    "expertise_drug": "Drug Offenses",
+    "expertise_violent": "Violent Crime",
+    "expertise_other": "Other (please specify)",
+    "expertise_other_place": "other",
+    "submit": "Submit Changes"
+  },
+
+  "client_cases": {
+    "name": "Full Name",
+    "name_arrested": "Name of Arrested Person",
+    "name_place": "name",
+    "occupation": "Occupation",
+    "occupation_place": "occupation",
+    "address": "Address",
+    "address_place": "address",
+    "DOB": "Date of Birth",
+    "DOB_place": "month day, year",
+    "gender": "Gender",
+    "gender_place": "gender",
+    "phone_arrested": "Phone number of Arrested Person",
+    "phone_place": "+1111111111",
+    "email": "Email of Arrested Person",
+    "email_place": "email",
+    "offense": "Offense",
+    "offense_place": "offense",
+    "details": "Details",
+    "details_place": "details",
+    "date_arrest": "Date of Arrest",
+    "date_arrest_place": "month day, year",
+    "contacts": "Contacts",
+    "contacts_place": "contacts",
+    "detention_center": "Detention Center",
+    "detention_center_place": "detention center",
+    "arrest_location": "Arrest Location",
+    "arrest_location_place": "location",
+    "torture": "Torture used?",
+    "torture_place": "yes or no",
+    "additional": "Additional notes",
+    "additional_place": "notes",
+    "lawyer": "Lawyer",
+    "lawyer_place": "name",
+    "picker_email": "Email",
+    "picker_phone": "Phone",
+    "submit": "Submit Case"
   }
 }

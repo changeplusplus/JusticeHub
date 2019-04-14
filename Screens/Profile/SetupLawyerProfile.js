@@ -45,7 +45,7 @@ class SetupLawyerProfile extends Component {
                     <TextInput style={Jtheme.Input}
                                value={this.state.bar}
                                onChangeText={(text) => this.setState({bar: text})}
-                               placeholder={"bar"}
+                               placeholder={"membership"}
                                width={100}/>
 
                     <Text style={Jtheme.InputText}>Law Firm</Text>
@@ -66,14 +66,14 @@ class SetupLawyerProfile extends Component {
                     <TextInput style={Jtheme.Input}
                                value={this.state.radius}
                                onChangeText={(text) => this.setState({radius: text})}
-                               placeholder={"radius (miles)"}
+                               placeholder={"kilometers"}
                                width={100}/>
 
                     <Text style={Jtheme.InputText}>Availability</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.avail}
                                onChangeText={(text) => this.setState({avail: text})}
-                               placeholder={"availability"}
+                               placeholder={"days and times"}
                                width={100}/>
                 </View>
                 <Text style={Jtheme.Text}>Expertise</Text>
