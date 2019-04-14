@@ -7,14 +7,13 @@ import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements"
 
 import I18n from '../../Utils/i18n';
 
-
 class ClientProfile extends Component {
 
     _openWhatsApp = () => {
         if (Linking.canOpenURL('whatsapp://app')) {
             Linking.openURL('whatsapp://app')
         } else {
-            alert('Please install WhatsApp to continue')
+            alert(I18n.curLang.client_profile.whatsApp_alert)
         }
     };
 
@@ -22,9 +21,12 @@ class ClientProfile extends Component {
     return (
       <View styles={{flex:1, justifyContent:'center'}}>
           <Text h1 style={Jtheme.Text}>Account</Text>
-          <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('EditClientProfile')}} title='Edit Profile'/>
-          <Button style={Jtheme.Button} onPress={this._openWhatsApp} title='Messages' />
-          <Button style={Jtheme.Button} onPress={this._logout} title='Log Out' />
+          <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('EditClientProfile')}}
+                  title={I18n.curLang.client_profile.edit_profile}/>
+          <Button style={Jtheme.Button} onPress={this._openWhatsApp}
+                  title={I18n.curLang.client_profile.messages} />
+          <Button style={Jtheme.Button} onPress={this._logout}
+                  title={I18n.curLang.client_profile.logout} />
       </View>
     )
   }

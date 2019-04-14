@@ -3,6 +3,7 @@ import {Picker, ScrollView, TextInput, View} from 'react-native';
 import * as firebase from 'firebase';
 import {InputBlock} from "../../Components/InputBlock";
 import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
+import I18n from "../../Utils/i18n";
 
 export default class EditClientProfile extends Component {
   state = {
@@ -12,14 +13,15 @@ export default class EditClientProfile extends Component {
   render() {
     return (
       <View style={{justifyContent:'center'}}>
-          <Text h5 style={Jtheme.Text}>How should lawyers contact you?</Text>
+          <Text h5 style={Jtheme.Text}>{I18n.curLang.edit_client_profile.contact_question}</Text>
         <Picker
             selectedValue={this.state.prefersEmail}
             onValueChange={(itemValue) => this.setState({prefersEmail: itemValue})}>
-          <Picker.Item label='Email' value={true} />
-          <Picker.Item label='Phone' value={false} />
+          <Picker.Item label={I18n.curLang.edit_client_profile.picker_email} value={true} />
+          <Picker.Item label={I18n.curLang.edit_client_profile.picker_phone} value={false} />
         </Picker>
-          <Button style={Jtheme.Button} onPress={this._submitChanges} title='Submit Changes'/>
+          <Button style={Jtheme.Button} onPress={this._submitChanges}
+                  title={I18n.curLang.edit_client_profile.submit}/>
       </View>
     );
   }

@@ -79,6 +79,7 @@
   },
 
   "client_cases": {
+    "reporting": "Reporting someone else",
     "name": "Full Name",
     "name_arrested": "Name of Arrested Person",
     "name_place": "name",
@@ -92,7 +93,7 @@
     "gender_place": "gender",
     "phone_arrested": "Phone number of Arrested Person",
     "phone_place": "+1111111111",
-    "email": "Email of Arrested Person",
+    "email_arrested": "Email of Arrested Person",
     "email_place": "email",
     "offense": "Offense",
     "offense_place": "offense",
@@ -102,6 +103,7 @@
     "date_arrest_place": "month day, year",
     "contacts": "Contacts",
     "contacts_place": "contacts",
+    "resolved": "Resolved?",
     "detention_center": "Detention Center",
     "detention_center_place": "detention center",
     "arrest_location": "Arrest Location",

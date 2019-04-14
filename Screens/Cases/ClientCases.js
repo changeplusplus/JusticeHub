@@ -5,6 +5,9 @@ import {
 } from 'react-native';
 import * as firebase from 'firebase';
 import {CheckBox} from "react-native-elements";
+import I18n from '../../Utils/i18n';
+
+
 //  FIXME - JAKE - ADD FUNCTIONALITY TO SHARE MICROWAVE
 const { width, height } = Dimensions.get('window');
 export default class ClientCases extends Component {
@@ -43,126 +46,126 @@ export default class ClientCases extends Component {
                 }}>
                     <CheckBox
                         style={{marginTop: 100}}
-                        title='Reporting someone else'
+                        title={I18n.curLang.client_cases.reporting}
                         checked={this.state.reportingOther}
                         onIconPress={() => this.setState({reportingOther: !this.state.reportingOther})}
                     />
-                    <Text style={Jtheme.InputText}>Name</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.name}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.name}
                                onChangeText={(text) => this.setState({name: text})}
-                               placeholder={"name"}
+                               placeholder={I18n.curLang.client_cases.name_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Arrested persons name</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.name_arrested}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.arrName}
                                onChangeText={(text) => this.setState({arrName: text})}
-                               placeholder={"name"}
+                               placeholder={I18n.curLang.client_cases.name_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Occupation</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.occupation}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.occupation}
                                onChangeText={(text) => this.setState({occupation: text})}
-                               placeholder={"occupation"}
+                               placeholder={I18n.curLang.client_cases.occupation_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Address</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.address}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.address}
                                onChangeText={(text) => this.setState({address: text})}
-                               placeholder={"address"}
+                               placeholder={I18n.curLang.client_cases.address_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Date of Birth</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.DOB}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.DOB}
                                onChangeText={(text) => this.setState({DOB: text})}
-                               placeholder={"birth"}
+                               placeholder={I18n.curLang.client_cases.DOB_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Gender</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.gender}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.gender}
                                onChangeText={(text) => this.setState({gender: text})}
-                               placeholder={"gender"}
+                               placeholder={I18n.curLang.client_cases.gender_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Phone number of Arrested Person</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.phone_arrested}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.arrPhone}
                                onChangeText={(text) => this.setState({arrPhone: text})}
-                               placeholder={"phone"}
+                               placeholder={I18n.curLang.client_cases.phone_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Email of Arrested Person</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.email_arrested}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.arrEmail}
                                onChangeText={(text) => this.setState({arrEmail: text})}
-                               placeholder={"email"}
+                               placeholder={I18n.curLang.client_cases.email_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Offense</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.offense}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.offense}
                                onChangeText={(text) => this.setState({offense: text})}
-                               placeholder={"offense"}
+                               placeholder={I18n.curLang.client_cases.offense_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Details</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.details}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.details}
                                onChangeText={(text) => this.setState({details: text})}
-                               placeholder={"details"}
+                               placeholder={I18n.curLang.client_cases.details_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Date of Arrest</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.date_arrest}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.date}
                                onChangeText={(text) => this.setState({date: text})}
-                               placeholder={"date"}
+                               placeholder={I18n.curLang.client_cases.date_arrest_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Contacts</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.contacts}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.contacts}
                                onChangeText={(text) => this.setState({contacts: text})}
-                               placeholder={"contacts"}
+                               placeholder={I18n.curLang.client_cases.contacts_place}
                                width={100}/>
                     <CheckBox
-                        title='Resolved'
+                        title={I18n.curLang.client_cases.resolved}
                         checked={this.state.resolved}
                         onIconPress={() => this.setState({resolved: !this.state.resolved})}
                     />
-                    <Text style={Jtheme.InputText}>Detention Center</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.detention_center}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.detentionCenter}
                                onChangeText={(text) => this.setState({detentionCenter: text})}
-                               placeholder={"detention center"}
+                               placeholder={I18n.curLang.client_cases.detention_center_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Location of arrest</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.arrest_location}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.locationArrest}
                                onChangeText={(text) => this.setState({locationArrest: text})}
-                               placeholder={"location"}
+                               placeholder={I18n.curLang.client_cases.arrest_location_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Torture used?</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.torture}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.torture}
                                onChangeText={(text) => this.setState({torture: text})}
-                               placeholder={"yes/no"}
+                               placeholder={I18n.curLang.client_cases.torture_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Additional Notes</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.additional}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.specialNotes}
                                onChangeText={(text) => this.setState({specialNotes: text})}
-                               placeholder={"notes"}
+                               placeholder={I18n.curLang.client_cases.additional_place}
                                width={100}/>
-                    <Text style={Jtheme.InputText}>Lawyer</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.lawyer}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.lawyer}
                                onChangeText={(text) => this.setState({lawyer: text})}
-                               placeholder={"name"}
+                               placeholder={I18n.curLang.client_cases.lawyer_place}
                                width={100}/>
                     <Picker
                         selectedValue={this.state.prefersEmail}
                         onValueChange={(itemValue) => this.setState({prefersEmail: itemValue})}>
-                        <Picker.Item label='Email' value={true} />
-                        <Picker.Item label='Phone' value={false} />
+                        <Picker.Item label={I18n.curLang.client_cases.picker_email} value={true} />
+                        <Picker.Item label={I18n.curLang.client_cases.picker_phone} value={false} />
                     </Picker>
 
                     <Button style={Jtheme.Button} onPress={this.submitCase}
-                            title='Submit Case'/>
+                            title={I18n.curLang.client_cases.submit}/>
                 </ScrollView>
             );
     }

@@ -71,6 +71,7 @@
   },
 
   "client_cases": {
+    "reporting": "الإبلاغ عن شخص آخر",
     "name": "الاسم الكامل",
     "name_arrested": "اسم الشخص المعتقل",
     "name_place": "اسم",
@@ -84,7 +85,7 @@
     "gender_place": "جنس",
     "phone_arrested": "اسم الشخص المعتقل",
     "phone_place": "+1111111111",
-    "email": "البريد الإلكتروني للشخص المعتقل",
+    "email_arrested": "البريد الإلكتروني للشخص المعتقل",
     "email_place": "البريد الإلكتروني",
     "offense": "جريمة",
     "offense_place": "جريمة",
@@ -94,6 +95,7 @@
     "date_arrest_place": "شهر يوم سنه",
     "contacts": "جهات الاتصال",
     "contacts_place": "جهات الاتصال",
+    "resolved": "حل؟",
     "detention_center": "مركز الاحتجاز",
     "detention_center_place": "مركز الاحتجاز",
     "arrest_location": "مركز الاحتجاز",
