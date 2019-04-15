@@ -12,7 +12,6 @@ class LawyerProfile extends Component {
     return (
       <View>
           <Text h1 style={Jtheme.Text}>My Profile</Text>
-<<<<<<< HEAD
             <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('CaseSearch')}}
                     title={I18n.curLang.lawyer_profile.find_cases}/>
             <Button style={Jtheme.Button} onPress={this._openWhatsApp}
@@ -21,12 +20,6 @@ class LawyerProfile extends Component {
                     title={I18n.curLang.lawyer_profile.edit_profile}/>
             <Button style={Jtheme.Button} onPress={this._logout}
                     title={I18n.curLang.lawyer_profile.logout}/>
-=======
-            <Button style={Jtheme.Button} onPress={this._caseSearch} title='Find Cases'/>
-            <Button style={Jtheme.Button} onPress={this._openWhatsApp} title='WhatsApp'/>
-            <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('SetupLawyerProfile')}} title='Edit Profile'/>
-            <Button style={Jtheme.Button} onPress={this._logout} title='Log Out' />
->>>>>>> admin_branch
 
       </View>
     )

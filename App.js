@@ -8,12 +8,9 @@ import Login from "./Screens/Auth/Login";
 import ClientProfile from "./Screens/Profile/ClientProfile";
 import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
-<<<<<<< HEAD
-=======
 import AdminProfile from "./Screens/Profile/AdminProfile";
 import ChatEntry from "./Screens/Chat/ChatEntry";
 import ChatImpl from "./Screens/Chat/ChatImpl";
->>>>>>> admin_branch
 import Fire from './Fire';
 import CaseSearch from "./Screens/Cases/CaseSearch";
 import LawyerAuth from "./Screens/Admin/LawyerAuth";
