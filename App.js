@@ -8,8 +8,12 @@ import Login from "./Screens/Auth/Login";
 import ClientProfile from "./Screens/Profile/ClientProfile";
 import LawyerProfile from "./Screens/Profile/LawyerProfile";
 import SetupLawyerProfile from "./Screens/Profile/SetupLawyerProfile";
+import AdminProfile from "./Screens/Profile/AdminProfile";
+import ChatEntry from "./Screens/Chat/ChatEntry";
+import ChatImpl from "./Screens/Chat/ChatImpl";
 import Fire from './Fire';
 import CaseSearch from "./Screens/Cases/CaseSearch";
+import LawyerAuth from "./Screens/Admin/LawyerAuth";
 //import CaseList from "./Screens/Cases/CaseList";
 import ClientCases from "./Screens/Cases/ClientCases";
 import EditClientProfile from "./Screens/Profile/EditClientProfile";
@@ -60,6 +64,12 @@ const MainStack = createStackNavigator({
     },
     SignUp: {
         screen: SignUp
+    },
+    AdminTabNav: {
+        screen: AdminProfile
+    },
+    LawyerAuth: {
+        screen: LawyerAuth
     },
     SetupLawyerProfile: {
         screen: SetupLawyerProfile
