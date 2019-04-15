@@ -3,6 +3,7 @@ import {Alert, Checkbox, ScrollView, TextInput, View} from 'react-native';
 import * as firebase from 'firebase';
 import {Button, CheckBox, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 import {InputBlock} from "../../Components/InputBlock";
+import I18n from "../../Utils/i18n";
 
 
 class SetupLawyerProfile extends Component {
@@ -34,77 +35,77 @@ class SetupLawyerProfile extends Component {
         return (
             <ScrollView contentContainerStyle={{justifyContent:'center', marginTop: 55, paddingBottom: 55}}>
                 <View style={Jtheme.InputsContainer}>
-                    <Text style={Jtheme.InputText}>Years of Practice</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.practice_yrs}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.exp}
                                onChangeText={(text) => this.setState({exp: text})}
-                               placeholder={"years"}
+                               placeholder={I18n.curLang.setup_lawyer_profile.practice_yrs_place}
                                width={100}/>
 
-                    <Text style={Jtheme.InputText}>Bar Association Membership</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.bar_membership}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.bar}
                                onChangeText={(text) => this.setState({bar: text})}
-                               placeholder={"bar"}
+                               placeholder={I18n.curLang.setup_lawyer_profile.bar_membership_place}
                                width={100}/>
 
-                    <Text style={Jtheme.InputText}>Law Firm</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.law_firm}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.firm}
                                onChangeText={(text) => this.setState({firm: text})}
-                               placeholder={"firm"}
+                               placeholder={I18n.curLang.setup_lawyer_profile.law_firm}
                                width={100}/>
 
-                    <Text style={Jtheme.InputText}>Location</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.location}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.location}
                                onChangeText={(text) => this.setState({location: text})}
-                               placeholder={"location"}
+                               placeholder={I18n.curLang.setup_lawyer_profile.location}
                                width={100}/>
 
-                    <Text style={Jtheme.InputText}>Radius of Practice</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.radius}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.radius}
                                onChangeText={(text) => this.setState({radius: text})}
-                               placeholder={"radius (miles)"}
+                               placeholder={I18n.curLang.setup_lawyer_profile.radius_place}
                                width={100}/>
 
-                    <Text style={Jtheme.InputText}>Availability</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.availability}</Text>
                     <TextInput style={Jtheme.Input}
                                value={this.state.avail}
                                onChangeText={(text) => this.setState({avail: text})}
-                               placeholder={"availability"}
+                               placeholder={I18n.curLang.setup_lawyer_profile.availability_place}
                                width={100}/>
                 </View>
-                <Text style={Jtheme.Text}>Expertise</Text>
+                <Text style={Jtheme.Text}>{I18n.curLang.setup_lawyer_profile.expertise}</Text>
                 <CheckBox
-                    title='Theft'
+                    title={I18n.curLang.setup_lawyer_profile.expertise_theft}
                     checked={this.state.expertise.theft}
                     onPress={() => this.setState({expertise: {
                             ...this.state.expertise, theft: !this.state.expertise.theft}})}
                 />
                 <CheckBox
-                    title='Drug Offenses'
+                    title={I18n.curLang.setup_lawyer_profile.expertise_drug}
                     checked={this.state.expertise.drug}
                     onPress={() => this.setState({expertise: {
                         ...this.state.expertise, drug: !this.state.expertise.drug}})}
                 />
                 <CheckBox
-                    title='Violent Crime'
+                    title={I18n.curLang.setup_lawyer_profile.expertise_violent}
                     checked={this.state.expertise.violent}
                     onPress={() => this.setState({expertise: {
                             ...this.state.expertise, violent: !this.state.expertise.violent}})}
                 />
-                <Text style={Jtheme.InputText}>Other (please specify)</Text>
+                <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.expertise_other}</Text>
                 <TextInput style={Jtheme.Input}
                     onChangeText={(text) =>
                         this.setState({expertise: {...this.state.expertise, other: text}})}
                         value={this.state.expertise.other}
-                    placeholder={"other"}
+                    placeholder={I18n.curLang.setup_lawyer_profile.expertise_other_place}
                     width={100}/>
                 <View style={{marginTop: 10}}>
                     <Button style={Jtheme.Button} onPress={this._submitChanges}
-                            title='Submit Changes'/>
+                            title={I18n.curLang.setup_lawyer_profile.submit}/>
                 </View>
             </ScrollView>
         )
