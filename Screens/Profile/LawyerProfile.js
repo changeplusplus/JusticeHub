@@ -16,7 +16,12 @@ import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements"
 import I18n from '../../Utils/i18n';
 
 class LawyerProfile extends Component {
+    constructor(props) {
+        super(props);
+    }
+
   render() {
+        console.log('Lawyer lang:', I18n.curLang);
     return (
       <View>
           <Text h1 style={Jtheme.Text}>My Profile</Text>
@@ -38,7 +43,7 @@ class LawyerProfile extends Component {
       const uid = firebase.auth().currentUser.uid;
       let authorized = false;
       firebase.database().ref('lawyerProfiles/' + uid).once('value', (snapshot) => {
-          auuthorized = snapshot.val().authorized;
+          authorized = snapshot.val().authorized;
           if (!authorized) {
             alert('Awaiting authorization')
           }

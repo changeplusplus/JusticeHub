@@ -16,6 +16,12 @@ import I18n from '../../Utils/i18n';
 import {Button, Text} from "react-native-elements";
 
 export default class SignUp extends Component {
+    constructor(props) {
+        super(props);
+
+        console.log('Signup:', I18n.curLang);
+    }
+
     state = {
         fullName: '',
         password: '',
@@ -31,23 +37,23 @@ export default class SignUp extends Component {
                 <KeyboardAvoidingView behavior='padding'>
 
                     <TextInput style={Jtheme.InputText}
-                               placeholder={I18n.curLang.signup_page.name_ph}
+                               placeholder={I18n.curLang.signup_page.name_place}
                                state='fullName'
                                onChangeText={(fullName) => this.setState({fullName})}/>
 
                     <TextInput style={Jtheme.InputText}
-                               placeholder={I18n.curLang.signup_page.pass_ph}
+                               placeholder={I18n.curLang.signup_page.pass_place}
                                state='password'
                                onChangeText={(password) => this.setState({password})}/>
 
                     <TextInput style={Jtheme.InputText}
-                               placeholder={I18n.curLang.signup_page.phone_ph}
+                               placeholder={I18n.curLang.signup_page.phone_place}
                                state='phone'
                                keyboardType='number-pad'
                                onChangeText={(phone) => this.setState({phone})}/>
 
                     <TextInput style={Jtheme.InputText}
-                               placeholder={I18n.curLang.signup_page.email_ph}
+                               placeholder={I18n.curLang.signup_page.email_place}
                                state='email'
                                onChangeText={(email) => this.setState({email})}/>
 

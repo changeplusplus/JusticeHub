@@ -94,7 +94,8 @@ class Login extends Component {
 
                     // Load language for lawyers
                     if (isLawyer) {
-                        I18n.curLang = snapshot.val().language;
+                        I18n.changeLang(snapshot.val().language);
+                        console.log('Language:', I18n.curLang);
                         navigate('LawyerTabNav');
                     }
                     else {
@@ -103,7 +104,7 @@ class Login extends Component {
                       isAdminRef.on('value', (snap1) => {
                           let isAdmin = (snap1.val() !== null);
                           if (isAdmin) {
-                            I18n.curLang = snap1.val().language;
+                            I18n.changeLang(snap1.val().language);
                             navigate('AdminProfile');
                           }
                           else {
