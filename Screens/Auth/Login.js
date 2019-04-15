@@ -83,6 +83,7 @@ class Login extends Component {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(() => {
                 // Get userId
+<<<<<<< HEAD
                 let userId = firebase.auth().currentUser.uid;
                 let isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
                 let thisObj = this;
@@ -105,6 +106,29 @@ class Login extends Component {
                         });
                     }
                 });
+=======
+              let userId = firebase.auth().currentUser.uid;
+              var isAdminRef = firebase.database().ref('admins/' + userId);
+              let thisObj = this;
+              isAdminRef.on('value', function(snapshot) {
+                  let isAdmin = (snapshot.val() !== null);
+                  const {navigate} = thisObj.props.navigation;
+                  if (isAdmin) {
+                      navigate('AdminTabNav');
+                  } else {
+                    var isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
+                    isLawyerRef.on('value', function(snapshot) {
+                        let isLawyer = (snapshot.val() !== null);
+                        const {navigate} = thisObj.props.navigation;
+                        if (isLawyer) {
+                            navigate('LawyerTabNav');
+                        } else {
+                            navigate('ClientTabNav');
+                        }
+                    });
+                  }
+              });
+>>>>>>> admin_branch
                 // console.log('Logged in');
                 DataStorage.saveLogin(email, password);
                 DataStorage.loadBasicData();
