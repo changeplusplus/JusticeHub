@@ -91,18 +91,29 @@ class Login extends Component {
                     const {navigate} = thisObj.props.navigation;
 
                     // Load language for lawyers
-                    I18n.curLang = snapshot.val().language;
-
                     if (isLawyer) {
+                        I18n.curLang = snapshot.val().language;
                         navigate('LawyerTabNav');
-                    } else {
-                        // Load client data just to grab language
-                        // Todo: This loads a lot of data every time, probably excessive
-                        firebase.database().ref('cases/' + userId).on('value', (snap) => {
-                            I18n.curLang = snap.val().language;
+                    }
+                    else {
+                      let isAdminRef = firebase.database().ref('admins/' + userId);
 
-                            navigate('ClientTabNav');
-                        });
+                      isAdminRef.on('value', (snap1) => {
+                          let isAdmin = (snap1.val() !== null);
+                          if (isAdmin) {
+                            I18n.curLang = snap1.val().language;
+                            navigate('AdminProfile');
+                          }
+                          else {
+                            // Load client data just to grab language
+                            // Todo: This loads a lot of data every time, probably excessive
+                            firebase.database().ref('cases/' + userId).on('value', (snap2) => {
+                                I18n.curLang = snap2.val().language;
+
+                                navigate('ClientTabNav');
+                            });
+                        }
+                      });
                     }
                 });
                 // console.log('Logged in');
@@ -112,7 +123,8 @@ class Login extends Component {
                 // Reset input so that it doesn't persist on logout
                 this.setState({
                     email: '',
-                    password: ''
+                    password: '',
+                    language: 'English'
                 });
             })
             .catch((error) => {
