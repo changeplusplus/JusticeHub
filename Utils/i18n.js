@@ -19,6 +19,8 @@ class I18n {
             I18n.curLang = I18n.languages.Eng;
         else if (lang === 'Esp')
             I18n.curLang = I18n.languages.Esp;
+        else
+            I18n.curLang = I18n.languages.Eng;
     };
 
     static getLangKey = () => {
