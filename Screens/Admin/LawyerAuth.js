@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import Modal from "react-native-modal";
 import * as firebase from 'firebase';
-import { SearchBar } from 'react-native-elements';
 
 const { width, height } = Dimensions.get('window');
 export default class LawyerAuth extends Component {
@@ -16,61 +15,127 @@ export default class LawyerAuth extends Component {
             isModalVisible: false,
             lawyerName: '',
             lawyerId: '',
+            avail: '',
+            bar: '',
+            email: '',
+            experience: '',
+            firm: '',
+            location: '',
+            phoneNumber: '',
+            radius: '',
             lawyersLoaded: false,
-            lawyers: [],
+            lawyers: []
         };
         this.fetchLawyers();
     }
 
 
     _toggleModal = () => {
-        this.setState({isModalVisible: !this.state.isModalVisible, lawyerName: '', lawyerId: ''});
+        this.setState({isModalVisible: !this.state.isModalVisible});
     };
 
+    _authorize = () => {
+      const {lawyerId} = this.state;
+      firebase.database().ref('lawyerProfiles/' + lawyerId + '/authorized').set(true);
+      this.fetchLawyers();
+      this._toggleModal();
+    }
+
+    _deny = () => {
+      const {lawyerId} = this.state;
+      firebase.database().ref('lawyerProfiles/' + lawyerId).remove();
+      this.fetchLawyers();
+      this._toggleModal();
+    }
 
     render() {
-        const {search} = this.state;
-        if (this.state.lawyersLoaded)
-            return (
+      const {isModalVisible, lawyerName, lawyerId, avail, bar, email, experience, firm, location, phoneNumber, radius, lawyersLoaded, lawyers} = this.state;
+        if (lawyersLoaded)
+        return (
+            <View style={{
+                flex: 1,
+                flexDirection: 'column',
+                alignItems: 'stretch',
+            }}>
+                <View>
+                    <TouchableOpacity onPress={this._toggleModal}
+                                      style={{
+                                          marginRight: 20,
+                                          marginBottom: 10,
+                                          flex: 1,
+                                          alignSelf: 'flex-end',
+                                          justifyContent: 'flex-end'
+                                      }}>
+
+                    </TouchableOpacity>
+                </View>
                 <View style={{
                     flex: 1,
                     flexDirection: 'column',
-                    alignItems: 'stretch',
-                }}>
-                    <View style={{
-                        flex: 1,
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        marginVertical: 50,
-                        alignItems: 'center'
+                    justifyContent: 'center',
+                    marginVertical: 50,
+                    alignItems: 'center'
 
-                    }}>
-                        {this.mainScreen()}
-                    </View>
-                    <Modal isVisible={this.state.isModalVisible}
-                           animationIn='bounceIn'
-                           animationInTiming={700}
-                           hasBackdrop={false}
-                           backdropColor='blue'
-                           backdropOpacity={.4}
-                           onBackdropPress={this._toggleModal}>
-                        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                            <View style={{
-                                flex: .75,
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: 'white',
-                                borderRadius: 70,
-                                borderWidth: 0,
-                            }}>
-                                <Text h6 style={Jtheme.Text}>Lawyer Name</Text>
-                                <Text style={Jtheme.InputText}>{this.state.lawyerName}</Text>
-                                    // FIXME - get parameters
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </Modal>
-                </View>);
+                }}>
+                    {this.mainScreen()}
+                </View>
+                <Modal isVisible={isModalVisible}
+                       animationIn='bounceIn'
+                       animationInTiming={700}
+                       hasBackdrop={false}
+                       backdropColor='blue'
+                       backdropOpacity={.4}
+                       onBackdropPress={this._toggleModal}>
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                        <View style={{
+                            flex: .75,
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor: 'white',
+                            borderRadius: 70,
+                            borderWidth: 0,
+                        }}>
+
+                            <Text style={Jtheme.Text}>Lawyer Name:
+                                <Text h6 style={Jtheme.InputText}>{lawyerName}</Text>
+                            </Text>
+                            <Text style={Jtheme.Text}>Email:
+                                <Text h6 style={Jtheme.InputText}>{email}</Text>
+                            </Text>
+                            <Text style={Jtheme.Text}>Phone Number:
+                                <Text h6 style={Jtheme.InputText}>{phoneNumber}</Text>
+                            </Text>
+                            <Text style={Jtheme.Text}>Firm:
+                                <Text h6 style={Jtheme.InputText}>{firm}</Text>
+                            </Text>
+                            <Text style={Jtheme.Text}>Bar:
+                                <Text h6 style={Jtheme.InputText}>{bar}</Text>
+                            </Text>
+                            <Text style={Jtheme.Text}>Experience:
+                                <Text h6 style={Jtheme.InputText}>{experience}</Text>
+                            </Text>
+                            <Text style={Jtheme.Text}>Location:
+                                <Text h6 style={Jtheme.InputText}>{location}</Text>
+                            </Text>
+                            <Text style={Jtheme.Text}>Radius:
+                                <Text h6 style={Jtheme.InputText}>{radius}</Text>
+                            </Text>
+                            <Text style={Jtheme.Text}>Availability:
+                                <Text h6 style={Jtheme.InputText}>{avail}</Text>
+                            </Text>
+
+
+                            <Button style={Jtheme.Button}
+                                    title='Authorize'
+                                    onPress={this._authorize} />
+                            <Button style={Jtheme.Button}
+                                    title='Deny'
+                                    onPress={this._deny} />
+                        </View>
+                    </TouchableWithoutFeedback>
+                </Modal>
+            </View>);
         else
             return (
                 <View style={{
@@ -86,35 +151,39 @@ export default class LawyerAuth extends Component {
     }
 
     renderListItem(item) {
-        // Check to see if there's even a lawyer to render
-        if (item.lawyerName) {
-              return (
-                  <TouchableOpacity
-                      style={{
-                          backgroundColor: 'white',
-                          borderRadius: 3,
-                          borderWidth: 1,
-                          borderColor: '#CED0CE',
-                          width: width,
-                          height: 50
-                      }}
-                      onPress={() => {
-                          console.log('Pressed laywer w/ following info: ' + item.lawyerName + ' ' + item.lawyerId);
-                          this.setState({
-                              lawyerName: item.lawyerName,
-                              lawyerId: item.lawyerId
-                          });
-                          this._toggleModal();
-                      }}>
-                      <Text style={{
-                          color: 'black',
-                          textAlign: 'center',
-                          textAlignVertical: 'center'
-                      }}>{item.lawyerName}</Text>
-                  </TouchableOpacity>
-              );
-        }
-   }
+                return (
+                    <TouchableOpacity
+                        style={{
+                            backgroundColor: 'white',
+                            borderRadius: 3,
+                            borderWidth: 1,
+                            borderColor: '#CED0CE',
+                            width: width,
+                            height: 50
+                        }}
+                        onPress={() => {
+                            this.setState({
+                                lawyerName: item.fullName,
+                                lawyerId: item.lawyer,
+                                avail: item.avail,
+                                bar: item.bar,
+                                email: item.email,
+                                experience: item.experience,
+                                firm: item.firm,
+                                location: item.location,
+                                phoneNumber: item.phoneNumber,
+                                radius: item.radius
+                            });
+                            this._toggleModal();
+                        }}>
+                        <Text style={{
+                            color: 'black',
+                            textAlign: 'center',
+                            textAlignVertical: 'center'
+                        }}>{item.fullName}</Text>
+                    </TouchableOpacity>
+                );
+            }
 
     fetchLawyers = () => {
         let user = firebase.auth().currentUser;
@@ -128,6 +197,7 @@ export default class LawyerAuth extends Component {
                   lawyerArr.push(obj[lawyer]);
                   lawyerArr[lawyerArr.length - 1].lawyer = lawyer;
                 }
+                console.log(lawyer);
           }
           stateVar.setState({lawyers: lawyerArr});
         })
@@ -144,12 +214,10 @@ export default class LawyerAuth extends Component {
 
 
     mainScreen = () => {
-
         return (
 
             <View
                 style={{flex: 1, justifyContent: 'space-evenly'}}>
-
                 <FlatList
                     data={this.state.lawyers}
                     keyExtractor={(item) => item.lawyerName}
@@ -158,7 +226,7 @@ export default class LawyerAuth extends Component {
                         return (<View style={{height: 5}}/>)
                     }}
                 />
-                <Button onPress={() => {this.props.navigation.navigate('LawyerProfile')}} title='Profile'/>
+                <Button onPress={() => {this.props.navigation.navigate('AdminProfile')}} title='Back to Profile'/>
             </View>
         )
 
