@@ -1,3 +1,12 @@
+/**
+ * Copyright 2019 Change++ (changeplusplus.org)
+ * File Name: EditClientProfile.js
+ * Authors: Jake Laderman
+ * Description: Allows one to edit the client profile
+ * Last Edited: 5.15.19
+ */
+
+
 import React, { Component } from 'react';
 import {Picker, ScrollView, TextInput, View} from 'react-native';
 import * as firebase from 'firebase';

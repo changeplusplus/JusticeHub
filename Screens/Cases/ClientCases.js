@@ -1,3 +1,12 @@
+/**
+ * Change++ (changeplusplus.org)
+ * File Name: ClientCase.js
+ * Authors: Jake Laderman
+ * Description: Implements the feature to allow a client to submit a case
+ * Last Edited: 5.15.19
+ */
+
+
 import React, { Component } from 'react';
 import {
     View, Text, Button, TextInput, TouchableOpacity,
@@ -7,8 +16,6 @@ import * as firebase from 'firebase';
 import {CheckBox} from "react-native-elements";
 import I18n from '../../Utils/i18n';
 
-
-//  FIXME - JAKE - ADD FUNCTIONALITY TO SHARE MICROWAVE
 const { width, height } = Dimensions.get('window');
 export default class ClientCases extends Component {
 

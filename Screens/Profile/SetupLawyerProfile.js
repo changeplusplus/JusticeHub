@@ -1,3 +1,11 @@
+/**
+ * Copyright 2019 Change++ (changeplusplus.org)
+ * File Name: SetupLawyerProfile.js
+ * Authors: Jarrett Perkins
+ * Description: Allows one to set up a lawyer profile
+ * Last Edited: 5.15.19
+ */
+
 import React, {Component} from 'react';
 import {Alert, Checkbox, ScrollView, TextInput, View} from 'react-native';
 import * as firebase from 'firebase';

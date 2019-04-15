@@ -1,3 +1,11 @@
+/**
+ * Copyright 2019 Change++ (changeplusplus.org)
+ * File Name: LawyerAuth.js
+ * Authors: Jarrett Perkins
+ * Description: Implements the admin feature to allow lawyers to verify users are lawyers
+ * Last Edited: 5.15.19
+ */
+
 import React, { Component } from 'react';
 import {
     View, Text, Button, TextInput, TouchableOpacity,

@@ -1,3 +1,11 @@
+/**
+ * Copyright 2019 Change++ (changeplusplus.org)
+ * File Name: AdminProfile.js
+ * Authors: Jarrett Perkins
+ * Description: Implements the admin profile to set up profile for admins
+ * Last Edited: 5.15.19
+ */
+
 import React, { Component } from 'react';
 import {View, Linking} from 'react-native';
 import * as firebase from 'firebase';

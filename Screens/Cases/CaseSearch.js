@@ -1,3 +1,12 @@
+/**
+ * Copyright 2019 Change++ (changeplusplus.org)
+ * File Name: CaseSearch.js
+ * Authors: James Raubenheimer\
+ * Contact: raubenheimerjames@gmail.com
+ * Description: Implements the Case Search feature which allows lawyers to connect with clients
+ * Last Edited: 5.15.19
+ */
+
 import React, { Component } from 'react';
 import {
     View, Text, Button, TextInput, TouchableOpacity,

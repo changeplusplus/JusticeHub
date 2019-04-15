@@ -1,7 +1,9 @@
 /**
- * Copyright 2018 Change++
- * Description: The screen which allows the user to login
- * Last Edited: January 9, 2019
+ * Copyright 2019 Change++ (changeplusplus.org)
+ * File Name: Login.js
+ * Authors: Jarrett Perkins
+ * Description: Implements login feature to allow a user to login into their account
+ * Last Edited: 5.15.19
  */
 
 import React, {Component} from 'react';
