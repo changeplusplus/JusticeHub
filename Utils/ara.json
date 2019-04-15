@@ -109,6 +109,33 @@
     "picker_email": "البريد الإلكتروني",
     "picker_phone": "هاتف",
     "submit": "إرسال القضية"
+  },
+
+  "case_search": {
+    "greeting_p1": "مرحبا",
+    "greeting_p2": "، اسمي هو",
+    "greeting_p3": ". رأيت قضيتك وأرغب في المساعدة.",
+    "contact_p1": "اتصل",
+    "contact_p2": " عن طريق البريد الإلكتروني على: ",
+    "whatsApp_alert": "الرجاء تثبيت WhatsApp للمتابعة",
+    "search": "أكتب هنا...",
+    "client_name": "اسم العميل",
+    "occupation": "الاحتلال",
+    "DOB": "تاريخ الولادة",
+    "address": "عنوان",
+    "gender": "جنس",
+    "case_name": "اسم القضية",
+    "case_details": "تفاصيل الحالة",
+    "date": "تاريخ",
+    "arrest_location": "مركز الاحتجاز",
+    "arrest_officer":  "القبض على ضابط",
+    "detention_center": "مركز الاحتجاز",
+    "torture": "التعذيب المستخدمة؟",
+    "special_notes": "ملاحظات خاصة",
+    "connect": "الاتصال",
+    "copy": "نسخ",
+    "profile": "الملف الشخصي",
+    "fetch_failed": "فشل في جلب الحالات"
   }
 
 

@@ -105,11 +105,11 @@
     "contacts": "Contactos",
     "contacts_place": "contactos",
     "resolved": "¿Resuelto?",
-    "detention_center": "El centro de detencion",
+    "detention_center": "El centro de detención",
     "detention_center_place": "centro de detención",
     "arrest_location": "La ubicación de detención",
     "arrest_location_place": "ubicación",
-    "torture": "Se usó la tortura?",
+    "torture": "¿Se usó la tortura?",
     "torture_place": "sí o no",
     "additional": "Notas adicionales",
     "additional_place": "notas",
@@ -118,6 +118,33 @@
     "picker_email": "correo electrónico",
     "picker_phone": "teléfono",
     "submit": "Enviar caso"
+  },
+
+  "case_search": {
+    "greeting_p1": "Hola",
+    "greeting_p2": ", me llamo ",
+    "greeting_p3": ". Vi su caso y me gustaría ayudar.",
+    "contact_p1": "Contacto ",
+    "contact_p2": " por correo electrónico a: ",
+    "whatsApp_alert": "Por favor, instale WhatsApp para continuar",
+    "search": "Escriba aquí...",
+    "client_name": "Nombre del cliente",
+    "occupation": "Ocupación",
+    "DOB": "Fecha de nacimiento",
+    "address": "Dirección",
+    "gender": "Género",
+    "case_name": "Nombre del caso",
+    "case_details": "Detalles del caso",
+    "date": "Fecha",
+    "arrest_location": "Arrest Location",
+    "arrest_officer":  "Arresting Officer",
+    "detention_center": "El centro de detención",
+    "torture": "¿Se usó la tortura?",
+    "special_notes": "Notas especiales",
+    "connect": "Conectar",
+    "copy": "Copiar",
+    "profile": "Perfil",
+    "fetch_failed": "No pudo obtener casos"
   }
 
 

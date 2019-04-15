@@ -100,7 +100,7 @@ export default class CaseSearch extends Component {
                     alignItems: 'stretch',
                 }}>
                     <SearchBar
-                        placeholder="Type Here..."
+                        placeholder={I18n.curLang.case_search.search}
                         onChangeText={this.updateSearch}
                         value={search}
                     />
@@ -144,54 +144,52 @@ export default class CaseSearch extends Component {
                                 borderWidth: 0,
                             }}>
 
-                                <Text style={Jtheme.Text}>Client Name:
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.client_name}
                                     <Text h6 style={Jtheme.InputText}>{clientName}</Text>
                                 </Text>
-                                <Text style={Jtheme.Text}>Occupation:
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.occupation}
                                     <Text h6 style={Jtheme.InputText}>{occupation}</Text>
                                 </Text>
-                                <Text style={Jtheme.Text}>Date of Birth:
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.DOB}
                                     <Text h6 style={Jtheme.InputText}>{DOB}</Text>
                                 </Text>
-                                <Text style={Jtheme.Text}>Address
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.address}
                                     <Text h6 style={Jtheme.InputText}>{address}</Text>
                                 </Text>
-                                <Text style={Jtheme.Text}>Gender:
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.gender}
                                     <Text h6 style={Jtheme.InputText}>{gender}</Text>
                                 </Text>
 
 
-                               <Text style={Jtheme.Text}>Case Name:
+                               <Text style={Jtheme.Text}>{I18n.curLang.case_search.case_name}
                                     <Text h6 style={Jtheme.InputText}>{offense}</Text>
                                 </Text>
-                                <Text style={Jtheme.Text}>Case Details:
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.case_details}
                                     <Text h6 style={Jtheme.InputText}>{details}</Text>
                                 </Text>
-                                <Text style={Jtheme.Text}>Date:
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.date}
                                     <Text h6 style={Jtheme.InputText}>{date}</Text>
                                 </Text>
-                                <Text style={Jtheme.Text}>Location of Arrest:
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.arrest_location}
                                     <Text h6 style={Jtheme.InputText}>{locationArrest}</Text>
                                 </Text>
-                                <Text style={Jtheme.Text}>Arresting Officer:
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.arrest_officer}
                                     <Text h6 style={Jtheme.InputText}>{arrestingOfficer}</Text>
                                 </Text>
-                                <Text style={Jtheme.Text}>Detention Center:
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.detention_center}
                                     <Text h6 style={Jtheme.InputText}>{detentionCenter}</Text>
                                 </Text>
-                                <Text style={Jtheme.Text}>Torture:
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.torture}
                                     <Text h6 style={Jtheme.InputText}>{torture}</Text>
                                 </Text>
-                                <Text style={Jtheme.Text}>Special Notes:
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.special_notes}
                                     <Text h6 style={Jtheme.InputText}>{specialNotes}</Text>
                                 </Text>
-
-
 
                                 {this._renderContactInfo()}
 
                                 <Button style={Jtheme.Button}
-                                        title='Connect'
+                                        title={I18n.curLang.case_search.connect}
                                         onPress={this._communicate} />
                             </View>
                         </TouchableWithoutFeedback>
@@ -279,7 +277,7 @@ export default class CaseSearch extends Component {
                 <View style={Jtheme.ContactContainer}>
                     <Text style={Jtheme.Text}>{this.state.contactInfo}</Text>
                     <Button style={[Jtheme.Button, { marginBottom: 10 }]}
-                            title='Copy'
+                            title={I18n.curLang.case_search.copy}
                             onPress={() => Clipboard.setString(this.state.clientEmail)}/>
                 </View>
             )
@@ -304,7 +302,7 @@ export default class CaseSearch extends Component {
                     // indicate a single case loaded
                     this.setState({casesLoaded: true})
                 }).catch((error) => {
-                    Alert.alert("Case Fetch Failed", error);
+                    Alert.alert(I18n.curLang.case_search.fetch_failed, error);
                 });
 
         // Also grab lawyer name for use later
@@ -329,7 +327,8 @@ export default class CaseSearch extends Component {
                         return (<View style={{height: 5}}/>)
                     }}
                 />
-                <Button onPress={() => {this.props.navigation.navigate('LawyerProfile')}} title='Profile'/>
+                <Button onPress={() => {this.props.navigation.navigate('LawyerProfile')}}
+                        title={I18n.curLang.case_search.profile}/>
             </View>
         )
 

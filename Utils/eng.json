@@ -117,14 +117,33 @@
     "picker_email": "Email",
     "picker_phone": "Phone",
     "submit": "Submit Case"
+
   },
 
-  "case_search":{
+  "case_search": {
     "greeting_p1": "Hello",
     "greeting_p2": ", my name is",
     "greeting_p3": ". I saw your case and would like to help.",
     "contact_p1": "Contact",
     "contact_p2": " by email at: ",
     "whatsApp_alert": "Please install WhatsApp to continue",
+    "search": "Type here...",
+    "client_name": "Client Name",
+    "occupation": "Occupation",
+    "DOB": "Date of Birth",
+    "address": "Address",
+    "gender": "Gender",
+    "case_name": "Case Name",
+    "case_details": "Case Details",
+    "date": "Date",
+    "arrest_location": "Arrest Location",
+    "arrest_officer":  "Arresting Officer",
+    "detention_center": "Detention Center",
+    "torture": "Torture used?",
+    "special_notes": "Special Notes",
+    "connect": "Connect",
+    "copy": "Copy",
+    "profile": "Profile",
+    "fetch_failed": "Failed to fetch cases"
   }
 }
