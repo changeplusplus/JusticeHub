@@ -84,7 +84,7 @@ class Login extends Component {
             .then(() => {
                 // Get userId
                 let userId = firebase.auth().currentUser.uid;
-                var isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
+                let isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
                 let thisObj = this;
                 isLawyerRef.on('value', (snapshot) => {
                     let isLawyer = (snapshot.val() !== null);
