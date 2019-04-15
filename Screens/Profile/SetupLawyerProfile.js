@@ -3,6 +3,7 @@ import {Alert, Checkbox, ScrollView, TextInput, View} from 'react-native';
 import * as firebase from 'firebase';
 import {Button, CheckBox, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 import {InputBlock} from "../../Components/InputBlock";
+import I18n from "../../Utils/i18n";
 
 
 class SetupLawyerProfile extends Component {
@@ -33,76 +34,80 @@ class SetupLawyerProfile extends Component {
             return null;
         }
         return (
-            <ScrollView contentContainerStyle={{justifyContent:'center', marginTop: 55}}>
-                <Text style={Jtheme.InputText}>Years of Practice</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.exp}
-                           onChangeText={(text) => this.setState({exp: text})}
-                           placeholder={"years"}
-                           width={100}/>
+            <ScrollView contentContainerStyle={{justifyContent:'center', marginTop: 55, paddingBottom: 55}}>
+                <View style={Jtheme.InputsContainer}>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.practice_yrs}</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.exp}
+                               onChangeText={(text) => this.setState({exp: text})}
+                               placeholder={I18n.curLang.setup_lawyer_profile.practice_yrs_place}
+                               width={100}/>
 
-                <Text style={Jtheme.InputText}>Bar Association Membership</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.bar}
-                           onChangeText={(text) => this.setState({bar: text})}
-                           placeholder={"bar"}
-                           width={100}/>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.bar_membership}</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.bar}
+                               onChangeText={(text) => this.setState({bar: text})}
+                               placeholder={I18n.curLang.setup_lawyer_profile.bar_membership_place}
+                               width={100}/>
 
-                <Text style={Jtheme.InputText}>Law Firm</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.firm}
-                           onChangeText={(text) => this.setState({firm: text})}
-                           placeholder={"firm"}
-                           width={100}/>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.law_firm}</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.firm}
+                               onChangeText={(text) => this.setState({firm: text})}
+                               placeholder={I18n.curLang.setup_lawyer_profile.law_firm}
+                               width={100}/>
 
-                <Text style={Jtheme.InputText}>Location</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.location}
-                           onChangeText={(text) => this.setState({location: text})}
-                           placeholder={"location"}
-                           width={100}/>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.location}</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.location}
+                               onChangeText={(text) => this.setState({location: text})}
+                               placeholder={I18n.curLang.setup_lawyer_profile.location}
+                               width={100}/>
 
-                <Text style={Jtheme.InputText}>Radius of Practice</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.radius}
-                           onChangeText={(text) => this.setState({radius: text})}
-                           placeholder={"radius (miles)"}
-                           width={100}/>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.radius}</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.radius}
+                               onChangeText={(text) => this.setState({radius: text})}
+                               placeholder={I18n.curLang.setup_lawyer_profile.radius_place}
+                               width={100}/>
 
-                <Text style={Jtheme.InputText}>Availability</Text>
-                <TextInput style={Jtheme.Input}
-                           value={this.state.avail}
-                           onChangeText={(text) => this.setState({avail: text})}
-                           placeholder={"availability"}
-                           width={100}/>
-                <Text style={Jtheme.Text}>Expertise</Text>
+                    <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.availability}</Text>
+                    <TextInput style={Jtheme.Input}
+                               value={this.state.avail}
+                               onChangeText={(text) => this.setState({avail: text})}
+                               placeholder={I18n.curLang.setup_lawyer_profile.availability_place}
+                               width={100}/>
+                </View>
+                <Text style={Jtheme.Text}>{I18n.curLang.setup_lawyer_profile.expertise}</Text>
                 <CheckBox
-                    title='Theft'
+                    title={I18n.curLang.setup_lawyer_profile.expertise_theft}
                     checked={this.state.expertise.theft}
-                    onIconPress={() => this.setState({expertise: {
+                    onPress={() => this.setState({expertise: {
                             ...this.state.expertise, theft: !this.state.expertise.theft}})}
                 />
                 <CheckBox
-                    title='Drug Offenses'
+                    title={I18n.curLang.setup_lawyer_profile.expertise_drug}
                     checked={this.state.expertise.drug}
-                    onIconPress={() => this.setState({expertise: {
+                    onPress={() => this.setState({expertise: {
                         ...this.state.expertise, drug: !this.state.expertise.drug}})}
                 />
                 <CheckBox
-                    title='Violent Crime'
+                    title={I18n.curLang.setup_lawyer_profile.expertise_violent}
                     checked={this.state.expertise.violent}
-                    onIconPress={() => this.setState({expertise: {
+                    onPress={() => this.setState({expertise: {
                             ...this.state.expertise, violent: !this.state.expertise.violent}})}
                 />
-                <Text style={Jtheme.InputText}>Other (please specify)</Text>
+                <Text style={Jtheme.InputText}>{I18n.curLang.setup_lawyer_profile.expertise_other}</Text>
                 <TextInput style={Jtheme.Input}
                     onChangeText={(text) =>
                         this.setState({expertise: {...this.state.expertise, other: text}})}
                         value={this.state.expertise.other}
-                    placeholder={"other"}
+                    placeholder={I18n.curLang.setup_lawyer_profile.expertise_other_place}
                     width={100}/>
-                <Button style={Jtheme.Button} onPress={this._submitChanges}
-                        title='Submit Changes'/>
+                <View style={{marginTop: 10}}>
+                    <Button style={Jtheme.Button} onPress={this._submitChanges}
+                            title={I18n.curLang.setup_lawyer_profile.submit}/>
+                </View>
             </ScrollView>
         )
     }
@@ -157,6 +162,11 @@ const Jtheme = {
 
     backgroundColor: '#112853',
 
+    InputsContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
     BackButton: {
         flex:1,
         color: '#cc7832',
@@ -188,12 +198,12 @@ const Jtheme = {
     },
 
     Input: {
-        flex: .5,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         borderColor: '#CED0CE',
         borderWidth: 1,
-        paddingLeft: 35,
+        paddingHorizontal: 5,
     },
 
     Text: {
@@ -204,20 +214,19 @@ const Jtheme = {
         justifyContent: 'center',
         fontSize: 40,
         paddingTop: 50,
-        paddingLeft: 50,
-        paddingRight: 50,
+        paddingHorizontal: 50
     },
 
     InputText: {
         flex:1,
         alignItems: 'center',
+        textAlign: 'center',
         fontWeight: 'bold',
         flexDirection: 'column',
         color: '#112853',
         justifyContent: 'center',
         fontSize: 15,
-        paddingBottom: 10,
-        paddingLeft: 10,
-        paddingRight: 50,
+        marginTop: 20,
+        paddingBottom: 10
     }
 };

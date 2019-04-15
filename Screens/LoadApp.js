@@ -30,8 +30,8 @@ class LoadApp extends Component {
 
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then(() => {
-                    DataStorage.loadBasicData();
-                    DataStorage.loadProfileData();
+                    // DataStorage.loadBasicData();
+                    // DataStorage.loadProfileData();
 
                     if (DataStorage.IS_LAWYER) {
                         navigate('LawyerTabNav');

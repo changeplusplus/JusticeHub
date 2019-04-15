@@ -1,0 +1,151 @@
+{
+
+  "login_page": {
+    "login": "Entrar",
+    "signUp": "Apuntar",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "selectLang": "Seleccionar idioma:",
+    "apply": "Aplicar",
+    "forgotPass": "Se te olvidó tu contraseña",
+    "welcome": "Bienvenidos a JusticeHub",
+    "desc": "Una plataforma digital para acceder y habilitar la justicia",
+    "arabic": "عربى",
+    "english": "English",
+    "spanish": "Español"
+  },
+
+  "signup_page": {
+    "title": "Crea una Cuenta",
+    "lawyer": "Abogado",
+    "client": "Cliente",
+    "phone": "Teléfono",
+    "phoneNumber": "El número de teléfono",
+    "occupation": "Ocupación",
+    "gender": "Género",
+    "DOB": "Fecha de nacimiento",
+    "details": "Detalles",
+    "contacts": "Contactos",
+    "notes": "Notas",
+    "location": "Ubicación",
+    "name_place": "Nombre completo",
+    "pass_place": "Contraseña",
+    "phone_place": "Número de teléfono",
+    "email_place": "Email",
+    "user_type": "Soy un:",
+    "fail_alert": "Debe completar los campos requeridos",
+    "signup": "Registrar"
+  },
+
+  "client_profile": {
+    "whatsApp_alert": "Por favor, instale WhatsApp para continuar",
+    "edit_profile": "Editar Perfil",
+    "messages": "Mensajes",
+    "logout": "Cerrar sesión"
+  },
+
+  "lawyer_profile": {
+    "whatsApp_alert": "Por favor, instale WhatsApp para continuar",
+    "find_cases": "Encontrar casos",
+    "messages": "Mensajes",
+    "edit_profile": "Editar Perfil",
+    "logout": "Cerrar sesión"
+  },
+
+  "edit_client_profile": {
+    "contact_question": "¿Cómo deben contactarse los abogados?",
+    "picker_email": "Correo Electrónico",
+    "picker_phone": "Teléfono",
+    "submit": "Enviar cambios"
+  },
+
+  "setup_lawyer_profile": {
+    "practice_yrs": "Años de práctica",
+    "practice_yrs_place": "años",
+    "bar_membership": "La afiliación de la asociación Bar",
+    "bar_membership_place": "afiliación",
+    "law_firm":"Su bufete de abogados",
+    "location": "Ubicación",
+    "radius": "El radio de la práctica",
+    "radius_place": "kilometros",
+    "availability": "La disponibilidad",
+    "availability_place": "días y horas",
+    "expertise": "La pericia",
+    "expertise_theft": "El robo",
+    "expertise_drug": "Las infracciones de drogas",
+    "expertise_violent": "El crimen violento",
+    "expertise_other": "Otro (por favor especificar)",
+    "expertise_other_place": "otro",
+    "submit": "Enviar cambios"
+  },
+
+  "client_cases": {
+    "reporting": "Denunciar en nombre de otra persona",
+    "name": "El nombre y apellidos",
+    "name_arrested": "Nombre de la persona arrestada",
+    "name_place": "nombre",
+    "occupation": "Ocupación",
+    "occupation_place": "ocupación",
+    "address": "Dirección",
+    "address_place": "dirección",
+    "DOB": "Fecha de nacimiento",
+    "DOB_place": "mes día, año",
+    "gender": "Género",
+    "gender_place": "género",
+    "phone_arrested": "El número de teléfono de la persona arrestada",
+    "phone_place": "+1111111111",
+    "email_arrested": "El correo electrónico de una persona arrestada",
+    "email_place": "correo electrónico",
+    "offense": "La infracción",
+    "offense_place": "infraccion",
+    "details": "Detalles",
+    "details_place": "detalles",
+    "date_arrest": "Fecha de detención",
+    "date_arrest_place": "mes día, año",
+    "contacts": "Contactos",
+    "contacts_place": "contactos",
+    "resolved": "¿Resuelto?",
+    "detention_center": "El centro de detención",
+    "detention_center_place": "centro de detención",
+    "arrest_location": "La ubicación de detención",
+    "arrest_location_place": "ubicación",
+    "torture": "¿Se usó la tortura?",
+    "torture_place": "sí o no",
+    "additional": "Notas adicionales",
+    "additional_place": "notas",
+    "lawyer": "Abogado",
+    "lawyer_place": "nombre",
+    "picker_email": "correo electrónico",
+    "picker_phone": "teléfono",
+    "submit": "Enviar caso"
+  },
+
+  "case_search": {
+    "greeting_p1": "Hola",
+    "greeting_p2": ", me llamo ",
+    "greeting_p3": ". Vi su caso y me gustaría ayudar.",
+    "contact_p1": "Contacto ",
+    "contact_p2": " por correo electrónico a: ",
+    "whatsApp_alert": "Por favor, instale WhatsApp para continuar",
+    "search": "Escriba aquí...",
+    "client_name": "Nombre del cliente",
+    "occupation": "Ocupación",
+    "DOB": "Fecha de nacimiento",
+    "address": "Dirección",
+    "gender": "Género",
+    "case_name": "Nombre del caso",
+    "case_details": "Detalles del caso",
+    "date": "Fecha",
+    "arrest_location": "Arrest Location",
+    "arrest_officer":  "Arresting Officer",
+    "detention_center": "El centro de detención",
+    "torture": "¿Se usó la tortura?",
+    "special_notes": "Notas especiales",
+    "connect": "Conectar",
+    "copy": "Copiar",
+    "profile": "Perfil",
+    "fetch_failed": "No pudo obtener casos"
+  }
+
+
+}

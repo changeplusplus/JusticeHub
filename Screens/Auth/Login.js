@@ -6,13 +6,10 @@
 
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
-import {TextInput, StyleSheet, TouchableOpacity, TouchableHighlight} from 'react-native';
+import {TextInput, StyleSheet, ScrollView, Platform, NativeModules, Picker} from 'react-native';
 import {InputBlock} from "../../Components/InputBlock";
 import DataStorage from "../../DataStorage";
-//import Il8n from "il8n-js";
-//import arabic from "../../Utils/locales/arabic";
-
-
+import I18n from '../../Utils/i18n';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
@@ -23,33 +20,62 @@ class Login extends Component {
 
     state = {
         email: '',
-        password: ''
+        password: '',
+        currentLanguage: 'English',
     };
 
     render() {
         return (
-            <ThemeProvider style={Jtheme.backgroundColor}>
+            <ThemeProvider style={[Jtheme.backgroundColor, Jtheme.MainContainer]}>
+                <ScrollView>
 
-                <Text h1 style={Jtheme.Text}>JusticeHub</Text>
-                <Text h4 style={Jtheme.Text}>A digital platform for accessing and enabling justice</Text>
-
-                <TextInput style={Jtheme.InputText}
-                    placeholder='Email'
-                    state='email'
-                    onChangeText={(email) => this.setState({email})}/>
+                <Text h1 style={Jtheme.Text}>{I18n.curLang.login_page.welcome}</Text>
+                <Text h4 style={Jtheme.Text}>{I18n.curLang.login_page.desc}</Text>
 
                 <TextInput style={Jtheme.InputText}
-                    placeholder="Password"
-                    state='password'
-                    onChangeText={(password) => this.setState({password})}
-                    secureTextEntry={true}/>
+                           placeholder={I18n.curLang.login_page.email}
+                           state='email'
+                           onChangeText={(email) => this.setState({email})}/>
 
-                <Button style={Jtheme.Button} onPress={this._login} title='Log In'/>
-                <Button style={Jtheme.Button} onPress={this._navToSignup} title='Sign Up'/>
-                <Button style={Jtheme.Button} title='Forgot Password'/>
+                <TextInput style={Jtheme.InputText}
+                           placeholder={I18n.curLang.login_page.password}
+                           state='password'
+                           onChangeText={(password) => this.setState({password})}
+                           secureTextEntry={true}/>
+
+                <Button style={Jtheme.Button} onPress={this._login} title={I18n.curLang.login_page.login}/>
+                <Button style={Jtheme.Button} onPress={this._navToSignup} title={I18n.curLang.login_page.signUp}/>
+                <Button style={Jtheme.Button} title={I18n.curLang.login_page.forgotPass}/>
+
+                <Text h5 style={Jtheme.Text}> {I18n.curLang.login_page.selectLang} </Text>
+                <Picker style={Jtheme.Text}
+                    selectedValue={this.state.currentLanguage}
+                    onValueChange={(language) => this.setState({currentLanguage:language})}>
+
+                    <Picker.Item label={I18n.curLang.login_page.arabic} value='Arabic'/>
+                    <Picker.Item label={I18n.curLang.login_page.english} value='English'/>
+                    <Picker.Item label={I18n.curLang.login_page.spanish} value='Spanish'/>
+                </Picker>
+                <Button style={Jtheme.Button} onPress={this._changeLanguage} title={I18n.curLang.login_page.apply}/>
+                </ScrollView>
             </ThemeProvider>
-        )
+        );
     }
+
+    _changeLanguage = () => {
+        if (this.state.currentLanguage === 'English') {
+            I18n.changeLang('Eng')
+        } else if (this.state.currentLanguage === 'Arabic') {
+            I18n.changeLang('Ara');
+        }
+        else if (this.state.currentLanguage === 'Spanish') {
+            I18n.changeLang('Esp');
+        }
+
+        // Following language change, must change state to force rerender
+        this.setState(this.state);
+    };
+
 
     _login = () => {
         const {email, password} = this.state;
@@ -57,27 +83,28 @@ class Login extends Component {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(() => {
                 // Get userId
-              let userId = firebase.auth().currentUser.uid;
-              var isAdminRef = firebase.database().ref('admins/' + userId);
-              let thisObj = this;
-              isAdminRef.on('value', function(snapshot) {
-                  let isAdmin = (snapshot.val() !== null);
-                  const {navigate} = thisObj.props.navigation;
-                  if (isAdmin) {
-                      navigate('AdminTabNav');
-                  } else {
-                    var isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
-                    isLawyerRef.on('value', function(snapshot) {
-                        let isLawyer = (snapshot.val() !== null);
-                        const {navigate} = thisObj.props.navigation;
-                        if (isLawyer) {
-                            navigate('LawyerTabNav');
-                        } else {
+                let userId = firebase.auth().currentUser.uid;
+                let isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
+                let thisObj = this;
+                isLawyerRef.on('value', (snapshot) => {
+                    let isLawyer = (snapshot.val() !== null);
+                    const {navigate} = thisObj.props.navigation;
+
+                    // Load language for lawyers
+                    I18n.curLang = snapshot.val().language;
+
+                    if (isLawyer) {
+                        navigate('LawyerTabNav');
+                    } else {
+                        // Load client data just to grab language
+                        // Todo: This loads a lot of data every time, probably excessive
+                        firebase.database().ref('cases/' + userId).on('value', (snap) => {
+                            I18n.curLang = snap.val().language;
+
                             navigate('ClientTabNav');
-                        }
-                    });
-                  }
-              });
+                        });
+                    }
+                });
                 // console.log('Logged in');
                 DataStorage.saveLogin(email, password);
                 DataStorage.loadBasicData();
@@ -87,9 +114,6 @@ class Login extends Component {
                     email: '',
                     password: ''
                 });
-
-                alert('Logged in!\n');
-
             })
             .catch((error) => {
                 alert(error);
@@ -108,6 +132,11 @@ class Login extends Component {
 const Jtheme = {
 
     backgroundColor: '#112853',
+
+    MainContainer: {
+        flex: 1,
+        marginVertical: 100
+    },
 
     Button: {
         color: '#cc7832',
@@ -179,3 +208,4 @@ const styles = StyleSheet.create({
 
 
 export default Login;
+

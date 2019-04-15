@@ -3,9 +3,8 @@ import * as firebase from 'firebase';
 import {
     View, KeyboardAvoidingView, TextInput, Picker
 } from 'react-native';
-import {InputBlock} from "../../Components/InputBlock";
-import DataStorage from '../../DataStorage';
-import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
+import I18n from '../../Utils/i18n';
+import {Button, Text} from "react-native-elements";
 
 export default class SignUp extends Component {
     state = {
@@ -19,41 +18,41 @@ export default class SignUp extends Component {
     render() {
         return (
             <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
-                <Text h3 style={Jtheme.Text}>Create an Account:</Text>
+                <Text h3 style={Jtheme.Text}>{I18n.curLang.signup_page.title}</Text>
                 <KeyboardAvoidingView behavior='padding'>
 
                     <TextInput style={Jtheme.InputText}
-                               placeholder="Full Name"
+                               placeholder={I18n.curLang.signup_page.name_ph}
                                state='fullName'
                                onChangeText={(fullName) => this.setState({fullName})}/>
 
                     <TextInput style={Jtheme.InputText}
-                               placeholder="Password"
+                               placeholder={I18n.curLang.signup_page.pass_ph}
                                state='password'
                                onChangeText={(password) => this.setState({password})}/>
 
                     <TextInput style={Jtheme.InputText}
-                               placeholder="Phone Number"
+                               placeholder={I18n.curLang.signup_page.phone_ph}
                                state='phone'
                                keyboardType='number-pad'
                                onChangeText={(phone) => this.setState({phone})}/>
 
                     <TextInput style={Jtheme.InputText}
-                               placeholder="Email"
+                               placeholder={I18n.curLang.signup_page.email_ph}
                                state='email'
                                onChangeText={(email) => this.setState({email})}/>
 
-                    <Text h5 style={Jtheme.Text}> I am a:</Text>
+                    <Text h5 style={Jtheme.Text}>{I18n.curLang.signup_page.user_type}</Text>
 
                     <Picker style={Jtheme.Text}
                         selectedValue={this.state.isLawyer}
                         onValueChange={(itemValue) => this.setState({isLawyer: itemValue})}>
 
-                        <Picker.Item label='Lawyer' value={true}/>
-                        <Picker.Item label='Client' value={false}/>
+                        <Picker.Item label={I18n.curLang.signup_page.lawyer} value={true}/>
+                        <Picker.Item label={I18n.curLang.signup_page.client} value={false}/>
                     </Picker>
 
-                    <Button style={Jtheme.Button} onPress={this._signUp} title='Sign Up'/>
+                    <Button style={Jtheme.Button} onPress={this._signUp} title={I18n.curLang.signup_page.signup}/>
                 </KeyboardAvoidingView>
             </View>
         )
@@ -64,7 +63,7 @@ export default class SignUp extends Component {
 
         if (fullName.trim() === '' || password.trim() === '' ||
             phone.trim() === '') {
-            alert('Must fill out required fields');
+            alert(I18n.curLang.signup_page.fail_alert);
             return;
         }
 
@@ -72,7 +71,7 @@ export default class SignUp extends Component {
             .then(() => {
                 // Get userId
                 let userId = firebase.auth().currentUser.uid;
-                if (isLawyer){
+                if (isLawyer) {
                     // Set lawyer data gets put in a lawyer user section in database
                     firebase.database().ref('lawyerProfiles/' + userId).set({
                         fullName: fullName,
@@ -80,7 +79,7 @@ export default class SignUp extends Component {
                         phoneNumber: phone,
                         isLawyer: isLawyer,
                         experience: '',
-                        bar: 'test',
+                        bar: '',
                         firm: '',
                         location: '',
                         radius: '',
@@ -90,14 +89,17 @@ export default class SignUp extends Component {
                             drug: false,
                             violent: false,
                             other: ''
-                        }
+                        },
+                        language: I18n.getLangKey()
                     });
-                } else{
+                }
+                else {
                     //for clients it begins their case profile
                     firebase.database().ref('cases/' + userId).set({
                         fullName: fullName,
                         email: email,
                         phoneNumber: phone,
+                        language: I18n.getLangKey()
                     });
                 }
 

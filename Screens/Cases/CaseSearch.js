@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {
     View, Text, Button, TextInput, TouchableOpacity,
-    Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback, Linking
+    Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback, Linking, Clipboard
 } from 'react-native';
 import Modal from "react-native-modal";
 import * as firebase from 'firebase';
 import { SearchBar } from 'react-native-elements';
+import I18n from '../../Utils/i18n';
 
 const { width, height } = Dimensions.get('window');
 export default class CaseSearch extends Component {
@@ -18,30 +19,58 @@ export default class CaseSearch extends Component {
             caseDetails: '',
             caseId: '',
             casesLoaded: false,
+            search: '',
             cases: [],
             clientName: '',
             clientPhone: '',
             clientEmail: '',
+            lawyerName:"",
+            contactInfo: '',
+            reportingOther: false,
+            name: '',
+            occupation: '',
+            address: '',
+            DOB: '',
+            gender: '',
+            arrName: '',
+            arrPhone: '',
+            arrEmail: '',
             prefersEmail: false,
-            search: ''
+            offense: '',
+            details: '',
+            date: '',
+            contacts: '',
+            resolved: false,
+            detentionCenter: '',
+            locationArrest: '',
+            arrestingOfficer: '',
+            torture: '',
+            specialNotes: '',
+            lawyer: ''
         };
+
+        this.lawyerName = '';
+
         this.fetchCases();
     }
 
-        // FIXME - Connor - need these parameters from the client case
-    _communicate = (clientName, clientPhone, clientEmail, prefersEmail) => {
+    _communicate = () => {
+        const {clientName, clientPhone, clientEmail, prefersEmail} = this.state;
 
-        let lawyerName = firebase.auth().currentUser.displayName;
-        let greeting = "Hello " + clientName + ", my name is " + lawyerName + ". I saw your case and would like to help.";
+        let greeting = I18n.curLang.case_search.greeting_p1 + clientName + I18n.curLang.case_search.greeting_p2
+        + this.lawyerName + I18n.curLang.case_search.greeting_p3;
+        console.log(greeting);
 
-        if (prefersEmail){
-            return(
-                <Text> Contact {clientName} by email at: {clientEmail} </Text>
-            )
+        if (prefersEmail) {
+            let contact = I18n.curLang.case_search.contact_p1 + clientName +
+                I18n.curLang.case_search.contact_p2 + clientEmail;
+            this.setState({
+                contactInfo: contact
+            });
 
         } else { // prefers phone contact -- to WhatsApp with default message
             if (!Linking.canOpenURL('whatsapp://app')) {
-                alert('Please install WhatsApp to continue')
+                alert(I18n.curLang.case_search.whatsApp_alert)
             } else {
                 if (clientPhone !== null) {
                     Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + clientPhone)
@@ -59,7 +88,10 @@ export default class CaseSearch extends Component {
     };
 
     render() {
-        const {search} = this.state;
+        const {search, clientName, clientPhone, clientEmail,  reportingOther, name,
+        occupation, address, DOB, gender, arrName, arrPhone, arrEmail, prefersEmail, offense, details,date, contacts,
+        resolved, detentionCenter, locationArrest, arrestingOfficer, torture, specialNotes, lawyer} = this.state;
+
         if (this.state.casesLoaded)
             return (
                 <View style={{
@@ -68,7 +100,7 @@ export default class CaseSearch extends Component {
                     alignItems: 'stretch',
                 }}>
                     <SearchBar
-                        placeholder="Type Here..."
+                        placeholder={I18n.curLang.case_search.search}
                         onChangeText={this.updateSearch}
                         value={search}
                     />
@@ -111,13 +143,54 @@ export default class CaseSearch extends Component {
                                 borderRadius: 70,
                                 borderWidth: 0,
                             }}>
-                                <Text h6 style={Jtheme.Text}>Case Name</Text>
-                                <Text style={Jtheme.InputText}>{this.state.caseName}</Text>
-                                <Text h6 style={Jtheme.Text}>Case Details</Text>
-                                <Text style={Jtheme.InputText}>{this.state.caseDetails}</Text>
-                                    // FIXME - get parameters
-                                <Button style={Jtheme.Button} title='Connect'
-                                        onPress={this._communicate(clientName, clientPhone, clientEmail, prefersEmail)}/>
+
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.client_name}
+                                    <Text h6 style={Jtheme.InputText}>{clientName}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.occupation}
+                                    <Text h6 style={Jtheme.InputText}>{occupation}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.DOB}
+                                    <Text h6 style={Jtheme.InputText}>{DOB}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.address}
+                                    <Text h6 style={Jtheme.InputText}>{address}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.gender}
+                                    <Text h6 style={Jtheme.InputText}>{gender}</Text>
+                                </Text>
+
+
+                               <Text style={Jtheme.Text}>{I18n.curLang.case_search.case_name}
+                                    <Text h6 style={Jtheme.InputText}>{offense}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.case_details}
+                                    <Text h6 style={Jtheme.InputText}>{details}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.date}
+                                    <Text h6 style={Jtheme.InputText}>{date}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.arrest_location}
+                                    <Text h6 style={Jtheme.InputText}>{locationArrest}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.arrest_officer}
+                                    <Text h6 style={Jtheme.InputText}>{arrestingOfficer}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.detention_center}
+                                    <Text h6 style={Jtheme.InputText}>{detentionCenter}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.torture}
+                                    <Text h6 style={Jtheme.InputText}>{torture}</Text>
+                                </Text>
+                                <Text style={Jtheme.Text}>{I18n.curLang.case_search.special_notes}
+                                    <Text h6 style={Jtheme.InputText}>{specialNotes}</Text>
+                                </Text>
+
+                                {this._renderContactInfo()}
+
+                                <Button style={Jtheme.Button}
+                                        title={I18n.curLang.case_search.connect}
+                                        onPress={this._communicate} />
                             </View>
                         </TouchableWithoutFeedback>
                     </Modal>
@@ -134,93 +207,128 @@ export default class CaseSearch extends Component {
                     {this.loadingScreen()}
                 </View>
             );
+
+        /*{this._communicate(clientName, clientPhone, clientEmail, prefersEmail)}*/
     }
 
     renderListItem(item) {
-        //if it contains the search term
+        // Check to see if there's even a case to render
+        // This is an issue because with new database setup accounts and case data are stored in same area
+        if (item.offense) {
+            // If it contains the search term in the title or description
+            if (item.offense.includes(this.state.search) || item.details.includes(this.state.search)) {
+                return (
+                    <TouchableOpacity
+                        style={{
+                            backgroundColor: 'white',
+                            borderRadius: 3,
+                            borderWidth: 1,
+                            borderColor: '#CED0CE',
+                            width: width,
+                            height: 50
+                        }}
+                        onPress={() => {
+                            console.log('Pressed case w/ following info: ' + item.email + ' ' + item.phoneNumber + ' ' + item.prefersEmail);
+                            this.setState({
 
-        if(item.caseName.includes(this.state.search)||item.caseDetails.includes(this.state.search)) {
-            return (
-                <TouchableOpacity
-                    style={{
-                        backgroundColor: 'white',
-                        borderRadius: 3,
-                        borderWidth: 1,
-                        borderColor: '#CED0CE',
-                        width: width,
-                        height: 50
-                    }}
-                    onPress={() => {
-                        this._toggleModal();
-                        this.setState({caseName: item.caseName, caseDetails: item.caseDetails, caseId: item.caseId});
-                    }}>
-                    <Text style={{
-                        color: 'black',
-                        textAlign: 'center',
-                        textAlignVertical: 'center'
-                    }}>{item.caseName}</Text>
-                </TouchableOpacity>
-            );
+                                caseId: item.caseId,
+                                clientPhone: item.phoneNumber,
+                                clientEmail: item.email,
+                                clientName: item.name,
+                                reportingOther: false,
+                                name: item.name,
+                                occupation: item.occupation,
+                                address: item.address,
+                                DOB: item.DOB,
+                                gender: item.gender,
+                                arrName: item.arrName,
+                                arrPhone: item.arrPhone,
+                                arrEmail: item.arrEmail,
+                                prefersEmail: item.prefersEmail,
+                                offense: item.offense,
+                                details: item.details,
+                                date: item.date,
+                                contacts: item.contacts,
+                                resolved: item.resolved,
+                                detentionCenter: item.detentionCenter,
+                                locationArrest: item.locationArrest,
+                                arrestingOfficer: item.arrestingOfficer,
+                                torture: item.torture,
+                                specialNotes: item.specialNotes,
+                                lawyer: item.lawyer
+
+                            });
+                            this._toggleModal();
+                        }}>
+                        <Text style={{
+                            color: 'black',
+                            textAlign: 'center',
+                            textAlignVertical: 'center'
+                        }}>{item.offense}</Text>
+                    </TouchableOpacity>
+                );
+            }
         }
+   }
+
+    _renderContactInfo = () => {
+        if (this.state.contactInfo !== '') {
+            return (
+                <View style={Jtheme.ContactContainer}>
+                    <Text style={Jtheme.Text}>{this.state.contactInfo}</Text>
+                    <Button style={[Jtheme.Button, { marginBottom: 10 }]}
+                            title={I18n.curLang.case_search.copy}
+                            onPress={() => Clipboard.setString(this.state.clientEmail)}/>
+                </View>
+            )
+        }
+
+        return null;
     }
 
     fetchCases = () => {
-        let user = firebase.auth().currentUser;
-        let caseList = firebase.database().ref("users/" + user.uid + "/cases/");
-        let userIds = firebase.database().ref("users/");
+        let caseIds = firebase.database().ref("cases/");
         let stateVar = this;
         let caseArr = [];
-        userIds.once('value', function (snapshot) {
+        caseIds.once('value', function (snapshot) {
             let obj = snapshot.val();
-            for (let userId in obj) {
-                console.log(userId);
-                let caseList = firebase.database().ref("users/" + userId+ "/cases/");
-                caseList.once('value', function (snapshot) {
-                    let cases = snapshot.val();
-                    for(let caseId in cases){
-                        caseArr.push(cases[caseId]);
+            for (let caseId in obj) {
+                        caseArr.push(obj[caseId]);
                         caseArr[caseArr.length - 1].caseId = caseId;
-                        console.log(caseId);
-                        console.log()
-                        console.log(caseArr.length+"\n");
                     }
+
                     stateVar.setState({cases: caseArr});
                 }).then(()=>{
                     // indicate a single case loaded
+                    this.setState({casesLoaded: true})
                 }).catch((error) => {
-                    Alert.alert("Case Fetch Failed", error);
+                    Alert.alert(I18n.curLang.case_search.fetch_failed, error);
                 });
-            }
 
+        // Also grab lawyer name for use later
+        const uid = firebase.auth().currentUser.uid;
+        firebase.database().ref('lawyerProfiles/' + uid).once('value', (snapshot) => {
+            this.lawyerName = snapshot.val().fullName;
+
+            console.log('Lawyer name ' + this.lawyerName);
         })
-            .then(() => {
-                this.setState({casesLoaded: true})
-            })
-            .catch((error) => {
-                Alert.alert("Case Fetch Failed", error);
-            });
-
-
     };
 
-
-
     mainScreen = () => {
-
+        // console.log('Cases:', this.state.cases);
         return (
-
             <View
                 style={{flex: 1, justifyContent: 'space-evenly'}}>
-
                 <FlatList
                     data={this.state.cases}
-                    keyExtractor={(item) => item.caseName}
+                    keyExtractor={(item) => item.offense}
                     renderItem={({item}) => this.renderListItem(item)}
                     ItemSeparatorComponent={() => {
                         return (<View style={{height: 5}}/>)
                     }}
                 />
-                <Button onPress={() => {this.props.navigation.navigate('LawyerProfile')}} title='Profile'/>
+                <Button onPress={() => {this.props.navigation.navigate('LawyerProfile')}}
+                        title={I18n.curLang.case_search.profile}/>
             </View>
         )
 
@@ -252,8 +360,7 @@ const Jtheme = {
 
     BackButton: {
         color: '#cc7832',
-        paddingLeft: 0,
-        paddingRight: 0,
+        paddingHorizontal: 0,
         paddingTop: 0,
         paddingBottom: 100,
         marginTop: -5,
@@ -262,10 +369,13 @@ const Jtheme = {
 
     Button: {
         color: '#cc7832',
-        paddingLeft: 70,
-        paddingRight: 70,
+        paddingHorizontal: 70,
         paddingTop: 10,
         paddingBottom: 10,
+    },
+
+    ContactContainer: {
+        marginVertical: 10
     },
 
     Container: {
@@ -293,21 +403,20 @@ const Jtheme = {
         flexDirection: 'column',
         color: '#112853',
         justifyContent: 'center',
-        fontSize: 20,
+        fontSize: 15,
         paddingTop: 5,
-        paddingLeft: 10,
-        paddingRight: 10,
+        paddingHorizontal: 10,
         borderTopWidth: 7,
         borderBottomWidth: 3
     },
 
     InputText: {
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         flexDirection: 'column',
         flex: .5,
         color: '#112853',
         justifyContent: 'center',
-        fontSize: 15,
+        fontSize: 10,
         paddingBottom: 5,
         paddingLeft: 10,
         paddingRight: 50,

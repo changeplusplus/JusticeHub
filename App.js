@@ -40,14 +40,11 @@ const ClientTabNav = createBottomTabNavigator({
 });
 
 const LawyerTabNav = createBottomTabNavigator({
-    /*CurrentCases: {
-
-    },
-    AllCases: {
-
-    },*/
     ViewProfile: {
         screen: LawyerProfile
+    },
+    CaseSearch: {
+        screen: CaseSearch
     }
 }, {
     tabBarPosition: 'bottom'
@@ -61,12 +58,6 @@ const MainStack = createStackNavigator({
 
     LoadApp: {
         screen: LoadApp
-    },
-    ChatEntry: {
-        screen: ChatEntry
-    },
-    Chat: {
-        screen: ChatImpl
     },
     Login: {
         screen: Login
