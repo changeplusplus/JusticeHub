@@ -13,6 +13,7 @@ import CaseSearch from "./Screens/Cases/CaseSearch";
 //import CaseList from "./Screens/Cases/CaseList";
 import ClientCases from "./Screens/Cases/ClientCases";
 import EditClientProfile from "./Screens/Profile/EditClientProfile";
+import CreateCase from "./Screens/Cases/CreateCase";
 
 // API information in firebase-config.js
 // firebase.initializeApp(config);
@@ -81,6 +82,9 @@ const MainStack = createStackNavigator({
     },
     CaseSearch: {
         screen: CaseSearch
+    },
+    CreateCase: {
+        screen: CreateCase
     }
 }, {
 

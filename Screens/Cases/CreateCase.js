@@ -7,7 +7,7 @@ import Modal from "react-native-modal";
 import * as firebase from 'firebase';
 import {CheckBox} from "react-native-elements";
 const { width, height } = Dimensions.get('window');
-export default class ClientCases extends Component {
+export default class CreateCase extends Component {
 
     constructor(props) {
         super(props);
@@ -55,17 +55,16 @@ export default class ClientCases extends Component {
             );}
         else{
             if (this.state.existingCase){
-                this.props.navigation.navigate('createCase');
-            } else {
-                return  (
-                    <View style={{
-                        flex: 1, flexDirection: 'column', justifyContent: 'center',
-                        alignItems: 'stretch'
-                    }}>
-
-                    </View>
-                )
+                this.props.navigation.navigate('createCase')
             }
+            return  (
+                <View style={{
+                    flex: 1, flexDirection: 'column', justifyContent: 'center',
+                    alignItems: 'stretch'
+                }}>
+
+                </View>
+            )
         }
             // return (
 
