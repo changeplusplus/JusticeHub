@@ -24,8 +24,13 @@ class LawyerProfile extends Component {
         console.log('Lawyer lang:', I18n.curLang);
     return (
       <View>
+<<<<<<< HEAD
           <Text h1 style={Jtheme.Text}>My Profile</Text>
             <Button style={Jtheme.Button} onPress={this._caseSearch}
+=======
+          <Text h1 style={Jtheme.Text}>{I18n.curLang.lawyer_profile.my_profile}</Text>
+            <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('CaseSearch')}}
+>>>>>>> e62b1d89eb605c08eeb7cee4c5123f9d423aeb60
                     title={I18n.curLang.lawyer_profile.find_cases}/>
             <Button style={Jtheme.Button} onPress={this._openWhatsApp}
                     title={I18n.curLang.lawyer_profile.messages}/>

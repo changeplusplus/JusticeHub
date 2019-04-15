@@ -43,6 +43,15 @@
     "logout": "الخروج"
   },
 
+  "lawyer_profile": {
+    "my_profile": "ملفي",
+    "whatsApp_alert": "الرجاء تثبيت WhatsApp للمتابعة",
+    "find_cases": "البحث عن الحالات",
+    "messages": "رسائل",
+    "edit_profile": "تعديل الملف الشخصي",
+    "logout": "الخروج"
+  },
+
   "edit_client_profile": {
     "contact_question": "كيف ينبغي للمحامين الاتصال بك؟",
     "picker_email": "البريد الإلكتروني",
