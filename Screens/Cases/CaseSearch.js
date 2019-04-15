@@ -6,6 +6,7 @@ import {
 import Modal from "react-native-modal";
 import * as firebase from 'firebase';
 import { SearchBar } from 'react-native-elements';
+import I18n from '../../Utils/i18n';
 
 const { width, height } = Dimensions.get('window');
 export default class CaseSearch extends Component {
@@ -53,26 +54,23 @@ export default class CaseSearch extends Component {
         this.fetchCases();
     }
 
-        // FIXME - Connor - need these parameters from the client case
     _communicate = () => {
         const {clientName, clientPhone, clientEmail, prefersEmail} = this.state;
 
-        let greeting = "Hello " + clientName + ", my name is " + this.lawyerName + ". I saw your case and would like to help.";
+        let greeting = I18n.curLang.case_search.greeting_p1 + clientName + I18n.curLang.case_search.greeting_p2
+        + this.lawyerName + I18n.curLang.case_search.greeting_p3;
         console.log(greeting);
 
         if (prefersEmail) {
-            let contact = 'Contact ' + clientName + ' by email at: ' + clientEmail;
+            let contact = I18n.curLang.case_search.contact_p1 + clientName +
+                I18n.curLang.case_search.contact_p2 + clientEmail;
             this.setState({
                 contactInfo: contact
             });
 
-            /*return(
-                <Text> Contact {clientName} by email at: {clientEmail} </Text>
-            )*/
-
         } else { // prefers phone contact -- to WhatsApp with default message
             if (!Linking.canOpenURL('whatsapp://app')) {
-                alert('Please install WhatsApp to continue')
+                alert(I18n.curLang.case_search.whatsApp_alert)
             } else {
                 if (clientPhone !== null) {
                     Linking.openURL('whatsapp://send?text=' + greeting + '&phone=' + clientPhone)

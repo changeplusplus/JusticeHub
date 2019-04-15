@@ -117,5 +117,14 @@
     "picker_email": "Email",
     "picker_phone": "Phone",
     "submit": "Submit Case"
+  },
+
+  "case_search":{
+    "greeting_p1": "Hello",
+    "greeting_p2": ", my name is",
+    "greeting_p3": ". I saw your case and would like to help.",
+    "contact_p1": "Contact",
+    "contact_p2": " by email at: ",
+    "whatsApp_alert": "Please install WhatsApp to continue",
   }
 }
