@@ -14,32 +14,6 @@ import I18n from '../../Utils/i18n';
 import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
 class Login extends Component {
-
-    constructor(props) {
-        super(props);
-
-        let locale = '';
-
-        // On construction of the login page, check device language and set that
-        if (Platform.OS === 'android') {
-            // Get language
-            locale = NativeModules.I18nManager.localeIdentifier;
-        }
-        else if (Platform.OS === 'ios') {
-            locale = NativeModules.SettingsManager.settings.AppleLocale;
-        }
-
-        console.log('Locale: ' + locale);
-        // Check for each language and adjust accordingly
-        if (locale.includes('en_') || locale === 'en') {
-            I18n.changeLang('Eng');
-        } else if (locale.includes('ar_') || locale === 'ar') {
-            I18n.changeLang('Ara');
-        } else if (locale.includes('es_') || locale === 'es') {
-            I18n.changeLang('Esp');
-        }
-    }
-
     static navigationOptions = {
         header: null
     };
@@ -110,7 +84,7 @@ class Login extends Component {
             .then(() => {
                 // Get userId
                 let userId = firebase.auth().currentUser.uid;
-                var isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
+                let isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
                 let thisObj = this;
                 isLawyerRef.on('value', (snapshot) => {
                     let isLawyer = (snapshot.val() !== null);
