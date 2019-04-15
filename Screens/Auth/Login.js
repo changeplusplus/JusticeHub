@@ -111,7 +111,7 @@ class Login extends Component {
                             // Load client data just to grab language
                             // Todo: This loads a lot of data every time, probably excessive
                             firebase.database().ref('cases/' + userId).on('value', (snap2) => {
-                                I18n.curLang = snap2.val().language;
+                                I18n.changeLang(snap2.val().language);
 
                                 navigate('ClientTabNav');
                             });
