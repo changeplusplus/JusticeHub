@@ -45,6 +45,7 @@
   },
 
   "lawyer_profile": {
+    "my_profile": "Mi perfil",
     "whatsApp_alert": "Por favor, instale WhatsApp para continuar",
     "find_cases": "Encontrar casos",
     "messages": "Mensajes",
