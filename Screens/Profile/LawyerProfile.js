@@ -5,16 +5,21 @@ import { SecureStore } from 'expo';
 import DataStorage from "../../DataStorage";
 import CaseSearch from "../Cases/CaseSearch";
 import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
+import I18n from '../../Utils/i18n';
 
 class LawyerProfile extends Component {
   render() {
     return (
       <View>
           <Text h1 style={Jtheme.Text}>My Profile</Text>
-            <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('CaseSearch')}} title='Find Cases'/>
-            <Button style={Jtheme.Button} onPress={this._openWhatsApp} title='WhatsApp'/>
-            <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('SetupLawyerProfile')}} title='Edit Profile'/>
-            <Button style={Jtheme.Button} onPress={this._logout} title='Log Out' />
+            <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('CaseSearch')}}
+                    title={I18n.curLang.lawyer_profile.find_cases}/>
+            <Button style={Jtheme.Button} onPress={this._openWhatsApp}
+                    title={I18n.curLang.lawyer_profile.messages}/>
+            <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('SetupLawyerProfile')}}
+                    title={I18n.curLang.lawyer_profile.edit_profile}/>
+            <Button style={Jtheme.Button} onPress={this._logout}
+                    title={I18n.curLang.lawyer_profile.logout}/>
 
       </View>
     )
@@ -24,7 +29,7 @@ class LawyerProfile extends Component {
         if (Linking.canOpenURL('whatsapp://app')) {
             Linking.openURL('whatsapp://app')
         } else {
-            alert('Please install WhatsApp to continue')
+            alert(I18n.curLang.lawyer_profile.whatsApp_alert)
         }
     };
 

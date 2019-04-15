@@ -6,6 +6,7 @@ import {
 import Modal from "react-native-modal";
 import * as firebase from 'firebase';
 import {CheckBox} from "react-native-elements";
+import I18n from '../../Utils/i18n';
 const { width, height } = Dimensions.get('window');
 export default class ClientCases extends Component {
 

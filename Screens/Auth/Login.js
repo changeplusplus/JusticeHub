@@ -6,21 +6,14 @@
 
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
-import {TextInput, StyleSheet, TouchableOpacity, TouchableHighlight, Picker} from 'react-native';
+import {TextInput, StyleSheet, ScrollView, Platform, NativeModules, Picker} from 'react-native';
 import {InputBlock} from "../../Components/InputBlock";
 import DataStorage from "../../DataStorage";
-import i18n from 'i18next';
+import I18n from '../../Utils/i18n';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button, Text, ThemeConsumer, ThemeProvider} from "react-native-elements";
 
-import { strings } from '../../Utils/i18n';
-
 class Login extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     static navigationOptions = {
         header: null
     };
@@ -33,48 +26,55 @@ class Login extends Component {
 
     render() {
         return (
-            <ThemeProvider style={Jtheme.backgroundColor}>
+            <ThemeProvider style={[Jtheme.backgroundColor, Jtheme.MainContainer]}>
+                <ScrollView>
 
-                <Text h1 style={Jtheme.Text}>{strings('login_page.welcome')}</Text>
-                <Text h4 style={Jtheme.Text}>A digital platform for accessing and enabling justice</Text>
+                <Text h1 style={Jtheme.Text}>{I18n.curLang.login_page.welcome}</Text>
+                <Text h4 style={Jtheme.Text}>{I18n.curLang.login_page.desc}</Text>
 
                 <TextInput style={Jtheme.InputText}
-                           placeholder={strings('login_page.email')}
+                           placeholder={I18n.curLang.login_page.email}
                            state='email'
                            onChangeText={(email) => this.setState({email})}/>
 
                 <TextInput style={Jtheme.InputText}
-                           placeholder={strings('login_page.password')}
+                           placeholder={I18n.curLang.login_page.password}
                            state='password'
                            onChangeText={(password) => this.setState({password})}
                            secureTextEntry={true}/>
 
-                <Button style={Jtheme.Button} onPress={this._login} title={strings('login_page.login')}/>
-                <Button style={Jtheme.Button} onPress={this._navToSignup} title={strings('login_page.signup')}/>
-                <Button style={Jtheme.Button} title={strings('login_page.forgotPass')}/>
+                <Button style={Jtheme.Button} onPress={this._login} title={I18n.curLang.login_page.login}/>
+                <Button style={Jtheme.Button} onPress={this._navToSignup} title={I18n.curLang.login_page.signUp}/>
+                <Button style={Jtheme.Button} title={I18n.curLang.login_page.forgotPass}/>
 
-                {/*<Text h5 style={Jtheme.Text}> {strings('login_page.selectLang')} </Text>*/}
-                {/*<Picker style={Jtheme.Text}*/}
-                {/*selectedValue={this.state.currentLanguage}*/}
-                {/*onValueChange={(language) => this.setState({currentLanguage:language})}>*/}
-                {/*<Picker.Item label='Arabic' value={'Arabic'}/>*/}
-                {/*<Picker.Item label='English' value={'English'}/>*/}
-                {/*<Picker.Item label='Spanish' value={'Spanish'}/>*/}
-                {/*</Picker>*/}
-                {/*<Button style={Jtheme.Button} onPress={this._changeLanguage} title='Apply'/>*/}
+                <Text h5 style={Jtheme.Text}> {I18n.curLang.login_page.selectLang} </Text>
+                <Picker style={Jtheme.Text}
+                    selectedValue={this.state.currentLanguage}
+                    onValueChange={(language) => this.setState({currentLanguage:language})}>
+
+                    <Picker.Item label={I18n.curLang.login_page.arabic} value='Arabic'/>
+                    <Picker.Item label={I18n.curLang.login_page.english} value='English'/>
+                    <Picker.Item label={I18n.curLang.login_page.spanish} value='Spanish'/>
+                </Picker>
+                <Button style={Jtheme.Button} onPress={this._changeLanguage} title={I18n.curLang.login_page.apply}/>
+                </ScrollView>
             </ThemeProvider>
         );
     }
 
-    // _changeLanguage = () => {
-    //     if (this.state.currentLanguage === 'English') {
-    //         languages.setLanguage('eng');
-    //     } else if (this.state.currentLanguage === 'Arabic'){
-    //             languages.setLanguage('ara');
-    //     } else if (this.state.currentLanguage === 'Spanish') {
-    //         languages.setLanguage('esp');
-    //     }
-    // };
+    _changeLanguage = () => {
+        if (this.state.currentLanguage === 'English') {
+            I18n.changeLang('Eng')
+        } else if (this.state.currentLanguage === 'Arabic') {
+            I18n.changeLang('Ara');
+        }
+        else if (this.state.currentLanguage === 'Spanish') {
+            I18n.changeLang('Esp');
+        }
+
+        // Following language change, must change state to force rerender
+        this.setState(this.state);
+    };
 
 
     _login = () => {
@@ -84,15 +84,25 @@ class Login extends Component {
             .then(() => {
                 // Get userId
                 let userId = firebase.auth().currentUser.uid;
-                var isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
+                let isLawyerRef = firebase.database().ref('lawyerProfiles/' + userId);
                 let thisObj = this;
-                isLawyerRef.on('value', function(snapshot) {
+                isLawyerRef.on('value', (snapshot) => {
                     let isLawyer = (snapshot.val() !== null);
                     const {navigate} = thisObj.props.navigation;
+
+                    // Load language for lawyers
+                    I18n.curLang = snapshot.val().language;
+
                     if (isLawyer) {
                         navigate('LawyerTabNav');
                     } else {
-                        navigate('ClientTabNav');
+                        // Load client data just to grab language
+                        // Todo: This loads a lot of data every time, probably excessive
+                        firebase.database().ref('cases/' + userId).on('value', (snap) => {
+                            I18n.curLang = snap.val().language;
+
+                            navigate('ClientTabNav');
+                        });
                     }
                 });
                 // console.log('Logged in');
@@ -122,6 +132,11 @@ class Login extends Component {
 const Jtheme = {
 
     backgroundColor: '#112853',
+
+    MainContainer: {
+        flex: 1,
+        marginVertical: 100
+    },
 
     Button: {
         color: '#cc7832',
