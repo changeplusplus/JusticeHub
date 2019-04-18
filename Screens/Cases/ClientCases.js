@@ -55,7 +55,7 @@ export default class ClientCases extends Component {
                 </View>
             );}
         else{
-            if (this.state.existingCase){
+            if (!this.state.existingCase){
                 this.props.navigation.navigate('createCase');
             } else {
                 return  (
