@@ -61,9 +61,9 @@ const MainStack = createStackNavigator({
     //     screen: CaseList
     // },
 
-    LoadApp: {
+    /*LoadApp: {
         screen: LoadApp
-    },
+    },*/
     Login: {
         screen: Login
     },
