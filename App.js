@@ -12,6 +12,7 @@ import AdminProfile from "./Screens/Profile/AdminProfile";
 import Fire from './Fire';
 import CaseSearch from "./Screens/Cases/CaseSearch";
 import LawyerAuth from "./Screens/Admin/LawyerAuth";
+import {YellowBox} from 'react-native';
 //import CaseList from "./Screens/Cases/CaseList";
 import ClientCases from "./Screens/Cases/ClientCases";
 import EditClientProfile from "./Screens/Profile/EditClientProfile";
@@ -22,6 +23,12 @@ let fire = new Fire();
 fire.init();
 
 console.disableYellowBox = true;
+
+/* Todo: Remove "Require cycle" warning from console. Require cycle is not an issue in our code, but in
+ * the expo build itself. Fixed in later versions of the sdk, but not worth upgrading at the moment
+ * https://github.com/expo/expo/issues/2538\
+ * For some reason YellowBox.ignoreWarnings() doesn't work...
+ */
 
 const ClientTabNav = createBottomTabNavigator({
     /*CreateCase: {

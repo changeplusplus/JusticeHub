@@ -23,42 +23,40 @@ class Login extends Component {
     state = {
         email: '',
         password: '',
-        currentLanguage: 'English',
+        currentLanguage: '',
     };
 
     render() {
         return (
             <ThemeProvider style={[Jtheme.backgroundColor, Jtheme.MainContainer]}>
                 <ScrollView>
+                    <Text h1 style={Jtheme.Text}>{I18n.curLang.login_page.welcome}</Text>
+                    <Text h4 style={Jtheme.Text}>{I18n.curLang.login_page.desc}</Text>
 
-                <Text h1 style={Jtheme.Text}>{I18n.curLang.login_page.welcome}</Text>
-                <Text h4 style={Jtheme.Text}>{I18n.curLang.login_page.desc}</Text>
+                    <TextInput style={Jtheme.InputText}
+                               placeholder={I18n.curLang.login_page.email}
+                               state='email'
+                               onChangeText={(email) => this.setState({email})}/>
 
-                <TextInput style={Jtheme.InputText}
-                           placeholder={I18n.curLang.login_page.email}
-                           state='email'
-                           onChangeText={(email) => this.setState({email})}/>
+                    <TextInput style={Jtheme.InputText}
+                               placeholder={I18n.curLang.login_page.password}
+                               state='password'
+                               onChangeText={(password) => this.setState({password})}
+                               secureTextEntry={true}/>
 
-                <TextInput style={Jtheme.InputText}
-                           placeholder={I18n.curLang.login_page.password}
-                           state='password'
-                           onChangeText={(password) => this.setState({password})}
-                           secureTextEntry={true}/>
+                    <Button style={Jtheme.Button} onPress={this._login} title={I18n.curLang.login_page.login}/>
+                    <Button style={Jtheme.Button} onPress={this._navToSignup} title={I18n.curLang.login_page.signUp}/>
+                    <Button style={Jtheme.Button} title={I18n.curLang.login_page.forgotPass}/>
 
-                <Button style={Jtheme.Button} onPress={this._login} title={I18n.curLang.login_page.login}/>
-                <Button style={Jtheme.Button} onPress={this._navToSignup} title={I18n.curLang.login_page.signUp}/>
-                <Button style={Jtheme.Button} title={I18n.curLang.login_page.forgotPass}/>
+                    <Text h5 style={Jtheme.Text}> {I18n.curLang.login_page.selectLang} </Text>
+                    <Picker selectedValue={this.state.currentLanguage}
+                            onValueChange={(language) => this.setState({currentLanguage: language})}>
 
-                <Text h5 style={Jtheme.Text}> {I18n.curLang.login_page.selectLang} </Text>
-                <Picker style={Jtheme.Text}
-                    selectedValue={this.state.currentLanguage}
-                    onValueChange={(language) => this.setState({currentLanguage:language})}>
-
-                    <Picker.Item label={I18n.curLang.login_page.arabic} value='Arabic'/>
-                    <Picker.Item label={I18n.curLang.login_page.english} value='English'/>
-                    <Picker.Item label={I18n.curLang.login_page.spanish} value='Spanish'/>
-                </Picker>
-                <Button style={Jtheme.Button} onPress={this._changeLanguage} title={I18n.curLang.login_page.apply}/>
+                        <Picker.Item label={I18n.curLang.login_page.arabic} value='Arabic'/>
+                        <Picker.Item label={I18n.curLang.login_page.english} value='English'/>
+                        <Picker.Item label={I18n.curLang.login_page.spanish} value='Spanish'/>
+                    </Picker>
+                    <Button style={Jtheme.Button} onPress={this._changeLanguage} title={I18n.curLang.login_page.apply}/>
                 </ScrollView>
             </ThemeProvider>
         );
@@ -131,7 +129,7 @@ class Login extends Component {
                 });
             })
             .catch((error) => {
-                alert(error);
+                alert(error.message);
             })
     };
 
