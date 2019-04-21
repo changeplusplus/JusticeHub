@@ -52,37 +52,37 @@ const MainStack = createStackNavigator({
     // CaseList: {
     //     screen: CaseList
     // },
-
-    LoadApp: {
-        screen: LoadApp
-    },
-    Login: {
-        screen: Login
-    },
-    SignUp: {
-        screen: SignUp
-    },
-    SetupLawyerProfile: {
-        screen: SetupLawyerProfile
-    },
-    EditClientProfile: {
-        screen: EditClientProfile
-    },
-    ClientTabNav: {
-        screen: ClientTabNav
-    },
-    LawyerTabNav: {
-        screen: LawyerTabNav
-    },
-    ClientCases: {
-        screen: ClientCases
-    },
-    ClientProfile: {
-        screen: ClientProfile
-    },
-    CaseSearch: {
-        screen: CaseSearch
-    },
+    //
+    // LoadApp: {
+    //     screen: LoadApp
+    // },
+    // Login: {
+    //     screen: Login
+    // },
+    // SignUp: {
+    //     screen: SignUp
+    // },
+    // SetupLawyerProfile: {
+    //     screen: SetupLawyerProfile
+    // },
+    // EditClientProfile: {
+    //     screen: EditClientProfile
+    // },
+    // ClientTabNav: {
+    //     screen: ClientTabNav
+    // },
+    // LawyerTabNav: {
+    //     screen: LawyerTabNav
+    // },
+    // ClientCases: {
+    //     screen: ClientCases
+    // },
+    // ClientProfile: {
+    //     screen: ClientProfile
+    // },
+    // CaseSearch: {
+    //     screen: CaseSearch
+    // },
     CreateCase: {
         screen: CreateCase
     }
@@ -98,9 +98,10 @@ const MainStack = createStackNavigator({
 class App extends React.Component {
     // SignUp component is a placeholder before we use react-navigation
     render() {
-        return (
-            <MainStack/>
-        );
+        firebase.auth().signInWithEmailAndPassword('Jakeclient@1.com','1234567')
+        .then(() => {return (<MainStack/>);});
+        return null;
+
     }
 }
 
