@@ -7,6 +7,8 @@ import Modal from "react-native-modal";
 import Swiper from 'react-native-swiper'
 import * as firebase from 'firebase';
 import {CheckBox, Slider} from "react-native-elements";
+import DatePicker from "react-native-datepicker";
+import I18n from "../../Utils/i18n";
 const { width, height } = Dimensions.get('window');
 export default class CreateCase extends Component {
 
@@ -36,7 +38,7 @@ export default class CreateCase extends Component {
             arrestingOfficer: '',
             torture: '',
             specialNotes: '',
-            lawyer: ''
+            lawyer: '',
         };
         this.loadData();
     }
@@ -46,6 +48,7 @@ export default class CreateCase extends Component {
     };
 
     transitionFunc = () => {
+        this.setState({test:!this.state.test});
         this.swiper.scrollBy(1);
     };
 
@@ -65,6 +68,10 @@ export default class CreateCase extends Component {
                     alignItems: 'stretch'
                 }}>
                     <Button title={'Modal'} onPress={this.toggleModal}/>
+                    <Picker onValueChange={(language) => this.setState({currentLanguage:language})}>
+                        <Picker.Item label={"Myself"} value="Arabic"/>
+                        <Picker.Item label={"Someone Else"} value="English"/>
+                    </Picker>
                     <Modal isVisible={this.state.isModalVisible}
                            animationIn='bounceIn'
                            animationInTiming={700}
@@ -81,11 +88,32 @@ export default class CreateCase extends Component {
                             opacity:100
                         }}>
                             <Swiper ref={swiper => {this.swiper = swiper}} loop={false} bounces={true} showsButtons={true}>
-                                <View style={{flex:1, backgroundColor: '#47ddff',borderRadius: 70}}>
-                                    <Button title={'text'} onPress={this.transitionFunc}/>
-                                </View>
-                                    <View style={{flex:1, backgroundColor: 'yellow',borderRadius: 70}}/>
-                                <View style={{flex:1, backgroundColor: 'blue',borderRadius: 70}}/>
+                                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                                    <View style={{
+                                        flex: 1,
+                                        flexDirection: 'column',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        backgroundColor: '#47ddff',
+                                        borderRadius: 70,
+                                        borderWidth: 0,
+                                    }}>
+                                        <Text style={{
+                                            fontWeight:'bold',
+                                            color: 'black',
+                                            fontSize: 35,
+                                        }}>Are you reporting an arrest of yourself or someone else?</Text>
+                                        <Picker style={{width: 300}} selectedValue={this.state.reportingOther}
+                                                onValueChange={(selection) => this.setState({reportingOther:selection})}>
+                                            <Picker.Item label={"Myself"} value={false}/>
+                                            <Picker.Item label={"Someone Else"} value={true}/>
+                                        </Picker>
+                                        <Button style={Jtheme.Button} onPress={() => alert('word')} title={'Next'}/>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                                {this.test()}
+                                <View style={{flex:1, backgroundColor: 'yellow', borderRadius: 70}}/>
+                                <View style={{flex:1, backgroundColor: 'blue', borderRadius: 70}}/>
                             </Swiper>
                         </View>
                     </Modal>
@@ -93,6 +121,11 @@ export default class CreateCase extends Component {
             )
         }
     }
+    test = () => {
+        return (
+            <View style={{flex: 1, backgroundColor: 'pink', borderRadius: 70}}/>
+        );
+    };
 
     submitCase = () => {
         const {reportingOther, name, occupation, address, DOB, gender,
