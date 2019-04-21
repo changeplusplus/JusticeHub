@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://up-prv.anonymous.justicehub.exp.direct",
+  "packagerNgrokUrl": "https://packager.up-prv.anonymous.justicehub.exp.direct",
+  "ngrokPid": 72170
 }
