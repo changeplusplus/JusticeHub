@@ -59,9 +59,8 @@ export default class SignUp extends Component {
 
                     <Text h5 style={Jtheme.Text}>{I18n.curLang.signup_page.user_type}</Text>
 
-                    <Picker style={Jtheme.Text}
-                        selectedValue={this.state.isLawyer}
-                        onValueChange={(itemValue) => this.setState({isLawyer: itemValue})}>
+                    <Picker selectedValue={this.state.isLawyer}
+                            onValueChange={(itemValue) => this.setState({isLawyer: itemValue})}>
 
                         <Picker.Item label={I18n.curLang.signup_page.lawyer} value={true}/>
                         <Picker.Item label={I18n.curLang.signup_page.client} value={false}/>

@@ -15,37 +15,7 @@ class LoadApp extends Component {
     }
 
     async _autoLogin() {
-        // let email = await SecureStore.getItemAsync('lastUser');
-        const {navigate} = this.props.navigation;
-
-        let email = '-';  // TODO: This temporarily eliminates auto sign in
-
-        if (email !== '-' && email) {
-            email = email.substring(0, email.indexOf('-at_')) + '@' + email.substring(email.indexOf('-at_') + 4, email.length);
-
-            console.log('Email:', email);
-
-            let password = await SecureStore.getItemAsync('password');
-            console.log('Pass:', password);
-
-            firebase.auth().signInWithEmailAndPassword(email, password)
-                .then(() => {
-                    // DataStorage.loadBasicData();
-                    // DataStorage.loadProfileData();
-
-                    if (DataStorage.IS_LAWYER) {
-                        navigate('LawyerTabNav');
-                    } else {
-                        navigate('ClientTabNav');
-                    }
-                })
-                .catch((error) => {
-                    alert('SignIn Error: ' + error.message);
-                    navigate('Login');
-                })
-        } else {
-            navigate('Login');
-        }
+        // navigate('Login');
     }
 
     render() {
