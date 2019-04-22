@@ -48,7 +48,7 @@ export default class CreateCase extends Component {
     }
 
     toggleModal = () => {
-        this.setState({isModalVisible: !this.state.isModalVisible});
+        this.setState({isModalVisible: !this.state.isModalVisible, pageIndex: 1});
     };
 
     render() {
@@ -92,38 +92,39 @@ export default class CreateCase extends Component {
                                             <Text style={Jtheme.HeaderText}>Arrested Person's Information</Text>
                                             <ScrollView scrollEnabled={false} style={{marginTop:5}}>
                                                 <Text style={Jtheme.InputText}>Full Name</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.arrName}
                                                     onChangeText={(text) => this.setState({arrName: text})}
                                                     width={250} height={30} maxLength={35}
                                                     borderWidth={1} borderColor={'blue'} textAlign={'center'}
                                                 />
                                                 <Text style={Jtheme.InputText}>Address</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.address}
                                                     multiline={true} placeholder="Street, City"
                                                     onChangeText={(text) => this.setState({address: text})}
                                                     width={250} height={30} maxLength={45}
                                                     borderWidth={1} borderColor={'blue'} textAlign={'center'}
                                                 />
                                                 <Text style={Jtheme.InputText}>Occupation</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.occupation}
+                                                    defaultValue={this.state.occupation}
                                                     onChangeText={(text) => this.setState({occupation: text})}
                                                     width={250} height={30} maxLength={35}
                                                     borderWidth={1} borderColor={'blue'} textAlign={'center'}
                                                 />
                                                 <Text style={Jtheme.InputText}>Gender</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.gender}
                                                     onChangeText={(text) => this.setState({gender: text})}
                                                     width={250} height={30} maxLength={35}
                                                     borderWidth={1} borderColor={'blue'} textAlign={'center'}
                                                 />
                                                 <Text style={Jtheme.InputText}>Phone</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.arrPhone}
                                                     onChangeText={(text) => this.setState({arrPhone: text})}
                                                     width={250} height={30} maxLength={35}
                                                     borderWidth={1} borderColor={'blue'} textAlign={'center'}
                                                 />
                                                 <Text style={Jtheme.InputText}>Email</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.arrEmail}
                                                     onChangeText={(text) => this.setState({arrEmail: text})}
                                                     width={250} height={30} maxLength={35}
                                                     borderWidth={1} borderColor={'blue'} textAlign={'center'}
@@ -145,7 +146,7 @@ export default class CreateCase extends Component {
                                                     onDateChange={(date) => {this.setState({DOB: date})}}
                                                 />
                                                 <Text style={Jtheme.InputText}>Prefered Method of Contact</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.preferedContact}
                                                     placeholder="Phone/Email"
                                                     onChangeText={(text) => this.setState({preferedContact: text})}
                                                     width={250} height={30} maxLength={35}
@@ -168,25 +169,25 @@ export default class CreateCase extends Component {
                                                     onDateChange={(date) => {this.setState({date: date})}}
                                                 />
                                                 <Text style={Jtheme.InputText}>Location of Arrest</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.locationArrest}
                                                     onChangeText={(text) => this.setState({locationArrest: text})}
                                                     width={250} height={30} maxLength={75}
                                                     borderWidth={1} borderColor={'blue'} textAlign={'center'}
                                                 />
                                                 <Text style={Jtheme.InputText}>Detention Center</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.detentionCenter}
                                                     onChangeText={(text) => this.setState({detentionCenter: text})}
                                                     width={250} height={30} maxLength={75}
                                                     borderWidth={1} borderColor={'blue'} textAlign={'center'}
                                                 />
                                                 <Text style={Jtheme.InputText}>Arresting Officer's Name</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.arrestingOfficer}
                                                     onChangeText={(text) => this.setState({arrestingOfficer: text})}
                                                     width={250} height={30} maxLength={35}
                                                     borderWidth={1} borderColor={'blue'} textAlign={'center'}
                                                 />
                                                 <Text style={Jtheme.InputText}>Any Methods of Torture Used</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.torture}
                                                     onChangeText={(text) => this.setState({torture: text})}
                                                     width={250} height={30} maxLength={35}
                                                     borderWidth={1} borderColor={'blue'} textAlign={'center'}
@@ -201,14 +202,14 @@ export default class CreateCase extends Component {
                                             <Text style={Jtheme.HeaderText}>Case Information</Text>
                                             <ScrollView scrollEnabled={false} style={{marginTop:-75}}>
                                                 <Text style={Jtheme.InputText}>Offense</Text>
-                                                <TextInput
+                                                <TextInput defaultValue={this.state.offense}
                                                     placeholder="Brief description"
                                                     onChangeText={(text) => this.setState({offense: text})}
                                                     width={250} height={30} maxLength={35}
                                                     borderWidth={1} borderColor={'blue'} textAlign={'center'}
                                                 />
                                                 <Text style={Jtheme.InputText}>Details</Text>
-                                                <TextInput multiline={true}
+                                                <TextInput multiline={true} defaultValue={this.state.details}
                                                            placeholder="Detailed description"
                                                            onChangeText={(text) => this.setState({details: text})}
                                                            width={250} height={250} maxLength={1500}
@@ -223,7 +224,7 @@ export default class CreateCase extends Component {
                                         <View style={Jtheme.Page}>
                                             <Text style={Jtheme.HeaderText}>Any Additional Notes</Text>
                                             <ScrollView scrollEnabled={false} style={{marginTop:-75}}>
-                                                <TextInput multiline={true}
+                                                <TextInput multiline={true} defaultValue={this.state.specialNotes}
                                                            onChangeText={(text) => this.setState({specialNotes: text})}
                                                            width={250} height={250} maxLength={1500}
                                                            borderWidth={1} borderColor={'blue'} textAlign={'center'}
