@@ -17,9 +17,8 @@ export default class CreateCase extends Component {
         this.state = {
             //just for component use
             isModalVisible: false,
-            pageIndex: 0,
-            numPages: 5,
-            dataLoaded: false,
+            pageIndex: 1, //1-based indexing
+            numPages: 6,
             previousButton: true,
             nextButton:  true,
             //stored data
@@ -33,7 +32,7 @@ export default class CreateCase extends Component {
             arrName: '',
             arrPhone: '',
             arrEmail: '',
-            prefersEmail: false,
+            preferedContact: '',
             offense: '',
             details: '',
             date: '',
@@ -52,11 +51,6 @@ export default class CreateCase extends Component {
         this.setState({isModalVisible: !this.state.isModalVisible});
     };
 
-    transitionFunc = () => {
-        this.setState({test:!this.state.test});
-        this.swiper.scrollBy(1);
-    };
-
     render() {
             return  (
                 <View style={{
@@ -64,10 +58,6 @@ export default class CreateCase extends Component {
                     alignItems: 'stretch'
                 }}>
                     <Button title={'Modal'} onPress={this.toggleModal}/>
-                    <Picker onValueChange={(language) => this.setState({currentLanguage:language})}>
-                        <Picker.Item label={"Myself"} value="Arabic"/>
-                        <Picker.Item label={"Someone Else"} value="English"/>
-                    </Picker>
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <Modal isVisible={this.state.isModalVisible}
                                animationIn='bounceIn'
@@ -85,17 +75,10 @@ export default class CreateCase extends Component {
                                 opacity:100
                             }}>
                                 <Swiper ref={swiper => {this.swiper = swiper}}
-                                        loop={false} bounces={true}
-                                        showsPagination={false} scrollEnabled={false}>
+                                        loop={false} scrollEnabled={false}>
                                         <View style={Jtheme.Page}>
-                                            <Text style={{
-                                                flex:1,
-                                                marginTop: 70,
-                                                fontWeight:'bold',
-                                                color: 'black',
-                                                fontSize: 35,
-                                            }}>Are you reporting an arrest of yourself or someone else?</Text>
-                                            <Picker style={{flex:1, marginTop: -200, width: 300}} selectedValue={this.state.reportingOther}
+                                            <Text style={Jtheme.HeaderText}>Are you reporting an arrest of yourself or someone else?</Text>
+                                            <Picker style={{flex:2, width: 300}} selectedValue={this.state.reportingOther}
                                                     onValueChange={(selection) => this.setState({reportingOther:selection})}>
                                                 <Picker.Item label={"Myself"} value={false}/>
                                                 <Picker.Item label={"Someone Else"} value={true}/>
@@ -106,15 +89,150 @@ export default class CreateCase extends Component {
                                             </View>
                                         </View>
                                         <View style={Jtheme.Page}>
+                                            <Text style={Jtheme.HeaderText}>Arrested Person's Information</Text>
+                                            <ScrollView scrollEnabled={false} style={{marginTop:5}}>
+                                                <Text style={Jtheme.InputText}>Full Name</Text>
+                                                <TextInput
+                                                    onChangeText={(text) => this.setState({arrName: text})}
+                                                    width={250} height={30} maxLength={35}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                                <Text style={Jtheme.InputText}>Address</Text>
+                                                <TextInput
+                                                    multiline={true} placeholder="Street, City"
+                                                    onChangeText={(text) => this.setState({address: text})}
+                                                    width={250} height={30} maxLength={45}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                                <Text style={Jtheme.InputText}>Occupation</Text>
+                                                <TextInput
+                                                    onChangeText={(text) => this.setState({occupation: text})}
+                                                    width={250} height={30} maxLength={35}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                                <Text style={Jtheme.InputText}>Gender</Text>
+                                                <TextInput
+                                                    onChangeText={(text) => this.setState({gender: text})}
+                                                    width={250} height={30} maxLength={35}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                                <Text style={Jtheme.InputText}>Phone</Text>
+                                                <TextInput
+                                                    onChangeText={(text) => this.setState({arrPhone: text})}
+                                                    width={250} height={30} maxLength={35}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                                <Text style={Jtheme.InputText}>Email</Text>
+                                                <TextInput
+                                                    onChangeText={(text) => this.setState({arrEmail: text})}
+                                                    width={250} height={30} maxLength={35}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                            </ScrollView>
                                             <View>
                                                 {this.renderPreviousButton()}
                                                 {this.renderNextButton()}
                                             </View>
                                         </View>
                                         <View style={Jtheme.Page}>
+                                            <Text style={Jtheme.HeaderText}>Arrested Person's Information Cont.</Text>
+                                            <ScrollView scrollEnabled={false} style={{marginTop:-100}}>
+                                                <Text style={Jtheme.InputText}>Date of Birth</Text>
+                                                <DatePicker
+                                                    style={{width: 250}} date={this.state.DOB} mode="date"
+                                                    showIcon={false} placeholder="select date" format="MM-DD-YYYY"
+                                                    confirmBtnText="Confirm" cancelBtnText="Cancel"
+                                                    onDateChange={(date) => {this.setState({DOB: date})}}
+                                                />
+                                                <Text style={Jtheme.InputText}>Prefered Method of Contact</Text>
+                                                <TextInput
+                                                    placeholder="Phone/Email"
+                                                    onChangeText={(text) => this.setState({preferedContact: text})}
+                                                    width={250} height={30} maxLength={35}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                            </ScrollView>
                                             <View>
                                                 {this.renderPreviousButton()}
                                                 {this.renderNextButton()}
+                                            </View>
+                                        </View>
+                                        <View style={Jtheme.Page}>
+                                            <Text style={Jtheme.HeaderText}>Arrest Information</Text>
+                                            <ScrollView scrollEnabled={false} style={{marginTop:-75}}>
+                                                <Text style={Jtheme.InputText}>Date of Arrest</Text>
+                                                <DatePicker
+                                                    style={{width: 250}} date={this.state.date} mode="date"
+                                                    showIcon={false} placeholder="select date" format="MM-DD-YYYY"
+                                                    confirmBtnText="Confirm" cancelBtnText="Cancel"
+                                                    onDateChange={(date) => {this.setState({date: date})}}
+                                                />
+                                                <Text style={Jtheme.InputText}>Location of Arrest</Text>
+                                                <TextInput
+                                                    onChangeText={(text) => this.setState({locationArrest: text})}
+                                                    width={250} height={30} maxLength={75}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                                <Text style={Jtheme.InputText}>Detention Center</Text>
+                                                <TextInput
+                                                    onChangeText={(text) => this.setState({detentionCenter: text})}
+                                                    width={250} height={30} maxLength={75}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                                <Text style={Jtheme.InputText}>Arresting Officer's Name</Text>
+                                                <TextInput
+                                                    onChangeText={(text) => this.setState({arrestingOfficer: text})}
+                                                    width={250} height={30} maxLength={35}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                                <Text style={Jtheme.InputText}>Any Methods of Torture Used</Text>
+                                                <TextInput
+                                                    onChangeText={(text) => this.setState({torture: text})}
+                                                    width={250} height={30} maxLength={35}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                            </ScrollView>
+                                            <View>
+                                                {this.renderPreviousButton()}
+                                                {this.renderNextButton()}
+                                            </View>
+                                        </View>
+                                        <View style={Jtheme.Page}>
+                                            <Text style={Jtheme.HeaderText}>Case Information</Text>
+                                            <ScrollView scrollEnabled={false} style={{marginTop:-75}}>
+                                                <Text style={Jtheme.InputText}>Offense</Text>
+                                                <TextInput
+                                                    placeholder="Brief description"
+                                                    onChangeText={(text) => this.setState({offense: text})}
+                                                    width={250} height={30} maxLength={35}
+                                                    borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                                <Text style={Jtheme.InputText}>Details</Text>
+                                                <TextInput multiline={true}
+                                                           placeholder="Detailed description"
+                                                           onChangeText={(text) => this.setState({details: text})}
+                                                           width={250} height={250} maxLength={1500}
+                                                           borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                            </ScrollView>
+                                            <View>
+                                                {this.renderPreviousButton()}
+                                                {this.renderNextButton()}
+                                            </View>
+                                        </View>
+                                        <View style={Jtheme.Page}>
+                                            <Text style={Jtheme.HeaderText}>Any Additional Notes</Text>
+                                            <ScrollView scrollEnabled={false} style={{marginTop:-75}}>
+                                                <TextInput multiline={true}
+                                                           onChangeText={(text) => this.setState({specialNotes: text})}
+                                                           width={250} height={250} maxLength={1500}
+                                                           borderWidth={1} borderColor={'blue'} textAlign={'center'}
+                                                />
+                                            </ScrollView>
+                                            <View>
+                                                {this.renderPreviousButton()}
+                                                <Button containerStyle={Jtheme.NextButton} onPress={this.submitCase}
+                                                        title={'Submit'}/>
                                             </View>
                                         </View>
                                 </Swiper>
@@ -139,7 +257,7 @@ export default class CreateCase extends Component {
     };
 
     renderPreviousButton = () => {
-        if (this.state.previousButton && this.state.pageIndex > 0){
+        if (this.state.previousButton && this.state.pageIndex > 1){
             return (
                 <Button containerStyle={Jtheme.PreviousButton} onPress={() => {
                     this.swiper.scrollBy(-1);
@@ -153,8 +271,8 @@ export default class CreateCase extends Component {
 
     submitCase = () => {
         const {reportingOther, name, occupation, address, DOB, gender,
-            arrName, arrPhone, arrEmail, prefersEmail, offense, details, date,
-            contacts, resolved, detentionCenter, locationArrest,
+            arrName, arrPhone, arrEmail, preferedContact, offense, details, date,
+            contacts, detentionCenter, locationArrest,
             arrestingOfficer, torture, specialNotes, lawyer} = this.state;
         let user = firebase.auth().currentUser;
         let userCase = firebase.database().ref("cases/" + user.uid);
@@ -169,12 +287,12 @@ export default class CreateCase extends Component {
             arrName: arrName,
             arrPhone: arrPhone,
             arrEmail: arrEmail,
-            prefersEmail: prefersEmail,
+            preferedContact: preferedContact,
             offense: offense,
             details: details,
             date: date,
             contacts: contacts,
-            resolved: resolved,
+            resolved: false,
             detentionCenter: detentionCenter,
             locationArrest: locationArrest,
             arrestingOfficer: arrestingOfficer,
@@ -215,25 +333,20 @@ const Jtheme = {
         borderWidth: 0,
     },
 
-    Input: {
-        flex: .5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderColor: '#CED0CE',
-        borderWidth: 1,
-        paddingLeft: 35,
+    HeaderText: {
+        flex:.70,
+        marginTop: 70,
+        fontWeight:'bold',
+        color: 'black',
+        fontSize: 35,
     },
 
     InputText: {
-        flex: 1,
-        alignItems: 'center',
-        fontWeight: 'bold',
-        flexDirection: 'column',
-        color: '#112853',
-        justifyContent: 'center',
+        textAlign: 'center',
+        color: 'black',
+        fontWeight:'bold',
         fontSize: 15,
-        paddingBottom: 10,
-        paddingLeft: 10,
-        paddingRight: 50,
+        marginBottom: 3,
+        marginTop: 7
     }
 };
