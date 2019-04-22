@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {
-    View, Text, Button, TextInput, TouchableOpacity,
+    View, Text, TextInput, TouchableOpacity,
     Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback, ScrollView, Picker
 } from 'react-native';
 import Modal from "react-native-modal";
 import Swiper from 'react-native-swiper'
 import * as firebase from 'firebase';
-import {CheckBox, Slider} from "react-native-elements";
+import {Button} from "react-native-elements";
 import DatePicker from "react-native-datepicker";
 import I18n from "../../Utils/i18n";
 const { width, height } = Dimensions.get('window');
@@ -15,9 +15,15 @@ export default class CreateCase extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            //just for component use
             isModalVisible: false,
-            existingCase: false,
+            pageIndex: 0,
+            numPages: 5,
             dataLoaded: false,
+            previousButton: true,
+            nextButton:  true,
+            //stored data
+            existingCase: false,
             reportingOther: false,
             name: '',
             occupation: '',
@@ -40,7 +46,6 @@ export default class CreateCase extends Component {
             specialNotes: '',
             lawyer: '',
         };
-        this.loadData();
     }
 
     toggleModal = () => {
@@ -53,15 +58,6 @@ export default class CreateCase extends Component {
     };
 
     render() {
-        if (!this.state.dataLoaded){
-            return (
-                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    {this.loadingScreen()}
-                </View>
-            );}
-        else{
             return  (
                 <View style={{
                     flex: 1, flexDirection: 'column', justifyContent: 'center',
@@ -72,59 +68,87 @@ export default class CreateCase extends Component {
                         <Picker.Item label={"Myself"} value="Arabic"/>
                         <Picker.Item label={"Someone Else"} value="English"/>
                     </Picker>
-                    <Modal isVisible={this.state.isModalVisible}
-                           animationIn='bounceIn'
-                           animationInTiming={700}
-                           hasBackdrop={false}
-                           backdropColor='blue'
-                           backdropOpacity={.4}
-                           onBackdropPress={this.toggleModal}>
-                        <View style={{
-                            flex: .75,
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            borderRadius: 70,
-                            opacity:100
-                        }}>
-                            <Swiper ref={swiper => {this.swiper = swiper}} loop={false} bounces={true} showsButtons={true}>
-                                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                                    <View style={{
-                                        flex: 1,
-                                        flexDirection: 'column',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        backgroundColor: '#47ddff',
-                                        borderRadius: 70,
-                                        borderWidth: 0,
-                                    }}>
-                                        <Text style={{
-                                            fontWeight:'bold',
-                                            color: 'black',
-                                            fontSize: 35,
-                                        }}>Are you reporting an arrest of yourself or someone else?</Text>
-                                        <Picker style={{width: 300}} selectedValue={this.state.reportingOther}
-                                                onValueChange={(selection) => this.setState({reportingOther:selection})}>
-                                            <Picker.Item label={"Myself"} value={false}/>
-                                            <Picker.Item label={"Someone Else"} value={true}/>
-                                        </Picker>
-                                        <Button style={Jtheme.Button} onPress={() => alert('word')} title={'Next'}/>
-                                    </View>
-                                </TouchableWithoutFeedback>
-                                {this.test()}
-                                <View style={{flex:1, backgroundColor: 'yellow', borderRadius: 70}}/>
-                                <View style={{flex:1, backgroundColor: 'blue', borderRadius: 70}}/>
-                            </Swiper>
-                        </View>
-                    </Modal>
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                        <Modal isVisible={this.state.isModalVisible}
+                               animationIn='bounceIn'
+                               animationInTiming={700}
+                               hasBackdrop={false}
+                               backdropColor='blue'
+                               backdropOpacity={.4}
+                               onBackdropPress={this.toggleModal}>
+                            <View style={{
+                                flex: .75,
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                borderRadius: 70,
+                                opacity:100
+                            }}>
+                                <Swiper ref={swiper => {this.swiper = swiper}}
+                                        loop={false} bounces={true}
+                                        showsPagination={false} scrollEnabled={false}>
+                                        <View style={Jtheme.Page}>
+                                            <Text style={{
+                                                flex:1,
+                                                marginTop: 70,
+                                                fontWeight:'bold',
+                                                color: 'black',
+                                                fontSize: 35,
+                                            }}>Are you reporting an arrest of yourself or someone else?</Text>
+                                            <Picker style={{flex:1, marginTop: -200, width: 300}} selectedValue={this.state.reportingOther}
+                                                    onValueChange={(selection) => this.setState({reportingOther:selection})}>
+                                                <Picker.Item label={"Myself"} value={false}/>
+                                                <Picker.Item label={"Someone Else"} value={true}/>
+                                            </Picker>
+                                            <View>
+                                                {this.renderPreviousButton()}
+                                                {this.renderNextButton()}
+                                            </View>
+                                        </View>
+                                        <View style={Jtheme.Page}>
+                                            <View>
+                                                {this.renderPreviousButton()}
+                                                {this.renderNextButton()}
+                                            </View>
+                                        </View>
+                                        <View style={Jtheme.Page}>
+                                            <View>
+                                                {this.renderPreviousButton()}
+                                                {this.renderNextButton()}
+                                            </View>
+                                        </View>
+                                </Swiper>
+                            </View>
+                        </Modal>
+                    </TouchableWithoutFeedback>
                 </View>
             )
-        }
     }
-    test = () => {
-        return (
-            <View style={{flex: 1, backgroundColor: 'pink', borderRadius: 70}}/>
-        );
+
+    renderNextButton = () => {
+        if (this.state.nextButton && this.state.pageIndex < this.state.numPages){
+            return (
+                <Button containerStyle={Jtheme.NextButton} onPress={() => {
+                    this.swiper.scrollBy(1);
+                    this.setState({pageIndex:this.state.pageIndex+1});
+                }} title={'Next'}/>
+            );
+        } else{
+            return null;
+        }
+    };
+
+    renderPreviousButton = () => {
+        if (this.state.previousButton && this.state.pageIndex > 0){
+            return (
+                <Button containerStyle={Jtheme.PreviousButton} onPress={() => {
+                    this.swiper.scrollBy(-1);
+                    this.setState({pageIndex:this.state.pageIndex-1});
+                }} title={'Previous'}/>
+            );
+        } else{
+            return null;
+        }
     };
 
     submitCase = () => {
@@ -164,75 +188,31 @@ export default class CreateCase extends Component {
                 alert(error);
             });
     };
-
-    loadData = () => {
-        let user = firebase.auth().currentUser;
-        let userCase = firebase.database().ref("cases/" + user.uid);
-        let stateVar = this;
-        userCase.once('value', function(snapshot){
-            let obj = snapshot.val();
-            if (obj.existingCase === null)
-                obj.existingCase = false;
-            stateVar.setState({
-                existingCase: obj.existingCase,
-                reportingOther: obj.reportingOther,
-                name: obj.name,
-                occupation: obj.occupation,
-                address: obj.address,
-                DOB: obj.DOB,
-                gender: obj.gender,
-                arrName: obj.arrName,
-                arrPhone: obj.arrPhone,
-                arrEmail: obj.arrEmail,
-                prefersEmail: obj.prefersEmail,
-                offense: obj.offense,
-                details: obj.details,
-                date: obj.date,
-                contacts: obj.contacts,
-                resolved: obj.resolved,
-                detentionCenter: obj.detentionCenter,
-                locationArrest: obj.locationArrest,
-                arrestingOfficer: obj.arrestingOfficer,
-                torture: obj.torture,
-                specialNotes: obj.specialNotes,
-                lawyer: obj.lawyer});
-        })
-            .then(() => {
-                this.setState({dataLoaded: true});
-            })
-            .catch((error) => {
-                Alert.alert("Error loading profile", error);
-            });
-    };
-
-    loadingScreen = () => {
-        return (
-            <View style={{flexDirection: 'row'}}>
-                <Text style={{
-                    fontSize: 32,
-                    fontWeight: 'bold',
-                    textAlign: 'center'
-                }}>Fetching Cases </Text>
-                <Image
-                    source={require('./loadingGif.gif')}
-                    style={{
-                        width: 50,
-                        height: 50,
-                    }}/>
-            </View>
-        )
-    };
-
 }
 
 const Jtheme = {
-    Button: {
+    NextButton: {
+        position:'absolute',
+        bottom:55,
+        left:25,
+        width:110
+    },
+
+    PreviousButton: {
+        position:'absolute',
+        bottom:55,
+        right:25,
+        width:110
+    },
+
+    Page: {
         flex: 1,
-        color: '#cc7832',
-        paddingLeft: 70,
-        paddingRight: 70,
-        paddingTop: 30,
-        paddingBottom: 30,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#47ddff',
+        borderRadius: 70,
+        borderWidth: 0,
     },
 
     Input: {
@@ -256,4 +236,4 @@ const Jtheme = {
         paddingLeft: 10,
         paddingRight: 50,
     }
-}
+};
