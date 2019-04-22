@@ -22,6 +22,7 @@
     "react-native-hide-show-password-input": "^1.0.7",
     "react-native-localize": "^1.1.1",
     "react-native-modal": "^7.0.2",
+    "react-native-swiper": "^1.5.14",
     "react-navigation": "^2.18.3",
     "react-password-mask": "^3.3.1"
   },

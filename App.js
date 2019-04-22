@@ -15,6 +15,9 @@ import LawyerAuth from "./Screens/Admin/LawyerAuth";
 //import CaseList from "./Screens/Cases/CaseList";
 import ClientCases from "./Screens/Cases/ClientCases";
 import EditClientProfile from "./Screens/Profile/EditClientProfile";
+import CreateCase from "./Screens/Cases/CreateCase";
+import Video from "expo/build/av/Video";
+import {Text} from "react-native-elements";
 
 // API information in firebase-config.js
 // firebase.initializeApp(config);
@@ -53,7 +56,6 @@ const MainStack = createStackNavigator({
     // CaseList: {
     //     screen: CaseList
     // },
-
     LoadApp: {
         screen: LoadApp
     },
@@ -89,6 +91,9 @@ const MainStack = createStackNavigator({
     },
     CaseSearch: {
         screen: CaseSearch
+    },
+    CreateCase: {
+        screen: CreateCase
     }
 }, {
 
@@ -100,11 +105,18 @@ const MainStack = createStackNavigator({
 });
 
 class App extends React.Component {
+    state = {
+        render : false
+    };
     // SignUp component is a placeholder before we use react-navigation
     render() {
-        return (
-            <MainStack/>
-        );
+        if(this.state.render){
+            return(<MainStack/>);
+        } else{
+            firebase.auth().signInWithEmailAndPassword("Jakeclient@1.com", "1234567")
+                .then(() => {this.setState({render:true})});
+            return(<Text>Waiting</Text>);
+        }
     }
 }
 

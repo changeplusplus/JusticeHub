@@ -12,6 +12,7 @@ import {
     View, Text, Button, TextInput, TouchableOpacity,
     Image, Dimensions, Alert, FlatList, Keyboard, TouchableWithoutFeedback, ScrollView, Picker
 } from 'react-native';
+import Modal from "react-native-modal";
 import * as firebase from 'firebase';
 import {CheckBox} from "react-native-elements";
 import I18n from '../../Utils/i18n';
@@ -22,6 +23,9 @@ export default class ClientCases extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isModalVisible: false,
+            existingCase: false,
+            dataLoaded: false,
             reportingOther: false,
             name: '',
             occupation: '',
@@ -44,137 +48,165 @@ export default class ClientCases extends Component {
             specialNotes: '',
             lawyer: ''
         };
+        this.loadData();
     }
 
-    render() {
-            return (
-                <ScrollView style={{
-                    marginTop: 75,
-                }}>
-                    <CheckBox
-                        style={{marginTop: 100}}
-                        title={I18n.curLang.client_cases.reporting}
-                        checked={this.state.reportingOther}
-                        onIconPress={() => this.setState({reportingOther: !this.state.reportingOther})}
-                    />
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.name}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.name}
-                               onChangeText={(text) => this.setState({name: text})}
-                               placeholder={I18n.curLang.client_cases.name_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.name_arrested}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.arrName}
-                               onChangeText={(text) => this.setState({arrName: text})}
-                               placeholder={I18n.curLang.client_cases.name_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.occupation}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.occupation}
-                               onChangeText={(text) => this.setState({occupation: text})}
-                               placeholder={I18n.curLang.client_cases.occupation_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.address}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.address}
-                               onChangeText={(text) => this.setState({address: text})}
-                               placeholder={I18n.curLang.client_cases.address_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.DOB}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.DOB}
-                               onChangeText={(text) => this.setState({DOB: text})}
-                               placeholder={I18n.curLang.client_cases.DOB_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.gender}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.gender}
-                               onChangeText={(text) => this.setState({gender: text})}
-                               placeholder={I18n.curLang.client_cases.gender_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.phone_arrested}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.arrPhone}
-                               onChangeText={(text) => this.setState({arrPhone: text})}
-                               placeholder={I18n.curLang.client_cases.phone_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.email_arrested}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.arrEmail}
-                               onChangeText={(text) => this.setState({arrEmail: text})}
-                               placeholder={I18n.curLang.client_cases.email_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.offense}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.offense}
-                               onChangeText={(text) => this.setState({offense: text})}
-                               placeholder={I18n.curLang.client_cases.offense_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.details}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.details}
-                               onChangeText={(text) => this.setState({details: text})}
-                               placeholder={I18n.curLang.client_cases.details_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.date_arrest}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.date}
-                               onChangeText={(text) => this.setState({date: text})}
-                               placeholder={I18n.curLang.client_cases.date_arrest_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.contacts}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.contacts}
-                               onChangeText={(text) => this.setState({contacts: text})}
-                               placeholder={I18n.curLang.client_cases.contacts_place}
-                               width={100}/>
-                    <CheckBox
-                        title={I18n.curLang.client_cases.resolved}
-                        checked={this.state.resolved}
-                        onIconPress={() => this.setState({resolved: !this.state.resolved})}
-                    />
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.detention_center}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.detentionCenter}
-                               onChangeText={(text) => this.setState({detentionCenter: text})}
-                               placeholder={I18n.curLang.client_cases.detention_center_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.arrest_location}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.locationArrest}
-                               onChangeText={(text) => this.setState({locationArrest: text})}
-                               placeholder={I18n.curLang.client_cases.arrest_location_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.torture}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.torture}
-                               onChangeText={(text) => this.setState({torture: text})}
-                               placeholder={I18n.curLang.client_cases.torture_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.additional}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.specialNotes}
-                               onChangeText={(text) => this.setState({specialNotes: text})}
-                               placeholder={I18n.curLang.client_cases.additional_place}
-                               width={100}/>
-                    <Text style={Jtheme.InputText}>{I18n.curLang.client_cases.lawyer}</Text>
-                    <TextInput style={Jtheme.Input}
-                               value={this.state.lawyer}
-                               onChangeText={(text) => this.setState({lawyer: text})}
-                               placeholder={I18n.curLang.client_cases.lawyer_place}
-                               width={100}/>
-                    <Picker
-                        selectedValue={this.state.prefersEmail}
-                        onValueChange={(itemValue) => this.setState({prefersEmail: itemValue})}>
-                        <Picker.Item label={I18n.curLang.client_cases.picker_email} value={true} />
-                        <Picker.Item label={I18n.curLang.client_cases.picker_phone} value={false} />
-                    </Picker>
+    toggleModal = () => {
+        this.setState({isModalVisible: !this.state.isModalVisible});
+    };
 
-                    <Button style={Jtheme.Button} onPress={this.submitCase}
-                            title={I18n.curLang.client_cases.submit}/>
-                </ScrollView>
-            );
+    render() {
+        if (!this.state.dataLoaded){
+            return (
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    {this.loadingScreen()}
+                </View>
+            );}
+        else{
+            if (!this.state.existingCase){
+                this.props.navigation.navigate('createCase');
+            } else {
+                return  (
+                    <View style={{
+                        flex: 1, flexDirection: 'column', justifyContent: 'center',
+                        alignItems: 'stretch'
+                    }}>
+
+                    </View>
+                )
+            }
+        }
+            // return (
+
+                {/*<ScrollView style={{*/}
+                {/*    marginTop: 75,*/}
+                {/*}}>*/}
+                {/*    <CheckBox*/}
+                {/*        style={{marginTop: 100}}*/}
+                {/*        title='Reporting someone else'*/}
+                {/*        checked={this.state.reportingOther}*/}
+                {/*        onIconPress={() => this.setState({reportingOther: !this.state.reportingOther})}*/}
+                {/*    />*/}
+                {/*    <Text style={Jtheme.InputText}>Name</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.name}*/}
+                {/*               onChangeText={(text) => this.setState({name: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Arrested persons name</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.arrName}*/}
+                {/*               onChangeText={(text) => this.setState({arrName: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Occupation</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.occupation}*/}
+                {/*               onChangeText={(text) => this.setState({occupation: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Address</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.address}*/}
+                {/*               onChangeText={(text) => this.setState({address: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Date of Birth</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.DOB}*/}
+                {/*               onChangeText={(text) => this.setState({DOB: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Gender</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.gender}*/}
+                {/*               onChangeText={(text) => this.setState({gender: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Arrested person phone number</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.arrPhone}*/}
+                {/*               onChangeText={(text) => this.setState({arrPhone: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Arrested person email</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.arrEmail}*/}
+                {/*               onChangeText={(text) => this.setState({arrEmail: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Offense</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.offense}*/}
+                {/*               onChangeText={(text) => this.setState({offense: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Details</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.details}*/}
+                {/*               onChangeText={(text) => this.setState({details: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Date of Arrest</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.date}*/}
+                {/*               onChangeText={(text) => this.setState({date: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Contacts</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.contacts}*/}
+                {/*               onChangeText={(text) => this.setState({contacts: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <CheckBox*/}
+                {/*        title='Resolved'*/}
+                {/*        checked={this.state.resolved}*/}
+                {/*        onIconPress={() => this.setState({resolved: !this.state.resolved})}*/}
+                {/*    />*/}
+                {/*    <Text style={Jtheme.InputText}>Detention Center</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.detentionCenter}*/}
+                {/*               onChangeText={(text) => this.setState({detentionCenter: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Location of arrest</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.locationArrest}*/}
+                {/*               onChangeText={(text) => this.setState({locationArrest: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Torture used?</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.torture}*/}
+                {/*               onChangeText={(text) => this.setState({torture: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Special Notes</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.specialNotes}*/}
+                {/*               onChangeText={(text) => this.setState({specialNotes: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Text style={Jtheme.InputText}>Lawyer</Text>*/}
+                {/*    <TextInput style={Jtheme.Input}*/}
+                {/*               value={this.state.lawyer}*/}
+                {/*               onChangeText={(text) => this.setState({lawyer: text})}*/}
+                {/*               placeholder={"name"}*/}
+                {/*               width={100}/>*/}
+                {/*    <Picker*/}
+                {/*        selectedValue={this.state.prefersEmail}*/}
+                {/*        onValueChange={(itemValue) => this.setState({prefersEmail: itemValue})}>*/}
+                {/*        <Picker.Item label='Email' value={true} />*/}
+                {/*        <Picker.Item label='Phone' value={false} />*/}
+                {/*    </Picker>*/}
+
+                {/*    <Button style={Jtheme.Button} onPress={this.submitCase}*/}
+                {/*            title='Submit Case'/>*/}
+                {/*</ScrollView>*/}
+            // );
     }
 
     submitCase = () => {
@@ -185,6 +217,7 @@ export default class ClientCases extends Component {
         let user = firebase.auth().currentUser;
         let userCase = firebase.database().ref("cases/" + user.uid);
         userCase.update({
+            existingCase: true,
             reportingOther: reportingOther,
             name: name,
             occupation: occupation,
@@ -213,6 +246,65 @@ export default class ClientCases extends Component {
                 alert(error);
             });
     };
+
+    loadData = () => {
+        let user = firebase.auth().currentUser;
+        let userCase = firebase.database().ref("cases/" + user.uid);
+        let stateVar = this;
+        userCase.once('value', function(snapshot){
+            let obj = snapshot.val();
+            if (obj.existingCase === null)
+                obj.existingCase = false;
+            stateVar.setState({
+                existingCase: obj.existingCase,
+                reportingOther: obj.reportingOther,
+                name: obj.name,
+                occupation: obj.occupation,
+                address: obj.address,
+                DOB: obj.DOB,
+                gender: obj.gender,
+                arrName: obj.arrName,
+                arrPhone: obj.arrPhone,
+                arrEmail: obj.arrEmail,
+                prefersEmail: obj.prefersEmail,
+                offense: obj.offense,
+                details: obj.details,
+                date: obj.date,
+                contacts: obj.contacts,
+                resolved: obj.resolved,
+                detentionCenter: obj.detentionCenter,
+                locationArrest: obj.locationArrest,
+                arrestingOfficer: obj.arrestingOfficer,
+                torture: obj.torture,
+                specialNotes: obj.specialNotes,
+                lawyer: obj.lawyer});
+        })
+            .then(() => {
+                this.setState({dataLoaded: true});
+            })
+            .catch((error) => {
+                Alert.alert("Error loading profile", error);
+            });
+    };
+
+    loadingScreen = () => {
+        return (
+            <View style={{flexDirection: 'row'}}>
+                <Text style={{
+                    fontSize: 32,
+                    fontWeight: 'bold',
+                    textAlign: 'center'
+                }}>Fetching Cases </Text>
+                <Image
+                    source={require('./loadingGif.gif')}
+                    style={{
+                        width: 50,
+                        height: 50,
+                    }}/>
+            </View>
+        )
+    };
+
 }
 
 const Jtheme = {
