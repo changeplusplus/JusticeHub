@@ -16,7 +16,6 @@ import {YellowBox} from 'react-native';
 //import CaseList from "./Screens/Cases/CaseList";
 import ClientCases from "./Screens/Cases/ClientCases";
 import EditClientProfile from "./Screens/Profile/EditClientProfile";
-import CreateCase from "./Screens/Cases/CreateCase";
 import Video from "expo/build/av/Video";
 import {Text} from "react-native-elements";
 
@@ -32,20 +31,6 @@ console.disableYellowBox = true;
  * https://github.com/expo/expo/issues/2538\
  * For some reason YellowBox.ignoreWarnings() doesn't work...
  */
-
-const ClientTabNav = createBottomTabNavigator({
-    /*CreateCase: {
-
-  },*/
-    ViewProfile: {
-        screen: ClientProfile
-    },
-    Cases: {
-        screen: ClientCases
-    }
-}, {
-    tabBarPosition: 'bottom'
-});
 
 const LawyerTabNav = createBottomTabNavigator({
     ViewProfile: {
@@ -84,9 +69,6 @@ const MainStack = createStackNavigator({
     EditClientProfile: {
         screen: EditClientProfile
     },
-    ClientTabNav: {
-        screen: ClientTabNav
-    },
     LawyerTabNav: {
         screen: LawyerTabNav
     },
@@ -98,9 +80,6 @@ const MainStack = createStackNavigator({
     },
     CaseSearch: {
         screen: CaseSearch
-    },
-    CreateCase: {
-        screen: CreateCase
     }
 }, {
 

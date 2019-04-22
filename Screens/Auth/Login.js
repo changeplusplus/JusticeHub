@@ -111,7 +111,7 @@ class Login extends Component {
                             firebase.database().ref('cases/' + userId).on('value', (snap2) => {
                                 I18n.changeLang(snap2.val().language);
 
-                                navigate('ClientTabNav');
+                                navigate('ClientProfile');
                             });
                         }
                       });

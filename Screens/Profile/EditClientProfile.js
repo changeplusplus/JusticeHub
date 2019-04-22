@@ -44,7 +44,7 @@ export default class EditClientProfile extends Component {
     firebase.database().ref('cases/' + userId).update({
       prefersEmail: prefersEmail
     });
-    navigate('ClientTabNav');
+    navigate('ClientProfile');
   };
 }
 

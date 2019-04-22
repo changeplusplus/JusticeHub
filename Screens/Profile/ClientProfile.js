@@ -32,6 +32,8 @@ class ClientProfile extends Component {
           <Text h1 style={Jtheme.Text}>Account</Text>
           <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('EditClientProfile')}}
                   title={I18n.curLang.client_profile.edit_profile}/>
+          <Button style={Jtheme.Button} onPress={() => {this.props.navigation.navigate('ClientCases')}}
+                  title={'Case'}/>
           <Button style={Jtheme.Button} onPress={this._openWhatsApp}
                   title={I18n.curLang.client_profile.messages} />
           <Button style={Jtheme.Button} onPress={this._logout}

@@ -132,7 +132,7 @@ export default class SignUp extends Component {
                 if (isLawyer) {
                     navigate('SetupLawyerProfile');
                 } else {
-                    navigate('ClientTabNav');
+                    navigate('ClientProfile');
                 }
             })
             .catch((error) => {
