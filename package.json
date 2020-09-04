@@ -13,7 +13,7 @@
     "chat-engine-react-native": "0.0.9",
     "expo": "^31.0.0",
     "firebase": "^5.5.7",
-    "lodash.merge": "^4.6.1",
+    "lodash.merge": "^4.6.2",
     "native-base": "^2.12.1",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
