@@ -11,7 +11,7 @@
   "dependencies": {
     "chat-engine": "^0.9.19",
     "chat-engine-react-native": "0.0.9",
-    "expo": "^31.0.0",
+    "expo": "^46.0.14",
     "firebase": "^5.5.7",
     "lodash.merge": "^4.6.1",
     "native-base": "^2.12.1",
